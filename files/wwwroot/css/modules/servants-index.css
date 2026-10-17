@@ -503,3 +503,53 @@
     flex: none;
     padding-inline-end: 1.6rem;
 }
+
+/* ---------- «رجوع» وبجواره عنوان القائمة وعددها ---------- */
+
+.servants-head-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .8rem;
+    margin-top: .35rem;
+}
+
+.servants-head-meta .ui-backbar {
+    margin: 0;
+}
+
+.servants-head-meta .servants-title {
+    display: flex;
+    align-items: baseline;
+    gap: .45rem;
+}
+
+.servants-head-meta .servants-title h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+/* ---------- سطر الجدول: الإجراءات مفرودة ---------- */
+
+.servants-index .members-table-bar {
+    display: block;
+}
+
+.servants-index .servants-bar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem;
+}
+
+.servants-index .servants-bar-actions .ui-btn {
+    min-height: 2.1rem;
+    padding: .2rem .7rem;
+    font-size: .84rem;
+    white-space: nowrap;
+}
+
+.servants-index .servants-bar-actions .servants-title__all {
+    margin-inline-start: auto;
+}
