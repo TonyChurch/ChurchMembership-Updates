@@ -1393,3 +1393,48 @@ a.ui-stat:hover {
     color: #fff;
     background: #be185d;
 }
+
+/* ---------- رأس الصفحة الموحد: العنوان و«رجوع» تحته، وبجوارهما البطاقات في سطرين ---------- */
+
+header.page-head--grid {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: .6rem 1rem;
+}
+
+header.page-head--grid .ui-page-header__title p { margin: 0; }
+header.page-head--grid .ui-page-header__title .ui-backbar { margin: .35rem 0 0; }
+header.page-head--grid .ui-page-header__title .ui-backbar .ui-btn,
+header.page-head--grid .ui-page-header__title .ui-backbar a { min-height: 1.9rem; padding: .15rem .7rem; font-size: .82rem; }
+header.page-head--grid > :not(.ui-page-header__title):not(ul.page-stats) { grid-column: 1 / -1; }
+
+ul.page-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .5rem;
+    margin: 0;
+}
+
+ul.page-stats .ui-chip-stat {
+    grid-template-columns: auto auto minmax(0, 1fr);
+    grid-template-rows: auto;
+    column-gap: .6rem;
+    min-width: 0;
+    min-height: 2.6rem;
+    padding: .3rem .65rem;
+}
+
+ul.page-stats .ui-chip-stat i { grid-row: auto; width: 2rem; height: 2rem; }
+ul.page-stats .ui-chip-stat strong { font-size: 1.15rem; }
+ul.page-stats .ui-chip-stat span { overflow: hidden; font-size: .82rem; font-weight: 700; opacity: 1; text-overflow: ellipsis; white-space: nowrap; }
+ul.page-stats > li { min-width: 0; }
+ul.page-stats .ui-birthdays { height: 100%; min-height: 2.6rem; flex-wrap: nowrap; }
+
+@media (max-width: 1279.98px) {
+    header.page-head--grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 767.98px) {
+    ul.page-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
