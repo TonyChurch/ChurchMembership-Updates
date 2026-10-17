@@ -453,3 +453,43 @@
         grid-row: 2;
     }
 }
+
+/* ---------- «رجوع» تحت اسم الصفحة، والبطاقات تأخذ باقي الصف ---------- */
+
+.servants-index .members-header {
+    grid-template-columns: auto minmax(0, 1fr);
+}
+
+.servants-index .members-header .ui-page-header__title .ui-backbar {
+    margin: .35rem 0 0;
+}
+
+.servants-index .members-header .ui-page-header__title .ui-backbar .ui-btn,
+.servants-index .members-header .ui-page-header__title .ui-backbar a {
+    min-height: 1.9rem;
+    padding: .15rem .7rem;
+    font-size: .82rem;
+}
+
+/* سنة الخدمة والشهر في سطر واحد بارتفاع باقي البطاقات */
+.servants-index .servants-stats .servants-year__form {
+    flex-wrap: nowrap;
+    gap: .4rem;
+}
+
+.servants-year__month {
+    flex-basis: auto;
+    white-space: nowrap;
+    font-size: .8rem;
+}
+
+@media (max-width: 1279.98px) {
+    .servants-index .members-header {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .servants-index .members-header .servants-stats {
+        grid-column: auto;
+        grid-row: auto;
+    }
+}
