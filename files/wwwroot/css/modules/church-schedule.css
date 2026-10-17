@@ -1,0 +1,331 @@
+/* صفحتا «مواعيد الكنيسة» و«مواعيد الاعتراف» */
+
+.church-schedule__icon {
+    background: linear-gradient(135deg, #34d399, #059669);
+}
+
+/* جدول ثابت: صف لكل يوم، واسم اليوم على اليمين ثم «صباحًا» و«مساءً» جنبًا إلى جنب */
+.church-schedule__hint {
+    margin: 0;
+    color: var(--ui-text-muted);
+    font-size: .9rem;
+}
+
+.church-schedule__sheet {
+    padding: 0;
+    overflow: hidden;
+}
+
+.church-schedule__day {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    border-top: 1px solid var(--ui-border);
+}
+
+.church-schedule__day:first-child {
+    border-top: 0;
+}
+
+.church-schedule__day > h2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: .35rem;
+    margin: 0;
+    padding: .9rem 1rem;
+    color: #0e4433;
+    background: rgba(23, 107, 78, .08);
+    border-inline-end: 3px solid #176b4e;
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+.church-schedule__day.is-today > h2 {
+    background: rgba(232, 189, 93, .28);
+    border-inline-end-color: #c89b3c;
+}
+
+.church-schedule__periods {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.church-schedule__period {
+    display: grid;
+    align-content: start;
+    gap: .35rem;
+    padding: .75rem 1rem;
+}
+
+.church-schedule__period + .church-schedule__period {
+    border-inline-start: 1px dashed var(--ui-border);
+}
+
+.church-schedule__period > h3 {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin: 0;
+    color: #9a6a12;
+    font-size: .85rem;
+    font-weight: 900;
+}
+
+.church-schedule__list {
+    display: grid;
+    gap: .45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.church-schedule__list > li.is-hidden {
+    opacity: .6;
+}
+
+.church-schedule__none {
+    color: var(--ui-text-muted);
+}
+
+/* اسم الخدمة ........ الساعة */
+.church-schedule__line {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+}
+
+.church-schedule__line strong {
+    font-size: 1rem;
+}
+
+.church-schedule__leader {
+    flex: 1 1 1.5rem;
+    min-width: 1.5rem;
+    border-bottom: 2px dotted var(--ui-border);
+    transform: translateY(-.25rem);
+}
+
+.church-schedule__time {
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.church-schedule__time--empty {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.church-schedule__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .2rem .7rem;
+    margin-top: .15rem;
+    color: var(--ui-text-muted);
+    font-size: .78rem;
+}
+
+.church-schedule__tools {
+    display: inline-flex;
+    gap: .3rem;
+    margin-inline-start: auto;
+}
+
+.church-schedule__add {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .2rem .7rem;
+    color: #176b4e;
+    font-size: .8rem;
+    font-weight: 800;
+    background: transparent;
+    border: 1px dashed #176b4e;
+    border-radius: 999px;
+}
+
+.church-schedule__add:hover,
+.church-schedule__add:focus-visible {
+    color: #fff;
+    background: #176b4e;
+}
+
+.church-schedule__form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+}
+
+.church-schedule__wide {
+    grid-column: 1 / -1;
+}
+
+/* ---------- مواعيد الاعتراف ---------- */
+
+.confessions__father + .confessions__father {
+    margin-top: 1rem;
+}
+
+.confessions__father .ui-table-card__header {
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.confessions__father .ui-table-card__header h2 {
+    margin-inline-end: auto;
+}
+
+.confessions__row--overdue {
+    background: rgba(220, 38, 38, .05);
+}
+
+.confessions__row--today {
+    background: rgba(232, 189, 93, .14);
+}
+
+.confessions__when {
+    display: grid;
+    line-height: 1.4;
+}
+
+.confessions__when small {
+    color: var(--ui-text-muted);
+}
+
+.confessions__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+}
+
+.confessions__reschedule {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+}
+
+.confessions__reschedule .form-control {
+    width: auto;
+    min-height: 2.1rem;
+    padding-block: .2rem;
+    font-size: .85rem;
+}
+
+@media (max-width: 767.98px) {
+    .church-schedule__day {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .church-schedule__day > h2 {
+        flex-direction: row;
+        align-items: center;
+        border-inline-end: 0;
+        border-bottom: 3px solid #176b4e;
+    }
+
+    .church-schedule__periods {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .church-schedule__period + .church-schedule__period {
+        border-inline-start: 0;
+        border-top: 1px dashed var(--ui-border);
+    }
+
+    .church-schedule__form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media print {
+    .church-schedule__day {
+        break-inside: avoid;
+    }
+}
+
+/* ---------- استيراد الأسر من ملف ---------- */
+
+.sheet-import__upload,
+.sheet-import__confirm {
+    display: grid;
+    gap: .75rem;
+    padding: 1.1rem 1.2rem;
+}
+
+.sheet-import__confirm {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+}
+
+.sheet-import__confirm p {
+    margin: 0;
+}
+
+.sheet-import__confirm > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.sheet-import__help {
+    margin: 0;
+    padding: 0 1.2rem .6rem;
+    color: var(--ui-text-muted);
+    font-size: .88rem;
+}
+
+.sheet-import__upload .sheet-import__help {
+    padding: 0;
+}
+
+.sheet-import__numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: .75rem;
+    padding: 1rem 1.2rem;
+}
+
+.sheet-import__numbers > div {
+    display: grid;
+    gap: .1rem;
+}
+
+.sheet-import__numbers b {
+    font-size: 1.7rem;
+    line-height: 1.2;
+}
+
+.sheet-import__numbers span {
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+}
+
+.sheet-import__list {
+    display: grid;
+    gap: .35rem;
+    margin: 0;
+    padding: .2rem 2.4rem 1rem 1.2rem;
+}
+
+.sheet-import__summary {
+    padding: .2rem 1.2rem .8rem;
+    color: var(--ui-primary, #2340e0);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.sheet-import .ui-table .form-select {
+    min-width: 14rem;
+}
+
+@media (max-width: 575.98px) {
+    .sheet-import__confirm {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.portal-inbox__request { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: .4rem 0 0; color: var(--ui-text-muted, #6b7690); font-weight: 700; }

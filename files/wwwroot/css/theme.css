@@ -1,0 +1,1395 @@
+/* =========================================================
+   نظام التصميم الموحد — Modern & Bright
+   كل الألوان والمسافات والزوايا والظلال معرّفة هنا فقط.
+   لتغيير شكل البرنامج كله عدّل القيم في :root.
+   ========================================================= */
+
+:root {
+    /* الخط */
+    --ui-font: "Cairo", "Segoe UI", Tahoma, Arial, sans-serif;
+
+    /* الألوان الأساسية */
+    --ui-primary: #3b5bfd;
+    --ui-primary-strong: #2340e0;
+    --ui-primary-soft: #eef1ff;
+    --ui-accent: #f5a524;
+    --ui-accent-soft: #fff5e1;
+    --ui-success: #12b981;
+    --ui-success-soft: #e6f8f1;
+    --ui-warning: #f59e0b;
+    --ui-warning-soft: #fff4de;
+    --ui-danger: #ef4461;
+    --ui-danger-soft: #fdecef;
+    --ui-violet: #8b5cf6;
+    --ui-violet-soft: #f2edff;
+    --ui-slate: #64748b;
+    --ui-slate-soft: #eef2f6;
+
+    /* الخلفيات والنصوص */
+    --ui-bg: #f4f6fb;
+    --ui-surface: #ffffff;
+    --ui-border: #e6eaf2;
+    --ui-text: #172036;
+    --ui-text-muted: #6b7690;
+
+    /* التدرجات */
+    --ui-gradient-primary: linear-gradient(135deg, #3b5bfd 0%, #6c5cff 55%, #9b6bff 100%);
+    --ui-gradient-accent: linear-gradient(135deg, #ffb547 0%, #ff8a4c 100%);
+
+    /* الزوايا والظلال والمسافات */
+    --ui-radius-sm: 10px;
+    --ui-radius: 16px;
+    --ui-radius-lg: 24px;
+    --ui-shadow-sm: 0 1px 2px rgba(23, 32, 54, .06), 0 1px 3px rgba(23, 32, 54, .05);
+    --ui-shadow: 0 6px 20px rgba(38, 56, 120, .08);
+    --ui-shadow-lg: 0 18px 40px rgba(59, 91, 253, .18);
+    --ui-gap: 1.25rem;
+    --ui-transition: 180ms cubic-bezier(.2, .7, .3, 1);
+}
+
+/* ---------- الأساس ---------- */
+
+body {
+    font-family: var(--ui-font);
+    color: var(--ui-text);
+    background-color: var(--ui-bg);
+}
+
+.ui-page {
+    display: grid;
+    gap: var(--ui-gap);
+    padding-block: 1.25rem 2rem;
+    color: var(--ui-text);
+}
+
+/* ---------- عنوان القسم ---------- */
+
+.ui-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 .9rem;
+}
+
+.ui-section-title h2 {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.ui-section-title h2 i {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    color: var(--ui-primary);
+    background: var(--ui-primary-soft);
+    border-radius: var(--ui-radius-sm);
+    font-size: 1rem;
+}
+
+/* ---------- البطاقة ---------- */
+
+.ui-card {
+    padding: 1.25rem;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow-sm);
+}
+
+/* ---------- الشارة ---------- */
+
+.ui-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .2rem .65rem;
+    color: var(--ui-primary-strong);
+    background: var(--ui-primary-soft);
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ui-badge--accent { color: #a4610a; background: var(--ui-accent-soft); }
+.ui-badge--success { color: #0a7a55; background: var(--ui-success-soft); }
+.ui-badge--danger { color: #b3203d; background: var(--ui-danger-soft); }
+
+/* ---------- بطاقة الإحصائية ---------- */
+
+.ui-stat {
+    --stat-color: var(--ui-primary);
+    --stat-soft: var(--ui-primary-soft);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.2rem;
+    color: inherit;
+    text-decoration: none;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow-sm);
+    overflow: hidden;
+    transition: transform var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.ui-stat::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 4px;
+    background: var(--stat-color);
+}
+
+a.ui-stat:hover {
+    color: inherit;
+    transform: translateY(-3px);
+    box-shadow: var(--ui-shadow);
+}
+
+.ui-stat__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    color: var(--stat-color);
+    background: var(--stat-soft);
+    border-radius: 14px;
+    font-size: 1.35rem;
+}
+
+.ui-stat__body {
+    display: grid;
+    min-width: 0;
+}
+
+.ui-stat__label {
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.ui-stat__value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.ui-stat__meta {
+    color: var(--ui-text-muted);
+    font-size: .75rem;
+}
+
+.ui-stat--success { --stat-color: var(--ui-success); --stat-soft: var(--ui-success-soft); }
+.ui-stat--warning { --stat-color: var(--ui-warning); --stat-soft: var(--ui-warning-soft); }
+.ui-stat--danger { --stat-color: var(--ui-danger); --stat-soft: var(--ui-danger-soft); }
+.ui-stat--violet { --stat-color: var(--ui-violet); --stat-soft: var(--ui-violet-soft); }
+.ui-stat--slate { --stat-color: var(--ui-slate); --stat-soft: var(--ui-slate-soft); }
+.ui-stat--accent { --stat-color: var(--ui-accent); --stat-soft: var(--ui-accent-soft); }
+
+/* ---------- الأزرار ---------- */
+
+.ui-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    padding: .6rem 1.1rem;
+    color: #fff;
+    text-decoration: none;
+    background: var(--ui-gradient-primary);
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(59, 91, 253, .28);
+    font-weight: 700;
+    transition: transform var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.ui-btn:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--ui-shadow-lg);
+}
+
+.ui-btn--ghost {
+    color: var(--ui-primary-strong);
+    background: var(--ui-primary-soft);
+    box-shadow: none;
+}
+
+.ui-btn--ghost:hover {
+    color: var(--ui-primary-strong);
+    box-shadow: var(--ui-shadow-sm);
+}
+
+/* تصدير Excel: أخضر بجوار زر PDF */
+.ui-btn--excel {
+    background: linear-gradient(135deg, #1d8a57, #107c41);
+    box-shadow: 0 6px 16px rgba(16, 124, 65, .25);
+}
+
+.ui-icon-btn.fp-excel {
+    color: #107c41;
+}
+
+/* ---------- الحالة الفارغة ---------- */
+
+.ui-empty {
+    display: grid;
+    justify-items: center;
+    gap: .4rem;
+    padding: 1.75rem 1rem;
+    color: var(--ui-text-muted);
+    text-align: center;
+}
+
+.ui-empty i {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    color: var(--ui-primary);
+    background: var(--ui-primary-soft);
+    border-radius: 50%;
+    font-size: 1.4rem;
+}
+
+.ui-empty strong {
+    color: var(--ui-text);
+}
+
+/* ---------- رأس الصفحة ---------- */
+
+.ui-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.ui-page-header__title {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+}
+
+.ui-page-header__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    color: #fff;
+    background: var(--ui-gradient-primary);
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(59, 91, 253, .3);
+    font-size: 1.35rem;
+}
+
+.ui-page-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.ui-page-header p {
+    margin: 0;
+    color: var(--ui-text-muted);
+    font-size: .9rem;
+}
+
+.ui-page-header__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+}
+
+/* ---------- شبكة الإحصائيات ---------- */
+
+.ui-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
+    gap: 1rem;
+}
+
+.ui-stats .ui-stat {
+    padding: .9rem 1rem;
+}
+
+.ui-stats .ui-stat__icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.15rem;
+}
+
+.ui-stats .ui-stat__value {
+    font-size: 1.45rem;
+}
+
+/* ---------- إحصائيات مصغّرة متدرجة ---------- */
+
+.ui-chip-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ui-chip-stat {
+    --chip-gradient: linear-gradient(135deg, #3b5bfd, #6c5cff);
+    --chip-shadow: rgba(59, 91, 253, .28);
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    column-gap: .5rem;
+    align-items: center;
+    min-width: 5.75rem;
+    padding: .45rem .8rem;
+    color: #fff;
+    background: var(--chip-gradient);
+    border-radius: 14px;
+    box-shadow: 0 6px 14px var(--chip-shadow);
+}
+
+.ui-chip-stat i {
+    grid-row: 1 / 3;
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    background: rgba(255, 255, 255, .2);
+    border-radius: 10px;
+    font-size: .95rem;
+}
+
+.ui-chip-stat strong {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+.ui-chip-stat span {
+    font-size: .72rem;
+    font-weight: 600;
+    opacity: .9;
+    line-height: 1.2;
+}
+
+.ui-chip-stat--violet { --chip-gradient: linear-gradient(135deg, #7c4dff, #b06bff); --chip-shadow: rgba(124, 77, 255, .28); }
+.ui-chip-stat--pink { --chip-gradient: linear-gradient(135deg, #ff4f8b, #ff85a8); --chip-shadow: rgba(255, 79, 139, .28); }
+.ui-chip-stat--green { --chip-gradient: linear-gradient(135deg, #0fb87a, #3ddc97); --chip-shadow: rgba(15, 184, 122, .28); }
+.ui-chip-stat--orange { --chip-gradient: linear-gradient(135deg, #ff7a3d, #ffa94d); --chip-shadow: rgba(255, 122, 61, .28); }
+.ui-chip-stat--gold { --chip-gradient: linear-gradient(135deg, #e6a200, #ffc93c); --chip-shadow: rgba(230, 162, 0, .28); }
+
+/* ---------- التبويبات ---------- */
+
+.ui-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    padding: .6rem .75rem 0;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--ui-border);
+    scrollbar-width: thin;
+}
+
+.ui-tabs__item {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: .45rem;
+    padding: .6rem .85rem;
+    color: var(--ui-text-muted);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 10px 10px 0 0;
+    font-size: .88rem;
+    font-weight: 700;
+    transition: color var(--ui-transition), background var(--ui-transition), border-color var(--ui-transition);
+}
+
+.ui-tabs__item:hover {
+    color: var(--ui-text);
+    background: var(--ui-bg);
+}
+
+.ui-tabs__item b {
+    min-width: 1.5rem;
+    padding: .05rem .45rem;
+    color: var(--ui-text-muted);
+    background: var(--ui-slate-soft);
+    border-radius: 999px;
+    font-size: .72rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.ui-tabs__item.is-active {
+    color: var(--ui-primary-strong);
+    border-bottom-color: var(--ui-primary);
+}
+
+.ui-tabs__item.is-active b {
+    color: #fff;
+    background: var(--ui-primary);
+}
+
+/* ---------- بطاقة أعياد الميلاد (اليوم / الأسبوع / الشهر) ---------- */
+
+.ui-birthdays {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    align-self: center;
+    gap: .3rem;
+    margin-inline-start: auto;
+    margin-bottom: .45rem;
+    padding: .25rem .3rem .25rem .6rem;
+    background: linear-gradient(135deg, #fff1f6, #fff6e8);
+    border: 1px solid #ffd6e4;
+    border-radius: 14px;
+}
+
+.ui-birthdays__title {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding-inline: .35rem;
+    color: #c2185b;
+    font-size: .82rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.ui-birthdays__item {
+    display: grid;
+    justify-items: center;
+    min-width: 3.4rem;
+    padding: .2rem .5rem;
+    color: var(--ui-text-muted);
+    text-decoration: none;
+    background: var(--ui-surface);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    line-height: 1.15;
+    transition: transform var(--ui-transition), box-shadow var(--ui-transition), border-color var(--ui-transition);
+}
+
+.ui-birthdays__item b {
+    font-size: 1.05rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.ui-birthdays__item span {
+    font-size: .68rem;
+    font-weight: 700;
+}
+
+.ui-birthdays__item.has-items {
+    color: #fff;
+    background: linear-gradient(135deg, #ff4f8b, #ff9a5a);
+    box-shadow: 0 4px 10px rgba(255, 79, 139, .28);
+}
+
+.ui-birthdays__item:hover {
+    color: inherit;
+    border-color: #ff85a8;
+    transform: translateY(-2px);
+}
+
+.ui-birthdays__item.has-items:hover {
+    color: #fff;
+}
+
+/* ---------- علامات صغيرة بجانب الاسم ---------- */
+
+.ui-flag {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    font-size: .7rem;
+    cursor: help;
+}
+
+.ui-flag--danger { color: var(--ui-danger); background: var(--ui-danger-soft); }
+.ui-flag--primary { color: var(--ui-primary); background: var(--ui-primary-soft); }
+.ui-flag--violet { color: var(--ui-violet); background: var(--ui-violet-soft); }
+.ui-flag--slate { color: var(--ui-slate); background: var(--ui-slate-soft); }
+.ui-flag--accent { color: #c77c00; background: var(--ui-accent-soft); }
+
+/* ---------- أيقونة الكأس (التناول): بلون النص المحيط ---------- */
+
+.icon-chalice {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -.125em;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M4 2h16c0 5.2-3.1 8.8-7 9.6V19h4v2H7v-2h4v-7.4C7.1 10.8 4 7.2 4 2zm7 2v2H9v2h2v2.3h2V8h2V6h-2V4z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M4 2h16c0 5.2-3.1 8.8-7 9.6V19h4v2H7v-2h4v-7.4C7.1 10.8 4 7.2 4 2zm7 2v2H9v2h2v2.3h2V8h2V6h-2V4z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* ---------- حقول الإدخال ---------- */
+
+.ui-field {
+    display: grid;
+    gap: .35rem;
+    min-width: 0;
+}
+
+.ui-field > label {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.ui-field .form-control,
+.ui-field .form-select {
+    min-height: 2.75rem;
+    color: var(--ui-text);
+    background-color: var(--ui-bg);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: .92rem;
+    transition: border-color var(--ui-transition), background-color var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.ui-field .form-control:focus,
+.ui-field .form-select:focus {
+    background-color: var(--ui-surface);
+    border-color: var(--ui-primary);
+    box-shadow: 0 0 0 4px rgba(59, 91, 253, .14);
+}
+
+.ui-input-icon {
+    position: relative;
+}
+
+.ui-input-icon > i {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: .95rem;
+    display: grid;
+    place-items: center;
+    color: var(--ui-text-muted);
+    pointer-events: none;
+}
+
+.ui-input-icon > .form-control {
+    padding-inline-start: 2.6rem;
+}
+
+/* ---------- شريط الفلاتر ---------- */
+
+/* شريط مضغوط بلون خفيف: العناوين مخفية بصريًا (تبقى لقارئات الشاشة) والنص الإرشادي داخل الحقول */
+.ui-filter {
+    display: grid;
+    grid-template-columns: minmax(12rem, 2fr) repeat(4, minmax(7rem, 1fr)) auto;
+    align-items: center;
+    gap: .6rem;
+    padding: .6rem .75rem;
+    background: linear-gradient(135deg, #eef1ff 0%, #f5efff 100%);
+    border-color: #d9dffb;
+}
+
+.ui-filter .ui-field > label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.ui-filter .ui-field .form-control,
+.ui-filter .ui-field .form-select {
+    min-height: 2.35rem;
+    padding-block: .3rem;
+    background-color: var(--ui-surface);
+    border-color: #dfe4f7;
+    font-size: .88rem;
+}
+
+.ui-filter__actions {
+    display: flex;
+    gap: .4rem;
+}
+
+.ui-filter__actions .ui-btn {
+    min-height: 2.35rem;
+    padding: .35rem .95rem;
+}
+
+@media (max-width: 1199.98px) {
+    .ui-filter {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+    }
+
+    .ui-filter > .ui-field:first-of-type {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .ui-filter {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .ui-filter__actions {
+        grid-column: 1 / -1;
+    }
+
+    .ui-filter__actions .ui-btn {
+        flex: 1;
+    }
+}
+
+/* ---------- الجدول ---------- */
+
+.ui-table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.ui-table-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--ui-border);
+}
+
+.ui-table-card__header h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.ui-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* صف العناوين بنفسجي موحد، والعناوين في المنتصف */
+.ui-table thead tr {
+    background: #6d3fd8;
+}
+
+.ui-table th {
+    padding: .7rem 1rem;
+    color: #fff;
+    background: transparent;
+    border-bottom: 0;
+    font-size: .82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.ui-table td {
+    padding: .75rem 1rem;
+    border-bottom: 1px solid var(--ui-border);
+    font-size: .9rem;
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* العمود الأول (الاسم) يبقى بمحاذاة البداية ليسهل قراءته، إلا لو كان رقمًا مسلسلًا */
+.ui-table td:first-child {
+    text-align: start;
+}
+
+.ui-table td.ui-muted:first-child {
+    text-align: center;
+}
+
+.ui-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.ui-table tbody tr {
+    transition: background var(--ui-transition);
+}
+
+/* شفاف حتى تظهر ألوان الأعمدة المميزة تحته */
+.ui-table tbody tr:hover {
+    background: rgba(59, 91, 253, .05);
+}
+
+.ui-table .ui-table__actions {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.ui-table .ui-muted {
+    color: var(--ui-text-muted);
+}
+
+.ui-table__code {
+    padding: .15rem .5rem;
+    color: var(--ui-text-muted);
+    background: var(--ui-bg);
+    border-radius: 6px;
+    font-size: .8rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* ---------- الصورة الرمزية ---------- */
+
+.ui-person {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    min-width: 0;
+}
+
+.ui-avatar {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--ui-primary-strong);
+    background: var(--ui-primary-soft);
+    border-radius: 50%;
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.ui-avatar--female {
+    color: #b3206b;
+    background: #fdebf4;
+}
+
+.ui-person__text {
+    display: grid;
+    min-width: 0;
+}
+
+.ui-person__text a,
+.ui-person__text strong {
+    overflow: hidden;
+    color: var(--ui-text);
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+.ui-person__text a:hover {
+    color: var(--ui-primary);
+}
+
+.ui-person__text small {
+    color: var(--ui-text-muted);
+    font-size: .76rem;
+}
+
+/* ---------- شارة الحالة ---------- */
+
+.ui-status {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .22rem .7rem;
+    border-radius: 999px;
+    font-size: .76rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ui-status::before {
+    content: "";
+    width: .45rem;
+    height: .45rem;
+    background: currentColor;
+    border-radius: 50%;
+}
+
+.ui-status--success { color: #0a7a55; background: var(--ui-success-soft); }
+.ui-status--warning { color: #a4610a; background: var(--ui-warning-soft); }
+.ui-status--danger { color: #b3203d; background: var(--ui-danger-soft); }
+.ui-status--slate { color: #475569; background: var(--ui-slate-soft); }
+.ui-status--violet { color: #6d3fd8; background: var(--ui-violet-soft); }
+.ui-status--primary { color: var(--ui-primary-strong); background: var(--ui-primary-soft); }
+
+/* ---------- أزرار الأيقونات ---------- */
+
+.ui-icon-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+}
+
+.ui-icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    padding: 0;
+    color: var(--ui-text-muted);
+    background: transparent;
+    border: 1px solid var(--ui-border);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: color var(--ui-transition), background var(--ui-transition), border-color var(--ui-transition);
+}
+
+.ui-icon-btn:hover,
+.ui-icon-btn[aria-expanded="true"] {
+    color: var(--ui-primary-strong);
+    background: var(--ui-primary-soft);
+    border-color: transparent;
+}
+
+/* ---------- القائمة المنسدلة ---------- */
+
+.ui-menu.dropdown-menu {
+    min-width: 12rem;
+    padding: .4rem;
+    border: 1px solid var(--ui-border);
+    border-radius: 14px;
+    box-shadow: var(--ui-shadow);
+}
+
+.ui-menu form {
+    margin: 0;
+}
+
+.ui-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .5rem .7rem;
+    border-radius: 9px;
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+.ui-menu .dropdown-item:hover {
+    background: var(--ui-bg);
+}
+
+.ui-menu .dropdown-item--danger {
+    color: var(--ui-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ui-stat,
+    .ui-btn,
+    .ui-icon-btn,
+    .ui-table tbody tr,
+    .ui-field .form-control,
+    .ui-field .form-select {
+        transition: none;
+    }
+}
+
+/* =========================================================
+   صفحات النماذج (إضافة / تعديل)
+   ui-form يلف النموذج كله ويعيد تنسيق حقول Bootstrap داخله،
+   وui-section بطاقة لكل مجموعة حقول بأيقونة ملونة صغيرة.
+   ========================================================= */
+
+.ui-form-page {
+    width: min(100%, 1120px);
+    margin-inline: auto;
+}
+
+.ui-form-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem 1rem;
+}
+
+.ui-form-header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.ui-form-header p {
+    margin: 0;
+    color: var(--ui-text-muted);
+    font-size: .88rem;
+}
+
+.ui-back {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .4rem .85rem;
+    color: var(--ui-text-muted);
+    text-decoration: none;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.ui-back:hover {
+    color: var(--ui-primary-strong);
+    border-color: var(--ui-primary);
+}
+
+.ui-form {
+    display: grid;
+    gap: var(--ui-gap);
+}
+
+.ui-form .form-label,
+.ui-form label.control-label {
+    margin-bottom: .3rem;
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.ui-form .form-control,
+.ui-form .form-select {
+    min-height: 2.6rem;
+    color: var(--ui-text);
+    background-color: var(--ui-bg);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: .92rem;
+    transition: border-color var(--ui-transition), background-color var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.ui-form textarea.form-control {
+    min-height: 5.5rem;
+}
+
+.ui-form .form-control:focus,
+.ui-form .form-select:focus {
+    background-color: var(--ui-surface);
+    border-color: var(--ui-primary);
+    box-shadow: 0 0 0 4px rgba(59, 91, 253, .14);
+}
+
+.ui-form .form-control[readonly] {
+    color: var(--ui-text-muted);
+    background-color: var(--ui-slate-soft);
+}
+
+.ui-form .form-check-input:checked {
+    background-color: var(--ui-primary);
+    border-color: var(--ui-primary);
+}
+
+.ui-form .text-danger,
+.ui-form .field-validation-error {
+    font-size: .78rem;
+}
+
+.ui-form .validation-summary-errors {
+    padding: .6rem .9rem;
+    color: #b3203d;
+    background: var(--ui-danger-soft);
+    border-radius: var(--ui-radius-sm);
+}
+
+.ui-form .validation-summary-valid {
+    display: none;
+}
+
+.ui-form .validation-summary-errors ul {
+    margin: 0;
+    padding-inline-start: 1.1rem;
+}
+
+/* ---------- بطاقة مجموعة حقول ---------- */
+
+.ui-section {
+    --section-color: var(--ui-primary);
+    --section-soft: var(--ui-primary-soft);
+    padding: 1.1rem 1.25rem 1.25rem;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-top: 3px solid var(--section-color);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.ui-section__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem .6rem;
+    margin-bottom: 1rem;
+}
+
+.ui-section__head h2 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.ui-section__head h2 i {
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    color: var(--section-color);
+    background: var(--section-soft);
+    border-radius: 9px;
+    font-size: .95rem;
+}
+
+.ui-section__head p {
+    margin: 0;
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+.ui-section--violet { --section-color: var(--ui-violet); --section-soft: var(--ui-violet-soft); }
+.ui-section--green { --section-color: var(--ui-success); --section-soft: var(--ui-success-soft); }
+.ui-section--gold { --section-color: var(--ui-accent); --section-soft: var(--ui-accent-soft); }
+.ui-section--pink { --section-color: #ec4899; --section-soft: #fdebf4; }
+.ui-section--danger { --section-color: var(--ui-danger); --section-soft: var(--ui-danger-soft); }
+.ui-section--slate { --section-color: var(--ui-slate); --section-soft: var(--ui-slate-soft); }
+
+/* شبكة حقول مرنة: عمودان أو ثلاثة حسب العرض */
+.ui-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: .9rem 1rem;
+}
+
+.ui-form-grid > .is-wide {
+    grid-column: 1 / -1;
+}
+
+/* ---------- أزرار الحفظ: شريط ثابت أسفل الشاشة ---------- */
+
+.ui-form-actions {
+    position: sticky;
+    bottom: .75rem;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    padding: .65rem;
+    background: rgba(255, 255, 255, .88);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow);
+    backdrop-filter: blur(8px);
+}
+
+.ui-form-actions .ui-btn {
+    min-width: 9rem;
+}
+
+.ui-btn--success {
+    background: linear-gradient(135deg, #0fb87a, #3ddc97);
+    box-shadow: 0 6px 16px rgba(15, 184, 122, .28);
+}
+
+.ui-btn--danger {
+    background: linear-gradient(135deg, #ef4461, #ff7a8a);
+    box-shadow: 0 6px 16px rgba(239, 68, 97, .28);
+}
+
+.ui-btn--plain {
+    color: var(--ui-text-muted);
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    box-shadow: none;
+}
+
+.ui-btn--plain:hover {
+    color: var(--ui-text);
+    box-shadow: var(--ui-shadow-sm);
+}
+
+/* ---------- صفحة عرض: أزواج (عنوان / قيمة) ---------- */
+
+.ui-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: .6rem;
+    margin: 0;
+}
+
+.ui-facts > div {
+    display: grid;
+    gap: .15rem;
+    padding: .55rem .75rem;
+    background: var(--ui-bg);
+    border-radius: 12px;
+}
+
+.ui-facts dt {
+    color: var(--ui-text-muted);
+    font-size: .74rem;
+    font-weight: 700;
+}
+
+.ui-facts dd {
+    margin: 0;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.ui-facts dd:empty::before,
+.ui-facts dd.is-empty {
+    color: var(--ui-text-muted);
+    font-weight: 500;
+}
+
+.ui-facts dd:empty::before {
+    content: "—";
+}
+.ui-notes {
+    margin: 0;
+    white-space: pre-line;
+}
+
+.ui-notes--empty {
+    color: var(--ui-text-muted);
+    font-size: .88rem;
+}
+/* ---------- اختيار من أزرار صغيرة ملونة (بديل القائمة المنسدلة القصيرة) ---------- */
+
+.ui-choice {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+}
+
+.ui-choice__item {
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+}
+
+.ui-choice__item input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ui-choice__item span {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .35rem .8rem;
+    color: var(--ui-text-muted);
+    background: var(--ui-bg);
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 700;
+    transition: color var(--ui-transition), background var(--ui-transition), border-color var(--ui-transition);
+}
+
+.ui-choice__item:hover span {
+    color: var(--ui-primary-strong);
+    border-color: var(--ui-primary);
+}
+
+.ui-choice__item input:checked + span {
+    color: #fff;
+    background: var(--ui-gradient-primary);
+    border-color: transparent;
+}
+
+.ui-choice__item input:focus-visible + span {
+    box-shadow: 0 0 0 4px rgba(59, 91, 253, .2);
+}
+/* ---------- رسالة تأكيد بعد الحفظ ---------- */
+
+.ui-flash {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .6rem .9rem;
+    color: #0a7a55;
+    background: var(--ui-success-soft);
+    border: 1px solid #b7ecd7;
+    border-radius: var(--ui-radius-sm);
+    font-weight: 700;
+}
+.ui-form-page--narrow {
+    width: min(100%, 720px);
+}
+.ui-flash--danger {
+    color: #b3203d;
+    background: var(--ui-danger-soft);
+    border-color: #f7c2cd;
+}
+/* ---------- مفتاح صغير ملون (خانة اختيار على شكل زر) ---------- */
+
+.ui-toggle {
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+}
+
+.ui-toggle input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ui-toggle span {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .85rem;
+    color: var(--ui-text-muted);
+    background: var(--ui-bg);
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 700;
+    transition: color var(--ui-transition), background var(--ui-transition), border-color var(--ui-transition);
+}
+
+.ui-toggle:hover span {
+    border-color: #ec4899;
+}
+
+.ui-toggle input:checked + span {
+    color: #fff;
+    background: linear-gradient(135deg, #ec4899, #ff85a8);
+    border-color: transparent;
+}
+
+.ui-toggle input:focus-visible + span {
+    box-shadow: 0 0 0 4px rgba(236, 72, 153, .2);
+}
+/* ---------- فحص الرقم القومي والموبايل أثناء الكتابة ---------- */
+
+.id-check {
+    display: block;
+    margin-top: .25rem;
+    font-size: .76rem;
+    font-weight: 700;
+}
+
+.id-check.is-ok { color: #0a7a55; }
+.id-check.is-error { color: #b3203d; }
+/* ---------- شريط زر الرجوع أعلى الصفحة ---------- */
+
+.ui-backbar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: calc(var(--ui-gap) * -.5);
+}
+/* ---------- إخوة الرب: سطر واحد في ملف الأسرة وملف الفرد (سرّي: للكاهن وخادم إخوة الرب) ---------- */
+
+.brothers-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .3rem .6rem;
+    padding: .28rem .7rem;
+    background: #fdebf4;
+    border: 1px solid #f7c6de;
+    border-radius: 999px;
+    font-size: .8rem;
+}
+
+/* في رأس ملف الأسرة: تحت أزرار الزيارات والاحتياجات والمستند، بعرضها كلها */
+.brothers-line--head {
+    grid-column: 1 / -1;
+    justify-content: center;
+}
+
+.brothers-line__title {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    color: #be185d;
+    font-weight: 800;
+}
+
+.brothers-line__text {
+    color: var(--ui-text-muted);
+    font-weight: 600;
+}
+
+.brothers-line__link {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    padding: .08rem .6rem;
+    color: #fff;
+    text-decoration: none;
+    background: #db2777;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.brothers-line__link:hover {
+    color: #fff;
+    background: #be185d;
+}
+
+/* زر إخوة الرب تحت بطاقة كل فرد في ملف الأسرة: باهت قبل الإلحاق، ملوَّن بعده */
+.person-brothers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    width: 100%;
+    margin-top: .3rem;
+    padding: .2rem .5rem;
+    color: #9d174d;
+    background: transparent;
+    border: 1px dashed #f0a9cb;
+    border-radius: 999px;
+    font-size: .74rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.person-brothers:hover {
+    color: #be185d;
+    background: #fdebf4;
+}
+
+.person-brothers.is-on {
+    color: #fff;
+    background: #db2777;
+    border: 1px solid #db2777;
+}
+
+.person-brothers.is-on:hover {
+    color: #fff;
+    background: #be185d;
+}

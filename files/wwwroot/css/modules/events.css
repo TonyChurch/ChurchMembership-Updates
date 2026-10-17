@@ -1,0 +1,288 @@
+/* المناسبات — قائمة مجمعة حسب الشهر بألوان حسب نوع المناسبة */
+
+.events-hint {
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+}
+
+.events-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem 1rem;
+}
+
+.events-bar__title {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.events-bar__title h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.events-types {
+    flex: 1;
+}
+
+.events-types .ui-choice__item span {
+    padding: .25rem .65rem;
+    font-size: .78rem;
+}
+
+.events-print {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .8rem;
+    color: var(--ui-text);
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: 10px;
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.events-print:hover {
+    border-color: var(--ui-primary);
+}
+
+/* ---------- الألوان حسب النوع ---------- */
+
+.events-row,
+.events-types__item--blue { --event-color: #3b5bfd; --event-soft: #eef1ff; }
+.events-row--pink,
+.events-types__item--pink { --event-color: #ec4899; --event-soft: #fdebf4; }
+.events-row--red,
+.events-types__item--red { --event-color: #ef4461; --event-soft: #fdecef; }
+.events-row--violet,
+.events-types__item--violet { --event-color: #8b5cf6; --event-soft: #f2edff; }
+.events-row--green,
+.events-types__item--green { --event-color: #12b981; --event-soft: #e6f8f1; }
+.events-row--gold,
+.events-types__item--gold { --event-color: #e6a200; --event-soft: #fff5e1; }
+
+.events-types [class*="events-types__item--"] i {
+    color: var(--event-color);
+}
+
+.events-types [class*="events-types__item--"] input:checked + span {
+    background: var(--event-color);
+}
+
+.events-types [class*="events-types__item--"] input:checked + span i {
+    color: #fff;
+}
+
+/* ---------- القائمة ---------- */
+
+.events-list {
+    display: grid;
+    gap: 1.1rem;
+    padding: 1rem 1.25rem 1.25rem;
+}
+
+.events-month h3 {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin: 0 0 .5rem;
+    color: #5b3fd0;
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.events-month h3::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--ui-border);
+}
+
+.events-month ul {
+    display: grid;
+    gap: .45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.events-row {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: .75rem;
+    padding: .5rem .75rem;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-inline-start: 4px solid var(--event-color);
+    border-radius: 14px;
+    transition: box-shadow var(--ui-transition);
+}
+
+.events-row:hover {
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.events-row.is-today {
+    background: linear-gradient(90deg, var(--event-soft), var(--ui-surface) 60%);
+}
+
+.events-row__date {
+    display: grid;
+    justify-items: center;
+    min-width: 2.8rem;
+    line-height: 1.1;
+}
+
+.events-row__date b {
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.events-row__date small {
+    color: var(--ui-text-muted);
+    font-size: .72rem;
+}
+
+.events-row__icon {
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    color: var(--event-color);
+    background: var(--event-soft);
+    border-radius: 11px;
+}
+
+.events-row__main {
+    display: grid;
+    min-width: 0;
+}
+
+.events-row__who {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .2rem .5rem;
+}
+
+.events-row__who a,
+.events-row__who strong {
+    color: var(--ui-text);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.events-row__who a:hover {
+    color: var(--ui-primary);
+}
+
+.events-row__type {
+    color: var(--event-color);
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.events-row__main small {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .15rem .8rem;
+    color: var(--ui-text-muted);
+    font-size: .76rem;
+}
+
+.events-row__main small a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.events-row__main small a:hover {
+    color: var(--ui-primary);
+}
+
+.events-row__delete:hover {
+    color: var(--ui-danger);
+    background: var(--ui-danger-soft);
+}
+
+@media (max-width: 575.98px) {
+    .events-row {
+        grid-template-columns: auto auto minmax(0, 1fr);
+    }
+
+    .events-row > .ui-status,
+    .events-row > .ui-icon-actions {
+        grid-column: 3;
+        justify-self: start;
+    }
+}
+
+@media print {
+    .no-print,
+    .app-shell__sidebar,
+    .topbar,
+    .app-footer,
+    .ui-tabs,
+    .events-types {
+        display: none !important;
+    }
+}
+/* ---------- نموذج المناسبة ---------- */
+
+.event-types-choice .ui-choice__item span {
+    padding: .4rem .8rem;
+}
+
+.events-form__delete:hover {
+    color: var(--ui-danger);
+    border-color: var(--ui-danger);
+}
+
+.events-delete-warning {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    margin: 1rem 0 0;
+    padding: .6rem .8rem;
+    color: #b3203d;
+    background: var(--ui-danger-soft);
+    border-radius: 10px;
+    font-weight: 700;
+}
+.events-row--slate,
+.events-types__item--slate { --event-color: #475569; --event-soft: #eef2f6; }
+
+/* ---------- كل تاريخ بلونه: صفوف اليوم الواحد تشترك في لون، واليوم التالي بلون آخر ---------- */
+
+.events-day--0 { --day-bg: #eef4ff; --day-strong: #3b63d9; }
+.events-day--1 { --day-bg: #edf8f1; --day-strong: #1f8a57; }
+.events-day--2 { --day-bg: #fff6e6; --day-strong: #b7791f; }
+.events-day--3 { --day-bg: #f6effc; --day-strong: #7c4bc0; }
+.events-day--4 { --day-bg: #e9f7f8; --day-strong: #12808c; }
+
+.events-row[class*="events-day--"] {
+    background: var(--day-bg);
+    border-color: color-mix(in srgb, var(--day-strong) 22%, transparent);
+    border-inline-start-color: var(--event-color);
+}
+
+.events-row[class*="events-day--"] .events-row__date {
+    padding: .3rem .45rem;
+    background: var(--day-strong);
+    border-radius: 10px;
+}
+
+.events-row[class*="events-day--"] .events-row__date b,
+.events-row[class*="events-day--"] .events-row__date small {
+    color: #fff;
+}
+
+/* اليوم يبقى مميزًا بإطار بلون يومه */
+.events-row.is-today[class*="events-day--"] {
+    background: var(--day-bg);
+    box-shadow: inset 0 0 0 2px var(--day-strong);
+}

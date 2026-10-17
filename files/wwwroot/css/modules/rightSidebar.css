@@ -1,0 +1,890 @@
+:root {
+    --sidebar-expanded: 260px;
+    --sidebar-collapsed: 72px;
+    --sidebar-navy: #0D2340;
+    --sidebar-navy-soft: #153257;
+    --sidebar-gold: #C89B3C;
+    --sidebar-white: #ffffff;
+    --sidebar-muted: rgba(255, 255, 255, .72);
+}
+
+.app-shell {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    background: #f6f8fb;
+}
+
+.app-shell__sidebar {
+    position: sticky;
+    top: 0;
+    width: var(--sidebar-expanded);
+    height: 100vh;
+    flex: 0 0 var(--sidebar-expanded);
+    transition: width .24s ease, flex-basis .24s ease;
+    z-index: 1020;
+}
+
+body.sidebar-collapsed .app-shell__sidebar {
+    width: var(--sidebar-collapsed);
+    flex-basis: var(--sidebar-collapsed);
+}
+
+.app-shell__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1010;
+    border-bottom: 1px solid #e8edf4;
+    background: rgba(255, 255, 255, .96);
+    backdrop-filter: blur(10px);
+}
+
+.topbar__inner {
+    display: flex;
+    align-items: center;
+    min-height: 88px;
+    gap: 1.25rem;
+}
+
+.topbar__brand {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 260px;
+    min-width: 0;
+    gap: .7rem;
+    color: #0D2340;
+    text-decoration: none;
+}
+
+.topbar__brand:hover,
+.topbar__brand:focus {
+    color: #0D2340;
+}
+
+.topbar__logo {
+    display: inline-block;
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    overflow: hidden;
+    border: 2px solid #c89b3c;
+    border-radius: 50%;
+    background: #f8f3e8;
+    box-shadow: 0 3px 10px rgba(13, 35, 64, .12);
+}
+
+.topbar__logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 3px;
+}
+
+.topbar__brand-copy {
+    display: grid;
+    min-width: 0;
+    line-height: 1.25;
+}
+
+.topbar__brand-copy strong {
+    overflow: hidden;
+    font-size: 1rem;
+    font-weight: 850;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topbar__brand-copy .topbar__value-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    overflow: visible;
+    color: #1769c2;
+    font-size: 1.32rem;
+    font-weight: 900;
+    line-height: 1.25;
+    text-align: center;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.topbar__value-message i {
+    color: #ad7b1d;
+    font-size: 1.05rem;
+    opacity: .95;
+}
+
+.topbar__value-message i:first-child { transform: scaleX(-1); }
+
+.topbar__brand-copy small {
+    color: #7b6850;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.topbar-church-clock {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .16rem;
+    margin-top: .35rem;
+    padding-top: .35rem;
+    border-top: 1px solid rgba(200, 155, 60, .3);
+    font-family: Tahoma, Arial, sans-serif;
+    line-height: 1.3;
+}
+
+.topbar-church-clock > span { display: grid; grid-template-columns: 5.4rem minmax(0, 1fr); min-width: 0; align-items: center; gap: .35rem; white-space: nowrap; }
+.topbar-church-clock b { color: #9a6a12; font-size: .75rem; font-weight: 900; }
+.topbar-church-clock time { overflow: hidden; color: #263a55; font-size: .82rem; font-weight: 900; text-overflow: ellipsis; }
+.topbar-church-clock > span:nth-child(3) time { font-size: .78rem; }
+
+.topbar__page-title {
+    overflow: hidden;
+    margin-inline-start: auto;
+    padding-inline-start: 1rem;
+    color: #667085;
+    font-size: .85rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topbar-family-panel {
+    display: grid;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    color: #fff;
+    background: #0d2340;
+    border: 1px solid rgba(200, 155, 60, .55);
+    border-inline-start-width: 3px;
+    border-radius: 6px;
+}
+
+.topbar-family-primary-row {
+    display: grid;
+    grid-template-columns: minmax(370px, 1.65fr) minmax(265px, 1fr);
+    min-width: 0;
+}
+
+.topbar-family-context {
+    display: grid;
+    grid-template-columns: minmax(110px, 1fr) minmax(145px, 1.35fr) minmax(110px, 1fr);
+    max-width: none;
+    min-width: 0;
+    min-height: 54px;
+    background: #0d2340;
+}
+
+.topbar-family-context > div {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+    padding: .45rem .25rem;
+}
+
+.topbar-family-context > div + div {
+    border-inline-start: 1px solid rgba(200, 155, 60, .3);
+}
+
+.topbar-family-context span {
+    flex: 0 0 auto;
+    color: #e8bd5d;
+    font-size: .7rem;
+    font-weight: 800;
+}
+
+.topbar-family-context span::after { content: ":"; }
+
+.topbar-family-context strong {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    gap: .42rem;
+    overflow: hidden;
+    color: #ffffff;
+    font-size: .9rem;
+    font-weight: 900;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topbar-family-context strong i {
+    color: #e8bd5d;
+    font-size: .9rem;
+}
+
+.topbar-family-context > div:first-child strong {
+    font-size: 1.08rem;
+}
+
+.topbar-family-context > div:nth-child(3) strong { font-size: .72rem; }
+
+.topbar-global-identity {
+    display: grid;
+    align-content: center;
+    min-width: 0;
+    min-height: 54px;
+    padding: .45rem 1.25rem;
+    color: #fff;
+    background: #0d2340;
+    text-align: center;
+}
+
+.topbar-global-identity strong {
+    overflow: hidden;
+    color: #fff;
+    font-size: 1.02rem;
+    font-weight: 900;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topbar-global-identity span {
+    margin-top: .14rem;
+    color: #e8bd5d;
+    font-size: .76rem;
+    font-weight: 750;
+}
+
+.topbar-family-actions {
+    display: grid;
+    grid-template-columns: minmax(370px, 1.65fr) minmax(265px, 1fr);
+    grid-template-areas:
+        "commands retreat"
+        "member-navigation retreat";
+    align-items: center;
+    min-width: 0;
+    min-height: 76px;
+    column-gap: 0;
+    padding: .28rem 0;
+    border-top: 1px solid rgba(200, 155, 60, .35);
+    background: #123154;
+}
+
+.topbar-family-commands {
+    grid-area: commands;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    gap: .25rem;
+    background: #123154;
+}
+
+.topbar-spiritual-shortcuts {
+    grid-area: member-navigation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 25rem);
+    margin: .18rem auto .08rem;
+    gap: .55rem;
+}
+
+.topbar-spiritual-shortcut {
+    display: inline-flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    gap: .38rem;
+    padding: .28rem .75rem;
+    color: #fff;
+    font-size: .78rem;
+    font-weight: 900;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .15);
+    transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
+}
+
+.topbar-spiritual-shortcut--synaxar {
+    background: linear-gradient(135deg, #8f3d85, #67265f);
+    border-color: #c978bd;
+}
+
+.topbar-spiritual-shortcut--bible {
+    background: linear-gradient(135deg, #147a72, #0c5752);
+    border-color: #55b7ae;
+}
+
+.topbar-spiritual-shortcut:hover,
+.topbar-spiritual-shortcut:focus-visible {
+    color: #fff;
+    filter: brightness(1.14);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .2);
+}
+
+.topbar-spiritual-shortcut__open {
+    margin-inline-start: auto;
+    font-size: .66rem;
+    opacity: .78;
+}
+
+.topbar-family-member-navigation {
+    grid-area: member-navigation;
+    display: grid;
+    grid-template-columns: auto minmax(10rem, 1fr) auto;
+    align-items: center;
+    width: min(100%, 31rem);
+    margin: .18rem auto .1rem;
+    gap: .6rem;
+}
+
+.topbar-family-member-navigation .topbar-family-actions__member {
+    min-width: 0;
+    max-width: none;
+    font-size: .9rem;
+}
+
+.topbar-family-actions > .topbar-daily-retreat {
+    grid-area: retreat;
+}
+
+.topbar-family-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    gap: .35rem;
+    padding: .3rem .7rem;
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 800;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 4px;
+}
+
+.topbar-family-actions__add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    gap: .4rem;
+    padding: .35rem .9rem;
+    color: #0d2340;
+    font-size: .82rem;
+    font-weight: 900;
+    text-decoration: none;
+    background: #e8bd5d;
+    border: 1px solid #f3d98b;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .16);
+}
+
+.topbar-family-actions__add:hover,
+.topbar-family-actions__add:focus-visible { color: #fff; background: #b98522; border-color: #d5a63e; }
+
+.topbar-global-command {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    gap: .35rem;
+    padding: .3rem .7rem;
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 800;
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 4px;
+}
+
+.topbar-global-command:hover,
+.topbar-global-command:focus-visible,
+.topbar-global-command.is-current {
+    color: #0d2340;
+    background: #e8bd5d;
+    border-color: #e8bd5d;
+}
+
+.topbar-global-command--disabled {
+    cursor: not-allowed;
+    opacity: .48;
+}
+
+.topbar-family-actions button:hover:not(:disabled),
+.topbar-family-actions button:focus-visible,
+.topbar-family-actions button.is-active {
+    color: #0d2340;
+    background: #e8bd5d;
+    border-color: #e8bd5d;
+}
+
+.topbar-family-actions button:disabled { opacity: .4; cursor: not-allowed; }
+.topbar-family-actions__separator { width: 1px; height: 24px; margin-inline: .35rem; background: rgba(232, 189, 93, .5); }
+.topbar-family-actions__member {
+    min-width: 8rem;
+    max-width: 14rem;
+    overflow: hidden;
+    padding-inline: .5rem;
+    color: #f4d47f;
+    font-size: .85rem;
+    font-weight: 900;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topbar-daily-retreat {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    min-width: 0;
+    gap: .55rem;
+    padding-block: .3rem;
+    padding-inline-start: 1.75rem;
+    padding-inline-end: .25rem;
+    background: #0d2340;
+    direction: rtl;
+}
+
+.topbar-family-actions .topbar-daily-retreat { background: #123154; }
+
+.topbar-daily-retreat__title { display: grid; grid-template-columns: auto auto; align-items: center; gap: .28rem; color: #ffff00; font-size: .88rem; white-space: nowrap; }
+.topbar-daily-retreat__title > span { font-weight: 900; }
+.topbar-daily-retreat__title i { font-size: .85rem; }
+.topbar-daily-retreat__title small { grid-column: 1 / -1; color: #cbd7e6; font-size: .7rem; text-align: center; }
+.topbar-daily-retreat__readings { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; gap: .08rem; }
+.topbar-daily-retreat__reading {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: .3rem;
+}
+.topbar-daily-retreat__reading-link {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    min-width: 0;
+    gap: .3rem;
+    overflow: hidden;
+    color: #fff;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: .76rem;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0;
+    text-decoration: none;
+    white-space: nowrap;
+    unicode-bidi: plaintext;
+}
+.topbar-daily-retreat__reading-link i { flex: 0 0 auto; color: #e8bd5d; font-size: .68rem; }
+.topbar-daily-retreat__reading-link span { overflow: hidden; text-overflow: ellipsis; }
+.topbar-daily-retreat__reading-link:hover, .topbar-daily-retreat__reading-link:focus-visible { color: #f4d47f; text-decoration: underline; }
+.topbar-daily-retreat__audio {
+    display: inline-grid;
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    place-items: center;
+    color: #c89224;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(200, 146, 36, .55);
+    border-radius: 50%;
+    font-size: .7rem;
+}
+.topbar-daily-retreat__audio:hover, .topbar-daily-retreat__audio:focus-visible, .topbar-daily-retreat__audio.is-playing { color: #0d2340; background: #c89224; }
+.topbar-daily-retreat__loading { color: #d5deea; font-size: .8rem; }
+
+.daily-spiritual-strip {
+    min-height: 38px;
+    color: var(--daily-strip-text, #173052);
+    background: var(--daily-strip-background, #ffffff);
+    border-top: 1px solid rgba(200, 155, 60, .58);
+    border-bottom: 2px solid rgba(13, 35, 64, .12);
+    box-shadow: 0 3px 8px rgba(13, 35, 64, .05);
+    overflow: hidden;
+}
+
+.daily-spiritual-strip__viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+.daily-spiritual-strip__track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    min-width: 200%;
+    min-height: 36px;
+    animation: daily-spiritual-scroll var(--daily-strip-speed, 55s) linear infinite;
+    will-change: transform;
+}
+
+.daily-spiritual-strip:hover .daily-spiritual-strip__track { animation-play-state: paused; }
+
+.daily-spiritual-strip__message {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: .48rem;
+    padding-inline: 1.35rem;
+    color: #40536b;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: .82rem;
+    font-weight: 700;
+    line-height: 1.25;
+    white-space: nowrap;
+}
+
+.daily-spiritual-strip__message { color: var(--daily-strip-text, #40536b); }
+.daily-spiritual-strip__message strong { color: var(--daily-strip-heading, #9a6a12); font-weight: 900; }
+.daily-spiritual-strip__message i { color: #c28b22; font-size: .9rem; }
+.daily-spiritual-strip__message--fathers i { color: #7653a6; }
+.daily-spiritual-strip__message--notice i { color: #b44d3a; }
+.daily-spiritual-strip__divider { width: 1px; height: 19px; background: rgba(13, 35, 64, .18); }
+
+@keyframes daily-spiritual-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .daily-spiritual-strip__track { animation: none; min-width: max-content; }
+}
+
+@media (max-width: 1400px) {
+    .topbar-family-commands { gap: .15rem; }
+    .topbar-family-actions button { padding-inline: .48rem; }
+    .topbar-family-actions button span { display: none; }
+    .topbar-family-actions__add { padding-inline: .65rem; }
+    .topbar-family-actions__member { min-width: 4.5rem; max-width: 6rem; }
+    .topbar-family-actions__separator { display: none; }
+    .topbar-spiritual-shortcuts { width: min(100%, 21rem); gap: .3rem; }
+    .topbar-spiritual-shortcut { padding-inline: .5rem; font-size: .72rem; }
+}
+
+@media (max-width: 1100px) {
+    .topbar__brand { flex-basis: 210px; }
+    .topbar-family-context { grid-template-columns: minmax(90px, 1fr) minmax(125px, 1.35fr) minmax(90px, 1fr); }
+    .topbar-family-context > div { padding-inline: .55rem; }
+    .topbar-family-context strong { font-size: .94rem; }
+    .topbar-family-context > div:first-child strong { font-size: 1rem; }
+    .topbar-family-actions button { padding-inline: .45rem; }
+    .topbar-family-actions__member { min-width: 6rem; max-width: 9rem; }
+    .topbar-family-primary-row { grid-template-columns: minmax(310px, 1.4fr) minmax(275px, 1fr); }
+    .topbar-family-actions { grid-template-columns: minmax(310px, 1.4fr) minmax(275px, 1fr); }
+    .topbar-family-actions button span { display: none; }
+    .topbar-daily-retreat__reading { font-size: .72rem; }
+    .topbar-global-identity strong { font-size: .9rem; }
+}
+
+.topbar__menu {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--sidebar-navy);
+    color: var(--sidebar-white);
+    font-size: 1.55rem;
+    margin-inline-start: auto;
+}
+
+@media (max-width: 575.98px) {
+    .topbar__inner { min-height: 112px; gap: .45rem; }
+    .topbar__brand { flex: 0 0 40px; }
+    .topbar__logo { flex-basis: 40px; width: 40px; height: 40px; }
+    .topbar__brand-copy { display: none; }
+    .topbar-family-context { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr); max-width: none; }
+    .topbar-family-context { min-height: 58px; }
+    .topbar-family-context > div { padding: .35rem .25rem; }
+    .topbar-family-context span { font-size: .58rem; }
+    .topbar-family-context strong { font-size: .74rem; }
+    .topbar-family-context > div:first-child strong { font-size: .8rem; }
+    .topbar-family-context strong i { display: none; }
+    .topbar-global-identity { flex: 0 0 28rem; }
+    .topbar-global-identity strong { font-size: .8rem; }
+    .topbar-family-primary-row { display: flex; min-width: max-content; }
+    .topbar-family-context { flex: 0 0 28rem; }
+    .topbar-family-primary-row > .topbar-daily-retreat { flex: 0 0 26rem; }
+    .topbar-family-actions { display: flex; justify-content: flex-start; overflow-x: auto; }
+    .topbar-family-commands { flex: 0 0 auto; }
+    .topbar-family-actions button { flex: 0 0 auto; padding-inline: .45rem; }
+    .topbar-family-actions__add { flex: 0 0 auto; padding-inline: .6rem; }
+    .topbar-family-actions button span { display: none; }
+    .topbar-family-actions__member { flex: 0 0 6.5rem; min-width: 6.5rem; font-size: .72rem; }
+    .topbar-spiritual-shortcuts { flex: 0 0 21rem; margin-inline: .35rem; }
+    .topbar-daily-retreat { flex: 0 0 26rem; }
+    .daily-spiritual-strip__message { padding-inline: .9rem; font-size: .74rem; }
+}
+
+.app-main {
+    flex: 1 0 auto;
+    width: 100%;
+    padding: 1rem;
+}
+
+.app-footer {
+    border-top: 1px solid #e8edf4;
+    background: #ffffff;
+    color: #667085;
+    padding: 1rem 0;
+}
+
+.right-sidebar,
+.right-sidebar-offcanvas {
+    background: var(--sidebar-navy);
+    color: var(--sidebar-white);
+}
+
+.right-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.right-sidebar--mobile {
+    min-height: 100%;
+}
+
+.right-sidebar-offcanvas {
+    width: min(var(--sidebar-expanded), 86vw);
+    border-left: 1px solid rgba(200, 155, 60, .32);
+}
+
+.right-sidebar__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 72px;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(200, 155, 60, .24);
+    gap: .75rem;
+}
+
+.right-sidebar__brand,
+.right-sidebar__link,
+.right-sidebar__sublink {
+    color: var(--sidebar-white);
+    text-decoration: none;
+}
+
+.right-sidebar__brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: .75rem;
+    font-weight: 850;
+}
+
+.right-sidebar__brand-mark {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(200, 155, 60, .5);
+    border-radius: 8px;
+    background: rgba(200, 155, 60, .12);
+    color: var(--sidebar-gold);
+    font-size: 1.35rem;
+}
+
+.right-sidebar__icon-btn {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .08);
+    color: var(--sidebar-white);
+    font-size: 1.15rem;
+    transition: background .2s ease, border-color .2s ease;
+}
+
+.right-sidebar__icon-btn:hover,
+.right-sidebar__icon-btn:focus {
+    border-color: rgba(200, 155, 60, .65);
+    background: rgba(200, 155, 60, .18);
+}
+
+.right-sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: .85rem;
+    overflow-y: auto;
+}
+
+.right-sidebar__link,
+.right-sidebar__sublink {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 46px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    gap: .75rem;
+    text-align: right;
+    transition: background .2s ease, color .2s ease;
+}
+
+.right-sidebar__link {
+    padding: .72rem .85rem;
+    font-weight: 800;
+}
+
+.right-sidebar__sublink {
+    min-height: 40px;
+    padding: .58rem 2.55rem .58rem .75rem;
+    color: var(--sidebar-muted);
+    font-size: .95rem;
+    font-weight: 700;
+}
+
+.right-sidebar__link i:first-child,
+.right-sidebar__sublink i:first-child {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 22px;
+    width: 22px;
+    color: var(--sidebar-white);
+    font-size: 1.12rem;
+}
+
+.right-sidebar__group-toggle {
+    color: var(--sidebar-white);
+}
+
+.right-sidebar__chevron {
+    margin-right: auto;
+    color: rgba(255, 255, 255, .62);
+    font-size: .9rem;
+    transition: transform .2s ease;
+}
+
+.right-sidebar__group-toggle[aria-expanded="true"] .right-sidebar__chevron {
+    transform: rotate(180deg);
+}
+
+.right-sidebar__link:hover,
+.right-sidebar__link:focus,
+.right-sidebar__sublink:hover,
+.right-sidebar__sublink:focus,
+.right-sidebar__link.is-active,
+.right-sidebar__sublink.is-active {
+    background: rgba(200, 155, 60, .18);
+    color: var(--sidebar-white);
+}
+
+.right-sidebar__link--disabled {
+    cursor: not-allowed;
+    opacity: .55;
+    pointer-events: none;
+}
+
+.right-sidebar__soon {
+    margin-inline-start: auto;
+    padding: .1rem .45rem;
+    border-radius: 999px;
+    background: rgba(200, 155, 60, .22);
+    color: var(--sidebar-white);
+    font-size: .68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.right-sidebar__link.is-active::before,
+.right-sidebar__sublink.is-active::before {
+    content: "";
+    position: absolute;
+    inset-block: .55rem;
+    inset-inline-start: .3rem;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--sidebar-gold);
+}
+
+.right-sidebar__submenu {
+    margin-top: .25rem;
+}
+
+.right-sidebar-daily-message {
+    display: grid;
+    gap: .15rem;
+    margin-top: .7rem;
+    padding-top: .7rem;
+    border-top: 1px solid rgba(200, 155, 60, .3);
+}
+
+.right-sidebar-daily-message__heading {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .45rem;
+    color: #e8bd5d;
+    font-size: .88rem;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.right-sidebar-daily-message__heading i:last-of-type { margin-inline-start: auto; font-size: .72rem; }
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__header {
+    justify-content: center;
+    padding-inline: .75rem;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__brand {
+    display: none;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__nav {
+    padding-inline: .5rem;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__link {
+    justify-content: center;
+    padding-inline: .5rem;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__text,
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__chevron,
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__submenu,
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar-daily-message {
+    display: none;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__link i:first-child {
+    font-size: 1.25rem;
+}
+
+@media (max-width: 991.98px) {
+    .app-shell {
+        display: block;
+    }
+
+    .app-main {
+        padding: .85rem;
+    }
+
+    .right-sidebar__header {
+        min-height: 68px;
+    }
+}

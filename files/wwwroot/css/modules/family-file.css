@@ -1,0 +1,364 @@
+/* ملف الأسرة — الشكل الموحد الجديد فوق التنسيقات القديمة (families.css)، داخل .family-v2 فقط */
+
+.family-v2 {
+    display: grid;
+    gap: var(--ui-gap);
+    padding-block: 1.25rem 2rem;
+    font-family: var(--ui-font);
+    color: var(--ui-text);
+}
+
+/* الشكل القديم للرأس والتبويبات المخفية لم يعد مستخدمًا */
+.family-v2 .family-file-hub,
+.family-v2 .family-workspace-tabs {
+    display: none !important;
+}
+
+/* ---------- بطاقة الأسرة ---------- */
+
+.family-hero {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(255, 200, 97, .18), transparent 45%),
+        radial-gradient(circle at 100% 100%, rgba(155, 107, 255, .12), transparent 40%),
+        var(--ui-surface);
+}
+
+.family-hero__icon {
+    display: grid;
+    place-items: center;
+    width: 4.25rem;
+    height: 4.25rem;
+    color: #fff;
+    background: linear-gradient(135deg, #e6a200, #ffc93c);
+    border-radius: 22px;
+    box-shadow: 0 10px 22px rgba(230, 162, 0, .3);
+    font-size: 1.8rem;
+}
+
+.family-hero__name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .75rem;
+}
+
+.family-hero__name h1 {
+    margin: 0;
+    font-size: 1.45rem;
+    font-weight: 800;
+}
+
+.family-hero__status {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .2rem .7rem;
+    color: #0a7a55;
+    background: var(--ui-success-soft);
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.family-hero__status i {
+    font-size: .5rem;
+}
+
+.family-hero__status.is-followup { color: #a4610a; background: var(--ui-accent-soft); }
+.family-hero__status.is-intensive { color: #5b3fd0; background: var(--ui-violet-soft); }
+.family-hero__status.is-urgent { color: #b3203d; background: var(--ui-danger-soft); }
+
+.family-hero__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin: .55rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.family-hero__chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .18rem .65rem;
+    color: var(--ui-primary-strong);
+    background: var(--ui-primary-soft);
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.family-hero__chips .is-violet { color: #5b3fd0; background: var(--ui-violet-soft); }
+.family-hero__chips .is-pink { color: #b3206b; background: #fdebf4; }
+.family-hero__chips .is-green { color: #0a7a55; background: var(--ui-success-soft); }
+.family-hero__chips .is-gold { color: #a4610a; background: var(--ui-accent-soft); }
+.family-hero__chips .is-danger { color: #b3203d; background: var(--ui-danger-soft); }
+
+.family-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .5rem;
+}
+
+.family-hero__actions .ui-btn {
+    padding: .45rem .95rem;
+}
+
+.family-hero__whatsapp { color: #1a9e55; }
+.family-hero__whatsapp:hover { color: #fff; background: #25d366; }
+
+@media (max-width: 991.98px) {
+    .family-hero {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .family-hero__actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
+}
+
+/* ---------- التبويبات والبحث ---------- */
+
+.family-sections {
+    padding: 0;
+    overflow: hidden;
+}
+
+.family-sections__tabs {
+    border-bottom: 1px solid var(--ui-border);
+}
+
+.family-sections__tabs .ui-tabs__item {
+    background: none;
+    border-top: 0;
+    border-inline: 0;
+    font-family: inherit;
+}
+
+.family-sections__tabs .family-file-hub__tab.is-active,
+.family-sections__tabs .family-file-hub__tab.active {
+    color: var(--ui-primary-strong);
+    border-bottom-color: var(--ui-primary);
+}
+
+.family-sections__tabs .family-file-hub__tab.is-active b,
+.family-sections__tabs .family-file-hub__tab.active b {
+    color: #fff;
+    background: var(--ui-primary);
+}
+
+.family-tab--attention b {
+    color: #fff !important;
+    background: var(--ui-danger) !important;
+}
+
+.family-sections__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem 1rem;
+    padding: .65rem 1rem;
+    background: var(--ui-bg);
+}
+
+.family-sections__search {
+    flex: 1;
+    max-width: 28rem;
+}
+
+.family-sections__search .form-control {
+    min-height: 2.3rem;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: 12px;
+    font-size: .88rem;
+}
+
+.family-sections__members {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .88rem;
+}
+
+.family-sections__members strong {
+    min-width: 8rem;
+    text-align: center;
+}
+
+/* ---------- محتوى الأقسام بنفس نظام البطاقات ---------- */
+
+.family-v2 .families-form-card {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.family-v2 .families-form-card__body {
+    padding: 0;
+}
+
+.family-v2 .families-form-section {
+    margin-bottom: var(--ui-gap);
+    padding: 1.1rem 1.25rem 1.25rem;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-top: 3px solid var(--ui-primary);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.family-v2 .tab-pane .families-form-section:nth-of-type(4n+2) { border-top-color: var(--ui-success); }
+.family-v2 .tab-pane .families-form-section:nth-of-type(4n+3) { border-top-color: var(--ui-accent); }
+.family-v2 .tab-pane .families-form-section:nth-of-type(4n+4) { border-top-color: var(--ui-violet); }
+
+.family-v2 .families-form-section__header h3,
+.family-v2 .families-form-section__header h2,
+.family-v2 .families-form-section h3 {
+    color: var(--ui-text);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.family-v2 .families-form-section__header > span:first-child,
+.family-v2 .family-tab-section-header > span:first-child {
+    color: var(--ui-primary);
+    background: var(--ui-primary-soft);
+    border-radius: 9px;
+}
+
+.family-v2 .form-label {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.family-v2 .form-control,
+.family-v2 .form-select {
+    min-height: 2.6rem;
+    color: var(--ui-text);
+    background-color: var(--ui-bg);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: .92rem;
+}
+
+.family-v2 .form-control:focus,
+.family-v2 .form-select:focus {
+    background-color: var(--ui-surface);
+    border-color: var(--ui-primary);
+    box-shadow: 0 0 0 4px rgba(59, 91, 253, .14);
+}
+
+.family-v2 .form-control[readonly] {
+    color: var(--ui-text-muted);
+    background-color: var(--ui-slate-soft);
+}
+
+/* الجداول بنفس رأس الجداول البنفسجي في البرنامج */
+.family-v2 .table {
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid var(--ui-border);
+    border-radius: 14px;
+}
+
+.family-v2 .table thead th {
+    color: #fff;
+    background: #6d3fd8;
+    border: 0;
+    font-size: .82rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.family-v2 .table td {
+    border-color: var(--ui-border);
+    font-size: .88rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.family-v2 .table tbody tr:hover {
+    background: rgba(59, 91, 253, .05);
+}
+
+/* الأزرار */
+.family-v2 .families-save-btn,
+.family-v2 .family-visit-add-btn,
+.family-v2 .family-visit-save-btn,
+.family-v2 .families-primary-btn {
+    color: #fff;
+    background: linear-gradient(135deg, #0fb87a, #3ddc97);
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(15, 184, 122, .25);
+    font-weight: 700;
+}
+
+.family-v2 .families-save-btn:hover,
+.family-v2 .family-visit-add-btn:hover,
+.family-v2 .family-visit-save-btn:hover,
+.family-v2 .families-primary-btn:hover {
+    color: #fff;
+    filter: brightness(1.05);
+}
+
+.family-v2 .btn-sm {
+    border-radius: 9px;
+}
+
+.family-v2 .alert {
+    border: 0;
+    border-radius: var(--ui-radius-sm);
+    font-weight: 700;
+}
+
+.family-v2 .alert-success {
+    color: #0a7a55;
+    background: var(--ui-success-soft);
+}
+
+.family-v2 .alert-warning {
+    color: #8a5a00;
+    background: var(--ui-accent-soft);
+}
+
+/* شريط الحفظ أسفل النموذج */
+.family-v2 .families-create-actions {
+    position: sticky;
+    bottom: .75rem;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .6rem;
+    padding: .65rem;
+    background: rgba(255, 255, 255, .9);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow);
+    backdrop-filter: blur(8px);
+}
+
+@media print {
+    .no-print,
+    .app-shell__sidebar,
+    .topbar,
+    .app-footer,
+    .family-sections {
+        display: none !important;
+    }
+}

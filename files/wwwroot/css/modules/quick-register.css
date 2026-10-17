@@ -1,0 +1,135 @@
+/* التسجيل السريع وضم الملف الموجود في صفحة الأسرة — يعتمد على theme.css */
+
+.quick-table {
+    margin: 0;
+}
+
+.quick-table th {
+    white-space: nowrap;
+}
+
+.quick-table td {
+    min-width: 9rem;
+    vertical-align: top;
+}
+
+.quick-table td:nth-child(2) {
+    min-width: 15rem;
+}
+
+.quick-table .quick-table__num {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    color: var(--ui-text-muted);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.quick-table small {
+    display: block;
+    font-size: .75rem;
+}
+
+.quick-table small:empty {
+    display: none;
+}
+
+.quick-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem 1.25rem;
+    margin-top: .9rem;
+}
+
+.quick-count {
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+}
+
+.quick-allow {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    margin-inline-start: auto;
+    font-size: .85rem;
+}
+
+/* ---------- ملف موجود يطابق الاسم المكتوب في صفحة الأسرة ---------- */
+
+.fb-match {
+    display: grid;
+    gap: .35rem;
+    margin-top: .4rem;
+    padding: .55rem .65rem;
+    border: 1px solid #f5d38a;
+    border-radius: var(--ui-radius-sm);
+    background: var(--ui-accent-soft);
+    font-size: .82rem;
+}
+
+.fb-match[hidden] {
+    display: none;
+}
+
+.fb-match__title {
+    color: #8a5a08;
+    font-weight: 800;
+}
+
+.fb-match__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .6rem;
+}
+
+.fb-match__item small {
+    color: var(--ui-text-muted);
+}
+
+.fb-match__item button {
+    margin-inline-start: auto;
+    padding: .2rem .7rem;
+    border: 0;
+    border-radius: 999px;
+    background: #a4610a;
+    color: #fff;
+    font-size: .78rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.fb-match--attached {
+    border-color: #b7ecd7;
+    background: var(--ui-success-soft);
+}
+
+.fb-match--attached .fb-match__title {
+    color: #0a7a55;
+}
+
+.fb-match--attached button {
+    background: var(--ui-slate);
+}
+
+/* ---------- رفع قائمة الفصل من ملف Word ---------- */
+
+.quick-word {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem .9rem;
+    padding: .75rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.quick-word__file {
+    width: auto;
+    max-width: 20rem;
+}
+
+.quick-word small {
+    color: var(--ui-text-muted);
+    font-size: .78rem;
+}

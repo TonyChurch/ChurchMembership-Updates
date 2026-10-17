@@ -1,0 +1,265 @@
+/* قسم «التوثيق»: وثائق الكنيسة وتجديداتها وصورها */
+
+.archive__icon {
+    background: linear-gradient(135deg, #f0c468, #b7791f);
+}
+
+.archive__filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem;
+    padding: .75rem 1rem;
+}
+
+.archive__filter .form-control {
+    flex: 1 1 14rem;
+    width: auto;
+}
+
+/* ---------- بطاقات السجلات ---------- */
+
+.archive__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: 1rem;
+}
+
+.archive__card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+    padding: 0;
+    color: inherit;
+    text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.archive__card:hover,
+.archive__card:focus-visible {
+    color: inherit;
+    transform: translateY(-2px);
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.archive__cover {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    color: #b7791f;
+    background: #fbf3df;
+    font-size: 2.6rem;
+}
+
+.archive__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.archive__body {
+    display: grid;
+    align-content: start;
+    gap: .4rem;
+    padding: .8rem 1rem 1rem;
+    min-width: 0;
+}
+
+.archive__body strong {
+    font-size: 1.02rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.archive__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .8rem;
+    margin: 0;
+}
+
+.archive__body small {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem .9rem;
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+/* ---------- صفحة السجل ---------- */
+
+.archive__description {
+    padding: 1rem 1.2rem;
+    line-height: 1.9;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.archive__gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+    gap: .8rem;
+    margin: 0;
+    padding: .2rem 1rem 1rem;
+    list-style: none;
+}
+
+.archive__gallery li {
+    position: relative;
+    display: grid;
+    gap: .3rem;
+}
+
+.archive__photo {
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    background: #f1f4f2;
+    border: 1px solid var(--ui-border);
+    border-radius: 12px;
+    aspect-ratio: 4 / 3;
+    cursor: zoom-in;
+}
+
+.archive__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.archive__gallery small {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+    overflow-wrap: anywhere;
+}
+
+.archive__file-tools {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem;
+}
+
+.archive__gallery .archive__file-tools {
+    position: absolute;
+    inset-block-start: .4rem;
+    inset-inline-end: .4rem;
+}
+
+.archive__gallery .archive__file-tools .ui-icon-btn {
+    background: rgba(255, 255, 255, .92);
+}
+
+.archive__files {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.archive__files li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .8rem;
+    padding: .7rem 1rem;
+    border-top: 1px solid var(--ui-border);
+}
+
+.archive__files li > i {
+    color: #b7791f;
+    font-size: 1.5rem;
+}
+
+.archive__file-name {
+    display: grid;
+    min-width: 0;
+}
+
+.archive__file-name strong {
+    overflow-wrap: anywhere;
+}
+
+.archive__file-name small,
+.archive__note {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+.archive__delete {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.archive__viewer {
+    display: grid;
+    gap: .6rem;
+    padding: .8rem;
+}
+
+.archive__viewer img {
+    max-width: 100%;
+    max-height: 78vh;
+    margin-inline: auto;
+    border-radius: 8px;
+}
+
+.archive__viewer p {
+    margin: 0;
+    text-align: center;
+}
+
+/* ---------- نوافذ الإضافة ---------- */
+
+.archive__form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+}
+
+.archive__wide {
+    grid-column: 1 / -1;
+}
+
+.archive__note {
+    display: block;
+    margin-top: .25rem;
+}
+
+.archive__error {
+    margin: 0;
+    color: #b91c1c;
+    font-size: .88rem;
+    font-weight: 700;
+}
+
+@media (max-width: 575.98px) {
+    .archive__form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .archive__files li {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .archive__files .archive__file-tools {
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .archive__card { transition: none; }
+}
+
+@media print {
+    .archive__gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .archive__gallery li {
+        break-inside: avoid;
+    }
+}

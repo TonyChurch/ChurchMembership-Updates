@@ -1,0 +1,156 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+.national-id-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  padding: .65rem .8rem;
+  border-radius: .5rem;
+  font-size: .9rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.national-id-status[hidden] {
+  display: none;
+}
+
+.national-id-status--ok {
+  color: #0f5132;
+  background: #d1e7dd;
+  border-color: #badbcc;
+}
+
+.national-id-status--taken {
+  display: block;
+  color: #842029;
+  background: #f8d7da;
+  border-color: #f5c2c7;
+}
+
+.national-id-status__title {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-weight: 800;
+  margin-bottom: .35rem;
+}
+
+.national-id-status__row {
+  display: flex;
+  gap: .4rem;
+  align-items: baseline;
+}
+
+.national-id-status__row span {
+  opacity: .85;
+}
+
+.national-id-status__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .6rem;
+}
+
+.national-id-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(13, 35, 64, .25);
+  border-top-color: #0D2340;
+  border-radius: 50%;
+  display: inline-block;
+  animation: nationalIdSpin .7s linear infinite;
+}
+
+@keyframes nationalIdSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.app-date-field {
+  position: relative;
+  display: block;
+}
+
+.app-date-native {
+  position: relative;
+  z-index: 2;
+  color: transparent !important;
+  caret-color: transparent;
+  background-color: transparent !important;
+}
+
+.app-date-native::-webkit-datetime-edit,
+.app-date-native::-webkit-datetime-edit-fields-wrapper,
+.app-date-native::-webkit-datetime-edit-text,
+.app-date-native::-webkit-datetime-edit-month-field,
+.app-date-native::-webkit-datetime-edit-day-field,
+.app-date-native::-webkit-datetime-edit-year-field {
+  color: transparent;
+}
+
+.app-date-native::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}
+
+.app-date-display {
+  position: absolute;
+  z-index: 3;
+  inset: 0 2.25rem 0 .75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  color: #0d2340;
+  font-size: .95rem;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.app-date-display.is-empty {
+  color: #8b98a8;
+  font-weight: 600;
+}
+
+/* التصدير إلى Excel وPDF للكاهن وأمين الخدمة فقط: تُخفى أزراره عن غيرهما (والخادم يرفضه أيضًا) */
+body.no-export a[href*="Excel"],
+body.no-export a[href*="Pdf"],
+body.no-export a[href*="/Export"],
+body.no-export .members-export { display: none !important; }
+
+/* رسالة «ما الجديد» بعد التحديث */
+.whats-new .modal-title { color: var(--ui-primary, #3b5bfd); font-weight: 800; }
+.whats-new ul { display: grid; gap: .45rem; margin: 0; padding-inline-start: 1.2rem; }

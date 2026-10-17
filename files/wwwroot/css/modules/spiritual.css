@@ -1,0 +1,14 @@
+.spiritual-page { max-width: 1120px; margin: 0 auto; }
+.spiritual-page__header { padding: 1.4rem; border: 1px solid rgba(200, 155, 60, .36); border-radius: 8px; background: #fff; }
+.spiritual-page__header > span { color: #a6761c; font-size: .85rem; font-weight: 850; }
+.spiritual-page__header h1 { margin: .35rem 0; color: #0d2340; font-size: 1.7rem; font-weight: 900; }
+.spiritual-page__header p { margin: 0; color: #667085; font-weight: 700; }
+.spiritual-page__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; margin-top: .85rem; }
+.spiritual-message-card { padding: 1.2rem; border: 1px solid #dfe7f0; border-radius: 8px; background: #fff; }
+.spiritual-message-card > i { color: #c89b3c; font-size: 1.2rem; }
+.spiritual-message-card > span { display: block; margin-top: .4rem; color: #9a6e1f; font-size: .82rem; font-weight: 850; }
+.spiritual-message-card--link { display: block; color: inherit; text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+.spiritual-message-card--link:hover, .spiritual-message-card--link:focus-visible { border-color: #c89b3c; box-shadow: 0 4px 14px rgba(200, 155, 60, .18); color: inherit; }
+.spiritual-message-card h2, .spiritual-message-card blockquote { margin: .4rem 0 0; color: #0d2340; font-size: 1.1rem; font-weight: 850; line-height: 1.8; }
+.spiritual-message-card p { margin: .4rem 0 0; color: #667085; font-size: .86rem; font-weight: 700; }
+@media (max-width: 767.98px) { .spiritual-page__grid { grid-template-columns: 1fr; } }

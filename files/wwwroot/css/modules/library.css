@@ -1,0 +1,143 @@
+/* صفحة «المكتبة»: كتب المناهج والوسائط */
+
+.library__icon {
+    background: linear-gradient(135deg, #60a5fa, #2563eb);
+}
+
+.library__filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem;
+    padding: .75rem 1rem;
+}
+
+.library__filter .form-control {
+    flex: 1 1 14rem;
+    width: auto;
+}
+
+.library__filter .form-select {
+    flex: 0 1 14rem;
+    width: auto;
+}
+
+.library__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.library__item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    gap: .75rem .85rem;
+    padding: 1rem;
+}
+
+.library__type {
+    --tint: #2563eb;
+    display: grid;
+    place-items: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    color: var(--tint);
+    background: color-mix(in srgb, var(--tint) 12%, transparent);
+    border-radius: 14px;
+    font-size: 1.6rem;
+}
+
+.library__type--red { --tint: #dc2626; }
+.library__type--blue { --tint: #2563eb; }
+.library__type--orange { --tint: #ea580c; }
+.library__type--green { --tint: #059669; }
+.library__type--violet { --tint: #7c3aed; }
+.library__type--pink { --tint: #db2777; }
+.library__type--slate { --tint: #475569; }
+.library__type--gold { --tint: #b45309; }
+
+.library__body {
+    display: grid;
+    align-content: start;
+    gap: .35rem;
+    min-width: 0;
+}
+
+.library__body h2 {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 800;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.library__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem;
+    margin: 0;
+}
+
+.library__tags small,
+.library__description,
+.library__note {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+.library__description {
+    margin: 0;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.library__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .45rem;
+    padding-top: .7rem;
+    border-top: 1px solid var(--ui-border);
+}
+
+.library__tools {
+    display: inline-flex;
+    gap: .3rem;
+    margin-inline-start: auto;
+}
+
+.library__form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+}
+
+.library__wide {
+    grid-column: 1 / -1;
+}
+
+.library__note {
+    display: block;
+    margin-top: .25rem;
+}
+
+.library__note:empty {
+    display: none;
+}
+
+.library__error {
+    margin: 0;
+    color: #b91c1c;
+    font-size: .88rem;
+    font-weight: 700;
+}
+
+@media (max-width: 575.98px) {
+    .library__form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

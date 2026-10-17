@@ -1,0 +1,227 @@
+/* سجل الأسر — يعتمد على theme.css وعلى تنسيقات قائمة الأعضاء (members-index.css) */
+
+/* ---------- شريط البحث: 4 حقول ---------- */
+
+.families-filter {
+    grid-template-columns: minmax(12rem, 2fr) repeat(3, minmax(7rem, 1fr)) auto;
+}
+
+@media (max-width: 1199.98px) {
+    .families-filter {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .families-filter {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ---------- بطاقة المناسبات بجوار الإحصائيات ---------- */
+
+.families-events {
+    background: linear-gradient(135deg, #eef1ff, #f5efff);
+    border-color: #d9dffb;
+}
+
+.families-events .ui-birthdays__title {
+    color: #5b3fd0;
+    text-decoration: none;
+}
+
+.families-events .ui-birthdays__title:hover {
+    text-decoration: underline;
+}
+
+/* ---------- التبويبات ---------- */
+
+.families-tab--urgent b {
+    color: #fff;
+    background: var(--ui-danger);
+}
+
+/* ---------- اختيار نوع البيانات الناقصة ---------- */
+
+.families-incomplete {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+    padding: .55rem 1.25rem;
+    background: linear-gradient(135deg, #fff8ec, #fff3f6);
+    border-bottom: 1px solid #ffe0b8;
+    font-size: .85rem;
+}
+
+.families-incomplete > span {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    color: #b45309;
+    font-weight: 800;
+}
+
+.families-incomplete a {
+    padding: .2rem .75rem;
+    color: #8a5a00;
+    text-decoration: none;
+    background: var(--ui-surface);
+    border: 1px solid #f3cf7c;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.families-incomplete a:hover,
+.families-incomplete a.is-active {
+    color: #fff;
+    background: #e6a200;
+    border-color: #e6a200;
+}
+
+.families-incomplete small {
+    margin-inline-start: auto;
+    color: var(--ui-text-muted);
+}
+
+/* ---------- الجدول ---------- */
+
+.families-table .families-table__number {
+    width: 1%;
+    color: var(--ui-text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.families-table td.members-select + td {
+    text-align: center;
+}
+
+.families-table td.families-table__number + td,
+.families-table td.families-table__number + td + td {
+    text-align: start;
+}
+
+.families-table .ui-person__text small {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .15rem .7rem;
+}
+
+.families-table .ui-person__text small i {
+    opacity: .75;
+}
+
+.families-count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding-inline: .45rem;
+    color: #5b3fd0;
+    background: var(--ui-violet-soft);
+    border-radius: 10px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.families-phone {
+    color: var(--ui-text);
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.families-phone:hover {
+    color: var(--ui-primary);
+}
+
+.families-phone--empty {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+/* الأسماء لا تُقتطع: عمود الأسماء يأخذ مساحته، والتفاصيل الصغيرة تلتف */
+.families-table .ui-person {
+    min-width: 11rem;
+}
+
+.families-table .ui-person__text a,
+.families-table .ui-person__text > span {
+    white-space: normal;
+}
+
+.families-table .ui-person__text small {
+    max-width: 16rem;
+}
+
+/* ---------- عمود الزيارة (أزرق مثل الافتقاد في قائمة الأعضاء) ---------- */
+
+.families-table td.families-visit {
+    background: rgba(59, 91, 253, .07);
+}
+
+.families-table .families-th--visit {
+    border-bottom: 3px solid #7fa0ff;
+}
+
+.families-visit__cell {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    white-space: nowrap;
+}
+
+.families-visit__next {
+    gap: .25rem;
+    font-size: .72rem;
+}
+
+/* ---------- الإجراءات ---------- */
+
+.families-actions {
+    justify-content: flex-end;
+}
+
+.families-actions form {
+    margin: 0;
+}
+
+.families-actions__text {
+    min-height: 2.1rem;
+    padding: .25rem .7rem;
+    font-size: .8rem;
+    white-space: nowrap;
+}
+
+.families-actions__complete {
+    color: #a4610a;
+    border-color: #ffd9a0;
+}
+
+.families-actions__complete:hover {
+    color: #fff;
+    background: #e6a200;
+}
+
+.families-actions__visit:hover { color: #0a7a55; background: var(--ui-success-soft); }
+.families-actions__event:hover { color: #6d3fd8; background: var(--ui-violet-soft); }
+.families-actions__whatsapp { color: #1a9e55; }
+.families-actions__whatsapp:hover { color: #fff; background: #25d366; }
+
+/* ---------- الطباعة ---------- */
+
+@media print {
+    .families-table .ui-avatar {
+        display: none;
+    }
+}
+
+/* إخفاء الأسرة (للجميع) وحذفها النهائي من المؤرشفة (للمسؤول) */
+.families-actions form { display: inline-flex; margin: 0; }
+.families-actions__hide { color: var(--ui-text-muted, #64748b); }
+.families-actions__hide:hover { color: #475569; background: var(--ui-surface-muted, #f1f5f9); }
+.families-actions__delete { color: var(--ui-danger); }
+.families-actions__delete:hover { background: var(--ui-danger-soft, #fde8e8); }

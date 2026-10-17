@@ -1,0 +1,525 @@
+/* المناطق — بطاقات صغيرة ملونة لكل منطقة */
+
+.areas-page .ui-page-header .ui-chip-stats {
+    margin-inline-start: auto;
+}
+
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.area-card {
+    --area-color: var(--ui-primary);
+    --area-soft: var(--ui-primary-soft);
+    display: grid;
+    gap: .65rem;
+    padding: 1rem 1.1rem;
+    background: linear-gradient(160deg, var(--area-soft), var(--ui-surface) 65%);
+    border: 1px solid var(--ui-border);
+    border-top: 3px solid var(--area-color);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow-sm);
+    transition: transform var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.area-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ui-shadow);
+}
+
+.area-card--violet { --area-color: #8b5cf6; --area-soft: #f2edff; }
+.area-card--green { --area-color: #12b981; --area-soft: #e6f8f1; }
+.area-card--gold { --area-color: #f5a524; --area-soft: #fff5e1; }
+.area-card--pink { --area-color: #ec4899; --area-soft: #fdebf4; }
+.area-card--teal { --area-color: #0ea5b7; --area-soft: #e3f7f9; }
+
+.area-card__head {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.area-card__head h2 {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.area-card__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    color: #fff;
+    background: var(--area-color);
+    border-radius: 11px;
+}
+
+.area-card__numbers {
+    display: flex;
+    gap: .5rem;
+}
+
+.area-card__numbers span {
+    padding: .15rem .6rem;
+    color: var(--ui-text-muted);
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+    font-size: .8rem;
+}
+
+.area-card__numbers b {
+    color: var(--ui-text);
+}
+
+.area-card__bar {
+    height: .35rem;
+    overflow: hidden;
+    background: var(--ui-slate-soft);
+    border-radius: 999px;
+}
+
+.area-card__bar span {
+    display: block;
+    height: 100%;
+    background: var(--area-color);
+    border-radius: inherit;
+}
+
+.area-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    justify-self: start;
+    color: var(--area-color);
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.area-card__link:hover {
+    text-decoration: underline;
+}
+/* ---------- الفصول ---------- */
+
+.classes-page .ui-page-header .ui-chip-stats {
+    margin-inline-start: auto;
+}
+
+.classes-stages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    padding: .6rem .75rem;
+}
+
+.classes-stages__item {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .3rem .75rem;
+    color: var(--ui-text-muted);
+    text-decoration: none;
+    background: var(--ui-bg);
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.classes-stages__item b {
+    min-width: 1.3rem;
+    padding: 0 .35rem;
+    color: var(--ui-text-muted);
+    background: var(--ui-surface);
+    border-radius: 999px;
+    font-size: .72rem;
+    text-align: center;
+}
+
+.classes-stages__item:hover {
+    color: var(--ui-primary-strong);
+}
+
+.classes-stages__item.is-active {
+    color: #fff;
+    background: var(--ui-gradient-primary);
+}
+
+.classes-stages__item.is-active b {
+    color: var(--ui-primary-strong);
+}
+
+.classes-stages__item.is-empty {
+    opacity: .55;
+}
+
+.classes-group {
+    display: grid;
+    gap: .75rem;
+}
+
+.classes-group > h2 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.classes-group > h2 > i {
+    color: var(--ui-violet);
+}
+
+.classes-group__add {
+    display: inline-flex;
+    align-items: center;
+    gap: .2rem;
+    margin-inline-start: auto;
+    padding: .2rem .65rem;
+    color: #0a7a55;
+    text-decoration: none;
+    background: var(--ui-success-soft);
+    border-radius: 999px;
+    font-size: .78rem;
+}
+
+.classes-group__add:hover {
+    color: #fff;
+    background: var(--ui-success);
+}
+
+.classes-note {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+.area-card.is-inactive {
+    opacity: .65;
+}
+/* ---------- المراحل ---------- */
+
+.area-card__numbers a {
+    padding: .15rem .6rem;
+    color: var(--ui-text-muted);
+    text-decoration: none;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+    font-size: .8rem;
+}
+
+.area-card__numbers a:hover {
+    color: var(--area-color);
+    border-color: var(--area-color);
+}
+
+.area-card__numbers a b {
+    color: var(--ui-text);
+}
+
+.area-card__head h2 small {
+    display: block;
+    color: var(--ui-text-muted);
+    font-size: .74rem;
+    font-weight: 600;
+}
+
+.stages-verse {
+    color: #8a5a00 !important;
+    font-size: .82rem !important;
+}
+
+.stages-verse small {
+    color: var(--ui-text-muted);
+}
+
+.stages-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.stages-actions .ui-btn {
+    padding: .45rem 1rem;
+}
+
+.stages-classes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+}
+
+.stages-classes span {
+    padding: .1rem .55rem;
+    color: var(--area-color);
+    background: var(--area-soft);
+    border-radius: 999px;
+    font-size: .74rem;
+    font-weight: 700;
+}
+.stages-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 1rem;
+}
+
+.classes-group__roster {
+    color: #5b3fd0;
+    background: var(--ui-violet-soft);
+}
+
+.classes-group__roster + .classes-group__add {
+    margin-inline-start: 0;
+}
+.area-card__head h2 small {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .3rem;
+    margin-top: .2rem;
+}
+
+.area-card__head h2 small .ui-status {
+    padding: .05rem .5rem;
+    font-size: .7rem;
+}
+
+.stages-schedule {
+    color: #8a5a00;
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+button.classes-stages__item {
+    border: 0;
+}
+
+.stage-categories .users-role small {
+    font-size: .74rem;
+}
+/* ---------- الفصول: مرحلة ملوّنة وبطاقات متجاورة ---------- */
+
+.classes-page {
+    gap: .8rem;
+}
+
+.classes-page .ui-page-header {
+    gap: .6rem .8rem;
+}
+
+.classes-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+
+.classes-actions .ui-btn {
+    padding: .42rem .85rem;
+    border-radius: 10px;
+    font-size: .88rem;
+}
+
+.classes-group {
+    --stage-color: #3b5bfd;
+    --stage-soft: #eef2ff;
+    gap: .6rem;
+    padding: .7rem .85rem .85rem;
+    background: linear-gradient(180deg, var(--stage-soft), var(--ui-surface) 70%);
+    border: 1px solid var(--ui-border);
+    border-inline-start: 5px solid var(--stage-color);
+    border-radius: var(--ui-radius);
+}
+
+.classes-group--violet { --stage-color: #8b5cf6; --stage-soft: #f2edff; }
+.classes-group--green { --stage-color: #12b981; --stage-soft: #e6f8f1; }
+.classes-group--gold { --stage-color: #e69a0c; --stage-soft: #fff5e1; }
+.classes-group--pink { --stage-color: #ec4899; --stage-soft: #fdebf4; }
+.classes-group--teal { --stage-color: #0ea5b7; --stage-soft: #e3f7f9; }
+
+.classes-group__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .7rem;
+}
+
+.classes-group__head h2 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+    font-size: 1.08rem;
+    font-weight: 800;
+}
+
+.classes-group__icon {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    color: #fff;
+    background: var(--stage-color);
+    border-radius: 10px;
+    font-size: .95rem;
+}
+
+.classes-group__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .22rem .7rem;
+    color: var(--stage-color);
+    text-decoration: none;
+    background: var(--ui-surface);
+    border: 1px solid var(--stage-color);
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.classes-group__btn:hover,
+.classes-group__btn--add {
+    color: #fff;
+    background: var(--stage-color);
+}
+
+.classes-group__btn--add:hover {
+    color: #fff;
+    filter: brightness(.92);
+}
+
+.classes-group__meta {
+    margin-inline-end: auto;
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: .6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.class-card {
+    display: grid;
+    align-content: start;
+    gap: .5rem;
+    padding: .6rem .7rem;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-top: 3px solid var(--stage-color);
+    border-radius: 14px;
+    box-shadow: var(--ui-shadow-sm);
+    transition: transform var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.class-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ui-shadow);
+}
+
+.class-card.is-inactive {
+    opacity: .65;
+}
+
+.class-card__head {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+}
+
+.class-card__name {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: .45rem;
+    min-width: 0;
+    color: var(--ui-text);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.class-card__name i {
+    color: var(--stage-color);
+}
+
+.class-card__name:hover {
+    color: var(--stage-color);
+}
+
+.class-card__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    color: var(--ui-text-muted);
+    text-decoration: none;
+    background: var(--ui-bg);
+    border-radius: 8px;
+    font-size: .85rem;
+}
+
+.class-card__icon:hover {
+    color: #fff;
+    background: var(--stage-color);
+}
+
+.class-card__numbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .3rem;
+}
+
+.class-card__numbers a {
+    padding: .12rem .55rem;
+    color: var(--ui-text-muted);
+    text-decoration: none;
+    background: var(--ui-bg);
+    border-radius: 999px;
+    font-size: .78rem;
+}
+
+.class-card__numbers a b {
+    color: var(--ui-text);
+}
+
+.class-card__numbers a:hover {
+    color: var(--stage-color);
+}
+
+.class-card__numbers a.class-card__split {
+    display: inline-flex;
+    align-items: center;
+    gap: .2rem;
+    margin-inline-start: auto;
+    color: var(--stage-color);
+    background: var(--stage-soft);
+    font-weight: 700;
+}
+
+.class-card__numbers a.class-card__split:hover {
+    color: #fff;
+    background: var(--stage-color);
+}
+
+/* استيراد / تصدير في رأس المرحلة */
+.classes-group__head .roster-transfer { display: inline-flex; }
+.classes-group__head .roster-transfer button.classes-group__btn { cursor: pointer; }
+.classes-group__head .roster-transfer .dropdown-item { display: flex; align-items: center; gap: .45rem; font-size: .85rem; }

@@ -1,0 +1,18 @@
+/* قراءة مستند ممسوح: المستند بجانب الحقول المقترحة */
+.read-doc__icon { background: linear-gradient(135deg, #0e7c66, #2bb39a); }
+.read-doc__grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+.read-doc__preview { position: sticky; top: 1rem; padding: .6rem; overflow: auto; max-height: 85vh; }
+.read-doc__preview img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.read-doc__preview iframe { display: block; width: 100%; height: 80vh; border: 0; border-radius: 10px; }
+.read-doc__form { padding: 1.1rem; display: grid; gap: 1rem; }
+.read-doc__target { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0; padding: 0; border: 0; }
+.read-doc__target legend { width: 100%; }
+.read-doc__hint { margin: 0; }
+.read-doc__actions { display: flex; justify-content: flex-end; gap: .5rem; }
+.read-doc__raw summary { cursor: pointer; color: var(--ui-text-muted, #6b7690); }
+.read-doc__raw ol { margin: .5rem 0 0; font-size: .9rem; }
+[data-new-only][hidden], [data-existing-only][hidden] { display: none !important; }
+@media (max-width: 991.98px) {
+    .read-doc__grid { grid-template-columns: 1fr; }
+    .read-doc__preview { position: static; max-height: 60vh; }
+}

@@ -1,0 +1,489 @@
+/*
+    مظهر القائمة الجانبية: تدرّج أخضر زمردي عميق بلمسات ذهبية بدل الكحلي المصمت، بطاقة مستخدم زجاجية،
+    أيقونة ملوّنة لكل قسم، وبند نشط أبيض واضح. يُحمَّل بعد rightSidebar.css و topbar.css فيعلو عليهما.
+*/
+
+:root {
+    --side-ink: #08261d;
+    --side-deep: #0e4433;
+    --side-emerald: #176b4e;
+    --side-gold: #f5c563;
+    --side-text: rgba(255, 255, 255, .9);
+    --side-muted: rgba(255, 255, 255, .62);
+    --side-line: rgba(255, 255, 255, .12);
+    --side-glass: rgba(255, 255, 255, .09);
+}
+
+/* ---------- الخلفية ---------- */
+
+.right-sidebar,
+.right-sidebar-offcanvas {
+    color: var(--side-text);
+    background:
+        radial-gradient(120% 55% at 100% 0%, rgba(52, 211, 153, .3), transparent 60%),
+        radial-gradient(90% 45% at 0% 100%, rgba(245, 197, 99, .2), transparent 65%),
+        linear-gradient(180deg, var(--side-ink) 0%, var(--side-deep) 48%, var(--side-emerald) 100%);
+}
+
+.app-shell__sidebar {
+    box-shadow: -8px 0 28px rgba(8, 38, 29, .22);
+}
+
+.right-sidebar-offcanvas {
+    border-left: 0;
+}
+
+/* ---------- الرأس ---------- */
+
+.right-sidebar__header {
+    min-height: 68px;
+    padding: .85rem .9rem .7rem;
+    border-bottom: 0;
+}
+
+.right-sidebar__brand {
+    letter-spacing: .01em;
+}
+
+.right-sidebar__brand-mark {
+    color: #3a2a05;
+    background: linear-gradient(135deg, #ffe29a, var(--side-gold) 55%, #e0a23a);
+    border: 0;
+    border-radius: 13px;
+    box-shadow: 0 6px 16px rgba(245, 197, 99, .35);
+}
+
+.right-sidebar__icon-btn {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+    color: var(--side-text);
+    background: var(--side-glass);
+    border: 1px solid var(--side-line);
+    border-radius: 11px;
+    font-size: 1rem;
+}
+
+.right-sidebar__icon-btn:hover,
+.right-sidebar__icon-btn:focus {
+    color: #fff;
+    background: rgba(255, 255, 255, .18);
+    border-color: rgba(255, 255, 255, .3);
+}
+
+/* ---------- بطاقة المستخدم ---------- */
+
+.right-sidebar__user {
+    padding: .2rem .8rem .2rem;
+}
+
+.right-sidebar__user-toggle {
+    gap: .7rem;
+    padding: .6rem .7rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, .06));
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(4, 24, 18, .28), inset 0 1px 0 rgba(255, 255, 255, .18);
+    backdrop-filter: blur(6px);
+}
+
+.right-sidebar__user-toggle:hover,
+.right-sidebar__user-toggle:focus-visible,
+.right-sidebar__user-toggle[aria-expanded="true"] {
+    border-color: rgba(245, 197, 99, .75);
+    filter: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .1));
+}
+
+.right-sidebar__user-avatar {
+    position: relative;
+    width: 2.7rem;
+    height: 2.7rem;
+    color: #3a2a05;
+    background: linear-gradient(135deg, #ffe29a, var(--side-gold) 55%, #e0a23a);
+    border: 2px solid rgba(255, 255, 255, .85);
+    box-shadow: 0 0 0 3px rgba(245, 197, 99, .28);
+    font-size: 1.1rem;
+}
+
+/* نقطة «متصل» على الصورة */
+.right-sidebar__user-avatar::after {
+    content: "";
+    position: absolute;
+    inset-block-end: -1px;
+    inset-inline-end: -1px;
+    width: .7rem;
+    height: .7rem;
+    background: #34d399;
+    border: 2px solid var(--side-deep);
+    border-radius: 50%;
+}
+
+.right-sidebar__user-text strong {
+    font-size: .95rem;
+}
+
+.right-sidebar__user-text small {
+    justify-self: start;
+    margin-top: .15rem;
+    padding: .05rem .5rem;
+    color: #ffe9bd;
+    background: rgba(245, 197, 99, .18);
+    border-radius: 999px;
+    font-size: .68rem;
+    font-weight: 700;
+}
+
+/* ---------- القائمة ---------- */
+
+.right-sidebar__nav {
+    gap: .2rem;
+    padding: .7rem .7rem 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, .25) transparent;
+}
+
+.right-sidebar__nav::-webkit-scrollbar {
+    width: 6px;
+}
+
+.right-sidebar__nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .22);
+    border-radius: 999px;
+}
+
+.right-sidebar__link,
+.right-sidebar__sublink {
+    color: var(--side-text);
+    border-radius: 14px;
+    transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+
+.right-sidebar__link {
+    min-height: 48px;
+    padding: .42rem .55rem;
+    gap: .7rem;
+    font-weight: 700;
+}
+
+/* أيقونة كل قسم داخل مربع ملوّن */
+.right-sidebar__link > i:first-child {
+    --chip: linear-gradient(135deg, #6f7dff, #4f5bd5);
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    color: #fff;
+    background: var(--chip);
+    border-radius: 11px;
+    box-shadow: 0 4px 10px rgba(4, 24, 18,.28), inset 0 1px 0 rgba(255, 255, 255, .25);
+    font-size: 1rem;
+}
+
+.right-sidebar__link > i.bi-speedometer2 { --chip: linear-gradient(135deg, #38bdf8, #2563eb); }
+.right-sidebar__link > i.bi-calendar-week-fill { --chip: linear-gradient(135deg, #fbbf24, #ea580c); }
+.right-sidebar__link > i.bi-archive-fill { --chip: linear-gradient(135deg, #f0c468, #b7791f); }
+.right-sidebar__link > i.bi-chat-dots-fill { --chip: linear-gradient(135deg, #f472b6, #be185d); }
+.right-sidebar__link > i.bi-book-half { --chip: linear-gradient(135deg, #60a5fa, #1d4ed8); }
+.right-sidebar__group-toggle > i.bi-people-fill { --chip: linear-gradient(135deg, #a78bfa, #7c3aed); }
+.right-sidebar__link > i.bi-journal-richtext { --chip: linear-gradient(135deg, #34d399, #059669); }
+.right-sidebar__link > i.bi-cash-coin { --chip: linear-gradient(135deg, #fcd34d, #d97706); }
+.right-sidebar__link > i.bi-heart-fill { --chip: linear-gradient(135deg, #fb7185, #db2777); }
+.right-sidebar__link > i.bi-capsule-pill { --chip: linear-gradient(135deg, #5eead4, #0d9488); }
+.right-sidebar__link > i.bi-bar-chart-line-fill { --chip: linear-gradient(135deg, #94a3b8, #64748b); }
+a.right-sidebar__link > i.bi-people-fill { --chip: linear-gradient(135deg, #f0abfc, #c026d3); }
+.right-sidebar__link > i.bi-gear-fill { --chip: linear-gradient(135deg, #cbd5e1, #64748b); }
+
+.right-sidebar__chevron {
+    color: var(--side-muted);
+    font-size: .8rem;
+}
+
+.right-sidebar__link:hover,
+.right-sidebar__link:focus,
+.right-sidebar__sublink:hover,
+.right-sidebar__sublink:focus {
+    color: #fff;
+    background: rgba(255, 255, 255, .1);
+}
+
+.right-sidebar__link:hover > i:first-child {
+    transform: scale(1.06);
+}
+
+.right-sidebar__link > i:first-child {
+    transition: transform .18s ease;
+}
+
+/* المجموعة المفتوحة: خلفية هادئة فقط */
+.right-sidebar__group-toggle.is-active {
+    color: #fff;
+    background: rgba(255, 255, 255, .1);
+}
+
+/* الصفحة الحالية: بند أبيض واضح */
+a.right-sidebar__link.is-active {
+    color: var(--side-deep);
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(4, 24, 18,.3);
+}
+
+a.right-sidebar__link.is-active:hover,
+a.right-sidebar__link.is-active:focus {
+    color: var(--side-deep);
+    background: #fff;
+}
+
+/* العلامة الذهبية القديمة على طرف البند لم تعد لازمة */
+.right-sidebar__link.is-active::before {
+    display: none;
+}
+
+/* ---------- القوائم الفرعية ---------- */
+
+.right-sidebar__submenu {
+    position: relative;
+    margin: .25rem 0 .35rem;
+    padding: .3rem;
+    background: rgba(4, 24, 18,.22);
+    border: 1px solid var(--side-line);
+    border-radius: 14px;
+}
+
+.right-sidebar__sublink {
+    min-height: 38px;
+    padding: .4rem .65rem;
+    gap: .55rem;
+    color: var(--side-muted);
+    border-radius: 10px;
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+.right-sidebar__sublink > i:first-child {
+    flex: 0 0 20px;
+    width: 20px;
+    height: auto;
+    color: var(--side-muted);
+    background: none;
+    box-shadow: none;
+    font-size: .92rem;
+}
+
+.right-sidebar__sublink:hover > i:first-child,
+.right-sidebar__sublink.is-active > i:first-child {
+    color: var(--side-gold);
+}
+
+.right-sidebar__sublink.is-active {
+    color: #fff;
+    background: rgba(255, 255, 255, .16);
+    font-weight: 800;
+}
+
+.right-sidebar__sublink.is-active::before {
+    inset-block: .5rem;
+    inset-inline-start: 0;
+    width: 3px;
+    background: var(--side-gold);
+}
+
+/* ---------- غير متاح بعد ---------- */
+
+.right-sidebar__link--disabled {
+    opacity: .5;
+}
+
+.right-sidebar__soon {
+    color: #ffe9bd;
+    background: rgba(245, 197, 99, .2);
+    font-size: .64rem;
+}
+
+/* ---------- رسالة اليوم ---------- */
+
+.right-sidebar-daily-message {
+    /* minmax(0, …): النصوص الطويلة تُقصّ داخل البطاقة ولا توسّع القائمة */
+    grid-template-columns: minmax(0, 1fr);
+    gap: .45rem;
+    margin-top: .8rem;
+    padding: .6rem .55rem .55rem;
+    background: var(--side-glass);
+    border: 1px solid rgba(245, 197, 99, .3);
+    border-radius: 16px;
+}
+
+.right-sidebar-daily-message__heading {
+    flex-wrap: wrap;
+    row-gap: .1rem;
+    color: var(--side-gold);
+    padding: .1rem .3rem .45rem;
+    border-bottom: 1px solid var(--side-line);
+}
+
+.right-sidebar-daily-message__heading time {
+    flex: 0 0 100%;
+    order: 1;
+    padding-inline-start: 1.6rem;
+    color: var(--side-muted);
+    font-size: .68rem;
+    font-weight: 700;
+}
+
+.right-sidebar-daily-message__heading time:empty {
+    display: none;
+}
+
+/* نافذة بارتفاع ثابت تصعد فيها البطاقات واحدة بعد الأخرى (sidebarTicker.js يحرّك المسار) */
+.right-sidebar-daily-message__viewport {
+    height: 8.4rem;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.right-sidebar-daily-message__track {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform .7s ease;
+}
+
+.right-sidebar-daily-message__track > .right-sidebar-daily-message__card {
+    flex: 0 0 100%;
+    min-height: 0;
+}
+
+.right-sidebar-daily-message__card {
+    display: grid;
+    align-content: start;
+    gap: .25rem;
+    padding: .5rem .6rem;
+    color: #fff;
+    text-decoration: none;
+    background: rgba(4, 24, 18, .26);
+    border-inline-start: 3px solid var(--side-gold);
+    border-radius: 10px;
+    transition: background .18s ease;
+}
+
+.right-sidebar-daily-message__card--birthdays {
+    border-inline-start-color: #f9a8d4;
+}
+
+.right-sidebar-daily-message__card--practice {
+    border-inline-start-color: #6ee7b7;
+}
+
+a.right-sidebar-daily-message__card:hover,
+a.right-sidebar-daily-message__card:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, .13);
+}
+
+.right-sidebar-daily-message__card small {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    color: var(--side-gold);
+    font-size: .68rem;
+    font-weight: 800;
+}
+
+.right-sidebar-daily-message__card--birthdays small {
+    color: #fbcfe8;
+}
+
+.right-sidebar-daily-message__card--practice small {
+    color: #a7f3d0;
+}
+
+.right-sidebar-daily-message__card p {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    font-size: .8rem;
+    font-weight: 700;
+    line-height: 1.65;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+}
+
+/* المناسبة والسنكسار: صف مختصر في الأسفل */
+.right-sidebar-daily-message__footer {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.right-sidebar-daily-message__chip {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 30px;
+    gap: .35rem;
+    padding: .25rem .55rem;
+    color: var(--side-text);
+    font-size: .7rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid var(--side-line);
+    border-radius: 999px;
+    transition: background .18s ease, color .18s ease;
+}
+
+.right-sidebar-daily-message__chip > i {
+    flex: none;
+    color: var(--side-gold);
+}
+
+.right-sidebar-daily-message__chip > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.right-sidebar-daily-message__chip--occasion {
+    flex: 1 1 auto;
+}
+
+.right-sidebar-daily-message__chip--synaxar {
+    flex: none;
+}
+
+.right-sidebar-daily-message__chip:hover,
+.right-sidebar-daily-message__chip:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, .16);
+}
+
+/* ---------- الوضع المطوي ---------- */
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__link {
+    padding-inline: .3rem;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__link > i:first-child {
+    font-size: 1.05rem;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
+    background: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .right-sidebar__link,
+    .right-sidebar__sublink,
+    .right-sidebar__link > i:first-child,
+    .right-sidebar-daily-message__track {
+        transition: none;
+    }
+}
+
+@media print {
+    .app-shell__sidebar {
+        box-shadow: none;
+    }
+}

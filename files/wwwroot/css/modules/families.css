@@ -1,0 +1,40 @@
+
+/* من سجّل الأسرة ومتى: يظهر مكان العنوان أسفل اسم الأسرة */
+.family-audit {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 6px;
+    font-size: .7rem;
+    color: var(--ui-text-muted, #64748b);
+}
+
+.family-audit .bi {
+    color: #7c3aed;
+}
+
+/* ما ينقص ملف الأسرة: شارات صغيرة تفتح مكان الاستكمال */
+.family-missing {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.family-missing__label {
+    font-size: .72rem;
+    color: var(--ui-text-muted, #64748b);
+}
+
+.family-missing__chip {
+    font-size: .72rem;
+    padding: 1px 8px;
+    text-decoration: none;
+    gap: 3px;
+}
+
+.family-missing__chip:hover {
+    filter: brightness(.95);
+    text-decoration: underline;
+}

@@ -1,0 +1,148 @@
+/*
+    «ابحث في البرنامج»: زر في القائمة الجانبية (تحت بطاقة المستخدم) ونافذة بحث تفتح بـ Ctrl+K.
+*/
+
+.right-sidebar__search {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    width: calc(100% - 1.6rem);
+    margin: .55rem .8rem .25rem;
+    padding: .55rem .8rem;
+    color: var(--side-muted, rgba(255, 255, 255, .7));
+    font: inherit;
+    font-size: .9rem;
+    text-align: start;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s, color .15s;
+}
+
+.right-sidebar__search:hover,
+.right-sidebar__search:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, .14);
+    border-color: var(--side-gold, #f5c563);
+    outline: none;
+}
+
+.right-sidebar__search > i { color: var(--side-gold, #f5c563); }
+
+.right-sidebar__search kbd {
+    margin-inline-start: auto;
+    padding: .1rem .4rem;
+    color: inherit;
+    font-family: inherit;
+    font-size: .7rem;
+    background: rgba(255, 255, 255, .12);
+    border-radius: 6px;
+    direction: ltr;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__search {
+    justify-content: center;
+    width: calc(100% - 1rem);
+    margin-inline: .5rem;
+    padding-inline: .5rem;
+}
+
+body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__search > i { font-size: 1.2rem; }
+
+/* ---------- النافذة ---------- */
+
+.app-search .modal-content {
+    overflow: hidden;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 30px 70px rgba(10, 20, 40, .35);
+}
+
+.app-search__head {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .9rem 1.1rem;
+    border-bottom: 1px solid var(--ui-border, #e6eaf2);
+}
+
+.app-search__head > i { color: var(--ui-primary, #3b5bfd); font-size: 1.2rem; }
+
+.app-search__head input {
+    flex: 1;
+    min-width: 0;
+    padding: .35rem 0;
+    color: var(--ui-text, #172036);
+    font: inherit;
+    font-size: 1.1rem;
+    background: transparent;
+    border: 0;
+    outline: none;
+}
+
+.app-search__body { padding: .5rem; max-height: min(65vh, 560px); }
+
+.app-search__list { margin: 0; padding: 0; list-style: none; }
+
+.app-search__group {
+    padding: .7rem .8rem .3rem;
+    color: var(--ui-text-muted, #6b7690);
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.app-search__item {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .6rem .8rem;
+    color: var(--ui-text, #172036);
+    text-decoration: none;
+    border-radius: 12px;
+}
+
+.app-search__item.is-active {
+    color: var(--ui-text, #172036);
+    background: var(--ui-primary-soft, #eef1ff);
+    box-shadow: inset 3px 0 0 var(--ui-primary, #3b5bfd);
+}
+
+.app-search__icon {
+    display: grid;
+    flex: 0 0 2.3rem;
+    height: 2.3rem;
+    place-items: center;
+    color: var(--ui-primary, #3b5bfd);
+    background: var(--ui-primary-soft, #eef1ff);
+    border-radius: 10px;
+}
+
+.app-search__item.is-active .app-search__icon { color: #fff; background: var(--ui-primary, #3b5bfd); }
+
+.app-search__text { display: flex; flex: 1; min-width: 0; flex-direction: column; }
+.app-search__text strong { font-size: .97rem; }
+.app-search__text small { overflow: hidden; color: var(--ui-text-muted, #6b7690); text-overflow: ellipsis; white-space: nowrap; }
+
+.app-search__where {
+    flex: none;
+    padding: .15rem .55rem;
+    color: var(--ui-text-muted, #6b7690);
+    font-size: .74rem;
+    background: var(--ui-slate-soft, #f1f4f9);
+    border-radius: 999px;
+}
+
+.app-search__empty { padding: 1.4rem; color: var(--ui-text-muted, #6b7690); text-align: center; }
+
+.app-search__foot {
+    padding: .55rem 1.1rem;
+    color: var(--ui-text-muted, #6b7690);
+    font-size: .78rem;
+    background: var(--ui-slate-soft, #f6f8fb);
+    border-top: 1px solid var(--ui-border, #e6eaf2);
+}
+
+@media (max-width: 575.98px) {
+    .app-search__where, .app-search__foot { display: none; }
+}

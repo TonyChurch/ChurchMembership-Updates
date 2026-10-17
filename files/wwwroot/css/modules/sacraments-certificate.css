@@ -1,0 +1,65 @@
+/* شهادة السر: صفحة A4 للطباعة */
+
+@page { size: A4; margin: 14mm; }
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 1.5rem;
+    color: #1d1a14;
+    font-family: "Traditional Arabic", "Amiri", "Sakkal Majalla", "Times New Roman", serif;
+    background: #ece7dc;
+}
+
+.certificate-tools { display: flex; gap: .6rem; justify-content: center; margin-bottom: 1rem; font-family: "Cairo", "Segoe UI", sans-serif; }
+.certificate-tools button, .certificate-tools a {
+    padding: .5rem 1.1rem;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    background: #0e4433;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.certificate-tools a { color: #0e4433; background: #fff; border: 1px solid #0e4433; }
+
+.certificate {
+    max-width: 190mm;
+    min-height: 260mm;
+    margin: 0 auto;
+    padding: 14mm 16mm;
+    background: #fffdf6;
+    border: 3px double #9a7420;
+    outline: 1px solid #9a7420;
+    outline-offset: -9px;
+    display: flex;
+    flex-direction: column;
+}
+
+.certificate__head { text-align: center; }
+.certificate__cross { color: #9a7420; font-size: 3rem; line-height: 1; }
+.certificate__church { margin: .4rem 0 0; font-size: 1.6rem; font-weight: 700; }
+.certificate__diocese { margin: .1rem 0 0; color: #6b5a33; font-size: 1.15rem; }
+.certificate h1 { margin: 1.2rem 0 .4rem; color: #7a1f1f; font-size: 2.3rem; }
+.certificate__ref { display: flex; justify-content: center; gap: 1.4rem; margin: .3rem 0 0; font-size: 1.1rem; }
+
+.certificate__body { flex: 1; margin-top: 1.6rem; font-size: 1.35rem; }
+.certificate__body > p { text-align: center; margin: 0 0 1.2rem; }
+.certificate__body dl { display: grid; grid-template-columns: 9.5rem 1fr; gap: .75rem 1rem; margin: 0; }
+.certificate__body dt { color: #6b5a33; font-weight: 700; }
+.certificate__body dd { margin: 0; padding-bottom: .2rem; border-bottom: 1px dotted #b9a676; font-weight: 700; }
+
+.certificate__foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; text-align: center; font-size: 1.15rem; }
+.certificate__foot span { display: block; color: #6b5a33; }
+.certificate__foot b { display: block; min-height: 3.5rem; margin-top: .3rem; }
+.certificate__sign { border-bottom: 1px solid #6b5a33; }
+.certificate__seal { width: 5.5rem; height: 5.5rem; margin: .3rem auto 0; border: 1px dashed #b9a676; border-radius: 50%; }
+
+@media print {
+    body { padding: 0; background: #fff; }
+    .certificate-tools { display: none; }
+    .certificate { min-height: 265mm; }
+}

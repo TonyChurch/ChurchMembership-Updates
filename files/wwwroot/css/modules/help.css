@@ -1,0 +1,250 @@
+/* صفحة «دليل الاستخدام»: مهام تُفتح بالضغط، ثم بطاقات التبويبات مجمعة بالأقسام */
+
+.help-guide {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.help-guide__icon {
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+}
+
+.help-guide__nav h2,
+.help-guide__heading {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 .75rem;
+    color: var(--ui-text);
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.help-guide__heading i,
+.help-guide__nav h2 i {
+    color: var(--ui-primary);
+}
+
+.help-guide__tips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: .75rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.help-guide__tips li {
+    display: flex;
+    gap: .6rem;
+    align-items: flex-start;
+    line-height: 1.8;
+}
+
+.help-guide__tips li > i {
+    flex: none;
+    margin-top: .3rem;
+    color: var(--ui-primary);
+    font-size: 1.1rem;
+}
+
+/* روابط المحتويات */
+.help-guide__jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.help-guide__jump a {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .4rem .85rem;
+    color: var(--ui-primary-strong);
+    background: var(--ui-primary-soft);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .9rem;
+    text-decoration: none;
+}
+
+.help-guide__jump a:hover {
+    background: var(--ui-primary);
+    color: #fff;
+}
+
+.help-guide__section {
+    scroll-margin-top: 1rem;
+}
+
+.help-guide__hint {
+    margin: -.4rem 0 .75rem;
+    color: var(--ui-text-muted);
+    font-size: .9rem;
+}
+
+/* المهام */
+.help-guide__tasks {
+    display: grid;
+    gap: .6rem;
+}
+
+.help-task {
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.help-task > summary {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .9rem 1.1rem;
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none;
+}
+
+.help-task > summary::-webkit-details-marker {
+    display: none;
+}
+
+.help-task > summary::after {
+    content: "\F282"; /* bi-chevron-down */
+    margin-inline-start: auto;
+    font-family: "bootstrap-icons";
+    color: var(--ui-text-muted);
+    transition: transform var(--ui-transition);
+}
+
+.help-task[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+.help-task > summary > i {
+    color: var(--ui-primary);
+    font-size: 1.15rem;
+}
+
+.help-task > ol,
+.help-task > ul,
+.help-task > p,
+.help-task > a {
+    margin-inline: 1.1rem;
+}
+
+.help-task > ol {
+    display: grid;
+    gap: .45rem;
+    margin-block: 0 .9rem;
+    padding-inline-start: 1.4rem;
+    line-height: 1.8;
+}
+
+.help-task__tip {
+    display: flex;
+    gap: .5rem;
+    margin-block: 0 .9rem;
+    padding: .6rem .8rem;
+    color: var(--ui-text);
+    background: var(--ui-warning-soft);
+    border-radius: var(--ui-radius-sm);
+    line-height: 1.8;
+}
+
+.help-task__tip i {
+    flex: none;
+    margin-top: .3rem;
+    color: var(--ui-warning);
+}
+
+.help-task__roles {
+    display: grid;
+    gap: .3rem;
+    margin-block: 0 .9rem;
+    padding: .6rem .8rem .6rem 1.6rem;
+    background: var(--ui-slate-soft);
+    border-radius: var(--ui-radius-sm);
+    line-height: 1.8;
+}
+
+.help-task__open {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* التبويبات */
+.help-guide__tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: .75rem;
+}
+
+.help-tab {
+    display: flex;
+    gap: .8rem;
+    align-items: flex-start;
+    padding: 1rem;
+    color: var(--ui-text);
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow-sm);
+    text-decoration: none;
+    transition: border-color var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.help-tab:hover {
+    color: var(--ui-text);
+    border-color: var(--ui-primary);
+    box-shadow: var(--ui-shadow);
+}
+
+.help-tab__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--ui-primary);
+    background: var(--ui-primary-soft);
+    border-radius: var(--ui-radius-sm);
+    font-size: 1.15rem;
+}
+
+.help-tab__body {
+    display: grid;
+    gap: .25rem;
+    line-height: 1.7;
+}
+
+.help-tab__body strong {
+    color: var(--ui-primary-strong);
+    font-size: 1.02rem;
+}
+
+.help-tab__body small {
+    color: var(--ui-text-muted);
+}
+
+/* عند الطباعة: تظهر كل الخطوات مفتوحة */
+@media print {
+    .help-task > summary::after {
+        display: none;
+    }
+
+    .help-task,
+    .help-tab {
+        break-inside: avoid;
+        box-shadow: none;
+    }
+
+    .help-task__open {
+        display: none;
+    }
+}

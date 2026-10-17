@@ -1,0 +1,443 @@
+/* حضور الخدام — يعتمد على theme.css وتنسيقات قائمة الأعضاء (members-index.css) */
+
+.sa-header {
+    margin-bottom: 1rem;
+}
+
+/* ---------- شريط الأدوات: الشهر + المرحلة + الأزرار ---------- */
+
+.sa-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem 1rem;
+    padding: .7rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.sa-month,
+.sa-period {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.sa-month strong {
+    min-width: 7rem;
+    text-align: center;
+    font-size: .95rem;
+}
+
+.sa-month__arrow {
+    display: inline-grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: var(--ui-primary-soft);
+    color: var(--ui-primary-strong);
+    text-decoration: none;
+}
+
+.sa-month__today {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--ui-primary-strong);
+}
+
+.sa-stage {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin: 0;
+    color: var(--ui-violet);
+}
+
+.sa-stage .form-select {
+    width: auto;
+    min-height: 1.9rem;
+    padding-block: .1rem;
+    font-size: .85rem;
+}
+
+.sa-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+    margin-inline-start: auto;
+}
+
+/* أزرار صغيرة ملونة */
+.sa-chip {
+    --chip: var(--ui-primary-strong);
+    --chip-soft: var(--ui-primary-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .28rem .7rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: var(--chip-soft);
+    color: var(--chip);
+    font-size: .8rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.sa-chip:hover { transform: translateY(-1px); box-shadow: var(--ui-shadow-sm); color: var(--chip); }
+.sa-chip.is-active { border-color: var(--chip); background: var(--chip); color: #fff; }
+.sa-chip--blue { --chip: var(--ui-primary-strong); --chip-soft: var(--ui-primary-soft); }
+.sa-chip--violet { --chip: #6d3fd8; --chip-soft: var(--ui-violet-soft); }
+.sa-chip--green { --chip: #0a7a55; --chip-soft: var(--ui-success-soft); }
+.sa-chip--red { --chip: #b3203d; --chip-soft: var(--ui-danger-soft); }
+.sa-chip--slate { --chip: #475569; --chip-soft: var(--ui-slate-soft); }
+
+/* ---------- اجتماعات الشهر ---------- */
+
+.sa-meetings {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sa-meetings h2 {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin: 0 0 .7rem;
+    font-size: 1rem;
+}
+
+.sa-meeting-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: .6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sa-meeting {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .5rem .6rem;
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius-sm);
+    background: var(--ui-surface);
+}
+
+.sa-meeting form { margin: 0; }
+
+.sa-meeting__date {
+    display: grid;
+    place-items: center;
+    min-width: 3rem;
+    padding: .2rem .3rem;
+    border-radius: 10px;
+    background: var(--ui-primary-soft);
+    color: var(--ui-primary-strong);
+    line-height: 1.1;
+}
+
+.sa-meeting__date b { font-size: 1.15rem; }
+.sa-meeting__date small { font-size: .62rem; }
+
+.sa-meeting__text {
+    display: grid;
+    flex: 1;
+    min-width: 0;
+}
+
+.sa-meeting__text strong { font-size: .86rem; }
+.sa-meeting__text small { color: var(--ui-text-muted); font-size: .72rem; }
+
+.sa-icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 0;
+    border-radius: 8px;
+    background: var(--ui-slate-soft);
+    color: #475569;
+    text-decoration: none;
+}
+
+.sa-icon-btn--danger { background: var(--ui-danger-soft); color: #b3203d; }
+
+/* ---------- النسب ---------- */
+
+.sa-pct {
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+.sa-pct--good { color: #0a7a55; }
+.sa-pct--mid { color: #a4610a; }
+.sa-pct--low { color: #b3203d; }
+
+.sa-bar {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    min-width: 160px;
+}
+
+.sa-bar__track {
+    flex: 1;
+    height: .5rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--ui-slate-soft);
+}
+
+.sa-bar__fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: currentColor;
+}
+
+.sa-num { text-align: center; white-space: nowrap; }
+
+.sa-empty,
+.sa-note {
+    margin: .5rem 1rem 1rem;
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+}
+
+/* ---------- كشف الحضور ---------- */
+
+.sa-meeting-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: .75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sa-take-bar {
+    flex-wrap: wrap;
+    gap: .6rem;
+}
+
+.sa-take-search { max-width: 240px; }
+
+.sa-bulk {
+    display: flex;
+    gap: .4rem;
+    margin-inline-start: auto;
+}
+
+.sa-roster {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sa-roster__row {
+    display: grid;
+    grid-template-columns: 2rem minmax(180px, 1.3fr) auto auto minmax(120px, 1fr);
+    align-items: center;
+    gap: .6rem;
+    padding: .5rem 1rem;
+    border-top: 1px solid var(--ui-border);
+}
+
+.sa-roster__row[hidden] { display: none; }
+/* المسلسل أمام كل اسم في الكشف */
+.sa-roster__num { color: var(--ui-text-muted); font-size: .8rem; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; }
+.sa-roster__row:nth-child(even) { background: #fafbfe; }
+.sa-roster__note { min-height: 1.9rem; font-size: .8rem; }
+
+.sa-status-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+}
+
+.sa-status-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sa-status {
+    --st: #475569;
+    --st-soft: var(--ui-slate-soft);
+    padding: .22rem .65rem;
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+    background: var(--ui-surface);
+    color: var(--ui-text-muted);
+    font-size: .78rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition: all var(--ui-transition);
+}
+
+.sa-status--success { --st: #0a7a55; --st-soft: var(--ui-success-soft); }
+.sa-status--warning { --st: #a4610a; --st-soft: var(--ui-warning-soft); }
+.sa-status--violet { --st: #6d3fd8; --st-soft: var(--ui-violet-soft); }
+.sa-status--danger { --st: #b3203d; --st-soft: var(--ui-danger-soft); }
+
+.sa-status:hover { border-color: var(--st); color: var(--st); }
+.sa-status-input:checked + .sa-status { border-color: var(--st); background: var(--st); color: #fff; }
+.sa-status-input:focus-visible + .sa-status { outline: 2px solid var(--st); outline-offset: 2px; }
+.sa-status--slate { --st: #475569; }
+.sa-status--gold { --st: #a4610a; --st-soft: var(--ui-warning-soft); }
+.sa-status--wine { --st: #8e1b3a; --st-soft: var(--ui-danger-soft); }
+.sa-status-input:disabled + .sa-status { opacity: .4; cursor: not-allowed; pointer-events: none; }
+
+/* قداس الأسبوع والتناول بجانب حالة الحضور */
+.sa-liturgy {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .3rem;
+    padding-inline-start: .6rem;
+    border-inline-start: 1px dashed var(--ui-border);
+}
+.sa-liturgy__label { color: var(--ui-text-muted); font-size: .75rem; font-weight: 700; }
+
+/* شريط التنقّل بين صفحات حضور الخدام ومتابعتهم */
+.sa-section-nav { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .75rem; }
+/* الرجوع وشريط التنقل في سطر واحد */
+.sa-topbar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; margin-bottom: .6rem; }
+.sa-topbar .ui-backbar, .sa-topbar .sa-section-nav { margin: 0; }
+/* عنوان وملخص في سطر واحد بلا مسافات زائدة */
+.sa-header--compact { margin-bottom: .6rem; gap: .75rem; grid-template-columns: auto minmax(0, 1fr); }
+.sa-header--compact .ui-page-header__title { align-items: center; gap: .6rem; }
+.sa-header--compact h1 { font-size: 1.3rem; }
+.sa-header--compact .ui-chip-stats { justify-content: flex-start; }
+.sa-header--compact + .members-flash, .sa-header--compact ~ .sa-toolbar { margin-bottom: .6rem; }
+
+/* الخادم الذي قدّم درس اليوم، تحت تاريخ العمود في تقرير الفصل */
+.ca-teacher { display: block; font-size: .68rem; font-weight: 600; opacity: .85; white-space: nowrap; }
+
+/* علامات القداس والتناول تحت خانة الحضور في التقارير */
+.sa-lit {
+    display: block;
+    margin-top: .1rem;
+    color: #a4610a;
+    font-size: .68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.sa-save-bar {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    gap: .5rem;
+    padding: .75rem 0;
+    background: linear-gradient(transparent, var(--ui-bg) 35%);
+}
+
+@media (max-width: 720px) {
+    .sa-roster__row { grid-template-columns: 1.6rem 1fr; }
+    .sa-roster__row > :not(.sa-roster__num):not(.ui-person):not(input[type="hidden"]) { grid-column: 1 / -1; }
+    .sa-liturgy { padding-inline-start: 0; border-inline-start: 0; }
+    .sa-actions, .sa-bulk { margin-inline-start: 0; }
+}
+
+/* ---------- التقرير ---------- */
+
+.sa-report__head {
+    margin-bottom: .8rem;
+    text-align: center;
+}
+
+.sa-report__head h1 { margin: 0; font-size: 1.35rem; }
+.sa-report__head p { margin: .2rem 0 .5rem; color: var(--ui-text-muted); }
+
+.sa-report__summary {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sa-report__summary li {
+    padding: .25rem .8rem;
+    border-radius: 999px;
+    background: var(--ui-primary-soft);
+    color: var(--ui-primary-strong);
+    font-size: .82rem;
+}
+
+.sa-grid__meeting {
+    text-align: center;
+    line-height: 1.15;
+}
+
+.sa-grid__meeting span { display: block; font-size: .65rem; font-weight: 600; }
+.sa-grid__name { font-weight: 700; white-space: nowrap; }
+
+.sa-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 6px;
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+.sa-mark--present { background: var(--ui-success-soft); color: #0a7a55; }
+.sa-mark--late { background: var(--ui-warning-soft); color: #a4610a; }
+.sa-mark--excused { background: var(--ui-violet-soft); color: #6d3fd8; }
+.sa-mark--absent { background: var(--ui-danger-soft); color: #b3203d; }
+.sa-mark--none { color: var(--ui-text-muted); }
+
+.sa-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 1rem;
+    margin: .7rem 0;
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+.sa-legend > span { display: inline-flex; align-items: center; gap: .3rem; }
+
+.sa-signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    font-size: .85rem;
+}
+
+@media print {
+    .sa-report .ui-card { box-shadow: none; border: 0; }
+    .sa-grid th, .sa-grid td { padding: .25rem .3rem; font-size: .75rem; border: 1px solid #ccc; }
+    .sa-mark { width: auto; height: auto; background: none !important; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* لوحة الشرف (نقاط تحفيز المخدومين) */
+.honor-board { padding: 1rem 1.1rem; margin-bottom: 1rem; background: linear-gradient(135deg, #fffaf0, #fff); border: 1px solid #f0dfb5; }
+.honor-board h2 { margin: 0; font-size: 1.1rem; color: #9a6a00; }
+.honor-board__list { display: grid; gap: .35rem; margin: .7rem 0 0; padding: 0; list-style: none; }
+.honor-board__list li { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; padding: .45rem .7rem; background: #fff; border: 1px solid #f3e6c6; border-radius: 12px; }
+.honor-board__list li.is-top { background: #fff6dc; border-color: #ecd08a; }
+.honor-board__rank { min-width: 1.8rem; font-size: 1.15rem; font-weight: 800; text-align: center; }
+.honor-board__points { margin-inline-start: auto; color: #9a6a00; }
+
+/* ماسح كروت الحضور */
+.sa-scanner { padding: .8rem; margin: .8rem; background: #0d1f19; border-radius: 16px; }
+.sa-scanner[hidden] { display: none; }
+.sa-scanner video { display: block; width: 100%; max-height: 55vh; object-fit: cover; background: #000; border-radius: 12px; }
+.sa-scanner__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .6rem; color: #fff; font-weight: 700; }
+.sa-scanner__log { display: flex; flex-wrap: wrap; gap: .3rem; margin: .5rem 0 0; padding: 0; list-style: none; }
+.sa-scanner__log li { padding: .2rem .6rem; color: #0d1f19; font-size: .85rem; background: #bdf0d5; border-radius: 999px; }
+.sa-roster__row--scanned { animation: sa-scanned 1.4s ease-out; }
+@keyframes sa-scanned { from { background: #bdf0d5; } to { background: transparent; } }

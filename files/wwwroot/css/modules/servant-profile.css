@@ -1,0 +1,475 @@
+/* ملف الخادم ولوحة متابعة الخدام — يعتمد على theme.css و member-profile.css و servant-attendance.css */
+
+.servant-profile .profile-hero,
+.servant-followup .members-header {
+    margin-bottom: 1rem;
+}
+
+/* ---------- شريط الفترة ---------- */
+
+.sp-toolbar .sa-month strong {
+    min-width: 9rem;
+}
+
+.sp-tabs {
+    display: inline-flex;
+    gap: .3rem;
+}
+
+.sp-range {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem;
+    margin: 0;
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+.sp-range .form-control {
+    width: auto;
+    min-height: 1.9rem;
+    padding-block: .1rem;
+    font-size: .8rem;
+}
+
+.sp-stats {
+    margin-bottom: 1rem;
+}
+
+/* ---------- الأعمدة والبطاقات ---------- */
+
+.sp-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+    align-items: start;
+    gap: 1rem;
+}
+
+.sp-grid__main,
+.sp-grid__side {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.sp-card {
+    padding: 1rem;
+}
+
+.sp-card__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .7rem;
+}
+
+.sp-card__head h2 {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.sp-card__head h2 i {
+    color: var(--ui-primary);
+}
+
+.sp-card__head .ui-icon-btn,
+.sp-card__link,
+.sp-card__meta,
+.sp-counts {
+    margin-inline-start: auto;
+}
+
+.sp-card__link {
+    font-size: .8rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.sp-card__meta {
+    color: var(--ui-text-muted);
+    font-size: .75rem;
+}
+
+.sp-counts {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+}
+
+.sp-empty,
+.sp-hint {
+    margin: 0;
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+}
+
+.sp-hint {
+    margin-top: .6rem;
+    font-size: .75rem;
+}
+
+/* ---------- آخر الاجتماعات ---------- */
+
+.sp-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .3rem;
+    margin-bottom: .7rem;
+    padding: .45rem .6rem;
+    border-radius: var(--ui-radius-sm);
+    background: var(--ui-bg);
+}
+
+.sp-strip small {
+    margin-inline-end: .3rem;
+    color: var(--ui-text-muted);
+    font-size: .75rem;
+}
+
+/* ---------- الجداول ---------- */
+
+.sp-table {
+    margin: 0;
+    font-size: .86rem;
+}
+
+.sp-table th {
+    white-space: nowrap;
+}
+
+.sp-date {
+    white-space: nowrap;
+}
+
+.sp-date small,
+.sp-sub {
+    display: block;
+    color: var(--ui-text-muted);
+    font-size: .72rem;
+}
+
+.sp-notes {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+.sp-phone {
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* ---------- القوائم الجانبية ---------- */
+
+.sp-list {
+    display: grid;
+    gap: .5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sp-list li {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .5rem .6rem;
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius-sm);
+}
+
+.sp-list__text {
+    display: grid;
+    flex: 1;
+    min-width: 0;
+}
+
+.sp-list__text strong {
+    font-size: .86rem;
+}
+
+.sp-list__text small {
+    color: var(--ui-text-muted);
+    font-size: .74rem;
+}
+
+.sp-list form {
+    margin: 0;
+}
+
+.sp-year {
+    padding: .15rem .5rem;
+    border-radius: 8px;
+    background: var(--ui-slate-soft);
+    color: #475569;
+    font-size: .72rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.sp-occasion {
+    --tint: var(--ui-accent);
+    --tint-soft: var(--ui-accent-soft);
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 10px;
+    background: var(--tint-soft);
+    color: var(--tint);
+}
+
+.sp-occasion--pink { --tint: #e0306f; --tint-soft: #ffe6ef; }
+.sp-occasion--red { --tint: #b3203d; --tint-soft: var(--ui-danger-soft); }
+.sp-occasion--blue { --tint: var(--ui-primary-strong); --tint-soft: var(--ui-primary-soft); }
+.sp-occasion--green { --tint: #0a7a55; --tint-soft: var(--ui-success-soft); }
+.sp-occasion--violet { --tint: #6d3fd8; --tint-soft: var(--ui-violet-soft); }
+.sp-occasion--slate { --tint: #475569; --tint-soft: var(--ui-slate-soft); }
+.sp-occasion--gold { --tint: #a4610a; --tint-soft: var(--ui-accent-soft); }
+
+.sp-previous {
+    margin: .6rem 0 0;
+    font-size: .85rem;
+    white-space: pre-line;
+}
+
+/* ---------- لوحة المتابعة ---------- */
+
+.sf-alerts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sf-alert {
+    --tone: var(--ui-primary);
+    border-top: 3px solid var(--tone);
+}
+
+.sf-alert .sp-card__head h2 i {
+    color: var(--tone);
+}
+
+.sf-alert--danger { --tone: var(--ui-danger); }
+.sf-alert--warning { --tone: var(--ui-warning); }
+.sf-alert--pink { --tone: #ff4f8b; }
+.sf-alert--violet { --tone: var(--ui-violet); }
+.sf-alert--slate { --tone: var(--ui-slate); }
+
+.sf-alert .sp-list {
+    max-height: 19rem;
+    overflow-y: auto;
+}
+
+.sf-ok {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin: 0;
+    color: #0a7a55;
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.sf-whatsapp {
+    color: #1a9e55;
+}
+
+.sf-whatsapp:hover {
+    color: #fff;
+    background: #25d366;
+}
+
+.sf-row--alert {
+    background: #fff8f9;
+}
+
+.sf-search {
+    max-width: 260px;
+}
+
+.sf-filters {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+}
+
+@media (max-width: 991.98px) {
+    .sp-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    .sp-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .servant-profile .ui-card,
+    .servant-followup .ui-card {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    .sf-alert .sp-list {
+        max-height: none;
+        overflow: visible;
+    }
+
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ---------- حضور الفصول ---------- */
+
+.ca-session-tools {
+    display: block;
+    margin-top: .15rem;
+}
+
+.ca-session-tools a {
+    color: inherit;
+    opacity: .75;
+}
+
+.ca-session-tools a:hover {
+    opacity: 1;
+}
+
+.ca-manage {
+    margin: 1rem 0;
+    font-size: .85rem;
+}
+
+.ca-manage summary {
+    width: fit-content;
+    color: var(--ui-text-muted);
+    cursor: pointer;
+}
+
+.ca-manage .sp-list {
+    max-width: 420px;
+    margin-top: .6rem;
+}
+
+.sp-class-line {
+    display: block;
+    margin-top: .15rem;
+}
+
+/* ---------- استيراد الخدام من Excel ---------- */
+
+.si-file {
+    width: auto;
+    max-width: 22rem;
+}
+
+.si-hint {
+    color: var(--ui-text-muted);
+    font-size: .78rem;
+}
+
+.si-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: .6rem;
+}
+
+.si-service {
+    display: grid;
+    gap: .3rem;
+    padding: .55rem .65rem;
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius-sm);
+    font-size: .86rem;
+}
+
+.si-service small {
+    color: var(--ui-text-muted);
+}
+
+.si-service--unmatched {
+    border-color: #f5d38a;
+    background: var(--ui-accent-soft);
+}
+
+.si-attendance {
+    display: flex;
+    align-items: flex-start;
+    gap: .5rem;
+    font-size: .9rem;
+}
+
+/* ---------- ترتيب الحضور ---------- */
+
+.sr-podium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: .6rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+.sr-podium li {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .6rem .75rem;
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius-sm);
+    background: var(--ui-surface);
+}
+
+.sr-rank {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: var(--ui-slate-soft);
+    color: #475569;
+    font-size: .82rem;
+    font-weight: 800;
+}
+
+.sr-rank--1 { background: #ffe9a8; color: #8a5a08; }
+.sr-rank--2 { background: #e6eaf0; color: #475569; }
+.sr-rank--3 { background: #f6d9c2; color: #8a4b12; }
+
+.sr-service {
+    margin-bottom: 1rem;
+}
+
+.sr-service__avg {
+    margin-inline-start: auto;
+    font-size: .82rem;
+    color: var(--ui-text-muted);
+}
+
+.sr-trend {
+    font-size: .75rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.sr-trend--up { color: #0a7a55; }
+.sr-trend--down { color: #b3203d; }
+.sr-trend--same { color: var(--ui-text-muted); }
+
+@media print {
+    .sr-service { break-inside: avoid; }
+}
+
+/* ---------- نشاط المستخدمين ---------- */
+
+.ua-online {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}

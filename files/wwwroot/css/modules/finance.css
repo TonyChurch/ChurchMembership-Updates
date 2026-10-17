@@ -1,0 +1,1188 @@
+/* الحسابات: دفاتر الإيصالات، المنصرف، كشف التسوية، السيارات */
+
+.fin-page {
+    gap: .8rem;
+}
+
+.fin-page .ui-page-header h1 .ui-status {
+    font-size: .8rem;
+    vertical-align: middle;
+}
+
+.fin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+}
+
+.fin-actions form {
+    margin: 0;
+}
+
+.fin-actions .ui-btn,
+.fin-page .ui-page-header > .ui-btn {
+    padding: .42rem .85rem;
+    border-radius: 10px;
+    font-size: .88rem;
+}
+
+.fin-btn-danger {
+    color: #b3203d;
+    background: var(--ui-danger-soft);
+    box-shadow: none;
+}
+
+.fin-btn-danger:hover {
+    color: #fff;
+    background: #b3203d;
+}
+
+.fin-period {
+    min-width: 7.5rem;
+    text-align: center;
+}
+
+.fin-year {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.fin-year .form-select {
+    width: auto;
+    min-height: 2.2rem;
+}
+
+/* ---------- التنقل ---------- */
+
+.fin-nav,
+.fin-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+}
+
+.fin-nav__item,
+.fin-filter a {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .85rem;
+    color: var(--ui-text-muted);
+    text-decoration: none;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.fin-nav__item:hover,
+.fin-filter a:hover {
+    color: var(--ui-primary-strong);
+}
+
+.fin-nav__item.is-active,
+.fin-filter a.is-active {
+    color: #fff;
+    background: var(--ui-gradient-primary);
+    border-color: transparent;
+}
+
+.fin-filter a {
+    padding: .22rem .7rem;
+    font-size: .8rem;
+}
+
+.fin-flash--error {
+    color: #b3203d;
+    background: var(--ui-danger-soft);
+}
+
+/* ---------- الأرقام الكبيرة ---------- */
+
+.fin-totals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: .6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fin-total {
+    --fin-color: #3b5bfd;
+    --fin-soft: #eef2ff;
+    display: grid;
+    gap: .1rem;
+    padding: .55rem .8rem;
+    background: var(--fin-soft);
+    border-inline-start: 4px solid var(--fin-color);
+    border-radius: 12px;
+}
+
+.fin-total span {
+    color: var(--ui-text-muted);
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.fin-total strong {
+    color: var(--fin-color);
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.fin-total strong small {
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.fin-total--green { --fin-color: #0a7a55; --fin-soft: #e6f8f1; }
+.fin-total--red { --fin-color: #b3203d; --fin-soft: #fdecef; }
+.fin-total--gold { --fin-color: #a4610a; --fin-soft: #fff5e1; }
+.fin-total--slate { --fin-color: #475569; --fin-soft: #f1f4f9; }
+
+.fin-counts {
+    margin: -.3rem 0 0;
+}
+
+.fin-muted {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+/* ---------- الجداول ---------- */
+
+.fin-table td,
+.fin-table th {
+    white-space: nowrap;
+}
+
+.fin-table td:nth-child(3) {
+    white-space: normal;
+}
+
+.fin-num {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+}
+
+.fin-table tfoot td {
+    padding: .55rem .75rem;
+    background: var(--ui-bg);
+    font-weight: 800;
+}
+
+.fin-link {
+    color: var(--ui-primary-strong);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.fin-link:hover {
+    text-decoration: underline;
+}
+
+.fin-cancelled td {
+    color: var(--ui-text-muted);
+    background: repeating-linear-gradient(135deg, transparent 0 8px, rgba(179, 32, 61, .05) 8px 16px);
+}
+
+.fin-table--entry td {
+    padding: .2rem .35rem;
+}
+
+.fin-table--entry .form-control {
+    min-height: 2rem;
+    padding: .15rem .5rem;
+    font-size: .88rem;
+}
+
+.fin-table--entry td:first-child {
+    width: 4.5rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.fin-table--entry .fin-amount {
+    min-width: 6rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.fin-icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    color: #b3203d;
+    background: var(--ui-danger-soft);
+    border: 0;
+    border-radius: 8px;
+}
+
+.fin-icon-btn:hover {
+    color: #fff;
+    background: #b3203d;
+}
+
+/* ---------- بطاقات الصفحة ---------- */
+
+.fin-receipts,
+.fin-settle {
+    display: grid;
+    gap: .65rem;
+}
+
+.fin-receipts h2,
+.fin-settle h2 {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 800;
+}
+
+.fin-receipts h2 i,
+.fin-settle h2 i {
+    color: var(--ui-primary);
+}
+
+.fin-settle {
+    border-inline-start: 4px solid #e6a200;
+}
+
+.fin-settle.is-done {
+    border-inline-start-color: #0a9468;
+}
+
+.fin-settle__result {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem 1.1rem;
+    font-size: .92rem;
+}
+
+.fin-settle__form,
+.fin-expense-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: .5rem .7rem;
+    margin: 0;
+}
+
+.fin-settle__form .form-label,
+.fin-expense-form .form-label {
+    margin-bottom: .15rem;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.fin-settle__form .form-control,
+.fin-expense-form .form-control,
+.fin-expense-form .form-select {
+    min-height: 2.3rem;
+}
+
+.fin-settle__notes,
+.fin-expense-form__wide {
+    flex: 1;
+    min-width: 14rem;
+}
+
+.fin-settle__form .ui-status {
+    margin-bottom: .45rem;
+}
+
+.fin-expense-form {
+    padding: .6rem .7rem;
+    background: var(--ui-bg);
+    border-radius: 12px;
+}
+
+.fin-expense-form > div:not(.fin-expense-form__wide) {
+    width: 10rem;
+}
+
+.fin-savebar {
+    position: sticky;
+    bottom: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    margin-top: .6rem;
+    padding: .5rem .75rem;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: 12px;
+    box-shadow: var(--ui-shadow);
+}
+
+.fin-print-title,
+.fin-signatures {
+    display: none;
+}
+
+@media print {
+    .no-print,
+    .app-shell__sidebar,
+    .topbar,
+    .app-footer {
+        display: none !important;
+    }
+
+    .fin-print-title {
+        display: block;
+        text-align: center;
+    }
+
+    .fin-print-title h1 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    .fin-print-title p {
+        margin: 0 0 .4rem;
+        font-size: .85rem;
+    }
+
+    .fin-signatures {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2.5rem;
+        font-weight: 700;
+    }
+
+    .fin-signatures span {
+        min-width: 9rem;
+        padding-top: 2rem;
+        border-top: 1px solid #333;
+        text-align: center;
+    }
+
+    .fin-table th,
+    .fin-table td {
+        padding: .25rem .4rem;
+        font-size: .78rem;
+    }
+
+    .fin-receipts,
+    .fin-settle {
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+}
+
+/* ---------- عناصر صغيرة ---------- */
+
+.fin-check {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-bottom: .45rem;
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.fin-btn-small {
+    padding: .25rem .7rem;
+    border-radius: 9px;
+    box-shadow: none;
+    font-size: .8rem;
+}
+
+.fin-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: .5rem 1rem;
+    margin: 0;
+}
+
+.fin-facts dt {
+    color: var(--ui-text-muted);
+    font-size: .76rem;
+    font-weight: 700;
+}
+
+.fin-facts dd {
+    margin: 0;
+    font-weight: 600;
+}
+
+.fin-facts__wide {
+    grid-column: 1 / -1;
+}
+
+.fin-print-only {
+    display: none;
+}
+
+@media print {
+    th.fin-print-only,
+    td.fin-print-only {
+        display: table-cell;
+        min-width: 7rem;
+    }
+}
+
+/* شريط الحفظ يبقى فوق خانات الجدول عند التمرير */
+.fin-savebar {
+    z-index: 5;
+}
+
+/* ---------- تقرير المنصرف مبوَّبًا ---------- */
+
+.fin-group {
+    border-inline-start: 4px solid var(--ui-primary);
+}
+
+.fin-group--none {
+    border-inline-start-color: #b3203d;
+}
+
+.fin-group__total {
+    margin-inline-start: auto;
+    color: var(--ui-primary-strong);
+    font-variant-numeric: tabular-nums;
+}
+
+.fin-bar {
+    display: inline-block;
+    width: 6rem;
+    height: .45rem;
+    margin-inline-end: .35rem;
+    overflow: hidden;
+    background: var(--ui-slate-soft);
+    border-radius: 999px;
+    vertical-align: middle;
+}
+
+.fin-bar span {
+    display: block;
+    height: 100%;
+    background: var(--ui-primary);
+    border-radius: inherit;
+}
+
+.fin-classify {
+    margin: 0;
+}
+
+.fin-classify .form-select {
+    min-width: 9rem;
+    min-height: 1.9rem;
+    padding-block: .1rem;
+    font-size: .8rem;
+}
+
+.fin-table--entry .form-control:focus {
+    position: relative;
+    box-shadow: 0 0 0 2px var(--ui-primary);
+}
+
+@media print {
+    .fin-group {
+        break-inside: avoid;
+    }
+}
+
+/* ---------- شريط الإجماليات بين الوارد والمنصرف ---------- */
+
+.fin-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .6rem;
+}
+
+.fin-strip__cell {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .3rem .8rem;
+    padding: .75rem 1rem;
+    color: #fff;
+    border-radius: 14px;
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.fin-strip__cell span {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .92rem;
+    font-weight: 700;
+}
+
+.fin-strip__cell strong {
+    font-size: 1.45rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.fin-strip__cell--in { background: linear-gradient(135deg, #0a9468, #22b888); }
+.fin-strip__cell--out { background: linear-gradient(135deg, #d6304f, #f0677f); }
+.fin-strip__cell--net { background: linear-gradient(135deg, #3b5bfd, #6c5cff); }
+.fin-strip__cell--net.is-negative { background: linear-gradient(135deg, #8a1c33, #c0392b); }
+
+.fin-strip__note {
+    grid-column: 1 / -1;
+    margin-top: -.3rem;
+    color: var(--ui-text-muted);
+    font-size: .76rem;
+    text-align: center;
+}
+
+.fin-expense-form__service {
+    width: 14rem !important;
+}
+
+@media (max-width: 767.98px) {
+    .fin-strip {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    .fin-strip__cell {
+        color: #000;
+        background: none !important;
+        border: 1px solid #999;
+        box-shadow: none;
+    }
+}
+
+/* ---------- تقرير تسوية الدفتر ---------- */
+
+.fin-report__sheet {
+    display: grid;
+    gap: .8rem;
+}
+
+.fin-report__head {
+    text-align: center;
+}
+
+.fin-report__head h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.fin-report__head h2 {
+    margin: .2rem 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--ui-primary-strong);
+}
+
+.fin-report__head p {
+    margin: 0;
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+}
+
+.fin-report__draft {
+    display: inline-block;
+    margin-top: .3rem !important;
+    padding: .1rem .7rem;
+    color: #a4610a !important;
+    background: var(--ui-warning-soft);
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.fin-report__sheet h3 {
+    margin: .5rem 0 0;
+    padding-bottom: .25rem;
+    border-bottom: 2px solid var(--ui-primary);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.fin-report__sheet h4 {
+    display: flex;
+    justify-content: space-between;
+    margin: .3rem 0 -.4rem;
+    padding: .3rem .7rem;
+    background: var(--ui-primary-soft);
+    border-radius: 8px;
+    font-size: .92rem;
+    font-weight: 800;
+}
+
+.fin-report__summary th {
+    width: 14rem;
+    color: var(--ui-text);
+    background: var(--ui-bg);
+    text-align: start;
+}
+
+.fin-report__signatures {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2.5rem;
+    font-weight: 700;
+}
+
+.fin-report__signatures span {
+    min-width: 9rem;
+    padding-top: 2.2rem;
+    border-top: 1px solid var(--ui-text-muted);
+    text-align: center;
+}
+
+@media print {
+    .fin-report__sheet {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+    }
+
+    .fin-report__sheet h4,
+    .fin-report__sheet table {
+        break-inside: auto;
+    }
+
+    .fin-report__sheet tr {
+        break-inside: avoid;
+    }
+
+    .fin-report__signatures {
+        break-inside: avoid;
+    }
+}
+
+/* ---------- إيصال استلام نقدية ---------- */
+
+.fin-row-actions {
+    white-space: nowrap;
+}
+
+.fin-row-actions form {
+    display: inline-block;
+    margin: 0;
+}
+
+.fin-icon-btn--print {
+    color: var(--ui-primary-strong);
+    background: var(--ui-primary-soft);
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.fin-icon-btn--print:hover {
+    color: #fff;
+    background: var(--ui-primary);
+}
+
+/* نموذج المطرانية: شعار يمينًا، العنوان في الوسط، التاريخ يسارًا، ثم السطور الثلاثة وجدول قرش/جنيه والتوقيعان */
+
+.fin-voucher-sheet {
+    display: grid;
+    gap: 1.2rem;
+    justify-items: center;
+}
+
+.fin-voucher {
+    display: grid;
+    gap: .85rem;
+    width: 100%;
+    max-width: 46rem;
+    padding: 1.2rem 1.6rem 1.4rem;
+    color: #000;
+    background: #fff;
+    border: 1px solid #555;
+    font-size: 1.05rem;
+}
+
+.fin-voucher__head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    gap: .8rem;
+}
+
+.fin-voucher__logo img {
+    display: block;
+    max-width: 13.5rem;
+    max-height: 7.2rem;
+}
+
+.fin-voucher__logo strong {
+    font-size: .95rem;
+}
+
+.fin-voucher__head h1 {
+    margin: 0 0 .3rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.fin-voucher__date {
+    justify-self: end;
+    align-self: start;
+    margin: .4rem 0 0;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.fin-voucher__date b {
+    font-variant-numeric: tabular-nums;
+}
+
+.fin-voucher__line {
+    display: flex;
+    align-items: baseline;
+    gap: .6rem;
+    margin: 0;
+}
+
+.fin-voucher__line span {
+    flex: none;
+    min-width: 6.2rem;
+    font-weight: 800;
+}
+
+.fin-voucher__line b {
+    flex: 1;
+    min-height: 1.7rem;
+    padding: 0 .4rem .1rem;
+    border-bottom: 1px dotted #333;
+    font-weight: 700;
+}
+
+.fin-voucher__body {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: end;
+    gap: .4rem 1rem;
+    margin-top: .2rem;
+}
+
+.fin-voucher__money {
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+
+.fin-voucher__money th,
+.fin-voucher__money td {
+    min-width: 4.6rem;
+    padding: .15rem .5rem;
+    text-align: center;
+}
+
+.fin-voucher__money th {
+    font-weight: 800;
+}
+
+.fin-voucher__money tbody td {
+    height: 1.7rem;
+    border-bottom: 1px dotted #333;
+    font-weight: 700;
+}
+
+.fin-voucher__money tfoot td {
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    font-weight: 800;
+}
+
+.fin-voucher__total {
+    padding-bottom: .2rem;
+    font-weight: 800;
+}
+
+.fin-voucher__statement {
+    align-self: start;
+    margin: 1.9rem 0 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.fin-voucher__signatures {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin-top: .6rem;
+}
+
+.fin-voucher__signatures div {
+    display: grid;
+    gap: 1.6rem;
+    min-width: 11rem;
+    text-align: center;
+}
+
+.fin-voucher__signatures span {
+    font-size: .92rem;
+    font-weight: 800;
+}
+
+.fin-voucher__signatures i {
+    border-bottom: 1px dotted #333;
+}
+
+@media print {
+    .fin-voucher-sheet {
+        display: block;
+    }
+
+    .fin-voucher {
+        max-width: none;
+        margin: 0 0 9mm;
+        break-inside: avoid;
+    }
+
+    /* إيصالان في كل صفحة */
+    .fin-voucher:nth-child(2n) {
+        break-after: page;
+    }
+
+    .fin-voucher:last-child {
+        break-after: auto;
+    }
+}
+
+.fin-h2-action {
+    margin-inline-start: auto;
+    text-decoration: none;
+}
+
+.fin-btn-back {
+    background: linear-gradient(135deg, #0a9468, #22b888);
+    box-shadow: none;
+}
+
+.fin-h2-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin-inline-start: auto;
+}
+
+.fin-h2-actions .fin-h2-action {
+    margin: 0;
+}
+
+/* ---------- حسابات الوارد/المنصرف/المُرحَّل (القربان، عطاء الخدمات) ---------- */
+
+.fin-strip--four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fin-strip__cell--carry { background: linear-gradient(135deg, #b7791f, #e6a200); }
+
+.fin-in { color: #0a7a55; }
+.fin-out { color: #b3203d; }
+
+.fin-carry-row td {
+    color: #8a5a00;
+    background: #fff9ea;
+    font-weight: 700;
+}
+
+.fin-accounts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: .7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fin-account {
+    --account-color: #3b5bfd;
+    --account-soft: #eef2ff;
+    display: grid;
+    gap: .55rem;
+    padding: .75rem .9rem;
+    background: linear-gradient(160deg, var(--account-soft), var(--ui-surface) 70%);
+    border: 1px solid var(--ui-border);
+    border-top: 4px solid var(--account-color);
+    border-radius: 14px;
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.fin-account--violet { --account-color: #8b5cf6; --account-soft: #f2edff; }
+.fin-account--green { --account-color: #12b981; --account-soft: #e6f8f1; }
+.fin-account--gold { --account-color: #e69a0c; --account-soft: #fff5e1; }
+.fin-account--pink { --account-color: #ec4899; --account-soft: #fdebf4; }
+.fin-account--teal { --account-color: #0ea5b7; --account-soft: #e3f7f9; }
+
+.fin-account.is-inactive {
+    opacity: .65;
+}
+
+.fin-account__name {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    color: var(--ui-text);
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.fin-account__name i {
+    color: var(--account-color);
+}
+
+.fin-account__name:hover {
+    color: var(--account-color);
+}
+
+.fin-account__numbers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .3rem .8rem;
+    margin: 0;
+}
+
+.fin-account__numbers div {
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+    font-size: .85rem;
+}
+
+.fin-account__numbers dt {
+    color: var(--ui-text-muted);
+    font-weight: 600;
+}
+
+.fin-account__numbers dd {
+    margin: 0;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.fin-account__balance dd {
+    color: var(--account-color);
+}
+
+.fin-account__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem;
+    font-size: .82rem;
+}
+
+.fin-account__foot .fin-link {
+    margin-inline-start: auto;
+}
+
+@media (max-width: 991.98px) {
+    .fin-strip--four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.fin-expense-form.is-editing {
+    outline: 2px solid #e6a200;
+    background: #fff9ea;
+}
+
+.fin-chip {
+    margin: .1rem;
+    text-decoration: none;
+}
+
+.fin-inline-form {
+    display: inline-block;
+    margin: 0;
+}
+
+.fin-brothers-card {
+    border-inline-start: 4px solid #ec4899;
+}
+
+.fin-brothers-card h2 i {
+    color: #ec4899;
+}
+
+/* ---------- خدمات إخوة الرب في ملف الأسرة ---------- */
+
+.fin-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: .5rem;
+}
+
+.fin-service {
+    --service-color: #3b5bfd;
+    --service-soft: #eef2ff;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .55rem .8rem;
+    color: var(--ui-text);
+    text-decoration: none;
+    background: var(--service-soft);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    transition: transform var(--ui-transition), border-color var(--ui-transition);
+}
+
+.fin-service:hover {
+    color: var(--ui-text);
+    border-color: var(--service-color);
+    transform: translateY(-1px);
+}
+
+.fin-service > i {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    color: #fff;
+    background: var(--service-color);
+    border-radius: 10px;
+}
+
+.fin-service b,
+.fin-service small {
+    display: block;
+}
+
+.fin-service small {
+    color: var(--ui-text-muted);
+    font-size: .74rem;
+}
+
+.fin-service--green { --service-color: #0a9468; --service-soft: #e6f8f1; }
+.fin-service--gold { --service-color: #d98e00; --service-soft: #fff5e1; }
+.fin-service--slate { --service-color: #475569; --service-soft: #f1f4f9; }
+
+.fin-subhead {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin: .3rem 0 0;
+    font-size: .9rem;
+    font-weight: 800;
+}
+
+.fin-members {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+}
+
+.fin-member {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .2rem .35rem .2rem .7rem;
+    background: #fdebf4;
+    border: 1px solid #f7c6de;
+    border-radius: 999px;
+    font-size: .84rem;
+}
+
+.fin-member.is-active {
+    background: #db2777;
+    border-color: #db2777;
+}
+
+.fin-member a {
+    color: #9d174d;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.fin-member.is-active a,
+.fin-member.is-active button {
+    color: #fff;
+}
+
+.fin-member form {
+    margin: 0;
+}
+
+.fin-member button {
+    display: grid;
+    place-items: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    padding: 0;
+    color: #9d174d;
+    background: none;
+    border: 0;
+    font-size: .7rem;
+}
+
+.fin-enroll {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin: 0;
+}
+
+.fin-enroll .form-select {
+    width: auto;
+    min-height: 2rem;
+    padding-block: .1rem;
+    font-size: .84rem;
+}
+
+.fin-member-link {
+    display: inline-grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-inline-start: .2rem;
+    color: #be185d;
+    background: #fdebf4;
+    border-radius: 7px;
+    font-size: .82rem;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.fin-member-link:hover {
+    color: #fff;
+    background: #db2777;
+}
+
+/* ---------- ملف مساعدات الأسرة ---------- */
+
+.fin-member-link--aid {
+    color: #0a7a55;
+    background: #e6f8f1;
+}
+
+.fin-member-link--aid:hover {
+    color: #fff;
+    background: #0a9468;
+}
+
+.aid-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1rem;
+}
+
+.aid-summary .fin-subhead {
+    margin-top: 0;
+}
+
+.fin-table tr.aid-focus {
+    background: rgba(245, 165, 36, .14);
+}

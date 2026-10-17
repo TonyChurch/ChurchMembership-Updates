@@ -1,0 +1,30 @@
+/* سجل الأسرار: القائمة ونموذج القيد */
+
+.sacraments__icon { background: linear-gradient(135deg, #2d6cdf, #6a8dff); }
+
+.sacraments__filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    align-items: center;
+    padding: .8rem;
+}
+
+.sacraments__filter input[type="search"] { flex: 1 1 16rem; }
+.sacraments__filter select { flex: 0 0 10rem; }
+
+.sacraments__tools { display: inline-flex; gap: .3rem; align-items: center; }
+.sacraments__tools form { margin: 0; }
+
+.sacraments__form { padding: 1.2rem; display: grid; gap: 1rem; }
+
+.sacraments__kinds { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; border: 0; }
+.sacraments__kinds legend { width: 100%; }
+
+.sacraments__register { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+
+.sacraments__linked { display: block; min-height: 1.2em; color: var(--ui-success, #138a4e); font-weight: 700; }
+
+.sacraments__actions { display: flex; justify-content: flex-end; gap: .5rem; }
+
+[data-baptism][hidden], [data-couple][hidden] { display: none !important; }

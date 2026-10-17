@@ -1,0 +1,224 @@
+/* المستخدمون والصلاحيات */
+
+.users-page .ui-page-header .ui-chip-stats {
+    margin-inline-start: auto;
+}
+
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.users-card {
+    display: grid;
+    align-content: start;
+    gap: .7rem;
+    padding: 1rem 1.1rem;
+}
+
+.users-card.is-disabled {
+    opacity: .65;
+}
+
+.users-card__head {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+}
+
+.users-card__head .ui-person__text {
+    flex: 1;
+}
+
+.users-card__roles,
+.users-card__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem .8rem;
+}
+
+.users-card__contact {
+    color: var(--ui-text-muted);
+    font-size: .82rem;
+}
+
+.users-card__contact a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.users-card__actions {
+    display: flex;
+    gap: .45rem;
+    padding-top: .6rem;
+    border-top: 1px dashed var(--ui-border);
+}
+
+.users-card__actions form {
+    margin: 0;
+}
+
+.users-card__actions .ui-btn {
+    padding: .35rem .8rem;
+    font-size: .85rem;
+}
+
+.users-card__disable:hover {
+    color: var(--ui-danger);
+    border-color: var(--ui-danger);
+}
+
+.users-card__enable {
+    color: #0a7a55;
+}
+
+/* ---------- اختيار الدور ---------- */
+
+.users-roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: .6rem;
+}
+
+.users-role {
+    --role-color: var(--ui-primary);
+    --role-soft: var(--ui-primary-soft);
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+}
+
+.users-role--admin { --role-color: var(--ui-violet); --role-soft: var(--ui-violet-soft); }
+.users-role--secretary { --role-color: var(--ui-accent); --role-soft: var(--ui-accent-soft); }
+
+.users-role input {
+    position: absolute;
+    opacity: 0;
+}
+
+.users-role > span {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .1rem .6rem;
+    padding: .75rem .85rem;
+    background: var(--ui-bg);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    transition: border-color var(--ui-transition), background var(--ui-transition);
+}
+
+.users-role i {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    color: var(--role-color);
+    background: var(--role-soft);
+    border-radius: 10px;
+}
+
+.users-role small {
+    color: var(--ui-text-muted);
+    font-size: .76rem;
+}
+
+.users-role:hover > span {
+    border-color: var(--role-soft);
+}
+
+.users-role input:checked + span {
+    background: var(--role-soft);
+    border-color: var(--role-color);
+}
+
+.users-role input:checked + span i {
+    color: #fff;
+    background: var(--role-color);
+}
+
+.users-role input:focus-visible + span {
+    box-shadow: 0 0 0 4px rgba(59, 91, 253, .2);
+}
+/* منطقة الخطر: بداية جديدة */
+.fresh-start {
+    margin-top: 28px;
+    padding: 18px 20px;
+    border: 1.5px solid var(--ui-danger);
+    background: var(--ui-danger-soft);
+}
+
+.fresh-start h2 {
+    font-size: 1.05rem;
+    color: var(--ui-danger);
+    margin: 0 0 6px;
+}
+
+.fresh-start p {
+    margin: 0 0 10px;
+    font-size: .88rem;
+}
+
+.fresh-start__lists {
+    display: grid;
+    gap: 8px;
+    font-size: .84rem;
+    margin-bottom: 12px;
+}
+
+.fresh-start__lists div {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.fresh-start__lists strong {
+    white-space: nowrap;
+}
+
+.fresh-start__wipe {
+    color: var(--ui-danger);
+}
+
+.fresh-start__keep {
+    color: var(--ui-success, #15803d);
+}
+
+.fresh-start__form summary {
+    list-style: none;
+    display: inline-flex;
+    cursor: pointer;
+    background: var(--ui-surface, #fff);
+    color: var(--ui-danger);
+    border: 1px solid var(--ui-danger);
+}
+
+.fresh-start__form summary::-webkit-details-marker {
+    display: none;
+}
+
+.fresh-start__form form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    margin-top: 12px;
+}
+
+.fresh-start__form label {
+    display: grid;
+    gap: 4px;
+    font-size: .84rem;
+    min-width: 200px;
+    flex: 1;
+}
+
+.fresh-start__confirm {
+    background: var(--ui-danger);
+    border-color: var(--ui-danger);
+    color: #fff;
+}

@@ -1,0 +1,291 @@
+/* الإعدادات */
+
+.settings-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: .6rem;
+}
+
+.settings-shortcut {
+    --tint: var(--ui-primary);
+    --tint-soft: var(--ui-primary-soft);
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .6rem .8rem;
+    color: var(--ui-text);
+    text-decoration: none;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: 14px;
+    font-weight: 700;
+    transition: transform var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.settings-shortcut:hover {
+    color: var(--ui-text);
+    transform: translateY(-2px);
+    box-shadow: var(--ui-shadow);
+}
+
+.settings-shortcut > i:first-child {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    color: var(--tint);
+    background: var(--tint-soft);
+    border-radius: 10px;
+}
+
+.settings-shortcut__arrow {
+    margin-inline-start: auto;
+    color: var(--ui-text-muted);
+    font-size: .75rem;
+}
+
+.settings-shortcut--violet { --tint: var(--ui-violet); --tint-soft: var(--ui-violet-soft); }
+.settings-shortcut--pink { --tint: #ec4899; --tint-soft: #fdebf4; }
+.settings-shortcut--green { --tint: var(--ui-success); --tint-soft: var(--ui-success-soft); }
+.settings-shortcut--gold { --tint: #e6a200; --tint-soft: var(--ui-accent-soft); }
+
+.settings-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--ui-gap);
+}
+
+@media (max-width: 1199.98px) {
+    .settings-columns {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.settings-add {
+    margin-inline-start: auto;
+    padding: .35rem .85rem;
+    font-size: .85rem;
+}
+
+.settings-help {
+    margin: -.5rem 0 .9rem;
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+}
+
+.settings-list {
+    display: grid;
+    gap: .5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.settings-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+    padding: .65rem .75rem;
+    background: var(--ui-bg);
+    border-radius: 14px;
+}
+
+.settings-item form {
+    margin: 0;
+}
+
+.settings-item__dot {
+    flex: none;
+    width: .7rem;
+    height: .7rem;
+    margin-top: .45rem;
+    background: var(--ui-slate);
+    border-radius: 50%;
+    opacity: .4;
+}
+
+.settings-item.is-active .settings-item__dot {
+    background: var(--ui-success);
+    opacity: 1;
+    box-shadow: 0 0 0 4px var(--ui-success-soft);
+}
+
+.settings-item__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.settings-item__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+}
+
+.settings-item__body p {
+    margin: .2rem 0;
+    font-size: .88rem;
+}
+
+.settings-item__body small {
+    color: var(--ui-text-muted);
+    font-size: .75rem;
+}
+
+.settings-preview {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: 1rem;
+    padding: .55rem .9rem;
+    border: 1px solid var(--ui-border);
+    border-radius: 12px;
+    font-size: .88rem;
+}
+
+.settings-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.settings-colors label {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    color: var(--ui-text-muted);
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.settings-colors .form-control-color {
+    width: 2.6rem;
+    min-height: 2.2rem;
+    padding: .2rem;
+}
+
+.settings-save {
+    margin-top: 1rem;
+}
+
+.settings-modal .modal-title {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    font-weight: 800;
+}
+
+.settings-modal .modal-footer {
+    justify-content: flex-start;
+    gap: .5rem;
+}
+/* ---------- النسخ الاحتياطي ---------- */
+
+.settings-backup__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--ui-gap);
+}
+
+@media (max-width: 991.98px) {
+    .settings-backup__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.settings-backup__list h3 {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    margin: 0 0 .6rem;
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.settings-backup form.settings-add {
+    margin: 0 0 0 0;
+    margin-inline-start: auto;
+    padding: 0;
+    font-size: inherit;
+}
+/* ---------- الدخول من الموبايل ---------- */
+.settings-mobile__body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+.settings-mobile__qr {
+    flex: none;
+    width: 170px;
+    padding: .5rem;
+    background: #fff;
+    border: 1px solid var(--ui-border);
+    border-radius: 14px;
+}
+
+.settings-mobile__qr svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.settings-mobile__steps {
+    flex: 1;
+    min-width: 240px;
+}
+
+.settings-mobile__link {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 .5rem;
+}
+
+.settings-mobile__link b {
+    padding: .2rem .7rem;
+    color: var(--ui-primary-strong);
+    font-size: 1.05rem;
+    background: var(--ui-primary-soft);
+    border-radius: 10px;
+}
+
+.settings-mobile__steps ol {
+    margin: .5rem 0;
+    padding-inline-start: 1.2rem;
+    font-size: .9rem;
+}
+
+.settings-mobile__steps li { margin-bottom: .25rem; }
+/* ---------- بيانات الكنيسة والاستعادة ---------- */
+
+.settings-subtitle {
+    margin: 1rem 0 .5rem;
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.settings-priest {
+    margin-bottom: .5rem;
+}
+
+.settings-restore {
+    margin-top: .8rem;
+    padding: .8rem;
+    border: 1px solid #f7c2cd;
+    border-radius: var(--ui-radius-sm);
+    background: var(--ui-danger-soft);
+}
+
+.settings-restore[hidden] {
+    display: none;
+}
+
+.settings-restore__actions {
+    display: flex;
+    gap: .5rem;
+    margin-top: .6rem;
+}

@@ -1,0 +1,158 @@
+/* =========================================================
+   الموبايل (شاشات أقل من 768px): شريط علوي نحيف، مسافات أصغر،
+   والشرائط العلوية للصفحات (ملف الأسرة / لوحة التحكم) في عمود واحد.
+   التنقل بين الصفحات من القائمة الجانبية (زر ☰).
+   ========================================================= */
+
+.topbar__mobile-title { display: none; }
+
+/* العناصر المخفية بصريًا داخل جدول يتمرر أفقيًا تبقى محبوسة داخله
+   (كانت عناوين الأعمدة المخفية توسّع الصفحة كلها على الموبايل) */
+.table-responsive { position: relative; }
+
+@media (max-width: 767.98px) {
+    /* القائمة الجانبية المخفية (تنزلق من الجانب) لا توسّع الصفحة فيصغّرها الموبايل */
+    html, body { overflow-x: clip; }
+
+    /* ---------- الشريط العلوي ---------- */
+    body .topbar__inner {
+        min-height: 58px;
+        flex-wrap: nowrap;
+        gap: .6rem;
+    }
+
+    body .topbar-global-panel { display: none; }
+
+    body .topbar__brand {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        gap: .55rem;
+        min-width: 0;
+        text-decoration: none;
+    }
+
+    body .topbar__logo {
+        flex: 0 0 38px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .topbar__mobile-title {
+        display: grid;
+        min-width: 0;
+        line-height: 1.25;
+    }
+
+    .topbar__mobile-title strong {
+        overflow: hidden;
+        color: var(--ui-text);
+        font-size: .95rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .topbar__mobile-title small {
+        color: var(--ui-text-muted);
+        font-size: .7rem;
+    }
+
+    body .topbar__menu {
+        flex: none;
+        width: 40px;
+        height: 40px;
+        font-size: 1.35rem;
+    }
+
+    /* ---------- المسافات ---------- */
+    body .app-main { padding: .6rem; }
+    body .ui-page.container-fluid { padding-inline: 0; }
+
+    /* ---------- الشريط العلوي للصفحة (ملف الأسرة / لوحة التحكم) ---------- */
+    body .fp-head {
+        grid-template-columns: minmax(0, 1fr);
+        gap: .7rem;
+        padding: .8rem;
+    }
+
+    body .fp-head__family { gap: .6rem; }
+
+    body .fp-head__icon {
+        width: 2.8rem;
+        height: 2.8rem;
+        font-size: 1.2rem;
+        border-radius: 14px;
+    }
+
+    body .fp-head__title h1 { font-size: 1.1rem; }
+    body .fp-head__family p { font-size: .78rem; }
+
+    /* الترتيب: الرجوع والأيقونات، ثم الاسم/الترحيب، ثم الأزرار */
+    body .fp-head > .fp-head__family { grid-row: 2; grid-column: 1; }
+
+    body .fp-head > .fp-head__actions {
+        grid-column: 1;
+        grid-row: 3;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .4rem;
+    }
+
+    /* الأزرار الثلاثة: رقائق صغيرة ملونة (أيقونة فوق الاسم) */
+    body .fp-head .fp-action {
+        flex-direction: column;
+        justify-content: center;
+        gap: .2rem;
+        padding: .5rem .3rem;
+        text-align: center;
+    }
+
+    body .fp-head .fp-action span { justify-items: center; }
+    body .fp-head .fp-action b { font-size: .78rem; white-space: normal; line-height: 1.25; }
+    body .fp-head .fp-action small { display: none; }
+
+    body .fp-head > .fp-head__side {
+        grid-row: 1;
+        grid-column: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* بطاقات أفراد الأسرة: اثنتان في الصف */
+    body .profile-people__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .5rem;
+    }
+
+    body .person-tile { padding: .6rem .45rem; }
+    body .person-tile__avatar { width: 2.4rem; height: 2.4rem; font-size: 1rem; }
+    body .person-tile__name { font-size: .85rem; }
+    body .person-tile__meta { font-size: .72rem; }
+    body .person-tile__chip { font-size: .66rem; padding-inline: .4rem; }
+
+    /* تنبيهات المناسبات الثلاثة جنبًا إلى جنب */
+    body .fp-events__alerts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .35rem;
+    }
+
+    body .fp-alert {
+        padding: .4rem .5rem;
+        font-size: .74rem;
+    }
+
+    /* الجداول: أعمدة ثانوية تختفي على الموبايل (تظهر في ملف الأسرة/العضو) */
+    /* الأسر: م / الزوجة / الزيارة */
+    body .families-table > * > tr > :nth-child(2),
+    body .families-table > * > tr > :nth-child(4),
+    body .families-table > * > tr > :nth-child(6) { display: none; }
+
+    /* الأعضاء: الافتقاد / الاعتراف / التناول / أب الاعتراف */
+    body .members-table:not(.families-table) > * > tr > :nth-child(4),
+    body .members-table:not(.families-table) > * > tr > :nth-child(5),
+    body .members-table:not(.families-table) > * > tr > :nth-child(6),
+    body .members-table:not(.families-table) > * > tr > :nth-child(8) { display: none; }
+
+    body .fp-card { padding: .8rem .85rem; }
+    body .fp-grid { gap: .7rem; }
+}

@@ -1,0 +1,527 @@
+/*
+    بوابة الشعب: صفحات للموبايل أولًا. عمود واحد من البطاقات، رأس زمردي، وشريط تنقل سفلي ثابت.
+    مستقلة عن تنسيقات البرنامج الداخلية (لا bootstrap) لتبقى خفيفة على شبكة الموبايل.
+*/
+:root {
+    --p-bg: #f4f8f6;
+    --p-surface: #ffffff;
+    --p-ink: #10261f;
+    --p-muted: #5a6f66;
+    --p-line: #d9e5df;
+    --p-emerald: #0e4433;
+    --p-emerald-2: #176b4e;
+    --p-gold: #b7791f;
+    --p-gold-soft: #fbf1d8;
+    --p-danger: #b3261e;
+    --p-nav-height: 4.2rem;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    color: var(--p-ink);
+    background: var(--p-bg);
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+a { color: var(--p-emerald-2); }
+
+h1, h2, h3, p, ul, blockquote { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+/* ---------- الرأس والتنقل ---------- */
+
+.portal-top {
+    padding: calc(.7rem + env(safe-area-inset-top, 0px)) 1rem .7rem;
+    color: #fff;
+    background: linear-gradient(135deg, var(--p-emerald), var(--p-emerald-2));
+}
+
+.portal-top__brand {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    max-width: 40rem;
+    margin-inline: auto;
+    color: #fff;
+    text-decoration: none;
+}
+
+.portal-top__brand img {
+    flex: none;
+    padding: 3px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.portal-top__brand span { display: grid; min-width: 0; line-height: 1.4; }
+.portal-top__brand strong { font-size: .95rem; }
+.portal-top__brand small { color: #f0c468; font-size: .8rem; font-weight: 700; }
+
+.portal-main {
+    display: grid;
+    gap: .9rem;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: 1rem 1rem calc(var(--p-nav-height) + 1.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.portal-nav {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 10;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: var(--p-surface);
+    border-top: 1px solid var(--p-line);
+    box-shadow: 0 -4px 16px rgba(14, 68, 51, .08);
+}
+
+.portal-nav a {
+    display: grid;
+    justify-items: center;
+    gap: .1rem;
+    min-height: var(--p-nav-height);
+    padding: .55rem .2rem .4rem;
+    color: var(--p-muted);
+    font-size: .74rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.portal-nav a i { font-size: 1.3rem; }
+.portal-nav a.is-current { color: var(--p-emerald); box-shadow: inset 0 3px 0 var(--p-gold); }
+
+/* ---------- البطاقات والنصوص ---------- */
+
+.portal-title { font-size: 1.35rem; font-weight: 800; }
+
+.portal-hero {
+    display: grid;
+    gap: .3rem;
+    padding: 1.2rem 1.1rem;
+    color: #fff;
+    background: linear-gradient(160deg, var(--p-emerald), var(--p-emerald-2));
+    border-radius: 16px;
+    border-bottom: 4px solid #f0c468;
+}
+
+.portal-hero__date { font-weight: 800; }
+.portal-hero__coptic { color: #f0c468; font-size: .88rem; font-weight: 700; }
+.portal-hero__coptic:empty { display: none; }
+.portal-hero blockquote { margin-top: .6rem; font-size: 1.12rem; font-weight: 700; line-height: 1.9; }
+
+.portal-card {
+    display: grid;
+    gap: .55rem;
+    padding: 1rem 1.05rem;
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 14px;
+}
+
+.portal-card--today { border-color: #e8bd5d; background: var(--p-gold-soft); }
+.portal-card--notice { border-inline-start: 4px solid var(--p-gold); }
+
+.portal-card h2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .45rem;
+    color: var(--p-emerald);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.portal-card h2 > i { color: var(--p-gold); }
+.portal-card h3 { display: flex; align-items: center; gap: .4rem; font-size: .98rem; font-weight: 800; }
+.portal-card h3 > i { color: var(--p-gold); }
+.portal-card h3 small { color: var(--p-muted); font-size: .78rem; font-weight: 600; }
+
+.portal-text { white-space: pre-line; overflow-wrap: anywhere; }
+.portal-muted { color: var(--p-muted); font-size: .88rem; }
+.portal-question { align-items: flex-start !important; line-height: 1.7; }
+
+.portal-quote {
+    padding: .5rem .8rem;
+    color: #5c3b00;
+    background: var(--p-gold-soft);
+    border-inline-start: 3px solid var(--p-gold);
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.portal-badge {
+    padding: .05rem .6rem;
+    color: #5c3b00;
+    background: #f0c468;
+    border-radius: 999px;
+    font-size: .74rem;
+}
+
+.portal-link { font-weight: 800; text-decoration: none; }
+
+.portal-list { display: grid; gap: .5rem; }
+.portal-list li { display: grid; }
+.portal-list span { color: var(--p-muted); }
+
+.portal-times { display: grid; }
+.portal-times li {
+    display: grid;
+    grid-template-columns: 6.6rem minmax(0, 1fr);
+    gap: .6rem;
+    padding-block: .45rem;
+    border-top: 1px solid var(--p-line);
+}
+.portal-times li:first-child { border-top: 0; }
+.portal-times b { color: var(--p-emerald); font-size: .92rem; }
+
+.portal-actions { display: grid; gap: .6rem; }
+.portal-action {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .85rem 1rem;
+    color: var(--p-ink);
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 14px;
+    text-decoration: none;
+}
+.portal-action > i { color: var(--p-gold); font-size: 1.6rem; }
+.portal-action span { display: grid; line-height: 1.45; }
+.portal-action small { color: var(--p-muted); }
+
+/* ---------- الخلوة (العناصر يولّدها dailyRetreat.js بأسماء أصنافه) ---------- */
+
+.portal-retreat { display: grid; gap: .3rem; padding-top: .5rem; border-top: 1px solid var(--p-line); }
+.portal-retreat:first-of-type { border-top: 0; padding-top: 0; }
+.topbar-daily-retreat__reading { display: flex; align-items: center; gap: .5rem; padding-block: .25rem; }
+.topbar-daily-retreat__reading-link { display: flex; flex: 1 1 auto; align-items: center; gap: .4rem; min-width: 0; font-weight: 700; text-decoration: none; }
+.topbar-daily-retreat__reading-link i { color: var(--p-gold); font-size: .8rem; }
+.topbar-daily-retreat__audio {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    color: var(--p-emerald);
+    background: var(--p-gold-soft);
+    border: 1px solid #e8bd5d;
+    border-radius: 50%;
+}
+.topbar-daily-retreat__audio.is-playing { color: #fff; background: var(--p-emerald); }
+.topbar-daily-retreat__loading { color: var(--p-muted); font-size: .88rem; }
+
+/* ---------- النماذج ---------- */
+
+.portal-form { display: grid; gap: .9rem; }
+.portal-form label { font-size: .9rem; font-weight: 800; }
+
+.portal-form input[type="text"],
+.portal-form input[type="tel"],
+.portal-form input:not([type]),
+.portal-form select,
+.portal-form textarea {
+    width: 100%;
+    padding: .7rem .8rem;
+    color: var(--p-ink);
+    background: #fff;
+    border: 1px solid #b9cbc3;
+    border-radius: 10px;
+    font: inherit;
+}
+
+.portal-form input:focus,
+.portal-form select:focus,
+.portal-form textarea:focus,
+.portal-button:focus-visible,
+.portal-nav a:focus-visible,
+.portal-action:focus-visible {
+    outline: 3px solid #f0c468;
+    outline-offset: 1px;
+}
+
+/* خانة المصيدة للبرامج الآلية: خارج الشاشة */
+.portal-trap { position: absolute !important; inset-inline-start: -200vw; width: 1px; height: 1px; opacity: 0; }
+
+.portal-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+    min-height: 3rem;
+    margin-top: .3rem;
+    color: #fff;
+    background: var(--p-emerald);
+    border: 0;
+    border-radius: 12px;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.portal-alert {
+    padding: .7rem .9rem;
+    color: var(--p-danger);
+    background: #fdecea;
+    border: 1px solid #f3b9b4;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.portal-choice { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.portal-choice label { position: relative; }
+.portal-choice input { position: absolute; opacity: 0; }
+.portal-choice span {
+    display: block;
+    padding: .6rem;
+    text-align: center;
+    border: 1px solid #b9cbc3;
+    border-radius: 10px;
+    font-weight: 800;
+}
+.portal-choice input:checked + span { color: #fff; background: var(--p-emerald); border-color: var(--p-emerald); }
+.portal-choice input:focus-visible + span { outline: 3px solid #f0c468; }
+
+.portal-sessions { display: grid; gap: .5rem; }
+.portal-session {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .65rem .8rem;
+    border: 1px solid #b9cbc3;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.portal-session input { flex: none; width: 1.25rem; height: 1.25rem; accent-color: var(--p-emerald); }
+.portal-session > span { display: grid; line-height: 1.5; font-weight: 600; }
+.portal-session small { color: var(--p-muted); font-weight: 600; }
+.portal-session:has(input:checked) { background: var(--p-gold-soft); border-color: #e8bd5d; }
+.portal-session.is-full { opacity: .55; cursor: not-allowed; }
+
+.portal-code {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-align: center;
+    user-select: all;
+}
+
+.portal-status { font-weight: 800; }
+.portal-status--ok { color: #1f7a4d; }
+.portal-status--no { color: var(--p-danger); }
+.portal-status--wait { color: var(--p-gold); }
+
+/* ---------- النوتة الروحية ---------- */
+
+.portal-button--ghost {
+    color: var(--p-emerald);
+    background: var(--p-surface);
+    border: 1px solid var(--p-emerald);
+}
+
+.notebook-day {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .5rem;
+    text-align: center;
+}
+
+.notebook-day > div { display: grid; line-height: 1.5; }
+.notebook-day small { color: var(--p-muted); }
+
+.notebook-day__step {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    color: var(--p-emerald);
+    background: var(--p-gold-soft);
+    border: 1px solid #e8bd5d;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.notebook-day__step:disabled { opacity: .35; cursor: default; }
+
+.notebook-group { display: grid; gap: .45rem; padding-top: .7rem; border-top: 1px solid var(--p-line); }
+.notebook-group h3 { color: var(--p-emerald); font-size: .95rem; }
+
+.notebook-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .45rem; }
+
+.notebook-items label {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    min-height: 2.9rem;
+    padding: .45rem .7rem;
+    border: 1px solid #b9cbc3;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.notebook-items input { flex: none; width: 1.3rem; height: 1.3rem; accent-color: var(--p-emerald); }
+.notebook-items label:has(input:checked) { background: var(--p-gold-soft); border-color: #e8bd5d; }
+
+/* آخر سبعة أيام: أعمدة بارتفاع ما سُجِّل في كل يوم */
+.notebook-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: end;
+    gap: .4rem;
+    height: 7rem;
+    padding-top: .5rem;
+}
+
+.notebook-week > div { display: grid; grid-template-rows: 1fr auto; align-items: end; justify-items: center; height: 100%; gap: .2rem; }
+.notebook-week span { width: 70%; background: var(--p-line); border-radius: 6px 6px 0 0; }
+.notebook-week span.has-value { background: var(--p-emerald-2); }
+.notebook-week small { color: var(--p-muted); font-size: .72rem; }
+
+/* ---------- الكتاب المقدس ---------- */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.bible { display: grid; gap: .7rem; scroll-margin-top: .5rem; }
+
+.bible-bar { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: .5rem; }
+
+.bible-bar select {
+    width: 100%;
+    padding: .65rem .7rem;
+    color: var(--p-ink);
+    background: var(--p-surface);
+    border: 1px solid #b9cbc3;
+    border-radius: 10px;
+    font: inherit;
+    font-weight: 700;
+}
+
+.bible-tools { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+.bible-tools button {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    min-height: 2.6rem;
+    padding: .3rem .85rem;
+    color: var(--p-emerald);
+    background: var(--p-surface);
+    border: 1px solid #b9cbc3;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.bible-tools button[aria-pressed="true"] { color: #fff; background: var(--p-emerald); border-color: var(--p-emerald); }
+
+.bible-page {
+    padding: 1.1rem 1.05rem;
+    color: #1b2a24;
+    background: #fffdf7;
+    border: 1px solid var(--p-line);
+    border-radius: 14px;
+    /* خط نسخي واضح للنص المشكَّل، وسطر واسع لأن التشكيل يحتاج ارتفاعًا */
+    font-family: "Traditional Arabic", "Amiri", "Sakkal Majalla", "Noto Naskh Arabic", "Times New Roman", serif;
+    line-height: 2.15;
+}
+
+.bible-page h1 {
+    margin-bottom: .6rem;
+    padding-bottom: .5rem;
+    color: var(--p-emerald);
+    border-bottom: 2px solid #e8bd5d;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.6;
+}
+
+.bible-page p { margin: 0 0 .35rem; overflow-wrap: anywhere; }
+.bible-page p.portal-muted { font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
+
+.bible-page sup {
+    margin-inline-end: .15rem;
+    color: var(--p-gold);
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    font-size: .58em;
+    font-weight: 800;
+}
+
+.bible-steps { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.bible-steps .portal-button { margin-top: 0; }
+.bible-steps .portal-button:disabled { opacity: .4; cursor: default; }
+.bible-credit { text-align: center; }
+
+/* الوضع الليلي: صفحة القراءة وما حولها داكنان */
+body.bible-night { background: #0c1512; }
+.bible.is-night .bible-page { color: #e8ece9; background: #121d19; border-color: #24352e; }
+.bible.is-night .bible-page h1 { color: #f0c468; border-bottom-color: #5c4a1c; }
+.bible.is-night .bible-page sup { color: #f0c468; }
+.bible.is-night .bible-bar select,
+.bible.is-night .bible-tools button:not([aria-pressed="true"]) { color: #e8ece9; background: #121d19; border-color: #2f4239; }
+.bible.is-night .portal-muted { color: #9db3a9; }
+
+/* الاستماع للأصحاح (تسجيل موقع القديس تكلا) */
+.bible-audio {
+    display: grid;
+    gap: .45rem;
+    padding: .7rem .8rem;
+    background: var(--p-gold-soft);
+    border: 1px solid #ecd9a8;
+    border-radius: 14px;
+}
+.bible-audio[hidden] { display: none; }
+.bible-audio__label { color: var(--p-emerald); font-weight: 800; }
+.bible-audio audio { width: 100%; height: 2.6rem; }
+.bible-audio__site { color: var(--p-gold); font-size: .88rem; font-weight: 700; text-decoration: none; }
+.bible-audio__error { color: var(--p-danger); }
+.bible.is-night .bible-audio { background: #1a2620; border-color: #2f4239; }
+.bible.is-night .bible-audio__label { color: #e8ece9; }
+
+/* أصحاحات الأسفار القانونية الثانية: روابط لموقع القديس تكلا */
+.bible-chapters { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; font-family: inherit; }
+.bible-chapters a {
+    display: grid;
+    min-width: 2.8rem;
+    height: 2.8rem;
+    place-items: center;
+    color: var(--p-emerald);
+    font-size: 1rem;
+    font-weight: 800;
+    text-decoration: none;
+    background: var(--p-surface);
+    border: 1px solid #b9cbc3;
+    border-radius: 12px;
+}
+.bible-chapters a:hover, .bible-chapters a:focus-visible { color: #fff; background: var(--p-emerald); }
+.bible.is-night .bible-chapters a { color: #e8ece9; background: #121d19; border-color: #2f4239; }
+.bible-steps[hidden] { display: none; }
+.portal-choice--wrap { grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); }
+
+/* الصلوات والقراءات */
+.portal-action--now { margin-bottom: .7rem; background: var(--p-gold-soft); border-color: #ecd9a8; }
+.portal-hours { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .5rem; }
+.portal-hours a { display: grid; gap: .1rem; padding: .65rem .75rem; color: var(--p-emerald); text-decoration: none; background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 12px; }
+.portal-hours small { color: var(--p-muted); }

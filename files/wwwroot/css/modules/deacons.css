@@ -1,0 +1,66 @@
+/* خدمة الشماسية */
+
+.deacons__icon { background: linear-gradient(135deg, #b7791f, #e3a63a); }
+
+.deacons__filters { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+.deacons__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .8rem;
+    color: var(--ui-text, #172036);
+    font-size: .88rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: var(--ui-surface, #fff);
+    border: 1px solid var(--ui-border, #e6eaf2);
+    border-radius: 999px;
+}
+.deacons__chip b { color: var(--ui-text-muted, #6b7690); font-weight: 800; }
+.deacons__chip.is-active { color: #fff; background: #b7791f; border-color: #b7791f; }
+.deacons__chip.is-active b { color: #fff; }
+
+.deacons__filter { display: flex; flex-wrap: wrap; gap: .6rem; padding: .8rem; }
+.deacons__filter select { flex: 1 1 11rem; }
+
+.deacons__form, .deacons__group { padding: 1.1rem; margin-bottom: 1rem; }
+.deacons__group h2 { display: flex; align-items: center; gap: .5rem; margin: 0 0 .8rem; font-size: 1.05rem; }
+.deacons__group h2 b { padding: .05rem .55rem; color: #fff; font-size: .8rem; background: #b7791f; border-radius: 999px; }
+
+.deacons__picks { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .9rem; }
+.deacons__picks label { position: relative; }
+.deacons__picks input { position: absolute; opacity: 0; }
+.deacons__picks span {
+    display: inline-block;
+    padding: .45rem .9rem;
+    font-weight: 700;
+    background: var(--ui-surface, #fff);
+    border: 1px solid var(--ui-border, #d9e0ec);
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+.deacons__picks input:checked + span { color: #fff; background: #0e4433; border-color: #0e4433; }
+.deacons__picks input:focus-visible + span { outline: 3px solid #f0c468; }
+
+.deacons__readings { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .8rem; }
+.deacons__readings .is-suggested { background: #fff8e6; border-color: #e3a63a; }
+
+.deacons__actions { display: flex; justify-content: flex-end; gap: .5rem; margin-top: 1rem; }
+.deacons__linked { display: block; min-height: 1.2em; color: var(--ui-success, #138a4e); font-weight: 700; }
+
+.deacons__services { display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: 1rem; }
+.deacons__service { padding: 1rem; }
+.deacons__service header { display: flex; justify-content: space-between; gap: .6rem; margin-bottom: .6rem; }
+.deacons__service header > div { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .6rem; }
+.deacons__service header strong { font-size: 1.05rem; }
+.deacons__tools { display: inline-flex; gap: .2rem; align-items: flex-start; }
+.deacons__tools form { margin: 0; }
+.deacons__roles { display: grid; grid-template-columns: 9rem 1fr; gap: .3rem .6rem; margin: 0; font-size: .92rem; }
+.deacons__roles dt { color: var(--ui-text-muted, #6b7690); }
+.deacons__roles dd { margin: 0; font-weight: 700; }
+
+@media (max-width: 575.98px) {
+    .deacons__services { grid-template-columns: 1fr; }
+    .deacons__roles { grid-template-columns: 7rem 1fr; }
+}

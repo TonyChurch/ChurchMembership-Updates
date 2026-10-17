@@ -1,0 +1,615 @@
+/* ملف العضو — يعتمد على theme.css */
+
+/* ---------- بطاقة العضو ---------- */
+
+/* عمودان لا يتداخلان. اليمين: الاسم والحالة، وتحتهما البيانات (تلتف في سطرين داخل عمودها).
+   اليسار: أزرار الإجراءات، وتحتها بطاقة الخدمة بعرض العمود. عمود اليمين له حد أدنى يكفي الاسم في سطر واحد،
+   وعمود اليسار يأخذ حاجته فقط، فلا يضغط أحدهما الآخر. */
+.profile-hero {
+    display: grid;
+    grid-template-columns: auto minmax(22rem, 1fr) minmax(0, max-content);
+    grid-template-areas:
+        "avatar name actions"
+        "avatar chips serve";
+    align-items: center;
+    gap: .7rem 1.5rem;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(155, 107, 255, .12), transparent 45%),
+        radial-gradient(circle at 100% 100%, rgba(255, 200, 97, .16), transparent 40%),
+        var(--ui-surface);
+}
+
+.profile-hero__avatar {
+    grid-area: avatar;
+    align-self: start;
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    color: #fff;
+    background: var(--ui-gradient-primary);
+    border-radius: 22px;
+    box-shadow: 0 10px 22px rgba(59, 91, 253, .3);
+    font-size: 1.9rem;
+    font-weight: 800;
+}
+
+.profile-hero--female .profile-hero__avatar {
+    background: linear-gradient(135deg, #ff4f8b, #ff85a8);
+    box-shadow: 0 10px 22px rgba(255, 79, 139, .3);
+}
+
+/* الاسم والبيانات عنصران مستقلان في شبكة الرأس */
+.profile-hero__main {
+    display: contents;
+}
+
+.profile-hero__name {
+    grid-area: name;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .75rem;
+}
+
+.profile-hero__name h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.profile-hero__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    grid-area: chips;
+    margin: 0;
+    align-self: start;
+    padding: 0;
+    list-style: none;
+}
+
+.profile-hero__chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .18rem .65rem;
+    color: var(--ui-primary-strong);
+    background: var(--ui-primary-soft);
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.profile-hero__chips .is-violet { color: #5b3fd0; background: var(--ui-violet-soft); }
+.profile-hero__chips .is-gold,
+.profile-hero__chips .is-accent { color: #a4610a; background: var(--ui-accent-soft); }
+.profile-hero__chips .is-danger { color: #b3203d; background: var(--ui-danger-soft); }
+.profile-hero__chips .is-slate { color: #475569; background: var(--ui-slate-soft); }
+.profile-hero__chips .is-primary { color: var(--ui-primary-strong); background: var(--ui-primary-soft); }
+
+.profile-hero__actions {
+    grid-area: actions;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .5rem;
+}
+
+/* «تعديل» و«حذف» يبدآن مع بداية بطاقة الخدمة، وباقي الإجراءات في آخر العمود جهة اليسار */
+.profile-hero__actions .ui-icon-actions {
+    margin-inline-start: auto;
+}
+
+.profile-hero__actions .ui-btn {
+    padding: .45rem .95rem;
+}
+
+.profile-hero__whatsapp { color: #1a9e55; }
+.profile-hero__whatsapp:hover { color: #fff; background: #25d366; }
+
+@media (max-width: 991.98px) {
+    .profile-hero {
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas:
+            "avatar name"
+            "chips chips"
+            "actions actions"
+            "serve serve";
+    }
+
+    .profile-hero__avatar {
+        align-self: center;
+    }
+
+    .profile-hero__actions {
+        justify-content: flex-start;
+    }
+}
+
+/* ---------- بطاقات الرعاية الثلاث ---------- */
+
+.profile-care {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--ui-gap);
+}
+
+.profile-care__card {
+    --care-color: var(--ui-primary);
+    --care-soft: rgba(59, 91, 253, .07);
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: .55rem;
+    padding: 1rem 1.1rem;
+    background: linear-gradient(180deg, var(--care-soft), var(--ui-surface) 70%);
+    border: 1px solid var(--ui-border);
+    border-top: 3px solid var(--care-color);
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow-sm);
+}
+
+.profile-care__card--confession { --care-color: #f5a524; --care-soft: rgba(245, 165, 36, .11); }
+.profile-care__card--communion { --care-color: #8b5cf6; --care-soft: rgba(139, 92, 246, .09); }
+
+.profile-care__card header {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.profile-care__card header i {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    color: var(--care-color);
+    font-size: 1rem;
+}
+
+.profile-care__card header .icon-chalice {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-inline: .35rem;
+}
+
+.profile-care__card h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.profile-care__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+    margin-top: .2rem;
+}
+
+.profile-care__tools form {
+    margin: 0;
+}
+
+.profile-care__tools .ui-btn {
+    padding: .4rem .85rem;
+    font-size: .85rem;
+}
+
+.profile-care__schedule {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+}
+
+.profile-care__schedule .form-control {
+    width: 10.5rem;
+    min-height: 2.1rem;
+    padding-block: .2rem;
+    background: var(--ui-surface);
+    border-color: var(--ui-border);
+    border-radius: 10px;
+    font-size: .85rem;
+}
+
+.profile-care__schedule {
+    flex-wrap: wrap;
+}
+
+.profile-care__schedule .profile-care__time {
+    width: 7.5rem;
+}
+
+.profile-care__note {
+    color: var(--ui-text-muted);
+    font-size: .78rem;
+}
+
+/* ---------- العمودان ---------- */
+
+.profile-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    align-items: start;
+    gap: var(--ui-gap);
+}
+
+.profile-columns__main,
+.profile-columns__side {
+    display: grid;
+    gap: var(--ui-gap);
+    min-width: 0;
+}
+
+@media (max-width: 1199.98px) {
+    .profile-columns {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.profile-facts__wide {
+    grid-column: 1 / -1;
+}
+
+.profile-facts--single {
+    grid-template-columns: 1fr;
+}
+
+.profile-muted {
+    margin: 0;
+    color: var(--ui-text-muted);
+    font-size: .85rem;
+}
+
+/* ---------- الأسرة ---------- */
+
+.profile-family__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    margin-bottom: .75rem;
+    padding: .6rem .8rem;
+    color: #8a5a00;
+    text-decoration: none;
+    background: var(--ui-accent-soft);
+    border-radius: 12px;
+}
+
+.profile-family__link span {
+    display: grid;
+}
+
+.profile-family__link small {
+    color: var(--ui-text-muted);
+}
+
+.profile-family__link:hover {
+    background: #ffe9b8;
+}
+
+.profile-family {
+    display: grid;
+    gap: .35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.profile-family .ui-person {
+    padding: .4rem .5rem;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 12px;
+}
+
+.profile-family .ui-person:hover {
+    background: var(--ui-bg);
+}
+
+.profile-family .ui-avatar {
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: .85rem;
+}
+
+/* ---------- الخدمة ---------- */
+
+.profile-service {
+    display: grid;
+    gap: .4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.profile-service li {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .45rem .6rem;
+    background: var(--ui-bg);
+    border-radius: 12px;
+}
+
+.profile-service li.is-past {
+    opacity: .6;
+}
+
+.profile-service li > span:last-child {
+    display: grid;
+}
+
+.profile-service small {
+    color: var(--ui-text-muted);
+}
+
+.profile-service__year {
+    padding: .15rem .5rem;
+    color: #fff;
+    background: var(--ui-violet);
+    border-radius: 8px;
+    font-size: .75rem;
+    font-weight: 800;
+}
+
+/* ---------- سجل الافتقاد ---------- */
+
+.profile-timeline {
+    position: relative;
+    display: grid;
+    gap: .9rem;
+    margin: 0;
+    padding: 0 1.4rem 0 0;
+    list-style: none;
+}
+
+.profile-timeline::before {
+    content: "";
+    position: absolute;
+    inset-block: .4rem;
+    inset-inline-start: .35rem;
+    width: 2px;
+    background: #dfe4f7;
+}
+
+.profile-timeline li {
+    position: relative;
+}
+
+.profile-timeline__dot {
+    position: absolute;
+    top: .35rem;
+    inset-inline-start: -1.4rem;
+    width: .85rem;
+    height: .85rem;
+    background: var(--ui-primary);
+    border: 3px solid var(--ui-primary-soft);
+    border-radius: 50%;
+}
+
+.profile-timeline__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .3rem .6rem;
+}
+
+.profile-timeline__head small {
+    color: var(--ui-text-muted);
+}
+
+.profile-timeline__body {
+    margin-top: .25rem;
+    color: var(--ui-text-muted);
+    font-size: .88rem;
+}
+
+.profile-timeline__body p {
+    margin: .3rem 0 0;
+    padding: .5rem .7rem;
+    color: var(--ui-text);
+    background: var(--ui-bg);
+    border-radius: 10px;
+    white-space: pre-line;
+}
+
+/* ---------- نافذة تسجيل الافتقاد ---------- */
+
+.profile-visit-modal .modal-title {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    font-weight: 800;
+}
+
+.profile-visit-modal .modal-footer {
+    justify-content: flex-start;
+    gap: .5rem;
+}
+
+/* ---------- الطباعة ---------- */
+
+@media print {
+    .no-print,
+    .app-shell__sidebar,
+    .topbar,
+    .app-footer,
+    .ui-flash,
+    .modal {
+        display: none !important;
+    }
+
+    .profile-columns {
+        grid-template-columns: 1fr;
+    }
+}
+/* ---------- تعديل العضو ---------- */
+
+.member-edit__avatar {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 16px;
+    font-size: 1.35rem;
+}
+
+.member-edit__avatar.is-female {
+    background: linear-gradient(135deg, #ff4f8b, #ff85a8);
+}
+
+.member-edit__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+
+.member-edit__flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-bottom: 1rem;
+}
+/* ---------- دعوة لتسجيل الخدمة ---------- */
+
+.profile-assign {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .85rem 1rem;
+    color: var(--ui-text);
+    text-decoration: none;
+    background: linear-gradient(135deg, #fff8ec, #f5efff);
+    border: 1px dashed #e0c78f;
+    border-radius: var(--ui-radius);
+}
+
+.profile-assign:hover {
+    color: var(--ui-text);
+    border-style: solid;
+}
+
+.profile-assign > i {
+    display: grid;
+    place-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    color: #fff;
+    background: linear-gradient(135deg, #e6a200, #ffc93c);
+    border-radius: 12px;
+}
+
+.profile-assign span {
+    display: grid;
+}
+
+.profile-assign small {
+    color: var(--ui-text-muted);
+    font-size: .76rem;
+}
+
+.ui-facts dd a {
+    color: var(--ui-primary-strong);
+    text-decoration: none;
+}
+/* ---------- بطاقة الخدمة: سطر مستقل أسفل رأس الملف، جهة اليسار تحت أزرار الإجراءات ----------
+   عنصر شبكة مستقل (لا داخل عمود الأزرار) حتى لا يوسّع العمود ويضغط الاسم والبيانات. */
+
+.profile-serve {
+    display: flex;
+    grid-area: serve;
+    align-self: start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .5rem;
+    padding: .55rem .7rem;
+    border-radius: var(--ui-radius-sm);
+    background: linear-gradient(135deg, #6d3fd8 0%, #8b5cf6 55%, #3b5bfd 100%);
+    box-shadow: 0 8px 18px rgba(109, 63, 216, .22);
+    color: #fff;
+}
+
+.profile-serve__title {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-inline-end: .2rem;
+    font-size: .88rem;
+    font-weight: 800;
+}
+
+.profile-serve__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .3rem .7rem;
+    border: 1px solid rgba(255, 255, 255, .45);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .95);
+    color: #4c2bb3;
+    font-size: .8rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform var(--ui-transition), box-shadow var(--ui-transition);
+}
+
+.profile-serve__btn:hover {
+    color: #4c2bb3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(23, 32, 54, .18);
+}
+
+.profile-serve__btn--plain {
+    margin-inline-start: auto;
+    background: transparent;
+    color: #fff;
+}
+
+.profile-serve__btn--plain:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, .15);
+}
+
+/* زر إخوة الرب: سطر كامل تحت «تعديل» و«ملف الأسرة» */
+.profile-hero__brothers {
+    flex-basis: 100%;
+}
+
+.profile-hero__brothers form {
+    margin: 0;
+}
+
+.profile-hero__brothers .person-brothers {
+    margin-top: 0;
+    padding: .32rem .8rem;
+    font-size: .84rem;
+}
+
+/* الأسرار في ملف العضو */
+.profile-sacraments { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.profile-sacraments li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem .8rem;
+    padding: .55rem .75rem;
+    background: var(--ui-violet-soft, #f3efff);
+    border-radius: 12px;
+}
+.profile-sacraments strong { color: var(--ui-violet, #6d4bd8); }
+.profile-sacraments small { flex-basis: 100%; color: var(--ui-text-muted, #6b7690); }
+.profile-sacraments a { margin-inline-start: auto; font-size: .85rem; text-decoration: none; }
+
+/* السجل الموحد */
+.profile-unified__list { display: grid; gap: .35rem; margin: 0; padding: 0; list-style: none; max-height: 26rem; overflow-y: auto; }
+.profile-unified__item { display: flex; align-items: center; gap: .7rem; padding: .45rem .6rem; border-radius: 10px; background: var(--ui-slate-soft, #f6f8fb); }
+.profile-unified__item > i { display: grid; flex: 0 0 2rem; height: 2rem; place-items: center; color: #fff; border-radius: 8px; background: var(--ui-slate, #64748b); }
+.profile-unified__item span { display: flex; flex: 1; min-width: 0; flex-direction: column; }
+.profile-unified__item small { color: var(--ui-text-muted, #6b7690); }
+.profile-unified__item time { flex: none; color: var(--ui-text-muted, #6b7690); font-size: .82rem; }
+.profile-unified__item--green > i { background: var(--ui-success, #138a4e); }
+.profile-unified__item--primary > i { background: var(--ui-primary, #3b5bfd); }
+.profile-unified__item--danger > i { background: var(--ui-danger, #d93636); }
+.profile-unified__item--gold > i { background: #b7791f; }
+.profile-unified__item--violet > i { background: var(--ui-violet, #6d4bd8); }

@@ -1,0 +1,61 @@
+/* تقرير أعياد الميلاد — يعتمد على مكونات theme.css */
+
+.birthdays-report__icon {
+    background: linear-gradient(135deg, #ff4f8b, #ff9a5a);
+    box-shadow: 0 8px 18px rgba(255, 79, 139, .3);
+}
+
+.birthdays-report__ranges {
+    padding: 0 .75rem;
+    border-bottom: 0;
+}
+
+.birthdays-report__today td {
+    background: #fff5f8;
+}
+
+@media print {
+    .no-print,
+    .app-shell__sidebar,
+    .topbar,
+    .app-footer,
+    .right-sidebar-offcanvas {
+        display: none !important;
+    }
+
+    body,
+    .app-shell {
+        background: #fff !important;
+    }
+
+    .app-main {
+        padding: 0 !important;
+    }
+
+    .birthdays-report .ui-card {
+        border: 0;
+        box-shadow: none;
+    }
+
+    .birthdays-report .ui-table-card__header {
+        padding-inline: 0;
+    }
+
+    .birthdays-report .ui-table th,
+    .birthdays-report .ui-table td {
+        padding: .45rem .5rem;
+        font-size: .85rem;
+    }
+
+    .birthdays-report .ui-person__text a {
+        color: #000;
+    }
+
+    .birthdays-report .table-responsive {
+        overflow: visible;
+    }
+
+    .birthdays-report tr {
+        break-inside: avoid;
+    }
+}
