@@ -553,3 +553,32 @@
 .servants-index .servants-bar-actions .servants-title__all {
     margin-inline-start: auto;
 }
+
+/* ---------- الخدام المكررون ---------- */
+.servants-dup-alert { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin: 0 0 .8rem; padding: .6rem .9rem; color: #8a2a12; background: #fff1ea; border: 1px solid #f6c7b0; border-inline-start: 5px solid #e2622d; border-radius: 12px; font-weight: 700; }
+.servants-dup-alert i { font-size: 1.2rem; }
+.servants-dup-alert .ui-btn { margin-inline-start: auto; min-height: 2rem; padding: .15rem .8rem; font-size: .85rem; }
+.servants-dup-badge { display: inline-flex; align-items: center; gap: .2rem; margin-inline-start: .35rem; padding: 0 .5rem; color: #fff; background: #e2622d; border-radius: 999px; font-size: .72rem; font-weight: 800; text-decoration: none; vertical-align: middle; }
+.servants-dup-badge:hover { color: #fff; background: #c4481a; }
+.servant-dups__icon { background: linear-gradient(135deg, #e2622d, #f6a04d); }
+.servant-dups__empty { padding: 1.2rem; color: #0f6b3d; font-weight: 700; }
+.servant-dups__hint { margin: 0 0 .8rem; color: #5b6478; font-size: .9rem; }
+.servant-dups__pair { padding: .8rem; margin-bottom: .8rem; }
+.servant-dups__people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+.servant-dups__person { position: relative; display: grid; gap: .35rem; margin: 0; padding: .7rem .8rem; border: 2px solid #f6c7b0; border-radius: 12px; background: #fff8f4; cursor: pointer; }
+.servant-dups__person:has(input:checked) { border-color: #23a26d; background: #effaf4; }
+.servant-dups__person input { position: absolute; inset-inline-end: .7rem; top: .8rem; width: 1.1rem; height: 1.1rem; }
+.servant-dups__person strong { font-size: 1.05rem; padding-inline-end: 4.5rem; }
+.servant-dups__tag { position: absolute; inset-inline-end: 2.2rem; top: .7rem; padding: 0 .5rem; border-radius: 999px; font-size: .74rem; font-weight: 800; }
+.servant-dups__tag--keep { display: none; color: #fff; background: #23a26d; }
+.servant-dups__tag--drop { color: #fff; background: #e2622d; }
+.servant-dups__person:has(input:checked) .servant-dups__tag--keep { display: inline; }
+.servant-dups__person:has(input:checked) .servant-dups__tag--drop { display: none; }
+.servant-dups__person dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .15rem .7rem; margin: 0; font-size: .86rem; }
+.servant-dups__person dt { color: #5b6478; font-weight: 600; }
+.servant-dups__person dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.servant-dups__open { justify-self: start; font-size: .82rem; }
+.servant-dups__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: .7rem; }
+.servant-dups__actions .ui-status { margin-inline-end: auto; }
+@media (max-width: 767.98px) { .servant-dups__people { grid-template-columns: 1fr; } }
+.servant-dups__note { flex-basis: 100%; color: #8a5a08; font-size: .85rem; font-weight: 700; }
