@@ -504,3 +504,45 @@
 @media (max-width: 767.98px) {
     .servant-attendance .sa-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* ---------- سطر واحد: التنقل يمينًا، والاجتماع وتسجيل الحضور والتصدير في باقي السطر ---------- */
+
+.sa-navbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem .8rem;
+    margin-bottom: .8rem;
+}
+
+.servant-attendance .sa-navbar > .sa-section-nav { margin: 0; }
+
+.sa-navbar__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+    margin-inline-start: auto;
+}
+
+.sa-navbar__tools .sa-stage,
+.sa-navbar__tools .sa-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin: 0;
+}
+
+.sa-navbar__tools .sa-stage .form-select {
+    width: auto;
+    min-width: 9rem;
+    min-height: 2rem;
+    padding-block: .1rem;
+    font-size: .85rem;
+}
+
+.sa-navbar__tools .ui-btn {
+    min-height: 2rem;
+    padding: .2rem .8rem;
+    font-size: .85rem;
+}
