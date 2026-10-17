@@ -473,3 +473,43 @@
 .ua-online {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
+
+/* الأكثر حضورًا: قائمة مضغوطة ملونة بدل البطاقات الكبيرة */
+.sr-top { padding: .7rem .9rem; margin: 0 0 1rem; }
+.sr-top__head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .55rem; }
+.sr-top__head h2 { margin: 0; font-size: 1rem; font-weight: 800; }
+.sr-top__head h2 i { color: #d99a06; }
+.sr-top__head .sa-chip { margin-inline-start: auto; }
+.sr-top__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
+    gap: .3rem .45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sr-top__item {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    min-width: 0;
+    padding: .2rem .5rem .2rem .3rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: .85rem;
+}
+.sr-top__item .sr-rank { min-width: 1.45rem; height: 1.45rem; font-size: .72rem; flex: none; }
+.sr-top__item a { flex: 1; min-width: 0; overflow: hidden; color: inherit; font-weight: 700; text-decoration: none; text-overflow: ellipsis; white-space: nowrap; }
+.sr-top__item a:hover { text-decoration: underline; }
+.sr-top__item .sa-pct { flex: none; font-size: .78rem; }
+.sr-top__item--1 { background: #fff6dc; border-color: #f6dd92; }
+.sr-top__item--2 { background: #f1f4f8; border-color: #dde3ec; }
+.sr-top__item--3 { background: #fcefe4; border-color: #f0d2b8; }
+.sr-top__item--4 { background: var(--ui-surface); border-color: var(--ui-border); }
+.sr-top__item.is-extra { display: none; }
+.sr-top.is-open .sr-top__item.is-extra { display: flex; }
+
+@media print {
+    .sr-top__item.is-extra { display: flex; }
+    .sr-top__list { grid-template-columns: repeat(4, 1fr); }
+}
