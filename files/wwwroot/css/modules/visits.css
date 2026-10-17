@@ -1,0 +1,27 @@
+/* الافتقاد */
+.visits__icon { background: linear-gradient(135deg, #138a4e, #3ddc97); }
+.visits__filter { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; padding: .55rem .7rem; margin-bottom: 1rem; }
+.visits__filter input[type="search"] { flex: 1 1 14rem; }
+.visits__filter .form-select { flex: 0 1 12rem; }
+.visits__filter .form-control, .visits__filter .form-select, .visits__filter .ui-btn { min-height: 2.2rem; padding-block: .2rem; font-size: .88rem; }
+.visits__tools { display: inline-flex; flex-wrap: wrap; gap: .25rem; }
+.visits__tools .ui-btn { min-height: 2rem; padding: .15rem .6rem; font-size: .82rem; }
+.visits__pager { display: flex; justify-content: center; align-items: center; gap: .8rem; margin-top: 1rem; }
+.visits__followups { padding: 1rem; margin-bottom: 1rem; }
+.visits__followups h2 { margin: 0 0 .6rem; font-size: 1rem; color: #b86e00; }
+.visits__followups ul { display: grid; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.visits__followups li { display: flex; flex-wrap: wrap; gap: .3rem .9rem; padding: .4rem .6rem; background: #fff8e6; border-radius: 10px; }
+.visits__followups li.is-late { background: #fde8e8; }
+.visits__period { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; padding: .55rem .7rem; margin-bottom: 1rem; }
+.visits__period > a:not(.ui-btn) { padding: .25rem .8rem; color: var(--ui-text, #172036); font-weight: 700; text-decoration: none; border-radius: 999px; background: var(--ui-slate-soft, #f1f4f9); }
+.visits__period > a.is-active { color: #fff; background: #138a4e; }
+.visits__log { display: grid; grid-template-columns: 16rem minmax(0, 1fr); gap: 1rem; align-items: start; }
+.visits__servants { padding: 1rem; }
+.visits__servants h2 { margin: 0 0 .6rem; font-size: 1rem; }
+.visits__servants ol { display: grid; gap: .3rem; margin: 0; padding: 0; list-style: none; }
+.visits__servants li { display: flex; justify-content: space-between; padding: .3rem .5rem; border-radius: 8px; background: var(--ui-slate-soft, #f6f8fb); }
+.visits__servants li b { color: #138a4e; }
+.visits__note { max-width: 22rem; white-space: normal; }
+.visits__modal { display: grid; gap: .6rem; }
+.visits__modal .form-label { display: grid; gap: .25rem; margin: 0; }
+@media (max-width: 991.98px) { .visits__log { grid-template-columns: 1fr; } }
