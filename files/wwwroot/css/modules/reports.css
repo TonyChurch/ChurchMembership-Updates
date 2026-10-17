@@ -1,0 +1,39 @@
+/* تقرير الكنيسة */
+.reports__icon { background: linear-gradient(135deg, #3b5bfd, #7c4dff); }
+
+.reports__period { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; padding: .6rem .8rem; margin-bottom: 1rem; }
+.reports__kinds { display: inline-flex; padding: .2rem; background: var(--ui-slate-soft, #f1f4f9); border-radius: 999px; }
+.reports__kinds a { padding: .3rem .9rem; color: var(--ui-text, #172036); font-weight: 700; text-decoration: none; border-radius: 999px; }
+.reports__kinds a.is-active { color: #fff; background: var(--ui-primary, #3b5bfd); }
+.reports__label { font-size: 1rem; }
+.reports__custom { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin-inline-start: auto; }
+.reports__custom label { display: inline-flex; align-items: center; gap: .3rem; font-size: .85rem; }
+.reports__custom .form-control { min-height: 2rem; padding-block: .15rem; }
+
+.reports__print-head { display: none; }
+
+.reports__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: 1rem; align-items: start; }
+.reports__section { padding: 1rem 1.1rem; border-top: 4px solid var(--tone, #3b5bfd); }
+.reports__section h2 { display: flex; align-items: center; gap: .5rem; margin: 0 0 .7rem; font-size: 1.05rem; color: var(--tone, #3b5bfd); }
+.reports__section--primary { --tone: #3b5bfd; }
+.reports__section--green { --tone: #138a4e; }
+.reports__section--violet { --tone: #6d4bd8; }
+.reports__section--gold { --tone: #b7791f; }
+.reports__section--pink { --tone: #d63384; }
+.reports__section--slate { --tone: #475569; }
+.reports__section dl { display: grid; gap: .35rem; margin: 0; }
+.reports__section dl > div { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; padding: .35rem 0; border-bottom: 1px dashed var(--ui-border, #e6eaf2); }
+.reports__section dt { font-weight: 600; color: var(--ui-text, #172036); }
+.reports__section dd { margin: 0; text-align: start; }
+.reports__section dd b { font-size: 1.1rem; color: var(--tone, #3b5bfd); }
+.reports__section dd small { display: block; color: var(--ui-text-muted, #6b7690); font-size: .78rem; }
+.reports__table { width: 100%; margin-top: .8rem; border-collapse: collapse; font-size: .85rem; }
+.reports__table th, .reports__table td { padding: .3rem .4rem; text-align: center; border-bottom: 1px solid var(--ui-border, #e6eaf2); }
+.reports__table th { color: var(--ui-text-muted, #6b7690); font-weight: 700; }
+.reports__table td:first-child, .reports__table th:first-child { text-align: start; }
+
+@media print {
+    .reports__print-head { display: block; font-weight: 700; margin-bottom: .5rem; }
+    .reports__grid { grid-template-columns: 1fr 1fr; gap: .5rem; }
+    .reports__section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; border-top: 3px solid var(--tone); padding: .5rem .7rem; }
+}

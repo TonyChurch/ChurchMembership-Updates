@@ -338,3 +338,66 @@
 .servants-index .servants-filter__more {
     padding-top: .3rem;
 }
+
+/* ---------- الإحصائيات: سطران × 3 بطاقات تحت العنوان، كل بطاقة أفقية واضحة ---------- */
+
+.servants-index .members-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.servants-index .servants-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .5rem;
+    margin: .2rem 0 .7rem;
+}
+
+.servants-index .servants-stats .ui-chip-stat {
+    grid-template-columns: auto auto minmax(0, 1fr);
+    grid-template-rows: auto;
+    column-gap: .6rem;
+    min-width: 0;
+    min-height: 2.9rem;
+    padding: .4rem .8rem;
+}
+
+.servants-index .servants-stats .ui-chip-stat i {
+    grid-row: auto;
+    width: 2rem;
+    height: 2rem;
+}
+
+.servants-index .servants-stats .ui-chip-stat strong {
+    font-size: 1.3rem;
+}
+
+.servants-index .servants-stats .ui-chip-stat span {
+    overflow: hidden;
+    font-size: .88rem;
+    font-weight: 700;
+    opacity: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.servants-index .servants-stats .servants-year,
+.servants-index .servants-stats .servants-year__form {
+    min-width: 0;
+    width: 100%;
+}
+
+.servants-index .servants-stats .servants-year__form {
+    justify-content: space-between;
+    min-height: 2.9rem;
+    padding-inline: .8rem .4rem;
+}
+
+.servants-index .servants-stats .servants-year__form label {
+    font-size: .88rem;
+}
+
+@media (max-width: 767.98px) {
+    .servants-index .servants-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
