@@ -716,3 +716,17 @@ a.roster-del__btn {
 /* قبل اختيار المرحلة: القائمة باهتة وتنبيه باختيار المرحلة أولًا */
 .ui-section.is-waiting .servant-picker { opacity: .55; }
 .ui-section.is-waiting [data-picker-hint]::before { content: "اختر المرحلة أولًا من الخطوة ١، ثم "; color: var(--ui-danger, #b3203d); font-weight: 700; }
+
+/* ترتيب وتوزيع الخدام: كل خادم صف فيه الاسم، ثم الدور و«نقل من …» عند تعليمه */
+.servant-picker__list { grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); max-height: 30rem; }
+.servant-picker__item { display: grid; gap: .35rem; cursor: default; }
+.servant-picker__main { display: flex; align-items: center; gap: .5rem; margin: 0; cursor: pointer; }
+.servant-picker__main .servant-picker__text { flex: 1; }
+.servant-picker__controls { display: flex; flex-wrap: wrap; gap: .3rem; }
+.servant-picker__controls[hidden] { display: none; }
+.servant-picker__controls .form-select { flex: 1 1 8rem; min-height: 1.9rem; padding-block: .1rem; font-size: .8rem; }
+.servant-picker__controls .form-select[hidden] { display: none; }
+.servant-picker__item.is-assigned { opacity: 1; background: #ecfdf3; border-color: #9fdcb8; }
+.servant-picker__item.is-removing { background: #fdecec; border-color: #f2a5a5; }
+.servant-picker__waiting { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0; padding: .5rem .7rem; color: #8a5300; background: #fff8e6; border-bottom: 1px solid #f3e2b3; }
+.servant-picker__waiting[hidden] { display: none; }
