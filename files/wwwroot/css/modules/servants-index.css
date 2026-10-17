@@ -401,3 +401,55 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* ---------- الإحصائيات بين اسم الصفحة و«رجوع» في نفس الصف ---------- */
+
+.servants-index .members-header {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.servants-index .members-header .servants-stats {
+    margin: 0;
+}
+
+.servants-index .servants-stats .ui-chip-stat {
+    min-height: 2.6rem;
+    padding: .3rem .65rem;
+}
+
+.servants-index .servants-stats .ui-chip-stat strong {
+    font-size: 1.15rem;
+}
+
+.servants-index .servants-stats .ui-chip-stat span {
+    font-size: .82rem;
+}
+
+/* سنة الخدمة وتحتها الشهر الحالي وترتيبه في السنة */
+.servants-index .servants-stats .servants-year__form {
+    flex-wrap: wrap;
+    row-gap: 0;
+    min-height: 2.6rem;
+    padding-block: .15rem;
+}
+
+.servants-year__month {
+    flex-basis: 100%;
+    color: #6b5bd0;
+    font-size: .72rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+@media (max-width: 1279.98px) {
+    .servants-index .members-header {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .servants-index .members-header .servants-stats {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+}
