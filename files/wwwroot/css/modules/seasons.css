@@ -1,0 +1,47 @@
+/* الأعياد والأصوام */
+.seasons__icon { background: linear-gradient(135deg, #7a3db8, #e0a526); }
+.seasons .ui-page-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: .8rem; }
+.seasons__years { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.seasons__years b { min-width: 3.5rem; text-align: center; font-size: 1.25rem; }
+.seasons__years .ui-btn { min-height: 2.1rem; padding: .15rem .75rem; font-size: .85rem; }
+
+.seasons__today { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .7rem; margin-bottom: 1rem; }
+.seasons__state { display: grid; gap: .25rem; padding: .8rem 1rem; border-inline-start: 5px solid #138a4e; background: #effaf4; }
+.seasons__state span { color: #5b6478; font-size: .82rem; }
+.seasons__state b { font-size: 1.1rem; color: #0f6b3d; }
+.seasons__state small { color: #7a3db8; font-weight: 700; }
+.seasons__state.is-fast { border-color: #7a3db8; background: #f5effc; }
+.seasons__state.is-fast b { color: #5b2a91; }
+.seasons__state.is-feast { border-color: #e0a526; background: #fff8e6; }
+.seasons__state.is-feast b { color: #a0700b; }
+
+.seasons__next { display: flex; align-items: center; gap: .65rem; padding: .7rem .9rem; }
+.seasons__next > i { font-size: 1.5rem; color: #e0a526; }
+.seasons__next--fast > i { color: #7a3db8; }
+.seasons__next span { display: grid; flex: 1; line-height: 1.45; }
+.seasons__next small { color: #5b6478; }
+.seasons__next em { padding: .1rem .6rem; font-style: normal; font-size: .78rem; font-weight: 700; color: #5c3b00; background: #fdeec7; border-radius: 999px; white-space: nowrap; }
+
+.seasons__table { padding: 1rem; }
+.seasons__table h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem 1rem; margin: 0 0 .7rem; font-size: 1.1rem; }
+.seasons__table h2 small { color: #a0700b; font-size: .85rem; }
+.seasons__month th { padding-top: .9rem; color: #5b2a91; background: transparent !important; font-size: .9rem; border-bottom: 2px solid #e7dcf5; }
+.seasons__row td { vertical-align: middle; }
+.seasons__row i { color: #e0a526; }
+.seasons__row--fast i { color: #7a3db8; }
+.seasons__row--feast b { color: #a0700b; }
+.seasons__row.is-past { opacity: .55; }
+.seasons__row.is-now td { background: #fff8e6; }
+.seasons__kind, .seasons__movable, .seasons__now { display: inline-block; margin-inline-start: .3rem; padding: 0 .45rem; font-size: .72rem; border-radius: 999px; }
+.seasons__kind { color: #5b6478; background: #f1f4f9; }
+.seasons__row--fast .seasons__kind { color: #5b2a91; background: #f5effc; }
+.seasons__row--feast .seasons__kind { color: #a0700b; background: #fff3d6; }
+.seasons__movable { color: #0b5ed7; background: #e7f0ff; }
+.seasons__now { color: #fff; background: #138a4e; }
+.seasons__note { color: #5b6478; font-size: .85rem; }
+.seasons__hint { margin: .6rem 0 0; color: #5b6478; font-size: .88rem; }
+
+@media print {
+    .seasons__today { display: none; }
+    .seasons__row.is-past { opacity: 1; }
+}

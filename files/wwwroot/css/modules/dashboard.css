@@ -326,3 +326,13 @@ a.fp-action { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
     .dash-events__tab { transition: none; }
 }
+
+/* الأعياد والأصوام */
+.dash-seasons__now { display: grid; gap: .15rem; margin: 0 0 .5rem; padding: .55rem .8rem; border-radius: 10px; border-inline-start: 4px solid #138a4e; background: #effaf4; }
+.dash-seasons__now small { color: #5b6478; font-size: .78rem; }
+.dash-seasons__now b { color: #0f6b3d; font-size: 1rem; }
+.dash-seasons__now span { color: #7a3db8; font-size: .85rem; font-weight: 700; }
+.dash-seasons__now.is-fast { border-color: #7a3db8; background: #f5effc; }
+.dash-seasons__now.is-fast b { color: #5b2a91; }
+.dash-seasons__now.is-feast { border-color: #e0a526; background: #fff8e6; }
+.dash-seasons__now.is-feast b { color: #a0700b; }
