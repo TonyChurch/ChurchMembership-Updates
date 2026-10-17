@@ -616,3 +616,27 @@
 
 .sa-meeting-card__tools a:hover,
 .sa-meeting-card__tools button:hover { background: rgba(255, 255, 255, .35); }
+
+/* ---------- تقرير الحضور: نوع الفترة والفترة المحددة في سطر واحد ---------- */
+
+.sa-periodbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem 1rem;
+    padding: .5rem .8rem;
+    margin-bottom: .8rem;
+}
+
+.sa-periodbar .sa-period { margin: 0; }
+.sa-periodbar .sp-range { margin: 0; flex-wrap: wrap; }
+.sa-periodbar .sp-range label { margin: 0; color: var(--ui-text-muted); font-size: .82rem; font-weight: 700; white-space: nowrap; }
+.sa-periodbar .sp-range .form-control { min-height: 2rem; padding-block: .15rem; font-size: .85rem; }
+.sa-report .sa-stats__month strong { white-space: nowrap; }
+
+.sa-report__print { display: none; }
+
+@media print {
+    .sa-report__print { display: block; }
+}
