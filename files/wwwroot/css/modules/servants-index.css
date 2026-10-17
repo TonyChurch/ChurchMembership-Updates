@@ -493,3 +493,13 @@
         grid-row: auto;
     }
 }
+
+.servants-index .servants-stats .servants-year__form {
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.servants-index .servants-stats .servants-year__form .form-select {
+    flex: none;
+    padding-inline-end: 1.6rem;
+}
