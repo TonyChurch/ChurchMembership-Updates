@@ -635,11 +635,26 @@ body.sidebar-collapsed .app-shell__sidebar {
 }
 
 .app-footer {
-    border-top: 1px solid #e8edf4;
-    background: #ffffff;
-    color: #667085;
-    padding: 1rem 0;
+    margin-top: .5rem;
+    padding: .85rem 0;
+    color: #e9f7ef;
+    background: linear-gradient(90deg, #0b3d2e 0%, #11624a 50%, #0b3d2e 100%);
+    border-top: 3px solid #e0a526;
+    box-shadow: 0 -4px 14px rgba(11, 61, 46, .18);
+    font-size: .9rem;
 }
+
+.app-footer .container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem 1.2rem;
+    text-align: center;
+}
+
+.app-footer__brand { opacity: .9; }
+.app-footer__church { color: #f6d27a; font-weight: 800; }
 
 .right-sidebar,
 .right-sidebar-offcanvas {
