@@ -254,7 +254,19 @@ document.addEventListener("click", event => {
         event.preventDefault();
         history.back();
     }
-});// نوع احتياج ذوي الهمم: القائمة تملأ الخانة المحفوظة؛ «أخرى» تُظهرها للكتابة
+});
+// مفتاح Backspace = «رجوع» خطوة للخلف، إلا أثناء الكتابة في خانة أو مع نافذة مفتوحة
+document.addEventListener("keydown", event => {
+    if (event.key !== "Backspace" || event.defaultPrevented || event.ctrlKey || event.altKey || event.metaKey || event.shiftKey) return;
+    const target = event.target;
+    if (target.closest && target.closest("input, textarea, select, [contenteditable=''], [contenteditable='true']")) return;
+    if (document.querySelector(".modal.show, dialog[open]")) return;
+    event.preventDefault();
+    const back = document.querySelector("a[data-back]");
+    if (back) back.click();
+    else if (history.length > 1) history.back();
+});
+// نوع احتياج ذوي الهمم: القائمة تملأ الخانة المحفوظة؛ «أخرى» تُظهرها للكتابة
 document.addEventListener("change", event => {
     const select = event.target.closest("[data-sn-select]");
     if (!select) return;
