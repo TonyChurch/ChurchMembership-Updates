@@ -1438,3 +1438,19 @@ ul.page-stats .ui-birthdays { height: 100%; min-height: 2.6rem; flex-wrap: nowra
 @media (max-width: 767.98px) {
     ul.page-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* ---------- لوحة المفاتيح ---------- */
+/* الصف المحدد بالأسهم في الجداول */
+.app-main table tbody tr.is-kb-row > td { background: #fff4d6 !important; box-shadow: inset 0 2px 0 #e0a526, inset 0 -2px 0 #e0a526; }
+/* زر «رجوع» المضاف تلقائيًا تحت عنوان الصفحة */
+.ui-backbar--title { margin: .35rem 0 0; }
+.ui-backbar--title .ui-back { min-height: 1.9rem; padding: .15rem .7rem; font-size: .82rem; }
+/* قائمة الاختصارات */
+.kb-dialog { width: min(36rem, 92vw); padding: 1.2rem 1.4rem; border: 0; border-radius: 16px; box-shadow: 0 20px 60px rgba(15, 23, 42, .3); direction: rtl; }
+.kb-dialog::backdrop { background: rgba(15, 23, 42, .45); }
+.kb-dialog h2 { margin: 0 0 .8rem; font-size: 1.15rem; font-weight: 800; }
+.kb-dialog table { width: 100%; border-collapse: collapse; }
+.kb-dialog td { padding: .4rem .3rem; border-bottom: 1px solid #eef1f6; font-size: .9rem; vertical-align: top; }
+.kb-dialog td:first-child { width: 42%; white-space: nowrap; }
+.kb-dialog kbd { padding: .1rem .45rem; color: #1e293b; background: #f1f4f9; border: 1px solid #d5dbe6; border-radius: 6px; font-family: inherit; font-size: .82rem; box-shadow: 0 1px 0 #cbd2de; }
+.kb-dialog p { margin: .7rem 0; color: #5b6478; font-size: .84rem; }

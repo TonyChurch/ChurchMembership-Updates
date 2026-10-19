@@ -242,30 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // للأجزاء التي تُضاف لاحقًا للصفحة (مثل فرد جديد في صفحة إضافة أسرة)
     window.setupIdentityFields = scan;
 });
-// زر «رجوع»: الصفحة السابقة إن كانت من داخل البرنامج، وإلا الرابط الاحتياطي
-document.addEventListener("click", event => {
-    const link = event.target.closest("[data-back]");
-    if (!link) return;
-    const previous = document.referrer ? new URL(document.referrer) : null;
-    const cameFromApp = previous && previous.origin === location.origin;
-    // بعد حفظ نموذج (إضافة/تعديل) لا نعود للنموذج نفسه، بل للرابط الاحتياطي (مثل قائمة الأسر)
-    const cameFromForm = previous && /\/(Create|Edit|AddMembers|CreateParents|Delete)\b/i.test(previous.pathname);
-    if (cameFromApp && !cameFromForm && history.length > 1) {
-        event.preventDefault();
-        history.back();
-    }
-});
-// مفتاح Backspace = «رجوع» خطوة للخلف، إلا أثناء الكتابة في خانة أو مع نافذة مفتوحة
-document.addEventListener("keydown", event => {
-    if (event.key !== "Backspace" || event.defaultPrevented || event.ctrlKey || event.altKey || event.metaKey || event.shiftKey) return;
-    const target = event.target;
-    if (target.closest && target.closest("input, textarea, select, [contenteditable=''], [contenteditable='true']")) return;
-    if (document.querySelector(".modal.show, dialog[open]")) return;
-    event.preventDefault();
-    const back = document.querySelector("a[data-back]");
-    if (back) back.click();
-    else if (history.length > 1) history.back();
-});
+// زر «رجوع» ومفتاح Backspace واختصارات لوحة المفاتيح: في keyboard.js
 // نوع احتياج ذوي الهمم: القائمة تملأ الخانة المحفوظة؛ «أخرى» تُظهرها للكتابة
 document.addEventListener("change", event => {
     const select = event.target.closest("[data-sn-select]");

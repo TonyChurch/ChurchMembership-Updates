@@ -248,3 +248,7 @@
         display: none;
     }
 }
+.help-guide__keys-table { width: 100%; border-collapse: collapse; }
+.help-guide__keys-table td { padding: .4rem .3rem; border-bottom: 1px solid #eef1f6; font-size: .9rem; vertical-align: top; }
+.help-guide__keys-table td:first-child { width: 30%; white-space: nowrap; }
+.help-guide__keys kbd, .help-guide__hint kbd { padding: .1rem .45rem; color: #1e293b; background: #f1f4f9; border: 1px solid #d5dbe6; border-radius: 6px; font-family: inherit; font-size: .82rem; box-shadow: 0 1px 0 #cbd2de; }
