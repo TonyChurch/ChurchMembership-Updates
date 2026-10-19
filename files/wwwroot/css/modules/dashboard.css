@@ -336,3 +336,114 @@ a.fp-action { text-decoration: none; }
 .dash-seasons__now.is-fast b { color: #5b2a91; }
 .dash-seasons__now.is-feast { border-color: #e0a526; background: #fff8e6; }
 .dash-seasons__now.is-feast b { color: #a0700b; }
+
+/* =========================================================
+   لوحة التحكم الجديدة (dashx): ترحيب، نبض الكنيسة، عمودان
+   ========================================================= */
+.dashx { gap: 1rem; }
+
+/* ---------- الترحيب ---------- */
+.dashx-hero {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    padding: 1.3rem 1.5rem 1rem;
+    overflow: hidden;
+    color: #fff;
+    background: radial-gradient(circle at 12% 0%, rgba(255, 214, 120, .35), transparent 38%),
+                linear-gradient(120deg, #2c1b6e 0%, #4b2fb0 45%, #7a3db8 100%);
+    border-radius: 22px;
+    box-shadow: 0 16px 40px rgba(59, 31, 140, .25);
+}
+.dashx-hero::after {
+    content: "✠";
+    position: absolute;
+    inset-inline-start: 1.5rem;
+    bottom: -2.6rem;
+    color: rgba(255, 255, 255, .07);
+    font-size: 10rem;
+    line-height: 1;
+    pointer-events: none;
+}
+.dashx-hero__top { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.3rem; }
+.dashx-hero__cross { display: grid; place-items: center; width: 3.6rem; height: 3.6rem; color: #f6d27a; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .25); border-radius: 18px; font-size: 1.9rem; }
+.dashx-hero__hello { flex: 1 1 18rem; display: grid; gap: .15rem; }
+.dashx-hero__greet { color: #f6d27a; font-size: .9rem; font-weight: 700; }
+.dashx-hero__hello h1 { margin: 0; font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 800; }
+.dashx-hero__dates { display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; margin: .2rem 0 0; color: rgba(255, 255, 255, .85); font-size: .9rem; }
+.dashx-hero__dates i { color: #f6d27a; }
+.dashx-hero__season { display: grid; gap: .1rem; min-width: 14rem; padding: .65rem 1rem; color: #fff; text-decoration: none; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .22); border-radius: 16px; backdrop-filter: blur(4px); }
+.dashx-hero__season:hover { color: #fff; background: rgba(255, 255, 255, .2); }
+.dashx-hero__season small { color: rgba(255, 255, 255, .7); font-size: .75rem; }
+.dashx-hero__season b { font-size: 1.05rem; }
+.dashx-hero__season.is-fast b { color: #e9d5ff; }
+.dashx-hero__season.is-feast b { color: #f6d27a; }
+.dashx-hero__season span { color: rgba(255, 255, 255, .85); font-size: .8rem; }
+.dashx-hero__icons { display: flex; gap: .35rem; }
+.dashx-hero__icons .ui-icon-btn { color: #fff; background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .25); }
+.dashx-hero__icons .ui-icon-btn:hover { background: rgba(255, 255, 255, .25); }
+.dashx-hero__actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: .45rem; }
+.dashx-hero__actions a { display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .9rem; color: #2c1b6e; text-decoration: none; background: #fff; border-radius: 999px; font-size: .88rem; font-weight: 700; box-shadow: 0 4px 12px rgba(20, 10, 60, .18); transition: transform .15s ease; }
+.dashx-hero__actions a:hover { transform: translateY(-2px); color: #4b2fb0; }
+.dashx-hero__actions a i { color: #7a3db8; }
+
+/* ---------- نبض الكنيسة ---------- */
+.dashx-kpis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .8rem; }
+.dashx-kpi {
+    position: relative;
+    display: grid;
+    gap: .1rem;
+    padding: .95rem 1rem .85rem;
+    overflow: hidden;
+    color: var(--ui-text, #172036);
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #edf0f6;
+    border-top: 4px solid var(--tint);
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(23, 32, 54, .06);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+.dashx-kpi:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(23, 32, 54, .1); color: inherit; }
+.dashx-kpi > i { position: absolute; inset-inline-end: .8rem; top: .8rem; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; color: var(--tint); background: var(--tint-soft); border-radius: 12px; font-size: 1.2rem; }
+.dashx-kpi b { font-size: 1.9rem; font-weight: 800; line-height: 1.1; color: var(--tint); }
+.dashx-kpi strong { font-size: .95rem; }
+.dashx-kpi small { color: #6b7488; font-size: .76rem; }
+
+.dashx-status { display: grid; gap: .6rem; padding: .7rem 1rem; }
+.dashx-status__items { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; }
+.dashx-status__item { display: inline-flex; align-items: baseline; gap: .4rem; color: inherit; text-decoration: none; font-weight: 700; font-size: .9rem; }
+.dashx-status__item b { color: var(--tint); font-size: 1.1rem; }
+.dashx-status__item small { color: #6b7488; font-weight: 600; }
+.dashx-dot { display: inline-block; width: .65rem; height: .65rem; border-radius: 50%; background: var(--tint); }
+
+/* ---------- العمودان ---------- */
+.dashx-columns { display: grid; grid-template-columns: minmax(0, 1fr) 24rem; gap: 1rem; align-items: start; }
+.dashx-main, .dashx-side { display: grid; gap: 1rem; min-width: 0; }
+.dashx-side .fp-card { margin: 0; }
+
+/* ---------- يحتاج انتباهك ---------- */
+.dashx-attention { padding: 1rem; }
+.dashx-attention__total { color: #6b7488; font-size: .85rem; font-weight: 700; }
+.dashx-attention__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .55rem; }
+.dashx-alert { display: flex; align-items: center; gap: .6rem; padding: .6rem .8rem; color: inherit; text-decoration: none; border: 1px solid transparent; border-radius: 12px; font-weight: 700; font-size: .9rem; transition: transform .12s ease; }
+.dashx-alert:hover { transform: translateX(-3px); color: inherit; }
+.dashx-alert > i { font-size: 1.15rem; }
+.dashx-alert span { flex: 1; }
+.dashx-alert b { min-width: 2.2rem; padding: .05rem .5rem; text-align: center; border-radius: 999px; font-size: .9rem; }
+.dashx-alert.is-danger { background: #fdecef; border-color: #f7c6d0; } .dashx-alert.is-danger > i, .dashx-alert.is-danger b { color: #b3203d; } .dashx-alert.is-danger b { background: #fff; }
+.dashx-alert.is-warning { background: #fff5e1; border-color: #f6dca3; } .dashx-alert.is-warning > i, .dashx-alert.is-warning b { color: #a4610a; } .dashx-alert.is-warning b { background: #fff; }
+.dashx-alert.is-info { background: #e8f0ff; border-color: #c8d9fb; } .dashx-alert.is-info > i, .dashx-alert.is-info b { color: #1d4fbf; } .dashx-alert.is-info b { background: #fff; }
+.dashx-alert.is-ok { background: #f2faf6; border-color: #d6efe2; color: #6b7488; } .dashx-alert.is-ok > i, .dashx-alert.is-ok b { color: #138a4e; }
+
+/* ---------- أجندة اليوم ---------- */
+.dashx-agenda { display: grid; gap: .35rem; margin: 0 0 .6rem; padding: 0; list-style: none; }
+.dashx-agenda li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: .5rem; padding: .4rem .6rem; background: #f6f3fd; border-radius: 10px; font-size: .9rem; }
+.dashx-agenda b { color: #4b2fb0; }
+
+@media (max-width: 1399.98px) { .dashx-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1199.98px) { .dashx-columns { grid-template-columns: 1fr; } }
+@media (max-width: 575.98px) { .dashx-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dashx-hero { padding: 1rem; } }
+@media print { .dashx-hero { color: #000; background: none; box-shadow: none; border: 1px solid #ccc; } }
+/* المراحل داخل العمود الرئيسي: بطاقات بعرض مريح */
+.dashx-main .dash-stages { grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr)); }
