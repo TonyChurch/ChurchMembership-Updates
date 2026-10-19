@@ -43,7 +43,8 @@
 .deacons__picks input:checked + span { color: #fff; background: #0e4433; border-color: #0e4433; }
 .deacons__picks input:focus-visible + span { outline: 3px solid #f0c468; }
 
-.deacons__readings { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .8rem; }
+.deacons__readings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem 1rem; }
+@media (max-width: 575.98px) { .deacons__readings { grid-template-columns: 1fr; } }
 .deacons__readings .is-suggested { background: #fff8e6; border-color: #e3a63a; }
 
 .deacons__actions { display: flex; justify-content: flex-end; gap: .5rem; margin-top: 1rem; }
@@ -91,3 +92,5 @@
 .deacons__empty div { display: grid; flex: 1 1 18rem; }
 .deacons__empty span { color: #5b6478; font-size: .9rem; }
 @media (max-width: 1199.98px) { .deacons__layout { grid-template-columns: 1fr; } .deacons__readings-side { position: static; } }
+/* أزرار القطمارس في اللوحة الجانبية: نفس الحجم */
+.deacons__readings-side .ui-btn { justify-content: center; width: 100%; min-height: 2.6rem; font-size: .9rem; }
