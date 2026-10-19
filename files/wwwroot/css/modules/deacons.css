@@ -64,3 +64,30 @@
     .deacons__services { grid-template-columns: 1fr; }
     .deacons__roles { grid-template-columns: 7rem 1fr; }
 }
+
+/* ---------- كشف الخدمة: الصفحة وبجانبها قراءات القداس ---------- */
+.deacons__layout { display: grid; grid-template-columns: minmax(0, 1fr) 19rem; gap: 1rem; align-items: start; }
+.deacons__readings-side { position: sticky; top: 1rem; display: grid; gap: .55rem; padding: 1rem; }
+.deacons__readings-side h2 { margin: 0; font-size: 1.05rem; font-weight: 800; }
+.deacons__readings-side h2 i { color: #b8860b; }
+.deacons__side-occasion { margin: 0; padding: .45rem .7rem; color: #5c3b00; background: #fff6dc; border-radius: 10px; font-weight: 800; }
+.deacons__side-occasion:empty { display: none; }
+.deacons__side-list { margin: 0; padding-inline-start: 1.2rem; font-size: .9rem; line-height: 1.8; }
+.deacons__hint { color: #5b6478; font-size: .8rem; font-weight: 600; }
+.deacons__sub { margin: -.3rem 0 .6rem; color: #6d3fd8; font-size: .88rem; font-weight: 700; }
+.deacons__occasion { display: flex; gap: .4rem; }
+.deacons__priests { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .6rem; margin: .8rem 0 0; padding: 0; border: 0; }
+.deacons__priests legend { float: none; width: auto; margin: 0 .3rem 0 0; font-size: .9rem; font-weight: 800; }
+.deacons__priest { display: inline-flex; align-items: center; gap: .35rem; margin: 0; padding: .3rem .7rem; border: 1px solid #dfe4ee; border-radius: 999px; cursor: pointer; font-weight: 700; }
+.deacons__priest:has(input:checked) { color: #fff; background: #3b2fa0; border-color: #3b2fa0; }
+.deacons__priest--all { border-style: dashed; }
+.deacons__guest { flex: 1 1 14rem; max-width: 22rem; }
+.deacons__names { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .45rem; align-items: center; }
+.deacons__names .ui-btn { justify-self: start; min-height: 2.1rem; padding: .15rem .8rem; }
+.deacons__readings .is-coptic label { color: #8a4b12; }
+.deacons__readings .is-arabic label { color: #0f6b3d; }
+.deacons__empty { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; padding: .9rem 1rem; margin-bottom: 1rem; background: #fff8e6; border: 1px solid #f3d58a; }
+.deacons__empty > i { font-size: 1.8rem; color: #b8860b; }
+.deacons__empty div { display: grid; flex: 1 1 18rem; }
+.deacons__empty span { color: #5b6478; font-size: .9rem; }
+@media (max-width: 1199.98px) { .deacons__layout { grid-template-columns: 1fr; } .deacons__readings-side { position: static; } }

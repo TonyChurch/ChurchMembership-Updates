@@ -46,3 +46,85 @@
     }));
     count();
 })();
+
+// كشف الخدمة: التاريخ يُقترح من نوع الخدمة، والمناسبة من التاريخ (ما لم تُعدَّل يدويًا)، والآباء معًا، وأسماء أخرى سطرًا سطرًا
+(() => {
+    const form = document.querySelector("[data-service-form]");
+    if (!form) return;
+    const kind = form.querySelector("[data-service-kind]");
+    const date = form.querySelector("[data-service-date]");
+    const occasion = form.querySelector("[data-service-occasion]");
+    const state = form.querySelector("[data-occasion-state]");
+    const side = document.querySelector("[data-side-occasion]");
+    let dateTouched = form.dataset.new !== "true";
+    let occasionTouched = false;
+
+    // الخدمة ← أقرب يوم لها: القداس الأحد أو الجمعة، عشية والتسبحة السبت، باكر الأحد
+    const nextDay = (days) => {
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        for (let i = 0; i < 8; i++) {
+            const day = new Date(today); day.setDate(today.getDate() + i);
+            if (days.includes(day.getDay())) return day;
+        }
+        return today;
+    };
+    const iso = (day) => `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}`;
+    const daysFor = (name) => name.includes("عشية") || name.includes("التسبحة") ? [6] : name.includes("باكر") ? [0] : name.includes("القداس") ? [0, 5] : null;
+
+    async function refreshOccasion(force) {
+        if (occasionTouched && !force) return;
+        try {
+            const response = await fetch(`${form.dataset.occasionUrl}?date=${encodeURIComponent(date.value)}&kind=${encodeURIComponent(kind.value)}`);
+            if (!response.ok) return;
+            const data = await response.json();
+            occasion.value = data.occasion;
+            occasionTouched = false;
+            if (state) state.textContent = "تُملأ تلقائيًا من التاريخ، ويمكن تعديلها";
+            if (side) side.textContent = data.occasion;
+        } catch { /* بلا اتصال: تبقى كما هي */ }
+    }
+
+    kind.addEventListener("change", () => {
+        const days = daysFor(kind.value);
+        if (!dateTouched && days) date.value = iso(nextDay(days));
+        refreshOccasion(false);
+    });
+    date.addEventListener("change", () => { dateTouched = true; refreshOccasion(false); });
+    occasion.addEventListener("input", () => {
+        occasionTouched = true;
+        if (state) state.textContent = "عُدّلت يدويًا";
+        if (side) side.textContent = occasion.value;
+    });
+    form.querySelector("[data-occasion-reset]")?.addEventListener("click", () => refreshOccasion(true));
+
+    // الآباء معًا
+    const all = form.querySelector("[data-priests-all]");
+    const priests = [...form.querySelectorAll("[data-priest]")];
+    all?.addEventListener("change", () => priests.forEach((box) => { box.checked = all.checked; }));
+    priests.forEach((box) => box.addEventListener("change", () => { if (all) all.checked = priests.every((item) => item.checked); }));
+
+    // أسماء أخرى: خانة لكل اسم، و«إضافة اسم» يفتح خانة جديدة (وEnter في آخر خانة كذلك)
+    form.querySelectorAll("[data-names]").forEach((box) => {
+        const add = box.querySelector("[data-add-name]");
+        const addField = () => {
+            const field = box.querySelector("input").cloneNode();
+            field.value = "";
+            box.insertBefore(field, add);
+            field.focus();
+        };
+        add.addEventListener("click", addField);
+        box.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter" || event.target.tagName !== "INPUT") return;
+            event.preventDefault();
+            const fields = [...box.querySelectorAll("input")];
+            if (event.target === fields[fields.length - 1] && event.target.value.trim()) addField();
+            else fields[fields.indexOf(event.target) + 1]?.focus();
+        });
+    });
+
+    // قراءات اليوم في نافذة بجانب الصفحة
+    document.querySelectorAll("[data-side-window]").forEach((button) => button.addEventListener("click", () => {
+        const width = Math.min(560, Math.round(screen.availWidth * 0.4));
+        window.open(button.dataset.sideWindow, "churchReadings", `width=${width},height=${screen.availHeight - 60},left=0,top=0,resizable=yes,scrollbars=yes`);
+    }));
+})();
