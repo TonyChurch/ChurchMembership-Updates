@@ -133,3 +133,10 @@
     .pascha__hours { grid-template-columns: repeat(2, 1fr); }
     .pascha__hour { break-inside: avoid; }
 }
+.pascha__people { display: grid; gap: .6rem; padding: .8rem 1rem; margin-bottom: 1rem; }
+.pascha__people .deacons__priests { margin: 0; }
+.pascha__sermon { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: .6rem; }
+.pascha__sermon label { display: grid; gap: .2rem; margin: 0; color: #5b6478; font-size: .84rem; font-weight: 700; }
+.pascha__print-line { display: none; margin: 0; font-weight: 700; }
+@media (max-width: 767.98px) { .pascha__sermon { grid-template-columns: 1fr; } }
+@media print { .pascha__people .deacons__priests, .pascha__sermon { display: none; } .pascha__print-line { display: block; } }
