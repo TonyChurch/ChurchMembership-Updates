@@ -62,6 +62,17 @@
         editor.normalize();
     }
 
+    // شريط الأدوات يثبت أسفل شريط البرنامج العلوي الثابت (ارتفاعه يتغير بعرض الشاشة)
+    const topbar = document.querySelector(".topbar");
+    const placeTools = () => {
+        const offset = topbar && getComputedStyle(topbar).position === "sticky" ? topbar.offsetHeight : 0;
+        document.querySelectorAll(".reply-editor__tools").forEach((tools) => { tools.style.top = `${offset + 8}px`; });
+    };
+    if (topbar && window.ResizeObserver) new ResizeObserver(placeTools).observe(topbar, { box: "border-box" });
+    addEventListener("resize", placeTools);
+    let settle;
+    addEventListener("scroll", () => { requestAnimationFrame(placeTools); clearTimeout(settle); settle = setTimeout(placeTools, 400); }, { passive: true });
+
     document.querySelectorAll("[data-reply-editor]").forEach((box) => {
         const editor = box.querySelector("[data-reply-area]");
         const field = box.querySelector("input[name=reply]");
@@ -114,4 +125,7 @@
         });
         update();
     });
+    placeTools();
+    addEventListener("load", placeTools);
+    document.fonts?.ready.then(placeTools);
 })();
