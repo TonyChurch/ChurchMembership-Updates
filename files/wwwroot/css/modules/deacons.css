@@ -95,3 +95,41 @@
 /* أزرار القطمارس في اللوحة الجانبية: نفس الحجم */
 .deacons__readings-side .ui-btn { justify-content: center; width: 100%; min-height: 2.6rem; font-size: .9rem; }
 @media (max-width: 575.98px) { .deacons__names { grid-template-columns: 1fr; } }
+
+/* ---------- قراءات البصخة ---------- */
+.pascha__periods { display: grid; grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr)); gap: .45rem; padding: .7rem; margin-bottom: 1rem; }
+.pascha__period { display: flex; align-items: center; gap: .5rem; padding: .45rem .65rem; color: inherit; text-decoration: none; border: 1px solid #e3e8f0; border-radius: 12px; }
+.pascha__period span { display: grid; flex: 1; line-height: 1.35; }
+.pascha__period small { color: #5b6478; font-size: .74rem; }
+.pascha__period.is-night { background: #f3f1fb; }
+.pascha__period.is-night > i:first-child { color: #3b2fa0; }
+.pascha__period.is-day { background: #fffaf0; }
+.pascha__period.is-day > i:first-child { color: #c98a00; }
+.pascha__period.is-active { border-color: #7a3db8; box-shadow: 0 0 0 2px #7a3db8 inset; }
+.pascha__saved { color: #138a4e; }
+.pascha__head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding: .8rem 1rem; margin-bottom: 1rem; }
+.pascha__head h2 { flex: 1 1 18rem; margin: 0; font-size: 1.1rem; font-weight: 800; }
+.pascha__head h2 small { color: #5b6478; font-size: .82rem; font-weight: 600; }
+.pascha__priest { display: grid; gap: .2rem; margin: 0; color: #5b6478; font-size: .82rem; font-weight: 700; min-width: 15rem; }
+.pascha__tools { display: flex; gap: .4rem; }
+.pascha__hours { display: grid; grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr)); gap: 1rem; align-items: start; }
+.pascha__hour { padding: .7rem .8rem; }
+.pascha__hour header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .4rem; }
+.pascha__hour h3 { margin: 0; color: #5b2a91; font-size: 1rem; font-weight: 800; }
+.pascha__add { min-height: 1.9rem; padding: .1rem .6rem; font-size: .8rem; }
+.pascha__table { width: 100%; border-collapse: collapse; }
+.pascha__table th { width: 38%; padding: .25rem .2rem; font-size: .85rem; font-weight: 700; white-space: nowrap; }
+.pascha__table td { padding: .2rem .15rem; }
+.pascha__table td:last-child { width: 2rem; }
+.pascha__table .form-control { min-height: 2rem; padding-block: .15rem; font-size: .88rem; }
+.pascha__table .ui-icon-btn { width: 1.8rem; height: 1.8rem; color: #b3203d; }
+.pascha__table tr.is-coptic th { color: #8a4b12; }
+.pascha__table tr.is-arabic th { color: #0f6b3d; }
+.pascha__table .is-suggested { background: #fff8e6; border-color: #e3a63a; }
+.pascha__print { display: none; }
+@media print {
+    .pascha__table .form-control { display: none; }
+    .pascha__print { display: inline; font-weight: 700; }
+    .pascha__hours { grid-template-columns: repeat(2, 1fr); }
+    .pascha__hour { break-inside: avoid; }
+}
