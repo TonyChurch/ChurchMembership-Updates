@@ -183,3 +183,4 @@
 .pascha__more { grid-column: 1 / -1; }
 .pascha__more summary { cursor: pointer; padding: .3rem .2rem; color: #5b2a91; font-weight: 700; font-size: .88rem; }
 .pascha__more-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr)); gap: .45rem; margin-top: .4rem; }
+.pascha__coptic { color: #8a4b12; font-weight: 800; }
