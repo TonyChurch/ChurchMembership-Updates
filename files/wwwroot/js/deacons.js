@@ -103,22 +103,26 @@
     all?.addEventListener("change", () => priests.forEach((box) => { box.checked = all.checked; }));
     priests.forEach((box) => box.addEventListener("change", () => { if (all) all.checked = priests.every((item) => item.checked); }));
 
-    // أسماء أخرى: خانة لكل اسم، و«إضافة اسم» يفتح خانة جديدة (وEnter في آخر خانة كذلك)
+    // الأسماء: 3 خانات في كل سطر؛ الكتابة في آخر سطر تفتح سطرًا جديدًا، وEnter ينقل للخانة التالية
     form.querySelectorAll("[data-names]").forEach((box) => {
-        const add = box.querySelector("[data-add-name]");
-        const addField = () => {
-            const field = box.querySelector("input").cloneNode();
-            field.value = "";
-            box.insertBefore(field, add);
-            field.focus();
+        const fields = () => [...box.querySelectorAll("input")];
+        const addRow = () => {
+            const template = fields()[0];
+            for (let i = 0; i < 3; i++) {
+                const field = template.cloneNode();
+                field.value = "";
+                box.appendChild(field);
+            }
         };
-        add.addEventListener("click", addField);
+        box.addEventListener("input", (event) => {
+            const list = fields();
+            if (list.indexOf(event.target) >= list.length - 3 && event.target.value.trim()) addRow();
+        });
         box.addEventListener("keydown", (event) => {
             if (event.key !== "Enter" || event.target.tagName !== "INPUT") return;
             event.preventDefault();
-            const fields = [...box.querySelectorAll("input")];
-            if (event.target === fields[fields.length - 1] && event.target.value.trim()) addField();
-            else fields[fields.indexOf(event.target) + 1]?.focus();
+            const list = fields();
+            list[list.indexOf(event.target) + 1]?.focus();
         });
     });
 

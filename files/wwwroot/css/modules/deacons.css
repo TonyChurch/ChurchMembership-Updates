@@ -83,7 +83,7 @@
 .deacons__priest:has(input:checked) { color: #fff; background: #3b2fa0; border-color: #3b2fa0; }
 .deacons__priest--all { border-style: dashed; }
 .deacons__guest { flex: 1 1 14rem; max-width: 22rem; }
-.deacons__names { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .45rem; align-items: center; }
+.deacons__names { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .45rem .6rem; align-items: center; }
 .deacons__names .ui-btn { justify-self: start; min-height: 2.1rem; padding: .15rem .8rem; }
 .deacons__readings .is-coptic label { color: #8a4b12; }
 .deacons__readings .is-arabic label { color: #0f6b3d; }
@@ -94,3 +94,4 @@
 @media (max-width: 1199.98px) { .deacons__layout { grid-template-columns: 1fr; } .deacons__readings-side { position: static; } }
 /* أزرار القطمارس في اللوحة الجانبية: نفس الحجم */
 .deacons__readings-side .ui-btn { justify-content: center; width: 100%; min-height: 2.6rem; font-size: .9rem; }
+@media (max-width: 575.98px) { .deacons__names { grid-template-columns: 1fr; } }
