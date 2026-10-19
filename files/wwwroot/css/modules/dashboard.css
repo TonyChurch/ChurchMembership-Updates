@@ -471,3 +471,22 @@ a.fp-action { text-decoration: none; }
 .dashx-hero__kpis b + span { grid-row: 2; }
 @media (max-width: 1399.98px) { .dashx-hero__kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 575.98px) { .dashx-hero__kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* الترحيب في سطر واحد: الاسم والتاريخ، ثم حال اليوم، ثم الأزرار، ثم الأيقونات */
+.dashx-hero { gap: .8rem; padding: 1rem 1.2rem; }
+.dashx-hero__top { flex-wrap: nowrap; gap: .8rem 1rem; }
+.dashx-hero__hello { flex: 0 0 auto; }
+.dashx-hero__hello h1 { font-size: clamp(1.2rem, 1.8vw, 1.55rem); white-space: nowrap; }
+.dashx-hero__greet { color: #f6d27a; font-size: .8em; font-weight: 700; }
+.dashx-hero__dates { font-size: .82rem; }
+.dashx-hero__season { flex: 0 0 auto; min-width: 0; padding: .45rem .8rem; border-radius: 14px; }
+.dashx-hero__season b { font-size: .95rem; white-space: nowrap; }
+.dashx-hero__season b small { color: rgba(255, 255, 255, .75); font-size: .78rem; font-weight: 600; }
+.dashx-hero__season span { white-space: nowrap; }
+.dashx-hero__top .dashx-hero__actions { flex: 1 1 auto; justify-content: flex-end; gap: .35rem; }
+.dashx-hero__top .dashx-hero__actions a { padding: .35rem .7rem; font-size: .82rem; }
+.dashx-hero__icons { flex: 0 0 auto; }
+@media (max-width: 1199.98px) {
+    .dashx-hero__top { flex-wrap: wrap; }
+    .dashx-hero__top .dashx-hero__actions { order: 5; flex-basis: 100%; justify-content: flex-start; }
+}
+.dashx-hero__top .dashx-hero__actions { min-width: 0; flex-wrap: wrap; }
