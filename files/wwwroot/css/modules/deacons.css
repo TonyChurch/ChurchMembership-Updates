@@ -140,3 +140,40 @@
 .pascha__print-line { display: none; margin: 0; font-weight: 700; }
 @media (max-width: 767.98px) { .pascha__sermon { grid-template-columns: 1fr; } }
 @media print { .pascha__people .deacons__priests, .pascha__sermon { display: none; } .pascha__print-line { display: block; } }
+
+/* حصص الألحان */
+.hymns__week { padding: 1rem; margin-bottom: 1rem; }
+.hymns__week h2, .hymns__choir--new h2 { display: flex; align-items: center; gap: .45rem; margin: 0 0 .75rem; font-size: 1.05rem; font-weight: 800; color: #1f5135; }
+.hymns__days { display: grid; grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); gap: .75rem; }
+.hymns__day h3 { margin: 0 0 .4rem; padding: .3rem .6rem; border-radius: .5rem; background: #eef6f0; color: #1f5135; font-size: .92rem; font-weight: 800; }
+.hymns__slot { display: grid; gap: .1rem; margin-bottom: .4rem; padding: .45rem .6rem; border-inline-start: 4px solid var(--choir); border-radius: .5rem; background: color-mix(in srgb, var(--choir) 8%, #fff); color: #263040; text-decoration: none; }
+.hymns__slot:hover { background: color-mix(in srgb, var(--choir) 15%, #fff); color: #263040; }
+.hymns__slot b { color: var(--choir); font-size: .85rem; }
+.hymns__slot span { font-weight: 700; font-size: .88rem; }
+.hymns__slot small { color: #6b7280; }
+.hymns__choirs { display: grid; gap: 1rem; }
+.hymns__choir { padding: .9rem 1rem; border-top: 4px solid var(--choir, #2f7d4f); scroll-margin-top: 5rem; }
+.hymns__choir.is-inactive { opacity: .65; }
+.hymns__choir-head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, .7fr) minmax(0, 1.2fr) auto auto auto; gap: .5rem; align-items: center; margin-bottom: .7rem; }
+.hymns__choir--new .hymns__choir-head { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, .7fr) minmax(0, 1.2fr) auto; }
+.hymns__choir-name { font-weight: 800; color: var(--choir, #1f5135); }
+.hymns__active { display: flex; align-items: center; gap: .3rem; margin: 0; white-space: nowrap; font-size: .85rem; }
+.hymns__groups { display: grid; gap: .35rem; }
+.hymns__row { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(5.5rem, .7fr) minmax(6.8rem, .7fr) minmax(6.8rem, .7fr) minmax(0, .9fr) 4.6rem; gap: .4rem; align-items: center; }
+.hymns__row--head { color: #6b7280; font-size: .8rem; font-weight: 700; padding: 0 .2rem; }
+.hymns__row--new .form-control:first-of-type { border-style: dashed; }
+.hymns__row-actions { display: flex; gap: .25rem; }
+.hymns__delete { margin-top: .6rem; text-align: end; }
+.hymns__delete .ui-btn { color: #b5473a; font-size: .82rem; }
+.hymns__print-head { display: none; margin: 0 0 .4rem; font-weight: 800; }
+@media (max-width: 991.98px) {
+    .hymns__choir-head, .hymns__choir--new .hymns__choir-head { grid-template-columns: 1fr 1fr; }
+    .hymns__row { grid-template-columns: 1fr 1fr 1fr; }
+    .hymns__row--head { display: none; }
+}
+@media print {
+    .hymns__choir-head { display: none; }
+    .hymns__print-head { display: block; }
+    .hymns__row .form-control, .hymns__row .form-select { border: 0; padding: 0; background: none; appearance: none; }
+    .hymns__choir, .hymns__day { break-inside: avoid; }
+}
