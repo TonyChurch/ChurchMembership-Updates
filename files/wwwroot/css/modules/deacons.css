@@ -184,3 +184,23 @@
 .pascha__more summary { cursor: pointer; padding: .3rem .2rem; color: #5b2a91; font-weight: 700; font-size: .88rem; }
 .pascha__more-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr)); gap: .45rem; margin-top: .4rem; }
 .pascha__coptic { color: #8a4b12; font-weight: 800; }
+/* المناسبات: مجموعات كقوائم متجاورة ملونة */
+.pascha__columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: .75rem; align-items: start; margin-bottom: 1rem; }
+.pascha__col { --tone: #7a3db8; --soft: #f6f0fc; padding: 0; overflow: hidden; border-top: 4px solid var(--tone); }
+.pascha__col--major { --tone: #b8860b; --soft: #fff8e6; }
+.pascha__col--minor { --tone: #1f7a44; --soft: #edf8f1; }
+.pascha__col--mary { --tone: #1f5fa8; --soft: #eef4fc; }
+.pascha__col--special { --tone: #7a3db8; --soft: #f6f0fc; }
+.pascha__col--monthly { --tone: #b5473a; --soft: #fdf1ef; }
+.pascha__col .pascha__group { display: flex; align-items: center; gap: .4rem; margin: 0; padding: .55rem .75rem; background: var(--soft); color: var(--tone); font-size: .95rem; }
+.pascha__col .pascha__group span { margin-inline-start: auto; min-width: 1.6rem; padding: 0 .4rem; border-radius: 999px; background: var(--tone); color: #fff; font-size: .75rem; text-align: center; }
+.pascha__list { display: grid; padding: .3rem; }
+.pascha__col .pascha__period { gap: .45rem; padding: .4rem .5rem; border: 0; border-radius: .5rem; background: transparent; }
+.pascha__col .pascha__period + .pascha__period { border-top: 1px dashed #e6e9ef; border-radius: 0; }
+.pascha__col .pascha__period:hover { background: var(--soft); }
+.pascha__col .pascha__period > i:first-child { color: var(--tone); }
+.pascha__col .pascha__period b { font-size: .9rem; }
+.pascha__col .pascha__period.is-active { background: var(--soft); box-shadow: inset -4px 0 0 var(--tone); border-radius: .5rem; }
+.pascha__col .pascha__more { padding: .2rem .3rem .4rem; }
+.pascha__col .pascha__more summary { color: var(--tone); }
+.pascha__col .pascha__more-grid { display: grid; grid-template-columns: 1fr; gap: 0; max-height: 22rem; overflow-y: auto; }
