@@ -177,3 +177,4 @@
     .hymns__row .form-control, .hymns__row .form-select { border: 0; padding: 0; background: none; appearance: none; }
     .hymns__choir, .hymns__day { break-inside: avoid; }
 }
+.pascha__adds { display: flex; gap: .3rem; }
