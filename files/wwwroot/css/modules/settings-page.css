@@ -293,3 +293,6 @@
 .settings-mobile__qr-card { display: grid; justify-items: center; gap: .35rem; margin: 0; padding: .7rem; border: 1px solid #e3e8f0; border-radius: 12px; background: #fff; }
 .settings-mobile__qr-card figcaption { display: grid; text-align: center; font-size: .85rem; }
 .settings-mobile__web .settings-help { flex: 1 1 16rem; }
+.settings-pull__steps { margin: .5rem 0; padding-inline-start: 1.2rem; line-height: 1.9; }
+.settings-pull__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: .4rem 0 .6rem; }
+.settings-pull__actions form { margin: 0; }
