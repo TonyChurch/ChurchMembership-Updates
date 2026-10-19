@@ -447,3 +447,27 @@ a.fp-action { text-decoration: none; }
 @media print { .dashx-hero { color: #000; background: none; box-shadow: none; border: 1px solid #ccc; } }
 /* المراحل داخل العمود الرئيسي: بطاقات بعرض مريح */
 .dashx-main .dash-stages { grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr)); }
+/* نبض الكنيسة داخل الترحيب: أزرار بيضاء بالرقم والاسم */
+.dashx-hero__kpis { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .5rem; }
+.dashx-hero__kpis a {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: .55rem;
+    padding: .5rem .8rem;
+    color: #2c1b6e;
+    text-decoration: none;
+    background: rgba(255, 255, 255, .96);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(20, 10, 60, .18);
+    transition: transform .15s ease;
+}
+.dashx-hero__kpis a:hover { transform: translateY(-2px); color: #2c1b6e; }
+.dashx-hero__kpis i { grid-row: 1 / 3; display: grid; place-items: center; width: 2.3rem; height: 2.3rem; color: var(--tint); background: var(--tint-soft); border-radius: 12px; font-size: 1.15rem; }
+.dashx-hero__kpis b { font-size: 1.25rem; font-weight: 800; line-height: 1.1; color: var(--tint); }
+.dashx-hero__kpis span { grid-column: 2; font-size: .85rem; font-weight: 800; }
+.dashx-hero__kpis small { display: none; }
+.dashx-hero__kpis b + span { grid-row: 2; }
+@media (max-width: 1399.98px) { .dashx-hero__kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 575.98px) { .dashx-hero__kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
