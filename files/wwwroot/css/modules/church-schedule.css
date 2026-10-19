@@ -329,3 +329,29 @@
 }
 
 .portal-inbox__request { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: .4rem 0 0; color: var(--ui-text-muted, #6b7690); font-weight: 700; }
+
+/* محرر الرد: مساحة كبيرة وأزرار تنسيق */
+.reply-editor { border: 1px solid var(--ui-border, #d8dee9); border-radius: .6rem; background: #fff; overflow: hidden; }
+.reply-editor:focus-within { border-color: #2f7d4f; box-shadow: 0 0 0 .2rem rgba(47, 125, 79, .15); }
+.reply-editor__tools { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem; padding: .35rem .5rem; background: #f6f8f7; border-bottom: 1px solid var(--ui-border, #d8dee9); }
+.reply-editor__tools button { min-width: 2.1rem; height: 2.1rem; padding: 0 .45rem; border: 1px solid transparent; border-radius: .4rem; background: transparent; color: #263040; font-size: 1rem; line-height: 1; }
+.reply-editor__tools button:hover { background: #fff; border-color: #cfd8d3; }
+.reply-editor__tools button.is-xl { font-size: 1.2rem; }
+.reply-editor__tools sup { font-size: .6em; }
+.reply-editor__sep { width: 1px; height: 1.4rem; margin: 0 .25rem; background: #cfd8d3; }
+.reply-editor__count { margin-inline-start: auto; color: #6b7690; font-size: .78rem; }
+.reply-editor__count.is-over { color: #b5473a; font-weight: 700; }
+.reply-editor__area { min-height: 14rem; max-height: 70vh; overflow-y: auto; resize: vertical; padding: .75rem .9rem; border: 0; border-radius: 0; font-size: 1.05rem; line-height: 1.9; white-space: pre-wrap; overflow-wrap: anywhere; }
+.reply-editor__area:focus { box-shadow: none; outline: 0; }
+
+/* تنسيق الردود */
+.portal-rich .rt-lg { font-size: 1.25em; }
+.portal-rich .rt-xl { font-size: 1.55em; line-height: 1.5; }
+.rt-red { color: #b3261e; }
+.rt-blue { color: #1f5fa8; }
+.rt-green { color: #1f7a44; }
+.rt-gold { color: #a87900; }
+.reply-editor__tools button.rt-red { color: #b3261e; }
+.reply-editor__tools button.rt-blue { color: #1f5fa8; }
+.reply-editor__tools button.rt-green { color: #1f7a44; }
+.reply-editor__tools button.rt-gold { color: #a87900; }

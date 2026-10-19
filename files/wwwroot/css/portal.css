@@ -526,3 +526,11 @@ body.bible-night { background: #0c1512; }
 .portal-hours a { display: grid; gap: .1rem; padding: .65rem .75rem; color: var(--p-emerald); text-decoration: none; background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 12px; }
 .portal-hours small { color: var(--p-muted); }
 .portal-hero__season { justify-self: start; padding: .1rem .7rem; color: #fff; background: rgba(255, 255, 255, .16); border-radius: 999px; font-size: .85rem; font-weight: 700; text-decoration: none; }
+
+/* تنسيق الردود */
+.portal-rich .rt-lg { font-size: 1.25em; }
+.portal-rich .rt-xl { font-size: 1.55em; line-height: 1.5; }
+.rt-red { color: #b3261e; }
+.rt-blue { color: #1f5fa8; }
+.rt-green { color: #1f7a44; }
+.rt-gold { color: #a87900; }
