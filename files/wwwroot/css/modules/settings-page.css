@@ -289,3 +289,7 @@
     gap: .5rem;
     margin-top: .6rem;
 }
+.settings-mobile__web { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; margin-bottom: 1rem; }
+.settings-mobile__qr-card { display: grid; justify-items: center; gap: .35rem; margin: 0; padding: .7rem; border: 1px solid #e3e8f0; border-radius: 12px; background: #fff; }
+.settings-mobile__qr-card figcaption { display: grid; text-align: center; font-size: .85rem; }
+.settings-mobile__web .settings-help { flex: 1 1 16rem; }
