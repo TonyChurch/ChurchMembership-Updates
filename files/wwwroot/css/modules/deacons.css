@@ -178,3 +178,5 @@
     .hymns__choir, .hymns__day { break-inside: avoid; }
 }
 .pascha__adds { display: flex; gap: .3rem; }
+.pascha__group { grid-column: 1 / -1; margin: .35rem .2rem 0; color: #5b2a91; font-size: .92rem; font-weight: 800; }
+.pascha__group:first-child { margin-top: 0; }
