@@ -78,12 +78,13 @@
         const field = box.querySelector("input[name=reply]");
         const counter = box.querySelector("[data-reply-count]");
         const form = box.closest("form");
-        const limit = Number(box.dataset.limit || 3000);
+        const limit = Number(box.dataset.limit || 50000);
 
         const update = () => {
             field.value = serialize(editor);
             if (counter) {
-                counter.textContent = `${editor.innerText.trim().length} حرف`;
+                // عدّاد فقط وليس حدًّا: المساحة تتسع لشرح طويل جدًّا
+                counter.textContent = `كتبت ${editor.innerText.trim().length.toLocaleString("ar-EG")} حرفًا — المساحة مفتوحة`;
                 counter.classList.toggle("is-over", field.value.length > limit);
             }
         };
