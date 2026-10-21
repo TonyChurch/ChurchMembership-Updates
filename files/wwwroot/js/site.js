@@ -1,3 +1,15 @@
+// البحث بلا فرق بين طرق كتابة الحروف: أ إ آ ← ا، ى ئ ← ي، ة ← ه، ؤ ← و، بلا تشكيل ولا تطويل
+window.arabicKey = (text) => String(text ?? "")
+    .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
+    .replace(/[\u0623\u0625\u0622\u0671]/g, "\u0627").replace(/[\u0649\u0626\u06CC]/g, "\u064A")
+    .replace(/\u0629/g, "\u0647").replace(/\u0624/g, "\u0648").replace(/\u06A9/g, "\u0643")
+    .toLowerCase().replace(/\s+/g, " ").trim();
+// كل كلمات البحث موجودة في النص
+window.arabicMatch = (text, search) => {
+    const haystack = window.arabicKey(text);
+    return window.arabicKey(search).split(" ").filter(Boolean).every((word) => haystack.includes(word));
+};
+
 ﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
