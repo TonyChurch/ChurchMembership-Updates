@@ -622,13 +622,24 @@
 /* ---------- شريط الجدول: العنوان يمينًا / إضافة أسرة في المنتصف / التصدير يسارًا ---------- */
 
 .members-table-bar {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    gap: .6rem 1rem;
 }
 
-.members-table-bar .members-export {
-    justify-self: end;
+/* إضافة أسرة / المكررون / تسجيل سريع / التصدير والطباعة: سطر واحد بجانب العنوان */
+.members-table-bar__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .45rem;
+    margin-inline-start: auto;
+}
+
+.members-table-bar__actions .ui-btn {
+    min-height: 2.35rem;
+    padding-block: .35rem;
 }
 
 .members-table-bar__add {
@@ -637,14 +648,9 @@
 }
 
 @media (max-width: 767.98px) {
-    .members-table-bar {
-        grid-template-columns: minmax(0, 1fr) auto;
-    }
-
-    .members-table-bar__add {
-        grid-row: 2;
-        grid-column: 1 / -1;
-        justify-self: center;
+    .members-table-bar__actions {
+        margin-inline-start: 0;
+        width: 100%;
     }
 }
 
@@ -820,4 +826,7 @@
 
 .members-bulk__cancel:hover {
     color: #b3203d;
+}
+.members-table-bar__actions .members-export__btn {
+    min-height: 2.35rem;
 }
