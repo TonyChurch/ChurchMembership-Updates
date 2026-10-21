@@ -204,3 +204,10 @@
 .pascha__col .pascha__more { padding: .2rem .3rem .4rem; }
 .pascha__col .pascha__more summary { color: var(--tone); }
 .pascha__col .pascha__more-grid { display: grid; grid-template-columns: 1fr; gap: 0; max-height: 22rem; overflow-y: auto; }
+.pascha__ref { display: block; color: #6b7690; font-size: .74rem; font-weight: 600; direction: rtl; }
+.pascha__reading { display: block; }
+.pascha__ref-input { display: block; width: 100%; margin-top: .1rem; padding: .05rem .3rem; border: 1px dashed transparent; border-radius: .35rem; background: transparent; color: #6b7690; font-size: .74rem; font-weight: 600; }
+.pascha__ref-input:hover { border-color: #cfd6e2; }
+.pascha__ref-input:focus { border-color: #7a3db8; background: #fff; color: #263040; outline: 0; }
+.pascha__ref-input::placeholder { color: #b9c0cc; }
+@media print { .pascha__ref-print { display: block !important; color: #555; font-size: .75rem; font-weight: 600; } }
