@@ -830,3 +830,29 @@
 .members-table-bar__actions .members-export__btn {
     min-height: 2.35rem;
 }
+
+/* عدد المكررين على زر «المكررون» */
+.members-dups-count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 .4rem;
+    color: #3f4a5e;
+    background: #e8ecf4;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 800;
+}
+
+.members-dups-count.is-alert {
+    color: #fff;
+    background: #d9480f;
+}
+
+/* شريط البحث: زر «بحث» في نهاية السطر نفسه (حقل البحث + خمس قوائم) */
+@media (min-width: 1200px) {
+    .members-top .ui-filter {
+        grid-template-columns: minmax(9rem, 1.5fr) repeat(5, minmax(6rem, 1fr)) auto;
+    }
+}
