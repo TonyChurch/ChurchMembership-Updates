@@ -63,7 +63,10 @@
         const nid = val(pane, "NationalId");
         if (words(val(pane, "FullName")).length < 3) list.push("الاسم ثلاثيًا");
         if ((!isDeceased(pane) || nid) && !readNid(nid)) list.push("الرقم القومي");
-        if (isParent(pane) && !isDeceased(pane) && !isMobile(val(pane, "Phone"))) list.push("الموبايل");
+        // الموبايل مطلوب للأب فقط؛ للأم اختياري، وإن كُتب يجب أن يكون صحيحًا
+        const phone = val(pane, "Phone");
+        if (pane.dataset.slot === "father" && !isDeceased(pane) && !isMobile(phone)) list.push("الموبايل");
+        else if (phone && !isMobile(phone)) list.push("الموبايل");
         if (pane.querySelector("[data-mother-kind]")?.value === "previous" && !val(pane, "PreviousMotherName")) list.push("اسم والدته");
         return list;
     };
