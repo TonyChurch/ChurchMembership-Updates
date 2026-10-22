@@ -561,3 +561,13 @@
 .fb-deceased { color: #475569; }
 .fb-deceased input { accent-color: #64748b; }
 .fb-person.is-deceased { opacity: .78; }
+
+/* زر «من مستند / شهادة ميلاد» بجوار عنوان «أسرة جديدة» */
+.fb-top__doc {
+    margin-inline-start: .4rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 575.98px) {
+    .fb-top__doc { padding-inline: .6rem; font-size: .82rem; }
+}
