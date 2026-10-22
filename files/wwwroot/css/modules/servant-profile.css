@@ -513,3 +513,10 @@
     .sr-top__item.is-extra { display: flex; }
     .sr-top__list { grid-template-columns: repeat(4, 1fr); }
 }
+
+/* تاريخ الخدمة: سنة البدء والخدمات السابقة (تعديل من الملف) */
+.sp-history-form { display: grid; gap: .5rem; margin: 0 0 .7rem; padding: .7rem; background: #f6f8fc; border: 1px dashed #cdd6e6; border-radius: .6rem; }
+.sp-history-form label { display: grid; gap: .2rem; margin: 0; color: #5b6478; font-size: .84rem; font-weight: 700; }
+.sp-history-form__actions { display: flex; gap: .4rem; }
+.sp-history-since { display: flex; align-items: center; gap: .4rem; margin: 0 0 .5rem; color: #1f5135; font-weight: 800; }
+.sp-history-since i { color: #b8860b; }
