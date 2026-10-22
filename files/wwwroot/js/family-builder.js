@@ -287,9 +287,12 @@
             if (idInput.value) return;
             box.classList.remove("fb-match--attached");
             const name = nameInput.value.trim();
-            if (words(name).length < 2) { box.hidden = true; return; }
+            // الاسم أو الرقم القومي أو الموبايل: أيها يطابق ملفًا مسجلًا بلا أسرة يُقترح ضمه
+            const nationalId = (field(pane, "NationalId")?.value || "").trim();
+            const phone = (field(pane, "Phone")?.value || "").trim();
+            if (words(name).length < 2 && nationalId.length < 14 && phone.length < 11) { box.hidden = true; return; }
             try {
-                const response = await fetch(`/Validation/Unattached?${new URLSearchParams({ name })}`, { headers: { Accept: "application/json" } });
+                const response = await fetch(`/Validation/Unattached?${new URLSearchParams({ name, nationalId, phone })}`, { headers: { Accept: "application/json" } });
                 if (!response.ok || idInput.value || nameInput.value.trim() !== name) return;
                 // ملف مضموم لفرد آخر في نفس الصفحة لا يُعرض مرة ثانية
                 const taken = panes().map(other => other.querySelector("[data-existing-id]")?.value).filter(Boolean);
@@ -329,6 +332,8 @@
         const schedule = () => { clearTimeout(timer); timer = setTimeout(lookup, 450); };
         nameInput.addEventListener("input", schedule);
         nameInput.addEventListener("change", schedule);
+        field(pane, "NationalId")?.addEventListener("change", schedule);
+        field(pane, "Phone")?.addEventListener("change", schedule);
         if (idInput.value) { setOwner(idInput.value); showAttached(); }
     };
 
