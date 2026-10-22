@@ -640,3 +640,7 @@
 @media print {
     .sa-report__print { display: block; }
 }
+
+/* تقرير الخدمة: سبع بطاقات في صفين */
+.servant-attendance.sa-report.servant-followup .sa-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 991.98px) { .servant-attendance.sa-report.servant-followup .sa-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

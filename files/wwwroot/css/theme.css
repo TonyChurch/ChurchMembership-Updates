@@ -394,6 +394,7 @@ a.ui-stat:hover {
 .ui-chip-stat--pink { --chip-gradient: linear-gradient(135deg, #ff4f8b, #ff85a8); --chip-shadow: rgba(255, 79, 139, .28); }
 .ui-chip-stat--green { --chip-gradient: linear-gradient(135deg, #0fb87a, #3ddc97); --chip-shadow: rgba(15, 184, 122, .28); }
 .ui-chip-stat--orange { --chip-gradient: linear-gradient(135deg, #ff7a3d, #ffa94d); --chip-shadow: rgba(255, 122, 61, .28); }
+.ui-chip-stat--red { --chip-gradient: linear-gradient(135deg, #d7263d, #ff5a6e); --chip-shadow: rgba(215, 38, 61, .28); }
 .ui-chip-stat--gold { --chip-gradient: linear-gradient(135deg, #e6a200, #ffc93c); --chip-shadow: rgba(230, 162, 0, .28); }
 
 /* ---------- التبويبات ---------- */
