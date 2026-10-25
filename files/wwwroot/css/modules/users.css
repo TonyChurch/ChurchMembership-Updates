@@ -222,3 +222,13 @@
     border-color: var(--ui-danger);
     color: #fff;
 }
+
+.users-card__delete {
+    color: var(--ui-danger);
+}
+
+.users-card__delete:hover {
+    color: #fff;
+    background: var(--ui-danger);
+    border-color: var(--ui-danger);
+}
