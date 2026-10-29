@@ -49,3 +49,13 @@
 .nursery-name-results button { display: grid; gap: .05rem; text-align: start; padding: .35rem .5rem; border: 0; border-radius: .45rem; background: none; }
 .nursery-name-results button:hover, .nursery-name-results button:focus { background: #fff3dc; }
 .nursery-name-results button small { color: #6b7690; font-weight: 400; }
+/* بطاقة المشرفة */
+.nursery-card__head { display: flex; align-items: center; gap: .7rem; padding-bottom: .6rem; margin-bottom: .6rem; border-bottom: 2px solid #f3e2c4; }
+.nursery-card__head small { color: #6b7690; }
+.nursery-card__icon { display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: .8rem; color: #fff; font-size: 1.4rem; background: linear-gradient(135deg, #e08a1e, #f6c453); }
+.nursery-card__data { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: .5rem 1rem; margin: 0; }
+.nursery-card__data dt { color: #8a5200; font-size: .8rem; font-weight: 700; }
+.nursery-card__data dd { margin: 0; font-weight: 600; }
+.nursery-day.is-late td { background: #fffaeb; }
+.nursery-day.is-absent td { background: #fff4f4; }
+.nursery-day.is-excused td, .nursery-day.is-leave td { background: #f5f6f9; }

@@ -26,7 +26,7 @@
             if (!value) { show(''); return; }
             if (value.length !== 14) { show(''); return; }
             try {
-                const response = await fetch(`/Nursery/LookupNationalId?value=${value}&id=${input.dataset.childId || 0}`, { headers: { Accept: 'application/json' } });
+                const response = await fetch(`${input.dataset.lookup || "/Nursery/LookupNationalId"}?value=${value}&id=${input.dataset.childId || 0}`, { headers: { Accept: 'application/json' } });
                 if (!response.ok) return;
                 const data = await response.json();
                 if (!data.birthDate) {
@@ -59,6 +59,7 @@
                         + `<div class="nursery-nid-data">${rows}</div><a href="${m.url}" target="_blank" rel="noopener">فتح ملفه</a>`, 'is-found');
                     return;
                 }
+                if (data.note) { show(`<i class="bi bi-check-circle-fill"></i> ✓ ${escape(data.gender)} · ${escape(data.age)} — ${escape(data.note)}`, "is-new"); return; }
                 show(`<i class="bi bi-person-plus-fill"></i> ✓ ${escape(data.gender)} · ${escape(data.age)} — غير مسجل في البرنامج؛ `
                     + (data.placement ? `سيُنشأ له ملف في التربية الكنسية: <b>${escape(data.placement)}</b> عند الحفظ.` : 'سيُنشأ له ملف في البرنامج عند الحفظ.'), 'is-new');
             } catch { /* الفحص اختياري؛ الحفظ يتحقق مرة أخرى */ }
