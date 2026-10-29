@@ -24,3 +24,17 @@
 @media (max-width: 991.98px) {
     .clinic-row--referral { grid-template-columns: 1fr 1fr; }
 }
+/* مصادر التوظيف ومشاركة واتساب */
+.jobs-whatsapp { background: #25d366 !important; border-color: #25d366 !important; color: #fff !important; }
+.jobs-whatsapp:hover { background: #1ebe5a !important; }
+.jobs-sources-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.jobs-sources-bar b { color: #17536a; }
+.jobs-source-chip { display: inline-flex; align-items: center; gap: .3rem; padding: .3rem .75rem; border: 1px solid #cfe7ee; border-radius: 999px; background: #f2fafc; color: #17536a; font-weight: 700; font-size: .85rem; text-decoration: none; }
+.jobs-source-chip:hover { background: #e3f3f7; color: #17536a; }
+.jobs-source-chip .bi-whatsapp { color: #1ebe5a; }
+.jobs-source-manage { margin-inline-start: auto; font-size: .82rem; }
+.clinic-row--source { grid-template-columns: minmax(0, 1.3fr) 9rem minmax(0, 1.6fr) minmax(0, 1.4fr) 4.5rem auto 4.6rem; }
+.jobs-source-name { display: flex; align-items: center; gap: .3rem; }
+@media (max-width: 991.98px) {
+    .clinic-row--source { grid-template-columns: 1fr 1fr; }
+}
