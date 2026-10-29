@@ -77,3 +77,20 @@
 .workshop-late-note { display: block; font-size: .78rem; }
 .clinic-row--worker { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 7.5rem minmax(0, 1fr) minmax(0, 1.4fr) auto 4.6rem; }
 @media (max-width: 991.98px) { .clinic-row--worker { grid-template-columns: 1fr 1fr; } }
+/* صفحة العاملين: شريط الأقسام والأرشيف */
+.workshop-subnav { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+.workshop-subnav a { display: inline-flex; align-items: center; gap: .4rem; padding: .5rem .95rem; border: 1px solid #f0d7e2; border-radius: 999px; background: #fff; color: #8a2f55; font-weight: 700; text-decoration: none; }
+.workshop-subnav a:hover { background: #fbeef3; color: #8a2f55; }
+.workshop-subnav a.is-active { background: #b5446e; border-color: #b5446e; color: #fff; }
+.workshop-archive-months { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .5rem; }
+.workshop-archive-month { display: grid; gap: .1rem; padding: .55rem .7rem; border: 1px solid #f0d7e2; border-radius: .7rem; background: #fffafc; color: inherit; text-decoration: none; }
+.workshop-archive-month:hover { box-shadow: 0 4px 12px rgba(181, 68, 110, .15); color: inherit; }
+.workshop-archive-month b { color: #8a2f55; }
+.workshop-archive-month small { color: #6b7690; font-size: .78rem; }
+.workshop-archive-month.is-empty { opacity: .55; }
+.workshop-archive-month.is-on { border-color: #b5446e; background: #fbeef3; box-shadow: inset 0 0 0 1px #b5446e; }
+.workshop-archive-title { font-size: 1rem; font-weight: 800; color: #8a2f55; margin: 0; }
+.workshop-archive-days { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: .4rem; margin-top: .5rem; }
+.workshop-archive-days a { display: grid; padding: .45rem .6rem; border: 1px solid #ecdde4; border-radius: .6rem; background: #fff; color: inherit; text-decoration: none; }
+.workshop-archive-days a:hover { background: #fbeef3; color: inherit; }
+.workshop-archive-days small { font-size: .78rem; }

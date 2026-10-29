@@ -487,3 +487,42 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
         box-shadow: none;
     }
 }
+
+/* أقسام داخل مجموعة (مشروعات الكنيسة): عنوان القسم يفتح روابطه أسفله */
+.right-sidebar__subgroup-toggle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: start;
+    cursor: pointer;
+}
+
+.right-sidebar__subgroup-toggle.is-open,
+.right-sidebar__subgroup-toggle[aria-expanded="true"] {
+    color: var(--side-text, #fff);
+    font-weight: 700;
+}
+
+.right-sidebar__subchevron {
+    margin-inline-start: auto;
+    font-size: .72rem;
+    transition: transform .2s ease;
+}
+
+.right-sidebar__subgroup-toggle[aria-expanded="true"] .right-sidebar__subchevron {
+    transform: rotate(180deg);
+}
+
+.right-sidebar__subsubmenu {
+    margin: .1rem 0 .35rem;
+    margin-inline-start: 1rem;
+    padding-inline-start: .45rem;
+    border-inline-start: 2px solid var(--side-line);
+}
+
+.right-sidebar__subsubmenu .right-sidebar__sublink {
+    min-height: 34px;
+    font-size: .84rem;
+}
