@@ -125,6 +125,8 @@ Copy-Item (Join-Path $app 'voucher-logo.*') $next -Force -ErrorAction SilentlyCo
 # شعار الحضانة واسمها (خاصان بكل كنيسة)
 Copy-Item (Join-Path $app 'nursery-logo.*') $next -Force -ErrorAction SilentlyContinue
 Copy-Item (Join-Path $app 'nursery-brand.json') $next -Force -ErrorAction SilentlyContinue
+Copy-Item (Join-Path $app 'page-texts.json') $next -Force -ErrorAction SilentlyContinue
+Copy-Item (Join-Path $app 'nursery-cert-bg.*') $next -Force -ErrorAction SilentlyContinue
 if (Test-Path (Join-Path $app 'wwwroot\uploads')) {
     Copy-Item (Join-Path $app 'wwwroot\uploads') (Join-Path $next 'wwwroot') -Recurse -Force
 }

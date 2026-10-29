@@ -151,3 +151,8 @@
 /* نص الشريط بالأزرق الداكن وبخط أثقل، عدا المرحلة والفصل فيبقيان كما هما */
 .nursery-nid-result.is-found, .nursery-nid-result.is-new, .nursery-nid-result.is-found strong, .nursery-nid-result .nursery-nid-data, .nursery-nid-result .nursery-nid-data b { color: #13295b; font-weight: 700; }
 .nursery-nid-result.is-new b, .nursery-nid-result .nursery-nid-data .is-place, .nursery-nid-result .nursery-nid-data .is-place b { color: #8a5a10; font-weight: 700; }
+.clinic-row--fee { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr) 6rem 6rem 6.5rem 7rem 2.6rem; }
+.nursery-fees-month { min-width: 8rem; text-align: center; color: #8a5200; }
+.nursery-manage-link { font-size: .78rem; font-weight: 600; }
+.clinic-row--class { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr) 6rem 6rem 4.6rem; }
+@media (max-width: 991.98px) { .clinic-row--class, .clinic-row--fee { grid-template-columns: 1fr 1fr; } }

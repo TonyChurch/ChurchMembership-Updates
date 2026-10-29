@@ -135,3 +135,48 @@ b.is-excellent, b.is-very-good, b.is-good, b.is-pass, b.is-weak { padding: .1rem
     .cert--year .cert__signs { padding-top: 1mm; }
     .cert--year .cert__signs i { margin-top: 6mm; }
 }
+
+/* ---------- الشهادة على خلفية الحضانة المرفوعة (صفحة عرضية) ---------- */
+.cert__panel { display: contents; }
+.cert--bg {
+    max-width: 297mm; min-height: 210mm; aspect-ratio: 297 / 210; page: bgpage;
+    padding: 0; border: 0; outline: 0; border-radius: 0;
+    background: var(--cert-bg) center / 100% 100% no-repeat;
+    display: block; position: relative; overflow: hidden;
+}
+.cert--bg .cert__panel {
+    position: absolute; top: 8%; bottom: 21%; inset-inline: 25%;
+    display: flex; flex-direction: column; gap: 1.6mm;
+    padding: 4mm 6mm;
+    background: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(240, 181, 77, .9);
+    border-radius: 14px;
+    box-shadow: 0 6px 22px rgba(30, 80, 140, .18);
+    font-size: .78rem;
+}
+.cert--year.cert--bg .cert__panel { top: 7%; bottom: 17%; inset-inline: 12%; font-size: .7rem; }
+.cert--bg .cert__head { display: none; }
+.cert--bg .cert__title { font-size: 1.35rem; }
+.cert--bg .cert__month { margin: 0; font-size: .85rem; }
+.cert--bg .cert__child { padding: 1.2mm 3mm; gap: 1mm 3mm; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cert--bg .cert__child b { font-size: .85rem; }
+.cert--bg .cert__child span { font-size: .68rem; }
+.cert--bg .cert__grades { font-size: .74rem; }
+.cert--bg .cert__grades th, .cert--bg .cert__grades td { padding: .7mm 2mm; }
+.cert--bg .cert__overall { font-size: .85rem; }
+.cert--bg .cert__note { padding: 1.2mm 3mm; }
+.cert--bg .cert__note p, .cert--bg .cert__note ul { margin: 0; line-height: 1.5; font-size: .74rem; }
+.cert--bg .cert__signs { gap: 4mm; padding-top: 1mm; margin-top: auto; }
+.cert--bg .cert__signs span { font-size: .72rem; }
+.cert--bg .cert__signs i { margin-top: 5mm; }
+.cert--bg .cert__verse { font-size: .68rem; }
+@media print {
+    .cert--bg { height: 210mm; width: 297mm; max-width: none; min-height: 0; padding: 0; }
+}
+@page bgpage { size: A4 landscape; margin: 0; }
+/* الشهادة الشهرية على الخلفية: كل المحتوى داخل اللوحة */
+.cert--bg:not(.cert--year) .cert__panel { top: 6%; bottom: 17%; inset-inline: 24%; gap: 1.2mm; padding: 3mm 5mm; }
+.cert--bg .cert__grades th, .cert--bg .cert__grades td { padding: .45mm 2mm; }
+.cert--bg .cert__title { font-size: 1.2rem; }
+.cert--bg .cert__verse { display: none; }
+.cert--bg .cert__signs i { margin-top: 4mm; }

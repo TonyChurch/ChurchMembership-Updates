@@ -1485,3 +1485,11 @@ input.form-control.is-ok-mark:not([type=date]):not([type=time]) {
 .id-owner { border: 1.5px solid #e6cf97; border-inline-start: 5px solid #c9962e; font-weight: 600; box-shadow: inset 0 1px 0 #fff, 0 4px 12px rgba(183, 121, 31, .15); }
 .id-owner, .id-owner b, .id-owner small { color: #13295b; font-weight: 700; }
 .id-owner small.is-place { color: #8a5a10; }
+
+/* عنوان الصفحة القابل للتعديل (Partials/_PageTitle) */
+.page-title-edit { margin-inline-start: .35rem; padding: .1rem .35rem; border: 0; border-radius: .4rem; background: transparent; color: #b7791f; font-size: .95rem; vertical-align: middle; opacity: .55; }
+.page-title-edit:hover, .page-title-edit:focus { opacity: 1; background: #fbf6ea; }
+.page-title-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: .4rem; align-items: center; margin-top: .4rem; padding: .5rem; border: 1.5px solid #e6cf97; border-inline-start: 5px solid #c9962e; border-radius: .6rem; background: #fbf6ea; }
+.page-title-form[hidden] { display: none; }
+.page-title-form small { grid-column: 1 / -1; color: #5b5240; }
+@media (max-width: 767.98px) { .page-title-form { grid-template-columns: 1fr; } }
