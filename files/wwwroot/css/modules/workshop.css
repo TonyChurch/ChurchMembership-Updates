@@ -1,0 +1,39 @@
+/* المشغل (يعتمد على أساسيات clinic.css) */
+.workshop__icon { background: linear-gradient(135deg, #b5446e, #e7799f); }
+.workshop .clinic-card h2 { color: #8a2f55; }
+.workshop-courses { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .8rem; }
+.workshop-course { display: grid; gap: .3rem; padding: .8rem .9rem; color: inherit; text-decoration: none; border: 1px solid #f0d7e2; border-top: 4px solid #b5446e; border-radius: .8rem; background: #fff; }
+.workshop-course:hover { box-shadow: 0 6px 18px rgba(181, 68, 110, .15); color: inherit; }
+.workshop-course.is-inactive { opacity: .6; }
+.workshop-course strong { color: #8a2f55; font-size: 1.02rem; }
+.workshop-course small { color: #6b7690; }
+.workshop-course__nums { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .2rem; }
+.workshop-chip { padding: .1rem .55rem; border-radius: 999px; background: #fbeef3; color: #8a2f55; font-size: .78rem; font-weight: 700; }
+.workshop-chip--due { background: #fff3e0; color: #a35a00; }
+.workshop-form { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; }
+.workshop-form label { display: grid; gap: .2rem; margin: 0; color: #5b6478; font-size: .84rem; font-weight: 700; }
+.workshop-form .is-wide { grid-column: span 2; }
+.workshop-form .is-full { grid-column: 1 / -1; }
+.clinic-row--trainee { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 8.5rem 7rem 6.5rem minmax(0, 1fr) 4.6rem; }
+.clinic-row--order { grid-template-columns: 8.5rem minmax(0, 1.1fr) minmax(0, .8fr) minmax(0, 1.6fr) 6rem 6rem 8.5rem 8rem 4.6rem; }
+.clinic-row--product { grid-template-columns: minmax(0, 1.6fr) 7rem 6rem minmax(0, 1.4fr) auto 4.6rem; }
+.workshop-attend { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .4rem; margin: .5rem 0 .8rem; }
+.workshop-attend label { display: flex; align-items: center; gap: .45rem; padding: .4rem .6rem; border: 1px solid #ecdde4; border-radius: .5rem; background: #fdf7f9; cursor: pointer; margin: 0; }
+.workshop-attend input:checked + span { color: #0f7a44; font-weight: 800; }
+.workshop-status--late { color: #b5473a; font-weight: 700; }
+@media (max-width: 991.98px) {
+    .workshop-form { grid-template-columns: 1fr 1fr; }
+    .clinic-row--trainee, .clinic-row--order, .clinic-row--product { grid-template-columns: 1fr 1fr; }
+}
+.workshop-filter { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .8rem; }
+.workshop-filter .workshop-chip { padding: .3rem .8rem; text-decoration: none; font-size: .84rem; }
+.workshop-filter .workshop-chip.is-on { background: #b5446e; color: #fff; }
+.clinic-row.is-inactive { opacity: .6; }
+/* صف الطلب طويل: ينقسم إلى أربعة أعمدة قبل أن يضيق المكان */
+@media (max-width: 1399.98px) {
+    .clinic-row--order { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .clinic-row--order.clinic-row--head { display: none; }
+}
+@media (max-width: 991.98px) {
+    .clinic-row--order { grid-template-columns: 1fr 1fr; }
+}
