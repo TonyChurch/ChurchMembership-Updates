@@ -167,3 +167,5 @@
 .nursery-birthday small { color: #6b7690; }
 .nursery-birthday.is-today { background: linear-gradient(135deg, #ffe1ef, #fff3c9); border-color: #e86fa0; box-shadow: 0 0 0 2px rgba(232, 111, 160, .25); }
 .nursery-birthday.is-past { opacity: .6; }
+.nursery-guardian-note { display: block; margin-top: .25rem; color: #13295b; font-size: .78rem; font-weight: 700; }
+.nursery-guardian-note i { color: #b7791f; }

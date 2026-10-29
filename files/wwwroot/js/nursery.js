@@ -48,7 +48,7 @@
                 if (data.member) {
                     const m = data.member;
                     fillEmpty('name', m.name);
-                    fillEmpty('guardianName', m.father);
+                    fillEmpty('guardianName', m.father || m.name.split(/\s+/).slice(1).join(' '));
                     fillEmpty('phone', m.phone);
                     fillEmpty('address', m.address);
                     const rows = [
@@ -88,7 +88,7 @@
             const set = (name, value) => { const target = field(name); if (target && value) { target.value = value; target.dispatchEvent(new Event("change", { bubbles: true })); } };
             set('birthDate', person.birthDate);
             set('gender', person.gender);
-            set('guardianName', person.father);
+            set('guardianName', person.father || person.name.split(/\s+/).slice(1).join(' '));
             set('phone', person.phone);
             set('address', person.address);
             const group = field('group');
@@ -138,6 +138,38 @@
             choose(person);
         });
         input.addEventListener('blur', () => setTimeout(close, 150));
+
+        // ولي الأمر من اسم الطفل: اسم الأب = اسم الطفل بدون الاسم الأول، وموبايله إن كان مسجلًا
+        input.addEventListener('change', async () => {
+            const guardian = field('guardianName');
+            if (!guardian || guardian.value.trim() || link.value) return;
+            try {
+                const response = await fetch(`/Nursery/LookupGuardian?childName=${encodeURIComponent(input.value)}`, { headers: { Accept: 'application/json' } });
+                if (!response.ok) return;
+                const data = await response.json();
+                if (!data.father || guardian.value.trim()) return;
+                guardian.value = data.father;
+                guardian.dispatchEvent(new Event('change', { bubbles: true }));
+                let note = guardian.parentElement.querySelector('.nursery-guardian-note');
+                if (!note) {
+                    note = document.createElement('small');
+                    note.className = 'nursery-guardian-note';
+                    guardian.insertAdjacentElement('afterend', note);
+                }
+                if (data.member) {
+                    const phone = field('phone');
+                    if (phone && !phone.value && data.member.phone) {
+                        phone.value = data.member.phone;
+                        phone.dispatchEvent(new Event('input', { bubbles: true }));
+                    }
+                    const address = field('address');
+                    if (address && !address.value && data.member.address) { address.value = data.member.address; address.dispatchEvent(new Event('change', { bubbles: true })); }
+                    note.innerHTML = `<i class="bi bi-person-check-fill"></i> الأب مسجل: ${escape(data.member.name)}${data.member.family ? ' · أسرة ' + escape(data.member.family) : ''}${data.member.phone ? ' · ' + escape(data.member.phone) : ''}`;
+                } else {
+                    note.innerHTML = '<i class="bi bi-info-circle"></i> من اسم الطفل؛ الأب غير مسجل في البرنامج.';
+                }
+            } catch { /* اختياري */ }
+        });
         input.addEventListener('keydown', event => { if (event.key === 'Escape') close(); });
     });
 })();
