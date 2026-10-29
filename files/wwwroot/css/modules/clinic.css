@@ -1,0 +1,62 @@
+/* المستوصف */
+.clinic__icon { background: linear-gradient(135deg, #0f8a7e, #34c3a8); }
+.clinic-card { padding: .9rem 1rem; margin-bottom: 1rem; }
+.clinic-card h2 { display: flex; align-items: center; gap: .45rem; margin: 0 0 .7rem; font-size: 1.05rem; font-weight: 800; color: #0f5f57; }
+.clinic-hint { margin: 0; color: #6b7690; font-size: .88rem; }
+.clinic-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+
+/* نموذج تسجيل متردد */
+.clinic-form { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; }
+.clinic-form label { display: grid; gap: .2rem; margin: 0; color: #5b6478; font-size: .84rem; font-weight: 700; }
+.clinic-form .is-wide { grid-column: span 2; }
+.clinic-form__kind { grid-column: 1 / -1; display: flex; gap: .5rem; flex-wrap: wrap; }
+.clinic-form__kind label { display: flex; align-items: center; gap: .35rem; padding: .35rem .8rem; border: 1px solid #d5e5e2; border-radius: 999px; background: #f4fbfa; cursor: pointer; }
+.clinic-form__kind input:checked + span { color: #0f5f57; font-weight: 800; }
+.clinic-form__actions { grid-column: 1 / -1; display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; }
+.clinic-form__free { display: flex !important; align-items: center; gap: .35rem; }
+
+/* جدول اليوم */
+.clinic-table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.clinic-table th { padding: .45rem .5rem; color: #5b6478; font-size: .8rem; text-align: start; border-bottom: 1px solid #e3e8f0; }
+.clinic-table td { padding: .45rem .5rem; border-bottom: 1px dashed #e8ecf3; vertical-align: middle; }
+.clinic-table tfoot td { font-weight: 800; border-bottom: 0; }
+.clinic-kind { display: inline-block; padding: .1rem .55rem; border-radius: 999px; font-size: .78rem; font-weight: 700; background: #e8f6f3; color: #0f5f57; }
+.clinic-kind--service { background: #fff3e0; color: #a35a00; }
+.clinic-free { color: #6b7690; font-size: .82rem; }
+.clinic-today { display: grid; gap: .4rem; }
+.clinic-today__item { display: grid; padding: .45rem .6rem; border-inline-start: 4px solid #0f8a7e; border-radius: .5rem; background: #f4fbfa; }
+.clinic-today__item b { color: #0f5f57; }
+.clinic-today__item small { color: #6b7690; }
+
+/* الصفوف القابلة للتعديل (الخدمات، المواعيد) */
+.clinic-row { display: grid; gap: .4rem; align-items: center; }
+.clinic-row--service { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) 7rem minmax(0, 1.4fr) auto 4.6rem; }
+.clinic-row--schedule { grid-template-columns: 8rem 7rem 7rem minmax(0, 1fr) 4.6rem; }
+.clinic-row--head { color: #6b7280; font-size: .8rem; font-weight: 700; padding: 0 .2rem; }
+.clinic-row--new .form-control:first-of-type, .clinic-row--new .form-select:first-of-type { border-style: dashed; }
+.clinic-rows { display: grid; gap: .35rem; }
+.clinic-actions { display: flex; gap: .25rem; }
+.clinic-active { display: flex; align-items: center; gap: .3rem; margin: 0; white-space: nowrap; font-size: .82rem; }
+
+/* بطاقة طبيب */
+.clinic-doctor { padding: .9rem 1rem; margin-bottom: 1rem; border-top: 4px solid #0f8a7e; scroll-margin-top: 5rem; }
+.clinic-doctor.is-inactive { opacity: .65; }
+.clinic-doctor__head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, .8fr) 7rem minmax(0, 1.2fr) auto auto; gap: .5rem; align-items: center; margin-bottom: .7rem; }
+.clinic-doctor__name { font-weight: 800; color: #0f5f57; }
+.clinic-week { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .6rem; }
+.clinic-week__day h3 { margin: 0 0 .35rem; padding: .3rem .6rem; border-radius: .5rem; background: #e8f6f3; color: #0f5f57; font-size: .9rem; font-weight: 800; }
+
+/* الحسابات */
+.clinic-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
+.clinic-sum { display: flex; justify-content: space-between; padding: .35rem 0; border-bottom: 1px dashed #e8ecf3; }
+.clinic-sum b { color: #0f5f57; }
+.clinic-net { font-size: 1.1rem; font-weight: 800; }
+.clinic-net.is-loss { color: #b5473a; }
+
+@media (max-width: 991.98px) {
+    .clinic-grid { grid-template-columns: 1fr; }
+    .clinic-form { grid-template-columns: 1fr 1fr; }
+    .clinic-row--service, .clinic-row--schedule, .clinic-doctor__head { grid-template-columns: 1fr 1fr; }
+    .clinic-row--head { display: none; }
+}
+@media print { .clinic-form, .clinic-actions { display: none !important; } }
