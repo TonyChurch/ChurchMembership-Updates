@@ -526,3 +526,52 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
     min-height: 34px;
     font-size: .84rem;
 }
+
+/* ---------- القوائم المنبثقة بلون مختلف عن القائمة: عاجي بإطار ذهبي ---------- */
+.right-sidebar__submenu {
+    background: #fbf6ea;
+    border: 1px solid #e6cf97;
+    box-shadow: inset 0 1px 0 #fff, 0 6px 16px rgba(4, 24, 18, .25);
+}
+
+.right-sidebar__submenu .right-sidebar__sublink {
+    color: #1f3d33;
+}
+
+.right-sidebar__submenu .right-sidebar__sublink > i:first-child {
+    color: #b7791f;
+}
+
+.right-sidebar__submenu .right-sidebar__sublink:hover,
+.right-sidebar__submenu .right-sidebar__sublink:focus {
+    color: #0e4433;
+    background: #f1e4c3;
+}
+
+.right-sidebar__submenu .right-sidebar__sublink.is-active {
+    color: #3d2a05;
+    background: linear-gradient(135deg, #ffe29a, #f5c563);
+    box-shadow: 0 3px 8px rgba(183, 121, 31, .3);
+}
+
+.right-sidebar__submenu .right-sidebar__sublink.is-active > i:first-child {
+    color: #7a4d0b;
+}
+
+.right-sidebar__submenu .right-sidebar__sublink.is-active::before {
+    background: #b7791f;
+}
+
+.right-sidebar__submenu .right-sidebar__subgroup-toggle.is-open,
+.right-sidebar__submenu .right-sidebar__subgroup-toggle[aria-expanded="true"] {
+    color: #0e4433;
+    background: #f1e4c3;
+}
+
+.right-sidebar__submenu .right-sidebar__subchevron {
+    color: #b7791f;
+}
+
+.right-sidebar__subsubmenu {
+    border-inline-start-color: #e6cf97;
+}
