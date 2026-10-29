@@ -1493,3 +1493,6 @@ input.form-control.is-ok-mark:not([type=date]):not([type=time]) {
 .page-title-form[hidden] { display: none; }
 .page-title-form small { grid-column: 1 / -1; color: #5b5240; }
 @media (max-width: 767.98px) { .page-title-form { grid-template-columns: 1fr; } }
+
+/* طفل الحضانة في تقرير أعياد الميلاد */
+.birthdays-nursery { display: inline-flex; align-items: center; gap: .25rem; margin-inline-start: .35rem; padding: .05rem .5rem; border-radius: 999px; background: #fff3dc; color: #8a5200; font-size: .75rem; font-weight: 700; }

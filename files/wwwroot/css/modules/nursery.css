@@ -156,3 +156,14 @@
 .nursery-manage-link { font-size: .78rem; font-weight: 600; }
 .clinic-row--class { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr) 6rem 6rem 4.6rem; }
 @media (max-width: 991.98px) { .clinic-row--class, .clinic-row--fee { grid-template-columns: 1fr 1fr; } }
+/* أعياد ميلاد أطفال الحضانة */
+.nursery-birthdays { border-inline-start: 5px solid #e86fa0; }
+.nursery-birthdays h2 i { color: #e86fa0; }
+.nursery-birthdays__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: .5rem; }
+.nursery-birthday { display: grid; gap: .1rem; padding: .55rem .75rem; border: 1px solid #f6d3e2; border-radius: .7rem; background: #fff7fb; color: inherit; text-decoration: none; }
+.nursery-birthday:hover { box-shadow: 0 4px 12px rgba(232, 111, 160, .2); color: inherit; }
+.nursery-birthday b { color: #b0386c; font-size: .82rem; }
+.nursery-birthday span { font-weight: 700; color: #13295b; }
+.nursery-birthday small { color: #6b7690; }
+.nursery-birthday.is-today { background: linear-gradient(135deg, #ffe1ef, #fff3c9); border-color: #e86fa0; box-shadow: 0 0 0 2px rgba(232, 111, 160, .25); }
+.nursery-birthday.is-past { opacity: .6; }
