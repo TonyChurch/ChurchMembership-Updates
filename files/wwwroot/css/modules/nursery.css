@@ -169,3 +169,13 @@
 .nursery-birthday.is-past { opacity: .6; }
 .nursery-guardian-note { display: block; margin-top: .25rem; color: #13295b; font-size: .78rem; font-weight: 700; }
 .nursery-guardian-note i { color: #b7791f; }
+/* تصفية حسابات الحضانة */
+.nursery-settle { border-inline-start: 5px solid #c9962e; }
+.clinic-sum.is-in b { color: #136c3a; }
+.clinic-sum.is-out b { color: #a32b2b; }
+.nursery-ledger td:nth-child(n+4), .nursery-ledger th:nth-child(n+4) { text-align: center; white-space: nowrap; }
+.nursery-ledger tr.is-opening td { background: #f6f0ff; font-weight: 700; }
+.nursery-ledger tr.is-fee td:nth-child(4), .nursery-ledger tr.is-in td:nth-child(4) { color: #136c3a; font-weight: 700; }
+.nursery-ledger tr.is-out td:nth-child(5) { color: #a32b2b; font-weight: 700; }
+.nursery-ledger tr.is-current td { background: #fff3dc; }
+.nursery-ledger tr.is-quiet td { color: #8a93a6; }
