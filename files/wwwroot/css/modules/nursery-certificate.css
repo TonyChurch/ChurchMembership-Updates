@@ -1,0 +1,112 @@
+/* شهادة الحضانة الشهرية وتقرير نهاية العام: صفحة A4 لكل طفل */
+
+@page { size: A4; margin: 10mm; }
+@page landscape { size: A4 landscape; margin: 9mm; }
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 1.2rem;
+    color: #2b2116;
+    font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+    background: #efe9dd;
+}
+
+.cert-tools { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-bottom: 1rem; }
+.cert-tools button, .cert-tools a {
+    padding: .5rem 1.1rem;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    background: #c46f0c;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.cert-tools a { color: #8a5200; background: #fff; border: 1px solid #e0a64a; }
+
+.cert {
+    position: relative;
+    max-width: 190mm;
+    min-height: 272mm;
+    margin: 0 auto 1.2rem;
+    padding: 12mm 14mm;
+    background:
+        radial-gradient(circle at 0 0, #fde7b8 0 22mm, transparent 22.5mm),
+        radial-gradient(circle at 100% 100%, #d9f0ff 0 26mm, transparent 26.5mm),
+        #fffdf8;
+    border: 4px solid #f0b54d;
+    border-radius: 18px;
+    outline: 2px dashed #8fc9ec;
+    outline-offset: -12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5mm;
+    break-after: page;
+}
+
+.cert--year { max-width: 279mm; min-height: 190mm; page: landscape; gap: 4mm; }
+
+.cert__head { display: flex; align-items: center; gap: 4mm; }
+.cert__logo { width: 18mm; height: 18mm; object-fit: contain; }
+.cert__church { margin: 0; font-size: 1.05rem; font-weight: 800; color: #6b3d00; }
+.cert__unit { margin: 0; color: #2c7fb8; font-weight: 700; }
+.cert__stars { margin-inline-start: auto; color: #f0b54d; font-size: 1.3rem; letter-spacing: .2rem; }
+
+.cert__title { margin: 0; text-align: center; font-size: 1.9rem; font-weight: 900; color: #c46f0c; }
+.cert--year .cert__title { font-size: 1.6rem; }
+.cert__month { margin: -3mm 0 0; text-align: center; color: #5b4a33; font-size: 1.05rem; }
+
+.cert__child { display: grid; grid-template-columns: repeat(auto-fit, minmax(38mm, 1fr)); gap: 2mm 4mm; padding: 3mm 4mm; background: #fff6e4; border: 1px solid #f3d9a6; border-radius: 10px; }
+.cert__child div { display: grid; }
+.cert__child span { color: #8a6a3d; font-size: .8rem; }
+.cert__child b { font-size: 1.05rem; color: #2b2116; }
+
+.cert__grades { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .95rem; border: 1px solid #e8d3a8; border-radius: 10px; overflow: hidden; }
+.cert__grades th { padding: 2.2mm 3mm; color: #fff; background: #2c7fb8; font-weight: 700; text-align: start; }
+.cert__grades td { padding: 2mm 3mm; border-top: 1px solid #f0e2c4; }
+.cert__grades tbody tr:nth-child(even) td { background: #fffaf0; }
+.cert__grades tfoot td { font-weight: 800; background: #fff1d6; border-top: 2px solid #f0b54d; }
+.cert__grades small { color: #8a7a62; font-weight: 400; }
+.cert__num { text-align: center; font-weight: 700; }
+.cert__grades--year { font-size: .82rem; }
+.cert__grades--year th, .cert__grades--year td { padding: 1.6mm 2mm; text-align: center; }
+.cert__grades--year th:first-child, .cert__grades--year td:first-child { text-align: start; }
+
+.cert__rating { display: inline-block; padding: .05rem .55rem; border-radius: 999px; font-size: .85em; font-weight: 800; }
+.is-excellent { color: #0f6b3a; background: #dcf5e6; }
+.is-very-good { color: #1d5d8f; background: #dceefc; }
+.is-good { color: #6b4d00; background: #fff0c2; }
+.is-pass { color: #8a4b00; background: #ffe2c2; }
+.is-weak { color: #9b1c1c; background: #fde0e0; }
+b.is-excellent, b.is-very-good, b.is-good, b.is-pass, b.is-weak { padding: .1rem .7rem; border-radius: 999px; }
+
+.cert__overall { margin: 0; text-align: center; font-size: 1.15rem; }
+.cert__empty { text-align: center; color: #8a7a62; padding: 10mm 0; }
+
+.cert__note { padding: 3mm 4mm; border: 1px dashed #e0a64a; border-radius: 10px; background: #fff; }
+.cert__note > span { color: #8a6a3d; font-size: .82rem; font-weight: 700; }
+.cert__note p { margin: 1mm 0 0; line-height: 1.8; }
+.cert__note ul { margin: 1mm 0 0; padding-inline-start: 5mm; font-size: .88rem; line-height: 1.7; }
+
+.cert__signs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; margin-top: auto; padding-top: 6mm; text-align: center; }
+.cert__signs span { font-weight: 700; color: #5b4a33; }
+.cert__signs i { display: block; margin-top: 10mm; border-top: 1px dotted #8a7a62; }
+.cert__verse { margin: 0; text-align: center; color: #2c7fb8; font-size: .85rem; }
+
+@media print {
+    body { padding: 0; background: #fff; }
+    .cert-tools { display: none; }
+    .cert { margin: 0; box-shadow: none; min-height: 0; height: 277mm; }
+    .cert--year { height: 192mm; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (max-width: 700px) {
+    body { padding: .5rem; }
+    .cert { padding: 6mm; min-height: 0; }
+    .cert__title { font-size: 1.4rem; }
+    .cert--year { overflow-x: auto; }
+}
