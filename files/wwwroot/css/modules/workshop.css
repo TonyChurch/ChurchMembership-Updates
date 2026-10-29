@@ -71,3 +71,9 @@
     .workshop-sheet th, .workshop-sheet td { min-width: 0; padding: .1rem; }
 }
 .workshop-deduct span, .workshop-deduct b { color: #a32b2b; }
+/* معتذر، وموعد الحضور في قائمة العاملين */
+.clinic-row.is-excused { border-inline-start-color: #8a8fa3; }
+.workshop-sheet td.is-excused { background: #eef0f4; color: #4b5266; font-weight: 800; }
+.workshop-late-note { display: block; font-size: .78rem; }
+.clinic-row--worker { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 7.5rem minmax(0, 1fr) minmax(0, 1.4fr) auto 4.6rem; }
+@media (max-width: 991.98px) { .clinic-row--worker { grid-template-columns: 1fr 1fr; } }

@@ -34,3 +34,18 @@
 .nursery-chip--brothers { background: #fbe7f0 !important; color: #9b2c5c !important; }
 .clinic-row--fee { border-inline-start: 4px solid transparent; padding-inline-start: .4rem; }
 .nursery-x { border: 0; background: none; color: #a32b2b; padding: 0 .1rem; line-height: 1; font-weight: 800; }
+/* نتيجة فحص الرقم القومي للطفل */
+.nursery-nid-result { padding: .55rem .75rem; border-radius: .6rem; font-size: .88rem; border: 1px solid #e3e8f0; background: #f8fafc; }
+.nursery-nid-result.is-error { border-color: #f1b2b2; background: #fff4f4; color: #a32b2b; }
+.nursery-nid-result.is-found { border-color: #9fd8b6; background: #f1fbf5; color: #136c3a; }
+.nursery-nid-result.is-new { border-color: #b9c6f5; background: #f3f6ff; color: #2d3f8f; }
+.nursery-nid-data { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: .35rem 0; color: #334155; }
+.nursery-member-card { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; }
+/* اقتراحات اسم الطفل من المسجلين في البرنامج */
+.nursery-name-field { position: relative; }
+.nursery-name-results { position: absolute; inset-inline: 0; top: 100%; z-index: 20; display: grid; gap: .15rem; max-height: 18rem; overflow-y: auto; margin-top: .2rem; padding: .35rem; border: 1px solid #f3e2c4; border-radius: .6rem; background: #fff; box-shadow: 0 10px 24px rgba(15, 23, 42, .12); }
+.nursery-name-results[hidden] { display: none; }
+.nursery-name-results__hint { color: #8a5200; font-weight: 700; padding: .1rem .3rem; }
+.nursery-name-results button { display: grid; gap: .05rem; text-align: start; padding: .35rem .5rem; border: 0; border-radius: .45rem; background: none; }
+.nursery-name-results button:hover, .nursery-name-results button:focus { background: #fff3dc; }
+.nursery-name-results button small { color: #6b7690; font-weight: 400; }
