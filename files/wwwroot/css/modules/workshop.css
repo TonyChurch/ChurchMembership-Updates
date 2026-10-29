@@ -70,3 +70,4 @@
     .workshop-sheet { font-size: .7rem; }
     .workshop-sheet th, .workshop-sheet td { min-width: 0; padding: .1rem; }
 }
+.workshop-deduct span, .workshop-deduct b { color: #a32b2b; }
