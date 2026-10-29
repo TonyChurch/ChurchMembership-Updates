@@ -1480,3 +1480,6 @@ input.form-control.is-ok-mark:not([type=date]):not([type=time]) {
 .id-owner > i { color: #b7791f; }
 .id-owner small { color: #5b5240; }
 .id-owner a { color: #8a5a10; }
+
+/* بطاقة صاحب الرقم: نفس تصميم القوائم المنبثقة */
+.id-owner { border: 1.5px solid #e6cf97; border-inline-start: 5px solid #c9962e; font-weight: 600; box-shadow: inset 0 1px 0 #fff, 0 4px 12px rgba(183, 121, 31, .15); }

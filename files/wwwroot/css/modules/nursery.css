@@ -142,3 +142,9 @@
     .clinic-row--child-day { grid-template-columns: 1fr 1fr; }
     .clinic-row--child-day > .nursery-day-name, .clinic-row--child-day > .nursery-status-buttons { grid-column: 1 / -1; }
 }
+/* شريط النتيجة تحت الخانة بتصميم القوائم المنبثقة: عاجي، إطار ذهبي، شريط ذهبي على الطرف، نص أخضر داكن */
+.nursery-nid-result { border: 1.5px solid #e6cf97; border-inline-start: 5px solid #c9962e; background: #fbf6ea; color: #1f3d33; box-shadow: inset 0 1px 0 #fff, 0 4px 12px rgba(183, 121, 31, .15); font-weight: 600; }
+.nursery-nid-result i { color: #b7791f; }
+.nursery-nid-result.is-found, .nursery-nid-result.is-new { border-color: #e6cf97; border-inline-start-color: #c9962e; }
+.nursery-nid-result.is-error { border-color: #f0c2c2; border-inline-start-color: #d64545; background: #fff7f2; color: #a32b2b; }
+.nursery-nid-result.is-error i { color: #d64545; }
