@@ -195,9 +195,31 @@ document.addEventListener("DOMContentLoaded", () => {
         if (id?.dataset.identitySetup) check(id, "NationalId");
     });
 
+    // صاحب الرقم إن وُجد: بطاقة صغيرة تحت الخانة بالاسم والكود والأسرة والمكان والهاتف والعنوان ورابط الملف
+    const escapeHtml = text => String(text ?? "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+    const showOwner = (input, owner) => {
+        let card = input.parentElement.querySelector(".id-owner");
+        if (!owner) { card?.remove(); return; }
+        if (!card) {
+            card = document.createElement("div");
+            card.className = "id-owner";
+            (input.parentElement.querySelector(".id-check") || input).insertAdjacentElement("afterend", card);
+        }
+        const parts = [owner.code, owner.family ? "أسرة " + owner.family : "", owner.place, owner.phone, owner.address].filter(Boolean);
+        card.innerHTML = `<i class="bi bi-person-vcard-fill" aria-hidden="true"></i><span><b>${escapeHtml(owner.kind)} ${escapeHtml(owner.name)}${owner.hidden ? " (مخفي)" : ""}</b>`
+            + (parts.length ? `<small>${parts.map(escapeHtml).join(" · ")}</small>` : "") + "</span>"
+            + (owner.url ? `<a href="${owner.url}" target="_blank" rel="noopener">فتح الملف</a>` : "");
+    };
+    // في صفحات العضو والأسرة والخادم لا يتكرر الرقم (خطأ يمنع الحفظ)؛ وفي باقي الصفحات يُعرض صاحبه للعلم فقط
+    const isStrict = (form, input) => {
+        if (input?.dataset.memberId || input?.dataset.familyId) return true;
+        const action = (form?.getAttribute("action") || location.pathname).toLowerCase();
+        return /\/(members|families|servants)(\/|$|\?)/.test(action);
+    };
+
     const check = async (input, kind) => {
         const value = input.value.trim();
-        if (!value) { showMessage(input, true, ""); return; }
+        if (!value) { showMessage(input, true, ""); showOwner(input, null); return; }
         const params = contextOf(input.form, input);
         params.set("value", value);
         // هاتف أب الاعتراف وهاتف حساب المستخدم: الشكل فقط (يتكرران طبيعيًا)
@@ -211,6 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (kind === "NationalId" && data.birthDate) fillFromNationalId(input, data);
             const genderError = kind === "NationalId" && data.ok && data.gender ? roleGenderError(input, data.gender) : "";
             if (genderError) { showMessage(input, false, genderError); return; }
+            showOwner(input, data.owner);
+            if (!data.ok && "owner" in data && !isStrict(input.form, input)) {
+                showMessage(input, true, data.owner ? "ℹ️ مسجل في البرنامج:" : "ℹ️ " + data.message.replace("بالفعل ", ""));
+                return;
+            }
             showMessage(input, data.ok, data.ok ? (kind === "NationalId" && data.birthDate ? `✓ ${data.gender} · ${data.age} سنة` : "✓") : data.message);
         } catch { /* الفحص الفوري اختياري؛ الحفظ يتحقق مرة أخرى */ }
     };
@@ -225,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const clean = toLatinDigits(input.value).replace(/\D/g, "").slice(0, length);
             if (clean !== input.value) input.value = clean;
             if (clean.length === length) check(input, kind);
-            else showMessage(input, true, "");
+            else { showMessage(input, true, ""); showOwner(input, null); }
         });
         input.addEventListener("blur", () => {
             if (!input.value) return;

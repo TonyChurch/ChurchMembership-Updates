@@ -1455,3 +1455,10 @@ ul.page-stats .ui-birthdays { height: 100%; min-height: 2.6rem; flex-wrap: nowra
 .kb-dialog td:first-child { width: 42%; white-space: nowrap; }
 .kb-dialog kbd { padding: .1rem .45rem; color: #1e293b; background: #f1f4f9; border: 1px solid #d5dbe6; border-radius: 6px; font-family: inherit; font-size: .82rem; box-shadow: 0 1px 0 #cbd2de; }
 .kb-dialog p { margin: .7rem 0; color: #5b6478; font-size: .84rem; }
+
+/* صاحب الرقم القومي أو الموبايل تحت الخانة (site.js) */
+.id-owner { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .6rem; margin-top: .3rem; padding: .4rem .6rem; border: 1px solid #cfe0f5; border-radius: .55rem; background: #f3f8ff; color: #1e3a5f; font-size: .8rem; line-height: 1.5; }
+.id-owner > i { color: #2563eb; font-size: 1rem; }
+.id-owner span { display: grid; flex: 1 1 12rem; min-width: 0; }
+.id-owner small { color: #51607a; overflow-wrap: anywhere; }
+.id-owner a { font-weight: 700; white-space: nowrap; }
