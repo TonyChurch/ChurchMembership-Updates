@@ -118,3 +118,27 @@
 /* الخلفية البيضاء حول الشعار تذوب في لون الصفحة؛ ويبقى الشعار بإطاره الذهبي */
 .nursery-brand-art { isolation: auto; }
 .nursery-brand-preview img { mix-blend-mode: multiply; border: 0; background: transparent; }
+/* حضور الأطفال: قائمة الفصول وكشف الفصل */
+.nursery-classbar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: .6rem; }
+.nursery-classbar label { display: grid; gap: .2rem; color: #8a5200; font-weight: 700; min-width: 15rem; }
+.nursery-classes { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: .6rem; }
+.nursery-class { display: grid; justify-items: start; gap: .2rem; padding: .8rem .9rem; color: inherit; text-decoration: none; border: 1px solid #f3e2c4; border-inline-start: 5px solid #e9c98a; border-radius: .8rem; background: #fffdf8; }
+.nursery-class:hover { box-shadow: 0 6px 16px rgba(224, 138, 30, .18); color: inherit; }
+.nursery-class > i { color: #e08a1e; font-size: 1.3rem; }
+.nursery-class strong { color: #8a5200; font-size: 1.1rem; }
+.nursery-class small { color: #6b7690; }
+.nursery-class.is-done { border-inline-start-color: #1f9d55; }
+.nursery-class.is-done .workshop-chip { background: #e5f6ec; color: #136c3a; }
+.nursery-class.is-partial { border-inline-start-color: #d39e00; }
+.clinic-row--child-day { grid-template-columns: minmax(0, 1.3fr) auto 6.5rem minmax(0, 1fr) 6.5rem minmax(0, 1.1fr); border-inline-start: 4px solid transparent; padding-inline-start: .4rem; }
+.nursery-day-name { display: flex; align-items: center; gap: .35rem; }
+.nursery-status-buttons { display: inline-flex; gap: .2rem; }
+.nursery-status-buttons button { padding: .3rem .55rem; border: 1px solid #e3e8f0; border-radius: .5rem; background: #fff; color: #5b6478; font-size: .8rem; font-weight: 700; }
+.nursery-status-buttons button.is-present.is-on { background: #1f9d55; border-color: #1f9d55; color: #fff; }
+.nursery-status-buttons button.is-late.is-on { background: #d39e00; border-color: #d39e00; color: #fff; }
+.nursery-status-buttons button.is-absent.is-on { background: #d64545; border-color: #d64545; color: #fff; }
+.nursery-status-buttons button.is-excused.is-on { background: #8a8fa3; border-color: #8a8fa3; color: #fff; }
+@media (max-width: 991.98px) {
+    .clinic-row--child-day { grid-template-columns: 1fr 1fr; }
+    .clinic-row--child-day > .nursery-day-name, .clinic-row--child-day > .nursery-status-buttons { grid-column: 1 / -1; }
+}
