@@ -108,6 +108,7 @@
         ["Alt + ←  /  Alt + →", "رجوع وتقدّم المتصفح"],
         ["↓  /  ↑", "التنقل بين صفوف الجدول (القائمة)"],
         ["Enter", "فتح الصف المحدد في الجدول"],
+        ["↑ ↓ ← →  داخل الخانات", "التنقل بين الخانات: ↑ ↓ لنفس العمود في الصف السابق/التالي (جداول الدرجات وصفوف التعديل) أو للخانة السابقة/التالية، و← → عند طرف النص"],
         ["→  /  ←", "الفترة السابقة / التالية (الشهر أو الأسبوع أو السنة) في صفحات الحضور والتقارير"],
         ["Home  /  End", "أول الصفحة / آخرها"],
         ["Page Up  /  Page Down", "صفحة لأعلى / لأسفل"],
@@ -154,6 +155,72 @@
         if (!handled && event.code === "Slash") { handled = true; if (event.shiftKey) showShortcuts(); else handled = focusSearch(); }
         if (!handled && (event.key === "?" || event.key === "؟")) { handled = true; showShortcuts(); }
         if (!handled && event.code === "KeyN" && !event.shiftKey) handled = addNew();
+        if (handled) event.preventDefault();
+    });
+
+    // ---------- الأسهم بين الخانات ----------
+    // داخل جدول خانات (الدرجات، صفوف التعديل): ↑ ↓ لنفس العمود في الصف السابق/التالي.
+    // وفي النماذج العادية: ↑ ↓ للخانة السابقة/التالية. ← → تنتقل عند طرف النص فقط (← للتالية في الصفحات العربية).
+    // القوائم المنسدلة ومربعات النص الطويل والخانات ذات الاقتراحات تبقى على سلوكها العادي.
+    const FIELD = "input:not([type=hidden]):not([type=checkbox]):not([type=radio]):not([type=file]):not([type=submit]):not([type=button]), select, textarea";
+    const fieldsIn = scope => [...scope.querySelectorAll(FIELD)].filter(el => !el.disabled && !el.readOnly && el.offsetParent !== null);
+    const gridRow = el => {
+        const row = el.closest(".clinic-row:not(.clinic-row--head), tr");
+        const grid = row?.parentElement?.closest(".clinic-rows, tbody, table");
+        return row && grid ? { row, grid } : null;
+    };
+    const gridRows = grid => [...grid.querySelectorAll(".clinic-row:not(.clinic-row--head), tr")].filter(row => fieldsIn(row).length > 0);
+    function focusField(target) {
+        if (!target) return false;
+        target.focus();
+        if (target.select && /^(text|search|tel|number|email|url)$/.test(target.type || "text")) { try { target.select(); } catch { } }
+        return true;
+    }
+    function moveVertical(el, step) {
+        const place = gridRow(el);
+        if (place) {
+            const rowsList = gridRows(place.grid);
+            const index = rowsList.indexOf(place.row);
+            const next = rowsList[index + step];
+            if (!next) return false;
+            const column = fieldsIn(place.row).indexOf(el);
+            const targets = fieldsIn(next);
+            return focusField(targets[Math.min(column, targets.length - 1)]);
+        }
+        const list = fieldsIn(el.form || document);
+        return focusField(list[list.indexOf(el) + step]);
+    }
+    function moveSideways(el, step) {
+        const scope = gridRow(el)?.row || el.form || document;
+        const list = fieldsIn(scope);
+        return focusField(list[list.indexOf(el) + step]);
+    }
+    function atEdge(el, forward) {
+        if (el.tagName !== "INPUT") return false;
+        if (el.type === "number") return true;
+        if (/^(date|time|datetime-local|month|week)$/.test(el.type)) return false;
+        try {
+            if (el.selectionStart !== el.selectionEnd && el.value) return false;
+            return forward ? el.selectionEnd === el.value.length : el.selectionStart === 0;
+        } catch { return true; }
+    }
+    document.addEventListener("keydown", event => {
+        const el = event.target;
+        if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+        if (!(el instanceof HTMLElement) || !el.matches(FIELD) || el.tagName === "TEXTAREA") return;
+        if (!/^Arrow(Up|Down|Left|Right)$/.test(event.key)) return;
+        let handled = false;
+        if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+            // القائمة المنسدلة والخانة ذات الاقتراحات تستعمل الأسهم لاختيار عنصر
+            if (el.tagName === "SELECT" || el.list) return;
+            handled = moveVertical(el, event.key === "ArrowDown" ? 1 : -1);
+        } else {
+            if (el.tagName === "SELECT") return;
+            const rtl = getComputedStyle(el).direction === "rtl";
+            const forward = (event.key === "ArrowLeft") === rtl;
+            if (!atEdge(el, forward)) return;
+            handled = moveSideways(el, forward ? 1 : -1);
+        }
         if (handled) event.preventDefault();
     });
 

@@ -51,6 +51,7 @@ body {
 
 .cert__head { display: flex; align-items: center; gap: 4mm; }
 .cert__logo { width: 18mm; height: 18mm; object-fit: contain; }
+.cert__logo.has-logo { width: 30mm; height: 30mm; }
 .cert__church { margin: 0; font-size: 1.05rem; font-weight: 800; color: #6b3d00; }
 .cert__unit { margin: 0; color: #2c7fb8; font-weight: 700; }
 .cert__stars { margin-inline-start: auto; color: #f0b54d; font-size: 1.3rem; letter-spacing: .2rem; }
@@ -109,4 +110,28 @@ b.is-excellent, b.is-very-good, b.is-good, b.is-pass, b.is-weak { padding: .1rem
     .cert { padding: 6mm; min-height: 0; }
     .cert__title { font-size: 1.4rem; }
     .cert--year { overflow-x: auto; }
+}
+
+/* الطباعة: كل شهادة أو تقرير في صفحة واحدة */
+@media print {
+    html { font-size: 12px; }
+    .cert { padding: 8mm 10mm; gap: 3mm; outline-offset: -7px; overflow: hidden; }
+    .cert__logo.has-logo { width: 26mm; height: 26mm; }
+    .cert__grades th { padding: 1.6mm 2.5mm; }
+    .cert__grades td { padding: 1.3mm 2.5mm; }
+    .cert__signs { padding-top: 3mm; }
+    .cert__signs i { margin-top: 8mm; }
+    .cert--year { padding: 6mm 9mm; gap: 2.5mm; }
+    .cert--year .cert__logo.has-logo { width: 20mm; height: 20mm; }
+    .cert__grades--year th, .cert__grades--year td { padding: 1mm 1.6mm; }
+}
+@media print {
+    .cert--year .cert__logo.has-logo { width: 16mm; height: 16mm; }
+    .cert--year .cert__title { font-size: 1.35rem; }
+    .cert--year .cert__child { padding: 1.5mm 3mm; }
+    .cert--year .cert__grades--year th, .cert--year .cert__grades--year td { padding: .7mm 1.5mm; }
+    .cert--year .cert__overall { font-size: 1rem; }
+    .cert--year .cert__note { padding: 1.5mm 3mm; }
+    .cert--year .cert__signs { padding-top: 1mm; }
+    .cert--year .cert__signs i { margin-top: 6mm; }
 }
