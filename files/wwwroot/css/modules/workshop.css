@@ -37,3 +37,36 @@
 @media (max-width: 991.98px) {
     .clinic-row--order { grid-template-columns: 1fr 1fr; }
 }
+/* العاملون: حضور اليوم وكشف الشهر */
+.workshop > .clinic-card { min-width: 0; }
+.workshop-daybar { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.workshop-daybar .form-control { width: auto; }
+.clinic-row--worker-day { grid-template-columns: minmax(0, 1.4fr) 9.5rem 7.5rem 7.5rem minmax(0, 1.2fr); border-inline-start: 4px solid transparent; padding-inline-start: .4rem; }
+.clinic-row--worker { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr) auto 4.6rem; }
+.clinic-row.is-present { border-inline-start-color: #1f9d55; }
+.clinic-row.is-late { border-inline-start-color: #d39e00; }
+.clinic-row.is-absent { border-inline-start-color: #d64545; }
+.clinic-row.is-leave { border-inline-start-color: #6b6fd6; }
+.workshop-month-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.workshop-sheet { border-collapse: collapse; font-size: .82rem; min-width: 100%; }
+.workshop-sheet th, .workshop-sheet td { min-width: 1.7rem; padding: .25rem .2rem; text-align: center; border: 1px solid #ecdde4; }
+.workshop-sheet thead th { background: #fbeef3; color: #8a2f55; }
+.workshop-sheet thead a { color: inherit; text-decoration: none; display: block; }
+.workshop-sheet th.is-friday { background: #f3e1e9; }
+.workshop-sheet th.is-current { background: #b5446e; color: #fff; }
+.workshop-sheet .workshop-sheet__name { min-width: 9rem; text-align: start; white-space: nowrap; position: sticky; inset-inline-start: 0; background: #fff; }
+.workshop-sheet thead .workshop-sheet__name { background: #fbeef3; }
+.workshop-sheet td.is-present { background: #e5f6ec; color: #136c3a; font-weight: 800; }
+.workshop-sheet td.is-late { background: #fff5d6; color: #8a6400; font-weight: 800; }
+.workshop-sheet td.is-absent { background: #fde6e6; color: #a32b2b; font-weight: 800; }
+.workshop-sheet td.is-leave { background: #ebebfd; color: #3e42a8; font-weight: 800; }
+.workshop-sheet__total { font-weight: 800; background: #fafafa; }
+@media (max-width: 991.98px) {
+    .clinic-row--worker-day { grid-template-columns: 1fr 1fr; }
+    .clinic-row--worker-day > span:first-of-type { grid-column: 1 / -1; }
+    .clinic-row--worker { grid-template-columns: 1fr 1fr; }
+}
+@media print {
+    .workshop-sheet { font-size: .7rem; }
+    .workshop-sheet th, .workshop-sheet td { min-width: 0; padding: .1rem; }
+}
