@@ -205,9 +205,10 @@ document.addEventListener("DOMContentLoaded", () => {
             card.className = "id-owner";
             (input.parentElement.querySelector(".id-check") || input).insertAdjacentElement("afterend", card);
         }
-        const parts = [owner.code, owner.family ? "أسرة " + owner.family : "", owner.place, owner.phone, owner.address].filter(Boolean);
+        const parts = [owner.code, owner.family ? "أسرة " + owner.family : "", owner.phone, owner.address].filter(Boolean);
         card.innerHTML = `<i class="bi bi-person-vcard-fill" aria-hidden="true"></i><span><b>${escapeHtml(owner.kind)} ${escapeHtml(owner.name)}${owner.hidden ? " (مخفي)" : ""}</b>`
-            + (parts.length ? `<small>${parts.map(escapeHtml).join(" · ")}</small>` : "") + "</span>"
+            + (parts.length ? `<small>${parts.map(escapeHtml).join(" · ")}</small>` : "")
+            + (owner.place ? `<small class="is-place">${escapeHtml(owner.place)}</small>` : "") + "</span>"
             + (owner.url ? `<a href="${owner.url}" target="_blank" rel="noopener">فتح الملف</a>` : "");
     };
     // في صفحات العضو والأسرة والخادم لا يتكرر الرقم (خطأ يمنع الحفظ)؛ وفي باقي الصفحات يُعرض صاحبه للعلم فقط

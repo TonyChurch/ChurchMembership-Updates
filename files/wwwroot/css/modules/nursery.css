@@ -148,3 +148,6 @@
 .nursery-nid-result.is-found, .nursery-nid-result.is-new { border-color: #e6cf97; border-inline-start-color: #c9962e; }
 .nursery-nid-result.is-error { border-color: #f0c2c2; border-inline-start-color: #d64545; background: #fff7f2; color: #a32b2b; }
 .nursery-nid-result.is-error i { color: #d64545; }
+/* نص الشريط بالأزرق الداكن وبخط أثقل، عدا المرحلة والفصل فيبقيان كما هما */
+.nursery-nid-result.is-found, .nursery-nid-result.is-new, .nursery-nid-result.is-found strong, .nursery-nid-result .nursery-nid-data, .nursery-nid-result .nursery-nid-data b { color: #13295b; font-weight: 700; }
+.nursery-nid-result.is-new b, .nursery-nid-result .nursery-nid-data .is-place, .nursery-nid-result .nursery-nid-data .is-place b { color: #8a5a10; font-weight: 700; }

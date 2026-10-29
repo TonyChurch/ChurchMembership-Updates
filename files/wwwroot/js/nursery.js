@@ -54,7 +54,7 @@
                     const rows = [
                         ['الاسم', m.name], ['الكود', m.code], ['الأسرة', m.family], ['الأب', m.father], ['الأم', m.mother],
                         ['الموبايل', m.phone], ['العنوان', m.address], ['المرحلة والفصل', m.place], ['خادم المتابعة', m.servant]
-                    ].filter(row => row[1]).map(row => `<span><b>${row[0]}:</b> ${escape(row[1])}</span>`).join('');
+                    ].filter(row => row[1]).map(row => `<span${row[0] === "المرحلة والفصل" ? " class=\"is-place\"" : ""}><b>${row[0]}:</b> ${escape(row[1])}</span>`).join('');
                     show(`<strong><i class="bi bi-person-check-fill"></i> مسجل في البرنامج${m.hidden ? ' (ملف مخفي)' : ''} — سيُربط به عند الحفظ</strong>`
                         + `<div class="nursery-nid-data">${rows}</div><a href="${m.url}" target="_blank" rel="noopener">فتح ملفه</a>`, 'is-found');
                     return;
