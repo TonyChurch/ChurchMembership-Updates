@@ -51,7 +51,7 @@ body {
 
 .cert__head { display: flex; align-items: center; gap: 4mm; }
 .cert__logo { width: 18mm; height: 18mm; object-fit: contain; }
-.cert__logo.has-logo { width: 30mm; height: 30mm; }
+.cert__logo.has-logo { width: 30mm; height: 30mm; mix-blend-mode: multiply; }
 .cert__church { margin: 0; font-size: 1.05rem; font-weight: 800; color: #6b3d00; }
 .cert__unit { margin: 0; color: #2c7fb8; font-weight: 700; }
 .cert__stars { margin-inline-start: auto; color: #f0b54d; font-size: 1.3rem; letter-spacing: .2rem; }

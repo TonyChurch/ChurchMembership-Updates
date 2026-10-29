@@ -12,7 +12,7 @@
         // يُملأ الحقل إن كان فارغًا فقط، حتى لا يُمسح ما كتبه المستخدم
         const fillEmpty = (name, value) => {
             const target = field(name);
-            if (target && value && !target.value) target.value = value;
+            if (target && value && !target.value) { target.value = value; target.dispatchEvent(new Event("change", { bubbles: true })); }
         };
         const show = (html, tone) => {
             box.innerHTML = html;
@@ -35,9 +35,9 @@
                     return;
                 }
                 const birth = field('birthDate');
-                if (birth) birth.value = data.birthDate;
+                if (birth) { birth.value = data.birthDate; birth.dispatchEvent(new Event("change", { bubbles: true })); }
                 const gender = field('gender');
-                if (gender && data.gender) gender.value = data.gender;
+                if (gender && data.gender) { gender.value = data.gender; gender.dispatchEvent(new Event("change", { bubbles: true })); }
                 fillEmpty('group', data.group);
 
                 if (data.nurseryChild) {
@@ -85,14 +85,14 @@
         const choose = person => {
             close();
             input.value = person.name;
-            const set = (name, value) => { const target = field(name); if (target && value) target.value = value; };
+            const set = (name, value) => { const target = field(name); if (target && value) { target.value = value; target.dispatchEvent(new Event("change", { bubbles: true })); } };
             set('birthDate', person.birthDate);
             set('gender', person.gender);
             set('guardianName', person.father);
             set('phone', person.phone);
             set('address', person.address);
             const group = field('group');
-            if (group && !group.value && person.group) group.value = person.group;
+            if (group && !group.value && person.group) { group.value = person.group; group.dispatchEvent(new Event("change", { bubbles: true })); }
             link.value = person.id;
             const nid = field('childNationalId');
             if (nid && person.nationalId) {
@@ -117,6 +117,7 @@
                     const response = await fetch(`/Nursery/LookupName?name=${encodeURIComponent(input.value)}&id=${input.dataset.childId || 0}`, { headers: { Accept: 'application/json' } });
                     if (!response.ok) return;
                     found = await response.json();
+                    if (document.activeElement !== input) return;
                     if (!found.length) { close(); return; }
                     list.innerHTML = '<small class="nursery-name-results__hint">مسجلون في البرنامج بنفس الاسم — اختر الطفل لربطه بملفه:</small>'
                         + found.map((person, index) => `<button type="button" data-index="${index}">`

@@ -292,3 +292,56 @@ document.addEventListener("change", event => {
     input.value = other ? "" : select.value;
     if (other) input.focus();
 });
+
+// =========================================================
+// علامة «صح» خضراء تحت كل خانة مُلئت بلا أخطاء، في كل نماذج الحفظ بالبرنامج.
+// تظهر بعد الخروج من الخانة (لا أثناء الكتابة)، وتختفي إن فُرغت الخانة أو صارت خاطئة.
+// خانات الرقم القومي والموبايل لها رسالتها الخاصة (✓ أو الخطأ) من فحص الهوية أعلاه.
+// في الصفوف والجداول الضيقة تظهر العلامة داخل الخانة نفسها حتى لا يختل الترتيب.
+// =========================================================
+(() => {
+    const SKIP_TYPES = /^(hidden|checkbox|radio|file|submit|button|reset|search|image|range|color)$/;
+    const eligible = field => {
+        if (!(field instanceof HTMLElement) || !field.matches("input, select, textarea")) return false;
+        if (field.tagName === "INPUT" && SKIP_TYPES.test(field.type)) return false;
+        if (field.disabled || field.readOnly || field.dataset.identitySetup || field.closest("[data-no-ok]")) return false;
+        const form = field.form;
+        // نماذج الحفظ فقط داخل محتوى الصفحة (لا البحث والفلاتر ولا الشريط الجانبي)
+        return !!form && (form.method || "").toLowerCase() === "post" && !!field.closest(".app-main, main");
+    };
+    const compact = field => !!field.closest(".clinic-row, td, th, .input-group, .fb-field");
+    const anchorOf = field => field.closest(".app-date-field") || field;
+
+    function mark(field) {
+        if (!eligible(field)) return;
+        const anchor = anchorOf(field);
+        let note = anchor.nextElementSibling?.classList.contains("field-ok") ? anchor.nextElementSibling : null;
+        const ok = field.value.trim() !== "" && field.checkValidity();
+        if (compact(field)) {
+            note?.remove();
+            field.classList.toggle("is-ok-mark", ok);
+            return;
+        }
+        if (!ok) { note?.remove(); return; }
+        if (!note) {
+            note = document.createElement("small");
+            note.className = "field-ok";
+            note.innerHTML = '<i class="bi bi-check-circle-fill" aria-hidden="true"></i>';
+            note.setAttribute("aria-hidden", "true");
+            anchor.insertAdjacentElement("afterend", note);
+        }
+    }
+
+    document.addEventListener("focusout", event => mark(event.target));
+    document.addEventListener("change", event => mark(event.target));
+    // أثناء الكتابة: تُزال العلامة إن صارت الخانة فارغة أو خاطئة فقط
+    document.addEventListener("input", event => {
+        const field = event.target;
+        if (!eligible(field)) return;
+        if (field.value.trim() === "" || !field.checkValidity()) {
+            field.classList.remove("is-ok-mark");
+            const anchor = anchorOf(field);
+            if (anchor.nextElementSibling?.classList.contains("field-ok")) anchor.nextElementSibling.remove();
+        }
+    });
+})();

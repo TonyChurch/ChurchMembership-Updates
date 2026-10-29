@@ -1462,3 +1462,21 @@ ul.page-stats .ui-birthdays { height: 100%; min-height: 2.6rem; flex-wrap: nowra
 .id-owner span { display: grid; flex: 1 1 12rem; min-width: 0; }
 .id-owner small { color: #51607a; overflow-wrap: anywhere; }
 .id-owner a { font-weight: 700; white-space: nowrap; }
+
+/* علامة «صح» خضراء تحت الخانة الصحيحة (site.js) */
+.field-ok { display: inline-flex; align-items: center; gap: .25rem; margin-top: .2rem; color: #0a7a55; font-size: .9rem; line-height: 1; }
+.form-control.is-ok-mark, .form-select.is-ok-mark { border-color: #3fb17d; }
+input.form-control.is-ok-mark:not([type=date]):not([type=time]) {
+    padding-inline-end: 1.9rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230a7a55'%3e%3cpath d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.02L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: .95rem;
+    background-position: left .55rem center;
+}
+[dir=ltr] input.form-control.is-ok-mark, input.form-control.is-ok-mark[dir=ltr] { background-position: right .55rem center; }
+
+/* بطاقة صاحب الرقم تحت الخانة: عاجي بإطار ذهبي كالقوائم المنبثقة */
+.id-owner { border-color: #e6cf97; background: #fbf6ea; color: #1f3d33; box-shadow: inset 0 1px 0 #fff, 0 3px 10px rgba(183, 121, 31, .12); }
+.id-owner > i { color: #b7791f; }
+.id-owner small { color: #5b5240; }
+.id-owner a { color: #8a5a10; }
