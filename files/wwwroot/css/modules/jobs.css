@@ -1,0 +1,26 @@
+/* مكتب التوظيف (يعتمد على clinic.css وworkshop.css وnursery.css، بألوان خاصة) */
+.jobs__icon { background: linear-gradient(135deg, #1f6f8b, #4fb3c8); }
+.jobs .clinic-card h2 { color: #17536a; }
+.jobs .workshop-chip { background: #e3f3f7; color: #17536a; }
+.jobs .workshop-filter .workshop-chip.is-on { background: #1f6f8b; color: #fff; }
+.jobs .nursery-child { border-color: #cfe7ee; border-top-color: #1f6f8b; }
+.jobs .nursery-child:hover { box-shadow: 0 6px 18px rgba(31, 111, 139, .18); }
+.jobs .nursery-child strong { color: #17536a; }
+.jobs .nursery-card__icon { background: linear-gradient(135deg, #1f6f8b, #4fb3c8); }
+.jobs .nursery-card__head { border-bottom-color: #cfe7ee; }
+.jobs .nursery-card__data dt { color: #17536a; }
+.jobs-search { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .7rem; }
+.jobs-search .form-control { max-width: 22rem; }
+.jobs-status--searching { background: #e3f3f7 !important; color: #17536a !important; }
+.jobs-status--employed, .jobs-status--hired { background: #e5f6ec !important; color: #136c3a !important; }
+.jobs-status--stopped, .jobs-status--rejected, .jobs-status--closed { background: #eef0f4 !important; color: #4b5266 !important; }
+.jobs-status--interviewed { background: #fff5d6 !important; color: #8a6400 !important; }
+.clinic-row--referral { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.4fr) 8rem 9.5rem minmax(0, 1.2fr) 4.6rem; }
+.jobs-candidates { display: grid; gap: .3rem; }
+.jobs-candidates form { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding: .4rem .6rem; border: 1px solid #e3edf1; border-radius: .6rem; margin: 0; }
+.jobs-candidates form.is-match { border-color: #9fd2df; background: #f2fafc; }
+.jobs-candidates small { color: #6b7690; }
+.jobs-candidates .ui-btn { margin-inline-start: auto; }
+@media (max-width: 991.98px) {
+    .clinic-row--referral { grid-template-columns: 1fr 1fr; }
+}
