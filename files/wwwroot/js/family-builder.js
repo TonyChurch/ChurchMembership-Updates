@@ -36,6 +36,29 @@
 
     const ageText = age => age < 1 ? "أقل من سنة" : age === 1 ? "سنة" : age === 2 ? "سنتان" : age <= 10 ? `${age} سنوات` : `${age} سنة`;
 
+    // المرحلة الدراسية من تاريخ الميلاد: السن في 1 أكتوبر من العام الدراسي الحالي (شرط القبول في مصر)
+    const schoolStage = birth => {
+        const today = new Date();
+        const schoolYear = today.getFullYear() - (today.getMonth() < 8 ? 1 : 0);
+        const age = schoolYear - birth.getFullYear() - (birth > new Date(birth.getFullYear(), 9, 1) ? 1 : 0);
+        const grades = ["أولى", "ثانية", "ثالثة", "رابعة", "خامسة", "سادسة"];
+        if (age < 2 || age > 17) return "";
+        if (age < 4) return "حضانة";
+        if (age < 6) return `كي جي ${age - 3}`;
+        if (age < 12) return `${grades[age - 6]} ابتدائي`;
+        return age < 15 ? `${grades[age - 12]} إعدادي` : `${grades[age - 15]} ثانوي`;
+    };
+
+    // خانة «الدراسة» للأبناء تُملأ من الرقم القومي، وما يكتبه المستخدم بنفسه لا يُستبدل
+    const fillEducation = pane => {
+        if (pane.dataset.slot !== "child") return;
+        const education = field(pane, "Education");
+        if (!education || education.dataset.manual) return;
+        if (education.value.trim() && education.value !== education.dataset.auto) return;
+        const info = readNid(val(pane, "NationalId"));
+        education.value = education.dataset.auto = info ? schoolStage(info.birth) : "";
+    };
+
     const roleOf = pane => {
         const info = readNid(val(pane, "NationalId"));
         switch (pane.dataset.slot) {
@@ -73,6 +96,7 @@
 
     // ---------- بطاقات الأفراد ----------
     const renderCard = pane => {
+        fillEducation(pane);
         if (!pane.card) {
             pane.card = document.createElement("button");
             pane.card.type = "button";
@@ -334,7 +358,8 @@
         nameInput.addEventListener("change", schedule);
         field(pane, "NationalId")?.addEventListener("change", schedule);
         field(pane, "Phone")?.addEventListener("change", schedule);
-        if (idInput.value) { setOwner(idInput.value); showAttached(); }
+        // بعد رجوع الحفظ بملاحظات تعود الحقول مملوءة، فيلزم البحث من جديد ليظهر «ضمّه لهذه الأسرة»
+        if (idInput.value) { setOwner(idInput.value); showAttached(); } else lookup();
     };
 
     const setupPane = pane => {
@@ -413,6 +438,7 @@
 
         // اسم الابن: الاسم الأول يُكمل باسم الأب
         const name = field(pane, "FullName");
+        field(pane, "Education")?.addEventListener("input", event => { event.target.dataset.manual = "1"; });
         if (pane.dataset.slot === "child") {
             name.addEventListener("blur", () => {
                 const father = bySlot("father");
