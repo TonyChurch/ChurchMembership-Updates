@@ -427,3 +427,9 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
         flex: 1 1 170px;
     }
 }
+
+.fb-serving-note {
+    grid-column: 1 / -1;
+    color: var(--ui-primary);
+    font-weight: 600;
+}

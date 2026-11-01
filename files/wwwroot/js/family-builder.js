@@ -362,6 +362,40 @@
         if (idInput.value) { setOwner(idInput.value); showAttached(); } else lookup();
     };
 
+    // «يخدم في الكنيسة»: الخادم المسجل تُملأ مرحلته وفصله ودوره من تكليفه، ويبقى التعديل اليدوي ممكنًا
+    const fillServing = async pane => {
+        const serving = pane.querySelector("[data-serving]");
+        const fields = pane.querySelector("[data-serving-fields]");
+        const stage = field(pane, "ServingServiceStageId");
+        fields?.querySelector(".fb-serving-note")?.remove();
+        if (!serving?.checked || !fields || !stage || stage.value) return;
+        const query = new URLSearchParams({
+            memberId: pane.querySelector("[data-existing-id]")?.value || "",
+            nationalId: val(pane, "NationalId"), phone: val(pane, "Phone"), name: val(pane, "FullName")
+        });
+        try {
+            const response = await fetch(`/api/activity/serving?${query}`, { headers: { Accept: "application/json" } });
+            if (!response.ok) return;
+            const found = await response.json();
+            if (!found || !serving.checked || stage.value) return;
+            stage.value = String(found.stageId);
+            stage.dispatchEvent(new Event("change", { bubbles: true }));
+            const classSelect = field(pane, "ServingServiceClassId");
+            if (classSelect && found.classId) {
+                classSelect.value = String(found.classId);
+                classSelect.dispatchEvent(new Event("change", { bubbles: true }));
+            }
+            const role = field(pane, "ServiceRole");
+            if (role && [...role.options].some(option => option.value === found.role)) role.value = found.role;
+            const start = fields.querySelector('[name$="Year"]');
+            if (start && !start.value && found.startYear) start.value = found.startYear;
+            const note = document.createElement("small");
+            note.className = "fb-serving-note fb-field--wide";
+            note.textContent = `من سجل الخدام: ${found.name} — ${found.stage}${found.more ? " (يوجد تكليف آخر أيضًا)" : ""}`;
+            fields.append(note);
+        } catch { /* الملء التلقائي اختياري */ }
+    };
+
     const setupPane = pane => {
         setupMatch(pane);
         pane.querySelectorAll("[data-tab]").forEach(tab => tab.addEventListener("click", () => {
@@ -418,7 +452,8 @@
         }
 
         const serving = pane.querySelector("[data-serving]");
-        serving.addEventListener("change", () => toggle(pane, serving, "[data-serving-fields]"));
+        serving.addEventListener("change", () => { toggle(pane, serving, "[data-serving-fields]"); fillServing(pane); });
+        ["FullName", "NationalId", "Phone"].forEach(name => field(pane, name)?.addEventListener("change", () => fillServing(pane)));
         toggle(pane, serving, "[data-serving-fields]");
         const special = pane.querySelector("[data-special]");
         special.addEventListener("change", () => toggle(pane, special, "[data-special-type]"));
