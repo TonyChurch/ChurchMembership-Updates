@@ -827,3 +827,100 @@ document.addEventListener("change", event => {
     });
     list.replaceWith(bar, wrap);
 })();
+
+// الحضانة: زر «حفظ الملف» في نموذج طفل جديد، ثم رسالة تأكيد والرجوع إلى النموذج لتسجيل طفل آخر
+(() => {
+    if (location.pathname.toLowerCase().replace(/\/$/, "") !== "/nursery") return;
+    const form = document.querySelector("form.nursery-child-form");
+    if (!form) return;
+    const key = "nursery-child-saved";
+    const button = form.querySelector('button[type="submit"]');
+    if (button) {
+        const icon = document.createElement("i");
+        icon.className = "bi bi-check2-circle";
+        icon.setAttribute("aria-hidden", "true");
+        button.replaceChildren(icon, " حفظ الملف");
+    }
+    form.addEventListener("submit", () => {
+        try { sessionStorage.setItem(key, JSON.stringify({ name: form.querySelector('[name="name"]').value.trim(), at: Date.now() })); } catch { /* يبقى الحفظ كالمعتاد */ }
+    });
+    let saved = null;
+    try { saved = JSON.parse(sessionStorage.getItem(key)); sessionStorage.removeItem(key); } catch { /* لا رسالة */ }
+    if (!saved || Date.now() - saved.at > 60000 || !saved.name) return;
+    const known = [...document.querySelectorAll('a[href^="/Nursery/Child/"]')].some(link => link.textContent.includes(saved.name));
+    if (!known) return;
+    const notice = document.createElement("div");
+    notice.className = "nursery-saved";
+    notice.setAttribute("role", "status");
+    notice.textContent = `تم حفظ ملف الطفل: ${saved.name}`;
+    document.body.append(notice);
+    setTimeout(() => notice.remove(), 6000);
+    // بعد اكتمال رسم الصفحة والجدول، وإلا يرجع المتصفح لموضعه السابق
+    window.addEventListener("load", () => setTimeout(() => {
+        form.closest("#new-child")?.scrollIntoView({ block: "start" });
+        form.querySelector('[name="name"]')?.focus({ preventScroll: true });
+    }, 250));
+})();
+
+// ملف الخادم: إضافة مناسبة له من بطاقة «مناسباته القادمة»
+(() => {
+    if (location.pathname.toLowerCase() !== "/servants/profile") return;
+    const memberId = Number(new URLSearchParams(location.search).get("memberId"));
+    const card = document.querySelector('[aria-labelledby="spOccasionsTitle"]');
+    if (!memberId || !card) return;
+    const url = "/api/activity/servant-event";
+    const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text) node.textContent = text;
+        return node;
+    };
+    const fill = (select, items) => select.append(...items.map(([value, text]) => {
+        const option = make("option", "", text);
+        option.value = value;
+        return option;
+    }));
+    const labelled = (text, control) => {
+        const box = make("label", "fb-events__field");
+        box.append(make("span", "", text), control);
+        return box;
+    };
+    fetch(url).then(response => {
+        if (!response.ok) return;
+        const types = [[1, "عيد زواج"], [2, "معمودية"], [3, "الميرون"], [4, "أول اعتراف"], [5, "أول تناول"], [6, "سيامة أغنسطس"], [7, "سيامة أبسالتس"], [8, "سيامة قارئ"],
+            [9, "سيامة شماس"], [10, "سيامة كاهن"], [11, "سيامة قمص"], [12, "بدء الخدمة"], [14, "نياحة"], [13, "مناسبة أخرى"], [0, "عيد ميلاد"]];
+        const open = make("button", "ui-btn ui-btn--ghost servant-event__open", "إضافة مناسبة");
+        open.type = "button";
+        card.querySelector(".sp-card__head").append(open);
+        const panel = make("div", "fb-events__grid servant-event");
+        panel.hidden = true;
+        const type = make("select", "form-select"), date = make("input", "form-control"), recurrence = make("select", "form-select"), notes = make("input", "form-control");
+        fill(type, types);
+        fill(recurrence, [["1", "سنوي"], ["0", "لا يتكرر"], ["2", "شهري"], ["3", "أسبوعي"]]);
+        date.type = "date";
+        notes.placeholder = "اختياري";
+        const save = make("button", "ui-btn", "حفظ المناسبة");
+        save.type = "button";
+        const status = make("small", "servant-event__status");
+        panel.append(labelled("نوع المناسبة", type), labelled("التاريخ", date), labelled("التكرار", recurrence), labelled("ملاحظات", notes), save, status);
+        card.querySelector(".sp-card__head").after(panel);
+        open.addEventListener("click", () => { panel.hidden = !panel.hidden; });
+        save.addEventListener("click", async () => {
+            if (!date.value) { date.focus(); return; }
+            const name = (document.querySelector("h1")?.textContent || "").trim();
+            const kind = type.selectedOptions[0].textContent;
+            save.disabled = true;
+            status.textContent = "";
+            try {
+                const result = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "X-Servant-Event": "1" },
+                    body: JSON.stringify({ memberId, type: Number(type.value), title: `${kind} — ${name}`, date: date.value, recurrence: Number(recurrence.value), notes: notes.value })
+                });
+                if (result.ok) { location.reload(); return; }
+                status.textContent = "تعذر حفظ المناسبة، راجع البيانات وحاول مرة أخرى.";
+            } catch { status.textContent = "تعذر الاتصال، حاول مرة أخرى."; }
+            save.disabled = false;
+        });
+    }).catch(() => { /* الزر إضافي */ });
+})();

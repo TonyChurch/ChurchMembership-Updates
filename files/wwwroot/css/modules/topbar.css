@@ -657,3 +657,47 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
     white-space: nowrap;
     font-size: .8rem;
 }
+
+/* رسالة حفظ ملف الطفل */
+.nursery-saved {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    z-index: 2100;
+    max-width: calc(100vw - 24px);
+    padding: .75rem 1.25rem;
+    transform: translateX(-50%);
+    border-radius: 12px;
+    background: #059669;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .25);
+}
+
+/* مناسبات ملف الخادم */
+.servant-event__open {
+    margin-inline-start: auto;
+    padding: .25rem .7rem;
+    font-size: .8rem;
+}
+
+.servant-event {
+    margin-block: .6rem;
+}
+
+.servant-event[hidden] {
+    display: none;
+}
+
+.servant-event__status {
+    grid-column: 1 / -1;
+    color: #dc2626;
+}
+
+.servant-event__status:empty {
+    display: none;
+}
+
+#new-child {
+    scroll-margin-top: 130px;
+}
