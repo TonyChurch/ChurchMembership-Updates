@@ -470,3 +470,19 @@ document.addEventListener("change", event => {
     load();
     setInterval(() => { if (!document.hidden) load(); }, 120000);
 })();
+
+// صفحات الأسرة: زر ثابت يفتح «إضافة أسرة» مباشرة
+(() => {
+    const path = location.pathname.toLowerCase();
+    if (!/^\/families(\/|$)/.test(path) || path.startsWith("/families/create")) return;
+    const link = document.createElement("a");
+    link.href = "/Families/Create";
+    link.className = "family-add-fab";
+    const icon = document.createElement("i");
+    icon.className = "bi bi-house-add-fill";
+    icon.setAttribute("aria-hidden", "true");
+    const text = document.createElement("span");
+    text.textContent = "أسرة جديدة";
+    link.append(icon, text);
+    document.body.append(link);
+})();
