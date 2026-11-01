@@ -747,28 +747,83 @@ document.addEventListener("change", event => {
     });
 })();
 
-// الحضانة: بطاقات الأطفال داخل قائمة مطوية ومختصرة مع بحث بالاسم أو الهاتف، وتفتح تلقائيًا عند اختيار مجموعة
+// الحضانة: الأطفال في جدول على مثال سجل الأسر، مع بحث بالاسم أو الهاتف
 (() => {
     const list = document.querySelector(".nursery-children");
     if (!list || location.pathname.toLowerCase().replace(/\/$/, "") !== "/nursery") return;
-    const cards = [...list.querySelectorAll(".nursery-child")];
-    const key = "nursery-archive-open";
-    const box = document.createElement("details");
-    box.className = "nursery-archive";
-    const title = document.createElement("summary");
-    title.textContent = `أرشيف الأطفال (${cards.length})`;
-    const search = document.createElement("input");
-    search.type = "search";
-    search.className = "form-control";
-    search.placeholder = "ابحث بالاسم أو الهاتف";
-    list.replaceWith(box);
-    box.append(title, search, list);
-    let saved = false;
-    try { saved = localStorage.getItem(key) === "1"; } catch { /* يبدأ مطويًا */ }
-    box.open = saved || new URLSearchParams(location.search).has("group");
-    box.addEventListener("toggle", () => { try { localStorage.setItem(key, box.open ? "1" : "0"); } catch { /* لا شيء */ } });
-    search.addEventListener("input", () => {
-        const text = search.value.trim();
-        cards.forEach(card => { card.hidden = !!text && !card.textContent.includes(text); });
+    const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text) node.textContent = text;
+        return node;
+    };
+    const cell = (...content) => {
+        const box = make("td");
+        box.append(...content);
+        return box;
+    };
+    const rows = [...list.querySelectorAll(".nursery-child")].map((card, index) => {
+        const name = card.querySelector("strong").textContent.trim();
+        const href = card.getAttribute("href");
+        const id = href.split("/").pop();
+        const [age, guardian = ""] = card.querySelector("small").textContent.split("· ولي الأمر:").map(item => item.trim());
+        const phone = card.querySelector('small[dir="ltr"]')?.textContent.trim() || "";
+        const health = card.querySelector(".nursery-health")?.textContent.trim() || "";
+        const group = card.querySelector(".workshop-chip")?.textContent.trim() || "—";
+
+        const avatar = make("span", "ui-avatar", name[0]);
+        avatar.setAttribute("aria-hidden", "true");
+        const photo = make("img", "nursery-table__photo");
+        photo.alt = "";
+        photo.loading = "lazy";
+        photo.src = `/api/activity/nursery-photo/${id}`;
+        photo.addEventListener("load", () => avatar.replaceChildren(photo));
+        const link = make("a", "", name);
+        link.href = href;
+        const text = make("span", "ui-person__text");
+        text.append(link);
+        if (health) text.append(make("small", "nursery-table__health", health));
+        const person = make("div", "ui-person");
+        person.append(avatar, text);
+
+        const phoneLink = phone ? make("a", "", phone) : document.createTextNode("—");
+        if (phone) { phoneLink.href = `tel:${phone}`; phoneLink.dir = "ltr"; }
+        const open = make("a", "ui-btn ui-btn--ghost nursery-table__open", "فتح الملف");
+        open.href = href;
+
+        const row = make("tr");
+        row.append(cell(make("span", "", String(index + 1))), cell(person), cell(guardian || "—"), cell(age), cell(make("span", "workshop-chip", group)), cell(phoneLink), cell(open));
+        row.lastChild.className = "no-print";
+        row.dataset.search = `${name} ${guardian} ${phone}`;
+        return row;
     });
+
+    const table = make("table", "ui-table members-table nursery-table");
+    const head = make("tr");
+    ["م", "الطفل", "ولي الأمر", "السن", "الفصل", "الهاتف", "الإجراءات"].forEach((title, index) => {
+        head.append(make("th", index === 6 ? "no-print" : "", title));
+    });
+    const thead = make("thead"), tbody = make("tbody");
+    thead.append(head);
+    tbody.append(...rows);
+    table.append(thead, tbody);
+    const wrap = make("div", "table-responsive");
+    wrap.append(table);
+
+    const bar = make("div", "nursery-table__bar no-print");
+    const search = make("input", "form-control");
+    search.type = "search";
+    search.placeholder = "ابحث باسم الطفل أو ولي الأمر أو الهاتف";
+    const count = make("small", "", `${rows.length} طفل`);
+    bar.append(search, count);
+    search.addEventListener("input", () => {
+        const value = search.value.trim();
+        let shown = 0;
+        rows.forEach(row => {
+            row.hidden = !!value && !row.dataset.search.includes(value);
+            if (!row.hidden) shown++;
+        });
+        count.textContent = `${shown} طفل`;
+    });
+    list.replaceWith(bar, wrap);
 })();

@@ -618,3 +618,42 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
         margin-bottom: .75rem;
     }
 }
+
+/* جدول أطفال الحضانة على مثال سجل الأسر */
+.nursery-table__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+    margin-block: .5rem;
+}
+
+.nursery-table__bar input {
+    flex: 0 1 360px;
+}
+
+.nursery-table tr[hidden] {
+    display: none;
+}
+
+.nursery-table .ui-avatar {
+    overflow: hidden;
+    flex: 0 0 auto;
+}
+
+.nursery-table__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nursery-table__health {
+    display: block;
+    color: #be123c;
+}
+
+.nursery-table__open {
+    padding: .25rem .7rem;
+    white-space: nowrap;
+    font-size: .8rem;
+}
