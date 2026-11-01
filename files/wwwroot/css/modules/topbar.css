@@ -388,3 +388,42 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
         display: none;
     }
 }
+
+/* زر «إضافة مناسبة» بجوار حفظ الأسرة */
+.fb-top__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: .5rem;
+}
+
+.fb-add-event {
+    background: var(--ui-surface);
+    color: var(--ui-primary);
+    border: 1px solid var(--ui-primary);
+    box-shadow: none;
+}
+
+.fb-add-event:hover {
+    background: var(--ui-primary);
+    color: #fff;
+}
+
+@media (max-width: 1399.98px) {
+    .fb-top {
+        grid-template-columns: auto minmax(160px, 1fr) auto;
+    }
+
+    .fb-top > :not(.ui-back, .fb-top__title, .fb-top__actions) {
+        grid-column: 1 / -1;
+        order: 5;
+    }
+
+    .fb-top__title {
+        flex-wrap: wrap;
+    }
+
+    .fb-top__title > div {
+        flex: 1 1 170px;
+    }
+}

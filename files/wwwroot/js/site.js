@@ -486,3 +486,42 @@ document.addEventListener("change", event => {
     link.append(icon, text);
     document.body.append(link);
 })();
+
+// صفحة بيانات الأسرة: زر «إضافة مناسبة». المناسبة تتبع أسرة محفوظة، فالأسرة الجديدة تُحفظ أولًا ثم تفتح صفحة المناسبة
+(() => {
+    const key = "family-add-event";
+    const read = () => { try { return Number(sessionStorage.getItem(key)) || 0; } catch { return 0; } };
+    const write = value => { try { if (value) sessionStorage.setItem(key, value); else sessionStorage.removeItem(key); } catch { /* تُحفظ الأسرة فقط */ } };
+    const eventUrl = id => `/MemberEvents/Create?familyId=${id}&returnUrl=${encodeURIComponent(`/Families/Profile/${id}`)}`;
+    const path = location.pathname.toLowerCase();
+
+    const saved = path.match(/^\/families\/profile\/(\d+)/);
+    if (saved) {
+        const asked = read();
+        write(0);
+        if (asked && Date.now() - asked < 600000) location.replace(eventUrl(saved[1]));
+        return;
+    }
+
+    const save = document.querySelector(".fb-top .fb-save");
+    if (!save) return;
+    const existing = path.match(/^\/families\/addmembers\/(\d+)/);
+    const actions = document.createElement("div");
+    actions.className = "fb-top__actions";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "ui-btn fb-add-event";
+    button.title = existing ? "فتح صفحة مناسبة لهذه الأسرة" : "تُحفظ الأسرة أولًا ثم تفتح صفحة المناسبة";
+    const icon = document.createElement("i");
+    icon.className = "bi bi-calendar-heart";
+    icon.setAttribute("aria-hidden", "true");
+    button.append(icon, " إضافة مناسبة");
+    save.replaceWith(actions);
+    actions.append(button, save);
+    save.addEventListener("click", () => write(0));
+    button.addEventListener("click", () => {
+        if (existing) { location.href = eventUrl(existing[1]); return; }
+        write(Date.now());
+        save.form.requestSubmit(save);
+    });
+})();
