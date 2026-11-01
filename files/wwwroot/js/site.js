@@ -924,3 +924,18 @@ document.addEventListener("change", event => {
         });
     }).catch(() => { /* الزر إضافي */ });
 })();
+
+// سجل الخدام: زر «المناسبات» بجوار «عرض الكل» يفتح مناسبات الخدام
+(() => {
+    const all = document.querySelector(".servants-title__all");
+    if (!all) return;
+    const link = document.createElement("a");
+    link.className = "ui-btn ui-btn--ghost no-print";
+    link.href = "/MemberEvents?servants=true&period=upcoming";
+    link.title = "مناسبات الخدام القادمة";
+    const icon = document.createElement("i");
+    icon.className = "bi bi-calendar-heart";
+    icon.setAttribute("aria-hidden", "true");
+    link.append(icon, " المناسبات");
+    all.before(link);
+})();
