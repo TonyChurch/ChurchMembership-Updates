@@ -594,3 +594,27 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
         display: none;
     }
 }
+
+/* صورة الطفل بحجم أكبر في ملفه */
+.nursery-photo img,
+.nursery-photo > i {
+    width: 170px;
+    height: 210px;
+    font-size: 3.5rem;
+}
+
+.nursery-photo__head {
+    width: 170px;
+    height: 210px;
+    border: 3px solid #e0a64a;
+    border-radius: 18px;
+}
+
+@media (max-width: 575.98px) {
+    .nursery-photo__head {
+        float: none;
+        display: block;
+        margin-inline: auto;
+        margin-bottom: .75rem;
+    }
+}
