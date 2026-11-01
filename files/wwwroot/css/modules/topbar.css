@@ -701,3 +701,17 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
 #new-child {
     scroll-margin-top: 130px;
 }
+
+/* عدد مناسبات الخدام على الزر */
+.servants-events__count {
+    display: inline-block;
+    min-width: 22px;
+    padding: 0 6px;
+    border-radius: 11px;
+    background: var(--ui-primary);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+}

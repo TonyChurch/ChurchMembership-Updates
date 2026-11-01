@@ -939,3 +939,22 @@ document.addEventListener("change", event => {
     link.append(icon, " المناسبات");
     all.before(link);
 })();
+
+// سجل الخدام: عدد مناسبات الخدام القادمة على زر «المناسبات»، من تبويبات صفحة المناسبات نفسها
+(() => {
+    const link = document.querySelector('a[href^="/MemberEvents?servants=true&period=upcoming"]');
+    if (!link) return;
+    fetch(link.href)
+        .then(response => response.ok ? response.text() : "")
+        .then(html => {
+            const tab = new DOMParser().parseFromString(html, "text/html").querySelector('a[href*="period=upcoming"][href*="servants=true"]');
+            const count = tab?.textContent.match(/\d+/)?.[0];
+            if (!count) return;
+            const badge = document.createElement("span");
+            badge.className = "servants-events__count";
+            badge.textContent = count;
+            link.append(" ", badge);
+            link.title = `${count} مناسبة قادمة للخدام`;
+        })
+        .catch(() => { /* الزر يعمل بدون العدد */ });
+})();
