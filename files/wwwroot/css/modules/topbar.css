@@ -433,3 +433,164 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
     color: var(--ui-primary);
     font-weight: 600;
 }
+
+/* مناسبات الأسرة داخل الاستمارة */
+.fb-events {
+    display: grid;
+    gap: .6rem;
+    margin-top: .75rem;
+    padding: .9rem 1rem;
+}
+
+.fb-events[hidden] {
+    display: none;
+}
+
+.fb-events__hint {
+    color: var(--ui-text-muted);
+}
+
+.fb-events__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    align-items: end;
+    gap: .6rem;
+}
+
+.fb-events__field {
+    display: grid;
+    gap: .25rem;
+    margin: 0;
+    font-size: .85rem;
+}
+
+.fb-events__list {
+    display: grid;
+    gap: .35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fb-events__list:empty {
+    display: none;
+}
+
+.fb-events__list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    padding: .4rem .7rem;
+    border-radius: 10px;
+    background: rgba(59, 91, 253, .08);
+}
+
+.fb-events__remove {
+    border: 0;
+    background: transparent;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* صورة طفل الحضانة */
+.nursery-photo {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: .75rem;
+}
+
+.nursery-photo img,
+.nursery-photo > i {
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+    border: 1px dashed var(--ui-border);
+    border-radius: 14px;
+    object-fit: cover;
+    color: var(--ui-text-muted);
+    font-size: 2rem;
+}
+
+.nursery-photo img[hidden],
+.nursery-photo > i[hidden],
+.nursery-photo__remove[hidden] {
+    display: none;
+}
+
+.nursery-photo label {
+    margin: 0;
+    cursor: pointer;
+}
+
+.nursery-photo__remove {
+    border: 0;
+    background: transparent;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.nursery-photo__head {
+    float: right;
+    width: 72px;
+    height: 72px;
+    margin-inline-end: .75rem;
+    border-radius: 14px;
+    object-fit: cover;
+}
+
+.nursery-photo__head[hidden] {
+    display: none;
+}
+
+/* أرشيف الأطفال: قائمة مطوية ومختصرة */
+.nursery-archive summary {
+    padding: .5rem .25rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.nursery-archive input[type="search"] {
+    max-width: 340px;
+    margin-block: .5rem;
+}
+
+.nursery-archive .nursery-children {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: .35rem;
+}
+
+.nursery-archive .nursery-child {
+    gap: 0;
+    min-height: 0;
+    padding: .35rem .7rem;
+}
+
+.nursery-archive .nursery-child[hidden],
+.nursery-archive .nursery-health,
+.nursery-archive .nursery-child__nums:empty {
+    display: none;
+}
+
+.nursery-archive .nursery-child strong {
+    overflow: hidden;
+    font-size: .9rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.nursery-archive .nursery-child small {
+    font-size: .75rem;
+}
+
+@media print {
+    .nursery-archive input[type="search"],
+    .nursery-archive summary {
+        display: none;
+    }
+}

@@ -487,41 +487,288 @@ document.addEventListener("change", event => {
     document.body.append(link);
 })();
 
-// صفحة بيانات الأسرة: زر «إضافة مناسبة». المناسبة تتبع أسرة محفوظة، فالأسرة الجديدة تُحفظ أولًا ثم تفتح صفحة المناسبة
+// صفحة بيانات الأسرة: «إضافة مناسبة». المناسبات تُكتب في الاستمارة وتُحفظ بعد حفظ الأسرة مباشرة في ملفها
 (() => {
-    const key = "family-add-event";
-    const read = () => { try { return Number(sessionStorage.getItem(key)) || 0; } catch { return 0; } };
-    const write = value => { try { if (value) sessionStorage.setItem(key, value); else sessionStorage.removeItem(key); } catch { /* تُحفظ الأسرة فقط */ } };
+    const queueKey = "family-events", savingKey = "family-events-saving";
+    const load = () => { try { return JSON.parse(sessionStorage.getItem(queueKey)) || []; } catch { return []; } };
+    const store = list => { try { sessionStorage.setItem(queueKey, JSON.stringify(list)); } catch { /* تبقى في الصفحة فقط */ } };
+    const mark = value => { try { if (value) sessionStorage.setItem(savingKey, value); else sessionStorage.removeItem(savingKey); } catch { /* لا شيء */ } };
+    const marked = () => { try { return Number(sessionStorage.getItem(savingKey)) || 0; } catch { return 0; } };
+    const clear = () => { store([]); mark(0); };
     const eventUrl = id => `/MemberEvents/Create?familyId=${id}&returnUrl=${encodeURIComponent(`/Families/Profile/${id}`)}`;
     const path = location.pathname.toLowerCase();
 
+    // بعد الحفظ: الأسرة صارت لها صفحة، فتُرسل مناسباتها عبر نموذج المناسبة المعتاد
     const saved = path.match(/^\/families\/profile\/(\d+)/);
     if (saved) {
-        const asked = read();
-        write(0);
-        if (asked && Date.now() - asked < 600000) location.replace(eventUrl(saved[1]));
+        const justSaved = Date.now() - marked() < 120000 && document.referrer.toLowerCase().includes("/families/create");
+        const list = justSaved ? load() : [];
+        mark(0);
+        if (!list.length) return;
+        clear();
+        (async () => {
+            const failed = [];
+            for (const item of list) {
+                try {
+                    const page = await (await fetch(eventUrl(saved[1]))).text();
+                    const form = [...new DOMParser().parseFromString(page, "text/html").forms].find(entry => entry.querySelector('[name="EventType"]'));
+                    const data = new FormData(form);
+                    const owner = [...form.querySelector('[name="MemberId"]').options].find(option => option.textContent.trim() === item.person);
+                    data.set("EventType", item.type);
+                    data.set("MemberId", owner ? owner.value : "");
+                    data.set("Title", item.person ? item.title : `${item.kind} — ${document.title.split(" - ")[0].replace("ملف ", "")}`);
+                    data.set("EventDate", item.date);
+                    data.set("Recurrence", item.recurrence);
+                    data.set("Notes", item.notes);
+                    const response = await fetch(form.getAttribute("action"), { method: "POST", body: new URLSearchParams(data) });
+                    if (!response.ok || response.url.includes("/MemberEvents/")) failed.push(item.title);
+                } catch { failed.push(item.title); }
+            }
+            if (!failed.length) { location.reload(); return; }
+            const alert = document.createElement("div");
+            alert.className = "ui-flash ui-flash--danger";
+            alert.setAttribute("role", "alert");
+            alert.textContent = `حُفظت الأسرة، لكن لم تُحفظ هذه المناسبات: ${failed.join("، ")}. أضفها من «مناسبات الأسرة».`;
+            (document.querySelector(".ui-page") || document.querySelector("main") || document.body).prepend(alert);
+        })();
         return;
     }
 
     const save = document.querySelector(".fb-top .fb-save");
     if (!save) return;
-    const existing = path.match(/^\/families\/addmembers\/(\d+)/);
     const actions = document.createElement("div");
     actions.className = "fb-top__actions";
     const button = document.createElement("button");
     button.type = "button";
     button.className = "ui-btn fb-add-event";
-    button.title = existing ? "فتح صفحة مناسبة لهذه الأسرة" : "تُحفظ الأسرة أولًا ثم تفتح صفحة المناسبة";
     const icon = document.createElement("i");
     icon.className = "bi bi-calendar-heart";
     icon.setAttribute("aria-hidden", "true");
-    button.append(icon, " إضافة مناسبة");
+    const label = document.createElement("span");
+    button.append(icon, " ", label);
     save.replaceWith(actions);
     actions.append(button, save);
-    save.addEventListener("click", () => write(0));
+
+    const existing = path.match(/^\/families\/addmembers\/(\d+)/);
+    if (existing) {
+        label.textContent = "إضافة مناسبة";
+        button.addEventListener("click", () => { location.href = eventUrl(existing[1]); });
+        return;
+    }
+
+    // الصفحة بعد ملاحظات الحفظ تحتفظ بالمناسبات، والصفحة الجديدة تبدأ فارغة
+    if (!document.querySelector(".fb-errors")) store([]);
+    mark(0);
+    // عيد الميلاد يُنشأ تلقائيًا من الرقم القومي عند حفظ الأسرة، فلا يُختار هنا
+    const types = [[1, "عيد زواج"], [2, "معمودية"], [3, "الميرون"], [4, "أول اعتراف"], [5, "أول تناول"], [6, "سيامة أغنسطس"], [7, "سيامة أبسالتس"],
+        [8, "سيامة قارئ"], [9, "سيامة شماس"], [10, "سيامة كاهن"], [11, "سيامة قمص"], [12, "بدء الخدمة"], [14, "نياحة"], [13, "مناسبة أخرى"]];
+    const yearly = [1, 14];
+    const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text) node.textContent = text;
+        return node;
+    };
+    const labelled = (text, control) => {
+        const box = make("label", "fb-events__field");
+        box.append(make("span", "", text), control);
+        return box;
+    };
+    const fill = (select, items) => {
+        select.replaceChildren(...items.map(([value, text]) => {
+            const option = make("option", "", text);
+            option.value = value;
+            return option;
+        }));
+    };
+
+    const panel = make("section", "ui-card fb-events");
+    panel.hidden = true;
+    panel.append(make("strong", "fb-events__title", "مناسبات الأسرة"), make("small", "fb-events__hint", "تُحفظ مع الأسرة عند الضغط على «حفظ الأسرة»."));
+    const grid = make("div", "fb-events__grid");
+    const type = make("select", "form-select"), person = make("select", "form-select"), date = make("input", "form-control"),
+        recurrence = make("select", "form-select"), notes = make("input", "form-control");
+    fill(type, types);
+    fill(recurrence, [["0", "لا يتكرر"], ["1", "سنوي"], ["2", "شهري"], ["3", "أسبوعي"]]);
+    date.type = "date";
+    recurrence.value = "1";
+    notes.placeholder = "اختياري";
+    type.addEventListener("change", () => { recurrence.value = yearly.includes(Number(type.value)) ? "1" : "0"; });
+    const add = make("button", "ui-btn", "أضف المناسبة");
+    add.type = "button";
+    grid.append(labelled("نوع المناسبة", type), labelled("صاحب المناسبة", person), labelled("التاريخ", date), labelled("التكرار", recurrence), labelled("ملاحظات", notes), add);
+    const rows = make("ul", "fb-events__list");
+    panel.append(grid, rows);
+    save.closest(".fb-top").after(panel);
+
+    const people = () => [...document.querySelectorAll("[data-slot]")]
+        .map(pane => (pane.querySelector('[name$="].FullName"]')?.value || "").trim()).filter(Boolean);
+    const draw = () => {
+        const list = load();
+        label.textContent = list.length ? `إضافة مناسبة (${list.length})` : "إضافة مناسبة";
+        rows.replaceChildren(...list.map((item, index) => {
+            const row = make("li", "", `${item.title} — ${item.date}`);
+            const remove = make("button", "fb-events__remove", "حذف");
+            remove.type = "button";
+            remove.addEventListener("click", () => { const next = load(); next.splice(index, 1); store(next); draw(); });
+            row.append(remove);
+            return row;
+        }));
+    };
     button.addEventListener("click", () => {
-        if (existing) { location.href = eventUrl(existing[1]); return; }
-        write(Date.now());
-        save.form.requestSubmit(save);
+        fill(person, [["", "الأسرة كلها (مناسبة عامة)"], ...people().map(name => [name, name])]);
+        panel.hidden = !panel.hidden;
+    });
+    add.addEventListener("click", () => {
+        if (!date.value) { date.focus(); return; }
+        const kind = types.find(([value]) => value === Number(type.value))[1];
+        const owner = person.value || `أسرة ${people()[0] || ""}`.trim();
+        store([...load(), { kind, type: type.value, person: person.value, date: date.value, recurrence: recurrence.value, notes: notes.value.trim(), title: `${kind} — ${owner}` }]);
+        date.value = notes.value = "";
+        draw();
+    });
+    // يعمل بعد فحص الاستمارة: الحفظ الموقوف بملاحظات لا يُحتسب
+    document.addEventListener("submit", event => {
+        if (event.target === save.form && !event.defaultPrevented && load().length) mark(Date.now());
+    });
+    draw();
+})();
+
+// الحضانة: صورة الطفل في نموذج التسجيل وملفه. تُصغَّر في المتصفح، وصورة الطفل الجديد تُرفع بعد حفظ بياناته
+(() => {
+    const path = location.pathname.toLowerCase();
+    if (!path.startsWith("/nursery")) return;
+    const key = "nursery-new-photo";
+    const url = id => `/api/activity/nursery-photo/${id}`;
+    const read = () => { try { return JSON.parse(sessionStorage.getItem(key)); } catch { return null; } };
+    const write = value => { try { if (value) sessionStorage.setItem(key, JSON.stringify(value)); else sessionStorage.removeItem(key); } catch { /* تُضاف الصورة من ملف الطفل */ } };
+    const send = (id, blob, method = "POST") => fetch(url(id), { method, headers: { "X-Nursery-Photo": "1", "Content-Type": "image/jpeg" }, body: blob });
+
+    const shrink = file => new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => {
+            const scale = Math.min(1, 800 / Math.max(image.width, image.height));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.round(image.width * scale);
+            canvas.height = Math.round(image.height * scale);
+            canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+            URL.revokeObjectURL(image.src);
+            resolve(canvas.toDataURL("image/jpeg", .85));
+        };
+        image.onerror = reject;
+        image.src = URL.createObjectURL(file);
+    });
+    const toBlob = async data => (await fetch(data)).blob();
+
+    // بعد الحفظ: يُعرف الطفل الجديد من صفحة ملفه، أو من أحدث رابط باسمه في القائمة
+    const pending = read();
+    const form = document.querySelector("form.nursery-child-form");
+    const onChild = path.match(/^\/nursery\/child\/(\d+)/);
+    const saved = onChild ? onChild[1] : [...document.querySelectorAll('a[href^="/Nursery/Child/"]')]
+        .filter(link => pending && link.textContent.includes(pending.name))
+        .map(link => Number(link.getAttribute("href").split("/").pop())).sort((a, b) => b - a)[0];
+    const fresh = pending && Date.now() - pending.at < 120000 && document.referrer.toLowerCase().includes("/nursery");
+    if (pending) write(null);
+    const uploaded = fresh && saved
+        ? toBlob(pending.data).then(blob => send(saved, blob)).catch(() => null)
+        : Promise.resolve(null);
+
+    if (!form) return;
+    const id = form.querySelector('[name="id"]')?.value;
+    const childId = onChild && id && id !== "0" ? id : "";
+    const box = document.createElement("div");
+    box.className = "nursery-photo";
+    const preview = document.createElement("img");
+    preview.alt = "صورة الطفل";
+    preview.hidden = true;
+    const empty = document.createElement("i");
+    empty.className = "bi bi-person-bounding-box";
+    empty.setAttribute("aria-hidden", "true");
+    const pick = document.createElement("label");
+    pick.className = "ui-btn ui-btn--ghost";
+    pick.textContent = "صورة الطفل";
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.hidden = true;
+    pick.append(input);
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "nursery-photo__remove";
+    remove.textContent = "حذف الصورة";
+    remove.hidden = true;
+    const status = document.createElement("small");
+    box.append(preview, empty, pick, remove, status);
+    form.prepend(box);
+
+    // في ملف الطفل تظهر الصورة أيضًا بجوار اسمه
+    const heading = childId ? document.querySelector("h1") : null;
+    const avatar = document.createElement("img");
+    avatar.className = "nursery-photo__head";
+    avatar.alt = "صورة الطفل";
+    avatar.hidden = true;
+    heading?.parentElement.prepend(avatar);
+    const show = source => {
+        preview.src = source;
+        preview.hidden = !source;
+        avatar.src = source;
+        avatar.hidden = !source;
+        empty.hidden = !!source;
+        remove.hidden = !source;
+    };
+    let chosen = "";
+    if (childId) {
+        uploaded.finally(() => {
+            preview.onerror = () => show("");
+            show(`${url(childId)}?t=${Date.now()}`);
+        });
+    }
+    input.addEventListener("change", async () => {
+        const file = input.files[0];
+        if (!file) return;
+        status.textContent = "";
+        try {
+            chosen = await shrink(file);
+            show(chosen);
+            if (childId) {
+                const response = await send(childId, await toBlob(chosen));
+                status.textContent = response.ok ? "حُفظت الصورة." : "تعذر حفظ الصورة.";
+            }
+        } catch { status.textContent = "تعذر قراءة الصورة، اختر صورة أخرى."; }
+        input.value = "";
+    });
+    remove.addEventListener("click", async () => {
+        chosen = "";
+        show("");
+        if (childId) await fetch(url(childId), { method: "DELETE", headers: { "X-Nursery-Photo": "1" } });
+    });
+    form.addEventListener("submit", () => {
+        if (chosen && !childId) write({ name: form.querySelector('[name="name"]').value.trim(), data: chosen, at: Date.now() });
+    });
+})();
+
+// الحضانة: بطاقات الأطفال داخل قائمة مطوية ومختصرة مع بحث بالاسم أو الهاتف، وتفتح تلقائيًا عند اختيار مجموعة
+(() => {
+    const list = document.querySelector(".nursery-children");
+    if (!list || location.pathname.toLowerCase().replace(/\/$/, "") !== "/nursery") return;
+    const cards = [...list.querySelectorAll(".nursery-child")];
+    const key = "nursery-archive-open";
+    const box = document.createElement("details");
+    box.className = "nursery-archive";
+    const title = document.createElement("summary");
+    title.textContent = `أرشيف الأطفال (${cards.length})`;
+    const search = document.createElement("input");
+    search.type = "search";
+    search.className = "form-control";
+    search.placeholder = "ابحث بالاسم أو الهاتف";
+    list.replaceWith(box);
+    box.append(title, search, list);
+    let saved = false;
+    try { saved = localStorage.getItem(key) === "1"; } catch { /* يبدأ مطويًا */ }
+    box.open = saved || new URLSearchParams(location.search).has("group");
+    box.addEventListener("toggle", () => { try { localStorage.setItem(key, box.open ? "1" : "0"); } catch { /* لا شيء */ } });
+    search.addEventListener("input", () => {
+        const text = search.value.trim();
+        cards.forEach(card => { card.hidden = !!text && !card.textContent.includes(text); });
     });
 })();
