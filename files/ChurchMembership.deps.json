@@ -7,6 +7,11 @@
   "targets": {
     ".NETCoreApp,Version=v10.0": {},
     ".NETCoreApp,Version=v10.0/win-x64": {
+      "ActivityFeed/1.0.0": {
+        "runtime": {
+          "ActivityFeed.dll": {}
+        }
+      },
       "ChurchMembership/1.0.0": {
         "dependencies": {
           "ClosedXML": "0.105.1",
@@ -1847,6 +1852,11 @@
     }
   },
   "libraries": {
+    "ActivityFeed/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "ChurchMembership/1.0.0": {
       "type": "project",
       "serviceable": false,

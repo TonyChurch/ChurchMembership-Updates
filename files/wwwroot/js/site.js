@@ -377,3 +377,96 @@ document.addEventListener("change", event => {
         })
         .catch(() => { /* البنود إضافية: اللوحة تعمل بدونها */ });
 })();
+
+// جرس الإشعارات للإدارة العامة: ما أضافه المستخدمون الآخرون (يظهر فقط إن أتاح الخادم القائمة لهذا الحساب)
+(() => {
+    const bar = document.querySelector(".topbar-family-commands");
+    const inner = document.querySelector(".topbar__inner");
+    if (!bar || !inner) return;
+    const seenKey = "activity-seen";
+    const readSeen = () => { try { return localStorage.getItem(seenKey) || ""; } catch { return ""; } };
+    const writeSeen = value => { try { localStorage.setItem(seenKey, value); } catch { /* يكفي عدّاد هذه الجلسة */ } };
+    let button, badge, panel, list = [];
+
+    const when = value => new Date(value).toLocaleString("ar-EG", { day: "numeric", month: "numeric", hour: "numeric", minute: "2-digit" });
+    const refreshBadge = () => {
+        const seen = readSeen();
+        const unread = list.filter(item => item.at > seen).length;
+        badge.textContent = unread > 99 ? "99+" : unread;
+        badge.hidden = unread === 0;
+        button.setAttribute("aria-label", unread ? `الإشعارات: ${unread} جديد` : "الإشعارات");
+    };
+    const render = () => {
+        const seen = readSeen();
+        panel.replaceChildren();
+        const title = document.createElement("strong");
+        title.className = "activity-panel__title";
+        title.textContent = "الإضافات الجديدة من المستخدمين";
+        panel.append(title);
+        if (list.length === 0) {
+            const empty = document.createElement("p");
+            empty.textContent = "لا توجد إضافات في آخر أسبوعين.";
+            panel.append(empty);
+        }
+        list.forEach(item => {
+            const row = document.createElement("a");
+            row.href = item.url;
+            row.className = item.at > seen ? "activity-panel__item is-new" : "activity-panel__item";
+            const who = document.createElement("b");
+            who.textContent = item.by;
+            const what = document.createElement("span");
+            what.textContent = item.text;
+            const time = document.createElement("small");
+            time.textContent = when(item.at);
+            row.append(who, what, time);
+            panel.append(row);
+        });
+    };
+    const close = () => { panel.hidden = true; button.setAttribute("aria-expanded", "false"); };
+    const toggle = () => {
+        if (!panel.hidden) { close(); return; }
+        render();
+        const box = button.getBoundingClientRect();
+        panel.style.top = `${Math.round(box.bottom + 8)}px`;
+        panel.hidden = false;
+        button.setAttribute("aria-expanded", "true");
+        if (list.length) writeSeen(list[0].at);
+        refreshBadge();
+    };
+    const build = () => {
+        button = document.createElement("button");
+        button.type = "button";
+        // شريط الأوامر مخفي على الشاشات الصغيرة: يوضع الجرس بجوار زر القائمة
+        const compact = !bar.offsetParent;
+        button.className = compact ? "activity-bell activity-bell--compact" : "topbar-global-command activity-bell";
+        button.setAttribute("aria-expanded", "false");
+        button.title = "الإشعارات";
+        const icon = document.createElement("i");
+        icon.className = "bi bi-bell-fill";
+        icon.setAttribute("aria-hidden", "true");
+        badge = document.createElement("span");
+        badge.className = "activity-bell__badge";
+        badge.hidden = true;
+        button.append(icon, badge);
+        panel = document.createElement("div");
+        panel.className = "activity-panel";
+        panel.hidden = true;
+        if (compact) inner.insertBefore(button, inner.querySelector(".topbar__menu")); else bar.append(button);
+        document.body.append(panel);
+        button.addEventListener("click", event => { event.stopPropagation(); toggle(); });
+        panel.addEventListener("click", event => event.stopPropagation());
+        document.addEventListener("click", close);
+        document.addEventListener("keydown", event => { if (event.key === "Escape") close(); });
+    };
+    const load = () => fetch("/api/activity/recent", { headers: { Accept: "application/json" } })
+        .then(response => response.ok ? response.json() : null)
+        .then(items => {
+            if (!items) return;
+            list = items;
+            if (!button) build();
+            refreshBadge();
+        })
+        .catch(() => { /* الجرس إضافي: البرنامج يعمل بدونه */ });
+    load();
+    setInterval(() => { if (!document.hidden) load(); }, 120000);
+})();
