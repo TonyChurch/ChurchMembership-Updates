@@ -346,3 +346,34 @@ document.addEventListener("change", event => {
         }
     });
 })();
+
+// لوحة التحكم: بنود الأرامل وكبار السن والمرضى في «يحتاج انتباهك»، بأعدادها وروابطها من تبويبات صفحة الأعضاء
+(() => {
+    const grid = document.querySelector(".dashx-attention__grid");
+    if (!grid) return;
+    fetch("/Members", { headers: { Accept: "text/html" } })
+        .then(response => response.ok && !response.redirected ? response.text() : "")
+        .then(html => {
+            const page = new DOMParser().parseFromString(html, "text/html");
+            [["widows", "الأرامل"], ["elderly", "كبار السن"], ["chronic", "المرضى"]].forEach(([key, label]) => {
+                const tab = page.querySelector(`a.ui-tabs__item[href*="care=${key}"]`);
+                if (!tab) return;
+                const count = Number(tab.querySelector("b")?.textContent.trim()) || 0;
+                const item = document.createElement("a");
+                item.href = tab.getAttribute("href");
+                item.className = `dashx-alert ${count ? "is-info" : "is-ok"}`;
+                const icon = document.createElement("i");
+                icon.className = tab.querySelector("i")?.className || "bi bi-people";
+                icon.setAttribute("aria-hidden", "true");
+                const text = document.createElement("span");
+                text.textContent = label;
+                const value = document.createElement("b");
+                value.textContent = count || "✓";
+                item.append(icon, text, value);
+                grid.insertBefore(item, count ? grid.querySelector(".is-ok") : null);
+                const total = document.querySelector(".dashx-attention__total");
+                if (total && count) total.textContent = `${(parseInt(total.textContent, 10) || 0) + 1} بند`;
+            });
+        })
+        .catch(() => { /* البنود إضافية: اللوحة تعمل بدونها */ });
+})();
