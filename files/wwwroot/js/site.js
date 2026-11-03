@@ -966,3 +966,53 @@ document.addEventListener("change", event => {
         })
         .catch(() => { /* الزر يعمل بدون العدد */ });
 })();
+
+// الصيدلية: بحث في قائمة الأسر لاختيار الأسرة بسرعة، مع رسالة واضحة إن لم تُسجَّل أسر بعد
+(() => {
+    const select = document.getElementById("medCase");
+    if (!select) return;
+    const options = [...select.options].filter(option => option.value);
+    const box = document.createElement("input");
+    box.type = "search";
+    box.className = "form-control med-case-search";
+    box.placeholder = options.length ? `ابحث في ${options.length} أسرة` : "لا توجد أسر في «إخوة الرب» بعد";
+    box.disabled = !options.length;
+    select.before(box);
+    box.addEventListener("input", () => {
+        const text = box.value.trim();
+        const shown = options.filter(option => {
+            option.hidden = !!text && !option.textContent.includes(text);
+            return !option.hidden;
+        });
+        if (text && shown.length && (select.selectedOptions[0]?.hidden || !select.value)) {
+            select.value = shown[0].value;
+            select.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+    });
+})();
+
+// رسالة «تم الحفظ» بعد أي حفظ أو تعديل أو حذف من نموذج في البرنامج
+(() => {
+    const key = "form-saved";
+    document.addEventListener("submit", event => {
+        const form = event.target;
+        if (event.defaultPrevented || !(form instanceof HTMLFormElement) || form.method.toLowerCase() !== "post" || form.target === "_blank") return;
+        const action = (form.getAttribute("action") || location.pathname).toLowerCase();
+        if (action.includes("/account/")) return;
+        try { sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), removed: /delete|remove/.test(action) })); } catch { /* بدون رسالة */ }
+    });
+    let saved = null;
+    try { saved = JSON.parse(sessionStorage.getItem(key)); } catch { /* لا شيء */ }
+    const forget = () => { try { sessionStorage.removeItem(key); } catch { /* لا شيء */ } };
+    if (!saved || Date.now() - saved.at > 60000 || document.querySelector(".nursery-saved")) { forget(); return; }
+    // رجوع الصفحة بأخطاء يعني أن الحفظ لم يتم
+    if (document.querySelector(".validation-summary-errors, .field-validation-error, .input-validation-error, .fb-errors, .ui-flash--danger")) { forget(); return; }
+    // بعض الصفحات تعيد تحميل نفسها بعد الحفظ: تبقى العلامة حتى تستقر الصفحة
+    setTimeout(forget, 1500);
+    const notice = document.createElement("div");
+    notice.className = "nursery-saved";
+    notice.setAttribute("role", "status");
+    notice.textContent = saved.removed ? "✓ تم الحذف" : "✓ تم الحفظ";
+    document.body.append(notice);
+    setTimeout(() => notice.remove(), 5000);
+})();

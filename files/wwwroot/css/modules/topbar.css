@@ -726,3 +726,8 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
     color: #047857;
     font-weight: 700;
 }
+
+/* بحث الأسر في الصيدلية */
+.med-case-search {
+    margin-bottom: .4rem;
+}
