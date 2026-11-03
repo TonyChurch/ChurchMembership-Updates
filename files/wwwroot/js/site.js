@@ -967,91 +967,203 @@ document.addEventListener("change", event => {
         .catch(() => { /* الزر يعمل بدون العدد */ });
 })();
 
-// الصيدلية: قائمة أسماء كل الأسر والبحث فيها، واختيار الأسرة يجهّز الروشتة لها (يُفتح لها ملف «تحت البحث» إن لم يكن لها ملف)
+// الصيدلية: «حسابات الصيدلية» لكل أسر الكنيسة، منفصلة عن علاج إخوة الرب. بحث في الأسر، روشتة، وحساب كل صيدلية في الشهر
 (() => {
-    const select = document.getElementById("medCase");
-    // قبل تسجيل أي أسرة تُخفي الصفحة نموذج الروشتة، فيوضع البحث مكان رسالة «لا توجد ملفات أسر»
-    const empty = select ? null : [...document.querySelectorAll(".ui-empty.no-print")].find(card => card.textContent.includes("لا توجد ملفات أسر"));
-    if (!select && !empty) return;
-    const url = "/api/activity/pharmacy-families";
-    const wrap = document.createElement("div");
-    wrap.className = "med-family";
-    const box = document.createElement("input");
-    box.type = "search";
-    box.className = "form-control";
-    box.placeholder = "ابحث باسم الأسرة أو كودها";
-    box.autocomplete = "off";
-    const list = document.createElement("ul");
-    list.className = "med-family__list";
-    list.hidden = true;
-    const status = document.createElement("small");
-    status.className = "med-family__status";
-    wrap.append(box, list, status);
-    if (select) select.before(wrap);
-    else {
-        const title = document.createElement("strong");
-        title.className = "med-family__title";
-        title.textContent = "اختر الأسرة لتسجيل الروشتة";
-        empty.classList.add("med-family__card");
-        empty.replaceChildren(title, wrap);
-    }
+    if (location.pathname.toLowerCase().replace(/\/$/, "") !== "/pharmacy") return;
+    const page = document.querySelector(".ui-page");
+    const anchor = document.querySelector(".fin-nav") || page?.querySelector("header");
+    if (!page || !anchor) return;
+    const api = "/api/activity/pharmacy-accounts";
+    const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+    };
+    const field = (label, control) => {
+        const box = make("label", "pha-field");
+        box.append(make("span", "", label), control);
+        return box;
+    };
+    const money = value => Number(value || 0).toLocaleString("ar-EG", { maximumFractionDigits: 2 });
+    const toast = text => {
+        const notice = make("div", "nursery-saved", text);
+        notice.setAttribute("role", "status");
+        document.body.append(notice);
+        setTimeout(() => notice.remove(), 5000);
+    };
+    const send = (path, method, body) => fetch(`${api}${path}`, {
+        method, headers: { "Content-Type": "application/json", "X-Pharmacy-Account": "1" }, body: body ? JSON.stringify(body) : undefined
+    });
 
-    let families = [];
-    const choose = async item => {
+    fetch(api).then(response => {
+        if (!response.ok) return;
+        const today = new Date();
+        let year = today.getFullYear(), month = today.getMonth() + 1, families = [], chosen = null;
+
+        const section = make("section", "ui-card pha");
+        const head = make("div", "pha__head");
+        const title = make("h2", "pha__title", "حسابات الصيدلية — كل أسر الكنيسة");
+        const note = make("small", "pha__note", "منفصلة عن علاج إخوة الرب، ولا تُفتح بها ملفات هناك.");
+        const nav = make("div", "pha__month");
+        const prev = make("button", "ui-btn ui-btn--ghost", "‹ السابق"), next = make("button", "ui-btn ui-btn--ghost", "التالي ›"), label = make("strong");
+        prev.type = next.type = "button";
+        nav.append(prev, label, next);
+        head.append(title, note, nav);
+
+        const strip = make("div", "pha__strip");
+        const form = make("form", "pha__form");
+        const search = make("input", "form-control");
+        search.type = "search";
+        search.autocomplete = "off";
+        search.placeholder = "ابحث باسم الأسرة أو كودها";
+        const list = make("ul", "med-family__list");
         list.hidden = true;
-        box.value = item.name;
-        status.textContent = "";
-        if (item.stopped) { status.textContent = "ملف هذه الأسرة في إخوة الرب موقوف؛ يعيد تنشيطه الكاهن أو خادم إخوة الرب."; return; }
-        if (select && item.caseId && [...select.options].some(option => option.value === String(item.caseId))) {
-            select.value = String(item.caseId);
-            select.dispatchEvent(new Event("change", { bubbles: true }));
-            document.getElementById("medPharmacy")?.focus();
-            return;
-        }
-        status.textContent = "جارٍ تجهيز ملف الأسرة...";
-        try {
-            const response = item.caseId ? null : await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", "X-Pharmacy-Family": "1" }, body: JSON.stringify({ familyId: item.familyId }) });
-            if (response && !response.ok) throw new Error();
-            const { caseId } = response ? await response.json() : item;
-            const query = new URLSearchParams(location.search);
-            query.set("caseId", caseId);
-            location.href = `${location.pathname}?${query}`;
-        } catch { status.textContent = "تعذر تجهيز ملف الأسرة، حاول مرة أخرى."; }
-    };
-    const draw = () => {
-        const text = box.value.trim();
-        const found = families.filter(item => !text || item.name.includes(text) || (item.code || "").includes(text)).slice(0, 30);
-        list.replaceChildren(...found.map(item => {
-            const row = document.createElement("li");
-            const button = document.createElement("button");
-            button.type = "button";
-            button.textContent = item.name;
-            if (item.code) {
-                const code = document.createElement("small");
-                code.textContent = item.code;
-                button.append(code);
-            }
-            button.addEventListener("click", () => choose(item));
-            row.append(button);
-            return row;
-        }));
-        if (!found.length) {
-            const empty = document.createElement("li");
-            empty.className = "med-family__empty";
-            empty.textContent = "لا توجد أسرة بهذا الاسم.";
-            list.append(empty);
-        }
-        list.hidden = false;
-    };
-    fetch(url).then(response => response.ok ? response.json() : []).then(items => {
-        families = items;
-        box.placeholder = `ابحث في ${items.length} أسرة بالاسم أو الكود`;
-        const current = select?.selectedOptions[0];
-        if (select?.value && current) box.value = current.textContent.replace(" (غير مسجلة في الأسر)", "").trim();
-    }).catch(() => { status.textContent = "تعذر تحميل قائمة الأسر."; });
-    box.addEventListener("input", draw);
-    box.addEventListener("focus", draw);
-    document.addEventListener("click", event => { if (!wrap.contains(event.target)) list.hidden = true; });
+        const familyBox = make("div", "med-family");
+        familyBox.append(search, list);
+        const member = make("select", "form-select");
+        const patient = make("input", "form-control");
+        patient.placeholder = "إن لم يكن من أفراد الأسرة";
+        const date = make("input", "form-control");
+        date.type = "date";
+        date.value = today.toISOString().slice(0, 10);
+        const pharmacy = make("input", "form-control");
+        pharmacy.setAttribute("list", "phaPharmacies");
+        pharmacy.placeholder = "اسم الصيدلية";
+        const pharmacies = make("datalist");
+        pharmacies.id = "phaPharmacies";
+        const invoice = make("input", "form-control");
+        invoice.placeholder = "اختياري";
+        const items = make("input", "form-control");
+        items.placeholder = "الأدوية (اختياري)";
+        const amount = make("input", "form-control");
+        amount.type = "number";
+        amount.min = "0";
+        amount.step = "0.01";
+        const save = make("button", "ui-btn", "حفظ الروشتة");
+        save.type = "submit";
+        const status = make("small", "med-family__status");
+        const patientField = field("اسم المريض", patient);
+        form.append(field("الأسرة", familyBox), field("لمن الروشتة؟", member), patientField, field("التاريخ", date), field("الصيدلية", pharmacy),
+            field("رقم الفاتورة", invoice), field("الأدوية", items), field("المبلغ", amount), save, status, pharmacies);
+
+        const tableWrap = make("div", "table-responsive");
+        section.append(head, strip, form, tableWrap);
+        anchor.after(section);
+
+        const resetMembers = () => {
+            member.replaceChildren(new Option("الأسرة كلها", ""));
+            patientField.hidden = false;
+        };
+        resetMembers();
+        member.addEventListener("change", () => { patientField.hidden = member.value !== ""; });
+
+        const choose = async item => {
+            chosen = item;
+            search.value = item.name;
+            list.hidden = true;
+            status.textContent = "";
+            resetMembers();
+            try {
+                const people = await (await fetch(`${api}/members?familyId=${item.familyId}`)).json();
+                people.forEach(person => member.append(new Option(person.name, person.id)));
+            } catch { /* يُكتب اسم المريض يدويًا */ }
+            pharmacy.focus();
+        };
+        const draw = () => {
+            const text = search.value.trim();
+            chosen = chosen && chosen.name === text ? chosen : null;
+            const found = families.filter(item => !text || item.name.includes(text) || (item.code || "").includes(text)).slice(0, 30);
+            list.replaceChildren(...found.map(item => {
+                const row = make("li");
+                const button = make("button", "", item.name);
+                button.type = "button";
+                if (item.code) button.append(make("small", "", item.code));
+                button.addEventListener("click", () => choose(item));
+                row.append(button);
+                return row;
+            }));
+            if (!found.length) list.append(make("li", "med-family__empty", "لا توجد أسرة بهذا الاسم."));
+            list.hidden = false;
+        };
+        search.addEventListener("input", draw);
+        search.addEventListener("focus", draw);
+        document.addEventListener("click", event => { if (!familyBox.contains(event.target)) list.hidden = true; });
+
+        const load = async () => {
+            label.textContent = new Date(year, month - 1, 1).toLocaleDateString("ar-EG", { month: "long", year: "numeric" });
+            const data = await (await fetch(`${api}?year=${year}&month=${month}`)).json();
+            pharmacies.replaceChildren(...data.pharmacies.map(name => new Option(name)));
+            const total = data.entries.reduce((sum, entry) => sum + entry.amount, 0);
+            const paid = data.entries.filter(entry => entry.paid).reduce((sum, entry) => sum + entry.amount, 0);
+            strip.replaceChildren(...[["روشتات الشهر", data.entries.length], ["علاج الشهر", money(total)], ["سُدِّد للصيدليات", money(paid)],
+                ["لم يُسدَّد من الشهر", money(total - paid)], ["المتأخر من كل الشهور", money(data.unpaidAll)]].map(([name, value]) => {
+                const card = make("div", "pha__stat");
+                card.append(make("small", "", name), make("b", "", String(value)));
+                return card;
+            }));
+            if (!data.entries.length) { tableWrap.replaceChildren(make("p", "pha__empty", "لا توجد روشتات مسجلة في هذا الشهر.")); return; }
+            const table = make("table", "ui-table pha__table");
+            const header = make("tr");
+            ["التاريخ", "الأسرة", "المريض", "الصيدلية", "الفاتورة", "الأدوية", "المبلغ", "سُدِّد", ""].forEach(name => header.append(make("th", "", name)));
+            const thead = make("thead"), tbody = make("tbody");
+            thead.append(header);
+            data.entries.forEach(entry => {
+                const row = make("tr");
+                const paidBox = make("input", "form-check-input");
+                paidBox.type = "checkbox";
+                paidBox.checked = entry.paid;
+                paidBox.title = "سُدِّد للصيدلية";
+                paidBox.addEventListener("change", async () => {
+                    const result = await send("/pay", "POST", { id: entry.id, paid: paidBox.checked });
+                    if (result.ok) load(); else paidBox.checked = !paidBox.checked;
+                });
+                const remove = make("button", "pha__remove", "حذف");
+                remove.type = "button";
+                remove.addEventListener("click", async () => {
+                    if (!confirm(`حذف روشتة ${entry.family} بمبلغ ${money(entry.amount)}؟`)) return;
+                    if ((await send(`/${entry.id}`, "DELETE")).ok) { toast("✓ تم الحذف"); load(); }
+                });
+                const cells = [entry.date, `${entry.family}${entry.code ? ` · ${entry.code}` : ""}`, entry.patient, entry.pharmacy || "—", entry.invoice || "—", entry.items || "—", money(entry.amount)];
+                cells.forEach(text => row.append(make("td", "", text)));
+                const paidCell = make("td"), removeCell = make("td", "no-print");
+                paidCell.append(paidBox);
+                removeCell.append(remove);
+                row.append(paidCell, removeCell);
+                tbody.append(row);
+            });
+            table.append(thead, tbody);
+            tableWrap.replaceChildren(table);
+        };
+        prev.addEventListener("click", () => { month--; if (month < 1) { month = 12; year--; } load(); });
+        next.addEventListener("click", () => { month++; if (month > 12) { month = 1; year++; } load(); });
+
+        form.addEventListener("submit", async event => {
+            event.preventDefault();
+            status.textContent = "";
+            if (!chosen) { status.textContent = "اختر الأسرة من نتائج البحث."; search.focus(); return; }
+            if (!(Number(amount.value) > 0)) { status.textContent = "اكتب مبلغ الروشتة."; amount.focus(); return; }
+            save.disabled = true;
+            const result = await send("", "POST", {
+                familyId: chosen.familyId, memberId: member.value ? Number(member.value) : null, patientName: patient.value,
+                date: date.value, pharmacy: pharmacy.value, invoiceNumber: invoice.value, items: items.value, amount: Number(amount.value)
+            }).catch(() => null);
+            save.disabled = false;
+            if (!result?.ok) { status.textContent = "تعذر حفظ الروشتة، راجع البيانات."; return; }
+            toast("✓ تم حفظ الروشتة");
+            amount.value = invoice.value = items.value = patient.value = "";
+            const saved = new Date(date.value);
+            year = saved.getFullYear();
+            month = saved.getMonth() + 1;
+            load();
+        });
+
+        fetch("/api/activity/pharmacy-families").then(answer => answer.ok ? answer.json() : []).then(all => {
+            families = all.filter(item => item.familyId);
+            search.placeholder = `ابحث في ${families.length} أسرة بالاسم أو الكود`;
+        });
+        load();
+    }).catch(() => { /* القسم يظهر لمن له صلاحية الصيدلية فقط */ });
 })();
 
 // رسالة «تم الحفظ» بعد أي حفظ أو تعديل أو حذف من نموذج في البرنامج

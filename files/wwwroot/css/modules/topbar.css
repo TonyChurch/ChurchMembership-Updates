@@ -800,3 +800,91 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
 .med-family__title {
     font-size: 1rem;
 }
+
+/* حسابات الصيدلية لكل الأسر */
+.pha {
+    display: grid;
+    gap: .9rem;
+    margin-block: 1rem;
+    padding: 1rem 1.1rem;
+    border-top: 4px solid #0d9488;
+}
+
+.pha__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem 1rem;
+}
+
+.pha__title {
+    margin: 0;
+    font-size: 1.15rem;
+    color: #0f766e;
+}
+
+.pha__note {
+    color: var(--ui-text-muted);
+}
+
+.pha__month {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-inline-start: auto;
+}
+
+.pha__strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: .5rem;
+}
+
+.pha__stat {
+    display: grid;
+    padding: .6rem .8rem;
+    border-radius: 12px;
+    background: #f0fdfa;
+}
+
+.pha__stat small {
+    color: #0f766e;
+}
+
+.pha__stat b {
+    font-size: 1.2rem;
+}
+
+.pha__form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    align-items: end;
+    gap: .6rem;
+}
+
+.pha-field {
+    display: grid;
+    gap: .25rem;
+    margin: 0;
+    font-size: .85rem;
+}
+
+.pha-field[hidden] {
+    display: none;
+}
+
+.pha__form .med-family__status {
+    grid-column: 1 / -1;
+}
+
+.pha__empty {
+    margin: 0;
+    color: var(--ui-text-muted);
+}
+
+.pha__remove {
+    border: 0;
+    background: transparent;
+    color: #dc2626;
+    font-weight: 600;
+}
