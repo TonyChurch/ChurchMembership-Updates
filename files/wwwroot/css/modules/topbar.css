@@ -715,3 +715,14 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
     line-height: 20px;
     text-align: center;
 }
+
+/* رسالة الحفظ الثابتة فوق نموذج طفل جديد */
+.nursery-saved-inline {
+    margin-bottom: .75rem;
+    padding: .7rem 1rem;
+    border: 1px solid #6ee7b7;
+    border-radius: 12px;
+    background: #ecfdf5;
+    color: #047857;
+    font-weight: 700;
+}

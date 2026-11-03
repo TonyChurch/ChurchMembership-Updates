@@ -854,12 +854,20 @@ document.addEventListener("change", event => {
     notice.setAttribute("role", "status");
     notice.textContent = `تم حفظ ملف الطفل: ${saved.name}`;
     document.body.append(notice);
-    setTimeout(() => notice.remove(), 6000);
+    setTimeout(() => notice.remove(), 8000);
+    // ورسالة ثابتة فوق نموذج الطفل الجديد تبقى حتى تبدأ الكتابة
+    const inline = document.createElement("div");
+    inline.className = "nursery-saved-inline";
+    inline.setAttribute("role", "status");
+    inline.textContent = `✓ تم الحفظ: ${saved.name}. يمكنك تسجيل طفل آخر الآن.`;
+    form.before(inline);
+    form.addEventListener("input", () => inline.remove(), { once: true });
     // بعد اكتمال رسم الصفحة والجدول، وإلا يرجع المتصفح لموضعه السابق
-    window.addEventListener("load", () => setTimeout(() => {
+    const jump = () => setTimeout(() => {
         form.closest("#new-child")?.scrollIntoView({ block: "start" });
         form.querySelector('[name="name"]')?.focus({ preventScroll: true });
-    }, 250));
+    }, 250);
+    if (document.readyState === "complete") jump(); else window.addEventListener("load", jump);
 })();
 
 // ملف الخادم: إضافة مناسبة له من بطاقة «مناسباته القادمة»
