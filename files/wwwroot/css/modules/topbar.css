@@ -731,3 +731,72 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
 .med-case-search {
     margin-bottom: .4rem;
 }
+
+/* الصيدلية: البحث في كل الأسر */
+.med-family {
+    position: relative;
+    margin-bottom: .4rem;
+}
+
+.med-family__list {
+    position: absolute;
+    inset-inline: 0;
+    z-index: 30;
+    max-height: 280px;
+    margin: .25rem 0 0;
+    padding: .25rem;
+    overflow-y: auto;
+    list-style: none;
+    border: 1px solid var(--ui-border);
+    border-radius: 12px;
+    background: var(--ui-surface, #fff);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .15);
+}
+
+.med-family__list[hidden] {
+    display: none;
+}
+
+.med-family__list button {
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+    width: 100%;
+    padding: .45rem .6rem;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ui-text);
+    text-align: start;
+}
+
+.med-family__list button:hover {
+    background: rgba(59, 91, 253, .08);
+}
+
+.med-family__list small {
+    color: var(--ui-text-muted);
+}
+
+.med-family__empty {
+    padding: .5rem .6rem;
+    color: var(--ui-text-muted);
+}
+
+.med-family__status {
+    color: #b45309;
+}
+
+.med-family__status:empty {
+    display: none;
+}
+
+.med-family__card {
+    display: grid;
+    gap: .6rem;
+    text-align: start;
+}
+
+.med-family__title {
+    font-size: 1rem;
+}

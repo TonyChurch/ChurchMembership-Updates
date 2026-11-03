@@ -967,28 +967,91 @@ document.addEventListener("change", event => {
         .catch(() => { /* الزر يعمل بدون العدد */ });
 })();
 
-// الصيدلية: بحث في قائمة الأسر لاختيار الأسرة بسرعة، مع رسالة واضحة إن لم تُسجَّل أسر بعد
+// الصيدلية: قائمة أسماء كل الأسر والبحث فيها، واختيار الأسرة يجهّز الروشتة لها (يُفتح لها ملف «تحت البحث» إن لم يكن لها ملف)
 (() => {
     const select = document.getElementById("medCase");
-    if (!select) return;
-    const options = [...select.options].filter(option => option.value);
+    // قبل تسجيل أي أسرة تُخفي الصفحة نموذج الروشتة، فيوضع البحث مكان رسالة «لا توجد ملفات أسر»
+    const empty = select ? null : [...document.querySelectorAll(".ui-empty.no-print")].find(card => card.textContent.includes("لا توجد ملفات أسر"));
+    if (!select && !empty) return;
+    const url = "/api/activity/pharmacy-families";
+    const wrap = document.createElement("div");
+    wrap.className = "med-family";
     const box = document.createElement("input");
     box.type = "search";
-    box.className = "form-control med-case-search";
-    box.placeholder = options.length ? `ابحث في ${options.length} أسرة` : "لا توجد أسر في «إخوة الرب» بعد";
-    box.disabled = !options.length;
-    select.before(box);
-    box.addEventListener("input", () => {
-        const text = box.value.trim();
-        const shown = options.filter(option => {
-            option.hidden = !!text && !option.textContent.includes(text);
-            return !option.hidden;
-        });
-        if (text && shown.length && (select.selectedOptions[0]?.hidden || !select.value)) {
-            select.value = shown[0].value;
+    box.className = "form-control";
+    box.placeholder = "ابحث باسم الأسرة أو كودها";
+    box.autocomplete = "off";
+    const list = document.createElement("ul");
+    list.className = "med-family__list";
+    list.hidden = true;
+    const status = document.createElement("small");
+    status.className = "med-family__status";
+    wrap.append(box, list, status);
+    if (select) select.before(wrap);
+    else {
+        const title = document.createElement("strong");
+        title.className = "med-family__title";
+        title.textContent = "اختر الأسرة لتسجيل الروشتة";
+        empty.classList.add("med-family__card");
+        empty.replaceChildren(title, wrap);
+    }
+
+    let families = [];
+    const choose = async item => {
+        list.hidden = true;
+        box.value = item.name;
+        status.textContent = "";
+        if (item.stopped) { status.textContent = "ملف هذه الأسرة في إخوة الرب موقوف؛ يعيد تنشيطه الكاهن أو خادم إخوة الرب."; return; }
+        if (select && item.caseId && [...select.options].some(option => option.value === String(item.caseId))) {
+            select.value = String(item.caseId);
             select.dispatchEvent(new Event("change", { bubbles: true }));
+            document.getElementById("medPharmacy")?.focus();
+            return;
         }
-    });
+        status.textContent = "جارٍ تجهيز ملف الأسرة...";
+        try {
+            const response = item.caseId ? null : await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", "X-Pharmacy-Family": "1" }, body: JSON.stringify({ familyId: item.familyId }) });
+            if (response && !response.ok) throw new Error();
+            const { caseId } = response ? await response.json() : item;
+            const query = new URLSearchParams(location.search);
+            query.set("caseId", caseId);
+            location.href = `${location.pathname}?${query}`;
+        } catch { status.textContent = "تعذر تجهيز ملف الأسرة، حاول مرة أخرى."; }
+    };
+    const draw = () => {
+        const text = box.value.trim();
+        const found = families.filter(item => !text || item.name.includes(text) || (item.code || "").includes(text)).slice(0, 30);
+        list.replaceChildren(...found.map(item => {
+            const row = document.createElement("li");
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = item.name;
+            if (item.code) {
+                const code = document.createElement("small");
+                code.textContent = item.code;
+                button.append(code);
+            }
+            button.addEventListener("click", () => choose(item));
+            row.append(button);
+            return row;
+        }));
+        if (!found.length) {
+            const empty = document.createElement("li");
+            empty.className = "med-family__empty";
+            empty.textContent = "لا توجد أسرة بهذا الاسم.";
+            list.append(empty);
+        }
+        list.hidden = false;
+    };
+    fetch(url).then(response => response.ok ? response.json() : []).then(items => {
+        families = items;
+        box.placeholder = `ابحث في ${items.length} أسرة بالاسم أو الكود`;
+        const current = select?.selectedOptions[0];
+        if (select?.value && current) box.value = current.textContent.replace(" (غير مسجلة في الأسر)", "").trim();
+    }).catch(() => { status.textContent = "تعذر تحميل قائمة الأسر."; });
+    box.addEventListener("input", draw);
+    box.addEventListener("focus", draw);
+    document.addEventListener("click", event => { if (!wrap.contains(event.target)) list.hidden = true; });
 })();
 
 // رسالة «تم الحفظ» بعد أي حفظ أو تعديل أو حذف من نموذج في البرنامج
