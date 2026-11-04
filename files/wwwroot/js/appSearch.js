@@ -31,25 +31,88 @@
         return features;
     }
 
+    // درجة قرب الاسم من البحث: التطابق التام أولًا، ثم ما يبدأ بالعبارة، ثم كلمة كاملة، ثم بداية كلمة، ثم ما يحتويها
+    function closeness(name, query) {
+        const text = normalize(name).replace(/\s+/g, ' ').trim();
+        const phrase = normalize(query).replace(/\s+/g, ' ').trim();
+        if (!text || !phrase) return 0;
+        if (text === phrase) return 100;
+        if (text.startsWith(phrase + ' ')) return 90;
+        if (text.startsWith(phrase)) return 85;
+        if (` ${text} `.includes(` ${phrase} `)) return 75;
+        if (` ${text}`.includes(` ${phrase}`)) return 65;
+        if (text.includes(phrase)) return 50;
+        const terms = words(query);
+        const plain = ` ${text.split(' ').map(word => word.length > 3 && word.startsWith('ال') ? word.slice(2) : word).join(' ')} `;
+        if (terms.length && terms.every(term => plain.includes(` ${term} `))) return 40;
+        if (terms.length && terms.every(term => plain.includes(term))) return 30;
+        return 0;
+    }
+    const byCloseness = (a, b) => b.score - a.score || a.item.title.length - b.item.title.length;
+
     function search(query) {
         const terms = words(query);
         if (!terms.length) return features.map(item => ({ item, score: 0 }));
         return features
             .map(item => {
-                let score = 0;
-                for (const term of terms) {
-                    if (!item.allKey.includes(term)) return null;
-                    score += item.titleKey.includes(term) ? (item.titleKey.startsWith(term) ? 5 : 3) : 1;
-                }
-                return { item, score };
+                if (!terms.every(term => item.allKey.includes(term))) return null;
+                // بند يطابق في الكلمات المفتاحية فقط يأتي بعد ما يطابق في العنوان
+                return { item, score: Math.max(closeness(item.title, query), 20) };
             })
             .filter(Boolean)
-            .sort((a, b) => b.score - a.score);
+            .sort(byCloseness);
     }
 
-    function render() {
+    // نتائج مباشرة من الأعضاء والأسر (بصلاحيات المستخدم نفسها لأنها صفحاته)، مرتبة بالأقرب
+    let people = { query: '', items: [] };
+    let peopleTimer = 0;
+    async function fetchRows(url, query, pick) {
+        try {
+            const response = await fetch(`${url}?search=${encodeURIComponent(query)}&pageSize=100`, { headers: { Accept: 'text/html' } });
+            if (!response.ok || /\/Account\//i.test(response.url)) return [];
+            const page = new DOMParser().parseFromString(await response.text(), 'text/html');
+            return [...page.querySelectorAll('tbody tr')].map(pick).filter(Boolean);
+        } catch { return []; }
+    }
+    function loadPeople(query) {
+        clearTimeout(peopleTimer);
+        if (normalize(query).replace(/\s/g, '').length < 2) { people = { query, items: [] }; return; }
+        peopleTimer = setTimeout(async () => {
+            const byUrl = url => features.some(item => item.url === url);
+            const [members, families] = await Promise.all([
+                byUrl(modalEl.dataset.membersUrl) ? fetchRows(modalEl.dataset.membersUrl, query, row => {
+                    const link = row.querySelector('a[href*="/Members/Details/"]');
+                    if (!link) return null;
+                    const title = link.textContent.trim();
+                    return { title, group: 'الأعضاء', icon: 'bi-person-fill', url: link.getAttribute('href'), description: row.querySelector('.ui-person__text small')?.textContent.trim() || 'ملف العضو', score: closeness(title, query) };
+                }) : [],
+                byUrl(modalEl.dataset.familiesUrl) ? fetchRows(modalEl.dataset.familiesUrl, query, row => {
+                    const names = [...row.querySelectorAll('a[href*="/Families/Profile/"]')].map(link => link.textContent.trim()).filter(Boolean);
+                    const link = row.querySelector('a[href*="/Families/Profile/"]');
+                    if (!link || !names.length) return null;
+                    const unique = [...new Set(names)];
+                    return { title: `أسرة ${unique[0]}`, group: 'الأسر', icon: 'bi-house-heart-fill', url: link.getAttribute('href'), description: unique.slice(1).join(' · ') || 'ملف الأسرة', score: Math.max(...unique.map(name => closeness(name, query))) };
+                }) : []
+            ]);
+            if (input.value.trim() !== query) return;
+            // اسم لم يطابق إلا برقم الهاتف أو الكود أو فرد آخر في الأسرة يأتي في آخر النتائج
+            people = { query, items: members.concat(families).map(item => ({ item, score: item.score || 10 })) };
+            render(true);
+        }, 250);
+    }
+
+    function render(keepPeople) {
         const query = input.value.trim();
-        results = search(query).map(result => result.item);
+        if (!keepPeople) loadPeople(query);
+        const found = search(query);
+        if (query && people.query === query) {
+            // الأقرب تطابقًا أولًا من الصفحات والأعضاء والأسر معًا (أقصى 12 عضوًا و8 أسر)
+            const members = people.items.filter(entry => entry.item.group === 'الأعضاء').sort(byCloseness).slice(0, 12);
+            const families = people.items.filter(entry => entry.item.group === 'الأسر').sort(byCloseness).slice(0, 8);
+            found.push(...members, ...families);
+            found.sort(byCloseness);
+        }
+        results = found.map(result => result.item);
         const fallback = [];
         if (query) {
             const byUrl = url => features.find(item => item.url === url);
