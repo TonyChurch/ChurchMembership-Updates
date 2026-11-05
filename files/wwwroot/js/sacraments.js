@@ -11,10 +11,14 @@
     const kind = () => form.querySelector("[data-sacrament-kind]:checked")?.value ?? "";
     const isBaptism = () => kind() === "معمودية وميرون";
 
+    const isOrdination = () => kind() === "رسامة";
+
     const applyKind = () => {
         form.querySelectorAll("[data-baptism]").forEach((element) => { element.hidden = !isBaptism(); });
-        form.querySelectorAll("[data-couple]").forEach((element) => { element.hidden = isBaptism(); });
-        personLabel.textContent = isBaptism() ? personLabel.dataset.labelBaptism : personLabel.dataset.labelCouple;
+        form.querySelectorAll("[data-couple]").forEach((element) => { element.hidden = isBaptism() || isOrdination(); });
+        form.querySelectorAll("[data-ordination]").forEach((element) => { element.hidden = !isOrdination(); });
+        personLabel.textContent = isBaptism() ? personLabel.dataset.labelBaptism
+            : isOrdination() ? personLabel.dataset.labelOrdination : personLabel.dataset.labelCouple;
     };
     form.querySelectorAll("[data-sacrament-kind]").forEach((radio) => radio.addEventListener("change", applyKind));
     applyKind();

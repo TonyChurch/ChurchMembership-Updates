@@ -1,15 +1,3 @@
-// البحث بلا فرق بين طرق كتابة الحروف: أ إ آ ← ا، ى ئ ← ي، ة ← ه، ؤ ← و، بلا تشكيل ولا تطويل
-window.arabicKey = (text) => String(text ?? "")
-    .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
-    .replace(/[\u0623\u0625\u0622\u0671]/g, "\u0627").replace(/[\u0649\u0626\u06CC]/g, "\u064A")
-    .replace(/\u0629/g, "\u0647").replace(/\u0624/g, "\u0648").replace(/\u06A9/g, "\u0643")
-    .toLowerCase().replace(/\s+/g, " ").trim();
-// كل كلمات البحث موجودة في النص
-window.arabicMatch = (text, search) => {
-    const haystack = window.arabicKey(text);
-    return window.arabicKey(search).split(" ").filter(Boolean).every((word) => haystack.includes(word));
-};
-
 ﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
@@ -195,32 +183,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (id?.dataset.identitySetup) check(id, "NationalId");
     });
 
-    // صاحب الرقم إن وُجد: بطاقة صغيرة تحت الخانة بالاسم والكود والأسرة والمكان والهاتف والعنوان ورابط الملف
-    const escapeHtml = text => String(text ?? "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
-    const showOwner = (input, owner) => {
-        let card = input.parentElement.querySelector(".id-owner");
-        if (!owner) { card?.remove(); return; }
-        if (!card) {
-            card = document.createElement("div");
-            card.className = "id-owner";
-            (input.parentElement.querySelector(".id-check") || input).insertAdjacentElement("afterend", card);
-        }
-        const parts = [owner.code, owner.family ? "أسرة " + owner.family : "", owner.phone, owner.address].filter(Boolean);
-        card.innerHTML = `<i class="bi bi-person-vcard-fill" aria-hidden="true"></i><span><b>${escapeHtml(owner.kind)} ${escapeHtml(owner.name)}${owner.hidden ? " (مخفي)" : ""}</b>`
-            + (parts.length ? `<small>${parts.map(escapeHtml).join(" · ")}</small>` : "")
-            + (owner.place ? `<small class="is-place">${escapeHtml(owner.place)}</small>` : "") + "</span>"
-            + (owner.url ? `<a href="${owner.url}" target="_blank" rel="noopener">فتح الملف</a>` : "");
-    };
-    // في صفحات العضو والأسرة والخادم لا يتكرر الرقم (خطأ يمنع الحفظ)؛ وفي باقي الصفحات يُعرض صاحبه للعلم فقط
-    const isStrict = (form, input) => {
-        if (input?.dataset.memberId || input?.dataset.familyId) return true;
-        const action = (form?.getAttribute("action") || location.pathname).toLowerCase();
-        return /\/(members|families|servants)(\/|$|\?)/.test(action);
-    };
-
     const check = async (input, kind) => {
         const value = input.value.trim();
-        if (!value) { showMessage(input, true, ""); showOwner(input, null); return; }
+        if (!value) { showMessage(input, true, ""); return; }
         const params = contextOf(input.form, input);
         params.set("value", value);
         // هاتف أب الاعتراف وهاتف حساب المستخدم: الشكل فقط (يتكرران طبيعيًا)
@@ -234,11 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (kind === "NationalId" && data.birthDate) fillFromNationalId(input, data);
             const genderError = kind === "NationalId" && data.ok && data.gender ? roleGenderError(input, data.gender) : "";
             if (genderError) { showMessage(input, false, genderError); return; }
-            showOwner(input, data.owner);
-            if (!data.ok && "owner" in data && !isStrict(input.form, input)) {
-                showMessage(input, true, data.owner ? "ℹ️ مسجل في البرنامج:" : "ℹ️ " + data.message.replace("بالفعل ", ""));
-                return;
-            }
             showMessage(input, data.ok, data.ok ? (kind === "NationalId" && data.birthDate ? `✓ ${data.gender} · ${data.age} سنة` : "✓") : data.message);
         } catch { /* الفحص الفوري اختياري؛ الحفظ يتحقق مرة أخرى */ }
     };
@@ -253,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const clean = toLatinDigits(input.value).replace(/\D/g, "").slice(0, length);
             if (clean !== input.value) input.value = clean;
             if (clean.length === length) check(input, kind);
-            else { showMessage(input, true, ""); showOwner(input, null); }
+            else showMessage(input, true, "");
         });
         input.addEventListener("blur", () => {
             if (!input.value) return;
@@ -293,59 +253,6 @@ document.addEventListener("change", event => {
     input.value = other ? "" : select.value;
     if (other) input.focus();
 });
-
-// =========================================================
-// علامة «صح» خضراء تحت كل خانة مُلئت بلا أخطاء، في كل نماذج الحفظ بالبرنامج.
-// تظهر بعد الخروج من الخانة (لا أثناء الكتابة)، وتختفي إن فُرغت الخانة أو صارت خاطئة.
-// خانات الرقم القومي والموبايل لها رسالتها الخاصة (✓ أو الخطأ) من فحص الهوية أعلاه.
-// في الصفوف والجداول الضيقة تظهر العلامة داخل الخانة نفسها حتى لا يختل الترتيب.
-// =========================================================
-(() => {
-    const SKIP_TYPES = /^(hidden|checkbox|radio|file|submit|button|reset|search|image|range|color)$/;
-    const eligible = field => {
-        if (!(field instanceof HTMLElement) || !field.matches("input, select, textarea")) return false;
-        if (field.tagName === "INPUT" && SKIP_TYPES.test(field.type)) return false;
-        if (field.disabled || field.readOnly || field.dataset.identitySetup || field.closest("[data-no-ok]")) return false;
-        const form = field.form;
-        // نماذج الحفظ فقط داخل محتوى الصفحة (لا البحث والفلاتر ولا الشريط الجانبي)
-        return !!form && (form.method || "").toLowerCase() === "post" && !!field.closest(".app-main, main");
-    };
-    const compact = field => !!field.closest(".clinic-row, td, th, .input-group, .fb-field");
-    const anchorOf = field => field.closest(".app-date-field") || field;
-
-    function mark(field) {
-        if (!eligible(field)) return;
-        const anchor = anchorOf(field);
-        let note = anchor.nextElementSibling?.classList.contains("field-ok") ? anchor.nextElementSibling : null;
-        const ok = field.value.trim() !== "" && field.checkValidity();
-        if (compact(field)) {
-            note?.remove();
-            field.classList.toggle("is-ok-mark", ok);
-            return;
-        }
-        if (!ok) { note?.remove(); return; }
-        if (!note) {
-            note = document.createElement("small");
-            note.className = "field-ok";
-            note.innerHTML = '<i class="bi bi-check-circle-fill" aria-hidden="true"></i>';
-            note.setAttribute("aria-hidden", "true");
-            anchor.insertAdjacentElement("afterend", note);
-        }
-    }
-
-    document.addEventListener("focusout", event => mark(event.target));
-    document.addEventListener("change", event => mark(event.target));
-    // أثناء الكتابة: تُزال العلامة إن صارت الخانة فارغة أو خاطئة فقط
-    document.addEventListener("input", event => {
-        const field = event.target;
-        if (!eligible(field)) return;
-        if (field.value.trim() === "" || !field.checkValidity()) {
-            field.classList.remove("is-ok-mark");
-            const anchor = anchorOf(field);
-            if (anchor.nextElementSibling?.classList.contains("field-ok")) anchor.nextElementSibling.remove();
-        }
-    });
-})();
 
 // لوحة التحكم: بنود الأرامل وكبار السن والمرضى في «يحتاج انتباهك»، بأعدادها وروابطها من تبويبات صفحة الأعضاء
 (() => {
@@ -1193,6 +1100,10 @@ document.addEventListener("change", event => {
         fetch("/api/activity/pharmacy-families").then(answer => answer.ok ? answer.json() : []).then(all => {
             families = all.filter(item => item.familyId);
             search.placeholder = `ابحث في ${families.length} أسرة بالاسم أو الكود`;
+            // الدخول من زر «صيدلية» في ملف الأسرة: الأسرة مختارة
+            const wanted = Number(new URLSearchParams(location.search).get("familyId"));
+            const preset = families.find(item => item.familyId === wanted);
+            if (preset) choose(preset);
         });
         load();
     }).catch(() => { /* القسم يظهر لمن له صلاحية الصيدلية فقط */ });

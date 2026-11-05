@@ -1,0 +1,72 @@
+/* قراءات السنة كاملة: صفحات A4 للطباعة */
+
+@page { size: A4; margin: 12mm; }
+
+:root { --book-ink: #1d1a14; --book-accent: #6b1f2a; --book-line: #cfc6b4; --book-head: #f3ecdd; }
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 1rem;
+    color: var(--book-ink);
+    font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+    font-size: 13px;
+    background: #ece7dc;
+}
+
+.book-tools { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin-bottom: 1rem; }
+
+.book-tools button, .book-tools a {
+    padding: .5rem 1.1rem;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    background: var(--book-accent);
+    border: 1px solid var(--book-accent);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.book-tools a { color: var(--book-accent); background: #fff; }
+
+.book { max-width: 190mm; margin: 0 auto; padding: 8mm; background: #fff; }
+
+.book__head { margin-bottom: 6mm; padding-bottom: 3mm; text-align: center; border-bottom: 2px solid var(--book-accent); }
+.book__head p { margin: 0; font-weight: 700; }
+.book__head h1 { margin: .2rem 0; color: var(--book-accent); font-size: 1.6rem; }
+.book__head small { color: #5b5547; }
+
+.book__period { margin-bottom: 6mm; }
+
+.book__period h2 { margin: 0 0 1.5mm; color: var(--book-accent); font-size: 1.05rem; break-after: avoid; }
+.book__period h2 small { display: block; color: #5b5547; font-size: .78rem; font-weight: 600; }
+
+.book__people { display: flex; flex-wrap: wrap; gap: .2rem 1.2rem; margin: 0 0 1.5mm; font-size: .85rem; }
+
+.book table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+
+.book th, .book td { padding: 1mm 1.5mm; overflow-wrap: anywhere; text-align: right; vertical-align: middle; border: 1px solid var(--book-line); }
+
+.book thead th { background: var(--book-head); font-size: .82rem; }
+.book thead th:nth-child(1) { width: 17%; }
+.book thead th:nth-child(2) { width: 23%; }
+.book thead th:nth-child(3) { width: 34%; }
+.book tbody th { background: #faf6ec; font-size: .85rem; }
+
+.book tbody tr { break-inside: avoid; }
+
+@media (max-width: 640px) {
+    body { padding: .5rem; font-size: 12px; }
+    .book { padding: 3mm; }
+}
+
+@media print {
+    body { padding: 0; background: #fff; }
+    .book-tools { display: none; }
+    .book { max-width: none; padding: 0; }
+    /* الفترة تبدأ صفحة جديدة إلا الأولى، فلا تنقسم الساعات بلا عنوان */
+    .book__period + .book__period { break-before: page; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

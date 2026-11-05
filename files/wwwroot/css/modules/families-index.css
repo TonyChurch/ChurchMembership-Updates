@@ -225,3 +225,30 @@
 .families-actions__hide:hover { color: #475569; background: var(--ui-surface-muted, #f1f5f9); }
 .families-actions__delete { color: var(--ui-danger); }
 .families-actions__delete:hover { background: var(--ui-danger-soft, #fde8e8); }
+
+/* بطاقة الرعاية بجوار المناسبات: لون مختلف للتمييز */
+.families-care {
+    background: linear-gradient(135deg, #e8f7f4, #eef2ff);
+    border-color: #bfe6dd;
+}
+
+.families-care .ui-birthdays__title { color: #0f766e; }
+
+.families-care .ui-birthdays__item.has-items {
+    background: linear-gradient(135deg, #0f9f8f, #4f6df5);
+    box-shadow: 0 4px 10px rgba(15, 159, 143, .28);
+}
+
+.families-care .ui-birthdays__item:hover { border-color: #0f9f8f; }
+
+/* شريطا المناسبات والرعاية: عرضهما أكبر من خانة إحصاء واحدة */
+ul.page-stats > li.families-strip { grid-column: span 2; }
+ul.page-stats > li.families-strip--care { grid-column: 1 / -1; }
+
+.families-strip .ui-birthdays {
+    display: flex;
+    width: 100%;
+    margin: 0;
+}
+
+.families-strip .ui-birthdays__item { flex: 1 1 0; min-width: 0; }

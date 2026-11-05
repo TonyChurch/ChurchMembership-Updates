@@ -86,10 +86,7 @@
         const nid = val(pane, "NationalId");
         if (words(val(pane, "FullName")).length < 3) list.push("الاسم ثلاثيًا");
         if ((!isDeceased(pane) || nid) && !readNid(nid)) list.push("الرقم القومي");
-        // الموبايل مطلوب للأب فقط؛ للأم اختياري، وإن كُتب يجب أن يكون صحيحًا
-        const phone = val(pane, "Phone");
-        if (pane.dataset.slot === "father" && !isDeceased(pane) && !isMobile(phone)) list.push("الموبايل");
-        else if (phone && !isMobile(phone)) list.push("الموبايل");
+        if (isParent(pane) && !isDeceased(pane) && !isMobile(val(pane, "Phone"))) list.push("الموبايل");
         if (pane.querySelector("[data-mother-kind]")?.value === "previous" && !val(pane, "PreviousMotherName")) list.push("اسم والدته");
         return list;
     };
@@ -311,12 +308,9 @@
             if (idInput.value) return;
             box.classList.remove("fb-match--attached");
             const name = nameInput.value.trim();
-            // الاسم أو الرقم القومي أو الموبايل: أيها يطابق ملفًا مسجلًا بلا أسرة يُقترح ضمه
-            const nationalId = (field(pane, "NationalId")?.value || "").trim();
-            const phone = (field(pane, "Phone")?.value || "").trim();
-            if (words(name).length < 2 && nationalId.length < 14 && phone.length < 11) { box.hidden = true; return; }
+            if (words(name).length < 2) { box.hidden = true; return; }
             try {
-                const response = await fetch(`/Validation/Unattached?${new URLSearchParams({ name, nationalId, phone })}`, { headers: { Accept: "application/json" } });
+                const response = await fetch(`/Validation/Unattached?${new URLSearchParams({ name })}`, { headers: { Accept: "application/json" } });
                 if (!response.ok || idInput.value || nameInput.value.trim() !== name) return;
                 // ملف مضموم لفرد آخر في نفس الصفحة لا يُعرض مرة ثانية
                 const taken = panes().map(other => other.querySelector("[data-existing-id]")?.value).filter(Boolean);
@@ -356,8 +350,6 @@
         const schedule = () => { clearTimeout(timer); timer = setTimeout(lookup, 450); };
         nameInput.addEventListener("input", schedule);
         nameInput.addEventListener("change", schedule);
-        field(pane, "NationalId")?.addEventListener("change", schedule);
-        field(pane, "Phone")?.addEventListener("change", schedule);
         // بعد رجوع الحفظ بملاحظات تعود الحقول مملوءة، فيلزم البحث من جديد ليظهر «ضمّه لهذه الأسرة»
         if (idInput.value) { setOwner(idInput.value); showAttached(); } else lookup();
     };
