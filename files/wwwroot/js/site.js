@@ -379,22 +379,24 @@ document.addEventListener("change", event => {
 })();
 
 // جرس الإشعارات للإدارة العامة: ما أضافه المستخدمون الآخرون (يظهر فقط إن أتاح الخادم القائمة لهذا الحساب)
+// مكانه بجوار «ابحث في البرنامج» في القائمة الجانبية فيبقى ظاهرًا، وعلى الموبايل يظهر العدد على زر القائمة أيضًا
 (() => {
-    const bar = document.querySelector(".topbar-family-commands");
-    const inner = document.querySelector(".topbar__inner");
-    if (!bar || !inner) return;
+    const searches = [...document.querySelectorAll(".right-sidebar__search")];
+    if (!searches.length) return;
     const seenKey = "activity-seen";
     const readSeen = () => { try { return localStorage.getItem(seenKey) || ""; } catch { return ""; } };
     const writeSeen = value => { try { localStorage.setItem(seenKey, value); } catch { /* يكفي عدّاد هذه الجلسة */ } };
-    let button, badge, panel, list = [];
+    let buttons = [], badges = [], panel, opener = null, list = [];
 
     const when = value => new Date(value).toLocaleString("ar-EG", { day: "numeric", month: "numeric", hour: "numeric", minute: "2-digit" });
     const refreshBadge = () => {
         const seen = readSeen();
         const unread = list.filter(item => item.at > seen).length;
-        badge.textContent = unread > 99 ? "99+" : unread;
-        badge.hidden = unread === 0;
-        button.setAttribute("aria-label", unread ? `الإشعارات: ${unread} جديد` : "الإشعارات");
+        badges.forEach(badge => {
+            badge.textContent = unread > 99 ? "99+" : unread;
+            badge.hidden = unread === 0;
+        });
+        buttons.forEach(button => button.setAttribute("aria-label", unread ? `الإشعارات: ${unread} جديد` : "الإشعارات"));
     };
     const render = () => {
         const seen = readSeen();
@@ -405,7 +407,7 @@ document.addEventListener("change", event => {
         panel.append(title);
         if (list.length === 0) {
             const empty = document.createElement("p");
-            empty.textContent = "لا توجد إضافات في آخر أسبوعين.";
+            empty.textContent = "لا توجد إضافات من المستخدمين الآخرين في آخر أسبوعين.";
             panel.append(empty);
         }
         list.forEach(item => {
@@ -422,38 +424,68 @@ document.addEventListener("change", event => {
             panel.append(row);
         });
     };
-    const close = () => { panel.hidden = true; button.setAttribute("aria-expanded", "false"); };
-    const toggle = () => {
-        if (!panel.hidden) { close(); return; }
+    const close = () => {
+        panel.hidden = true;
+        buttons.forEach(button => button.setAttribute("aria-expanded", "false"));
+        opener = null;
+    };
+    const toggle = button => {
+        if (!panel.hidden && opener === button) { close(); return; }
         render();
+        // القائمة تنفتح بجوار القائمة الجانبية من جهة الصفحة، وعلى الموبايل تحت الجرس
         const box = button.getBoundingClientRect();
-        panel.style.top = `${Math.round(box.bottom + 8)}px`;
+        const side = button.closest(".right-sidebar")?.getBoundingClientRect();
+        const room = side ? side.left : 0;
+        panel.style.left = "auto";
+        if (room > 300) {
+            panel.style.top = `${Math.round(Math.max(8, box.top))}px`;
+            panel.style.right = `${Math.round(window.innerWidth - room + 8)}px`;
+        } else {
+            panel.style.top = `${Math.round(box.bottom + 8)}px`;
+            panel.style.right = "12px";
+        }
         panel.hidden = false;
-        button.setAttribute("aria-expanded", "true");
+        opener = button;
+        buttons.forEach(item => item.setAttribute("aria-expanded", item === button ? "true" : "false"));
         if (list.length) writeSeen(list[0].at);
         refreshBadge();
     };
     const build = () => {
-        button = document.createElement("button");
-        button.type = "button";
-        // شريط الأوامر مخفي على الشاشات الصغيرة: يوضع الجرس بجوار زر القائمة
-        const compact = !bar.offsetParent;
-        button.className = compact ? "activity-bell activity-bell--compact" : "topbar-global-command activity-bell";
-        button.setAttribute("aria-expanded", "false");
-        button.title = "الإشعارات";
-        const icon = document.createElement("i");
-        icon.className = "bi bi-bell-fill";
-        icon.setAttribute("aria-hidden", "true");
-        badge = document.createElement("span");
-        badge.className = "activity-bell__badge";
-        badge.hidden = true;
-        button.append(icon, badge);
+        searches.forEach(search => {
+            const row = document.createElement("div");
+            row.className = "activity-search-row";
+            search.before(row);
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "activity-bell activity-bell--side";
+            button.setAttribute("aria-expanded", "false");
+            button.title = "الإشعارات: ما أضافه المستخدمون";
+            const icon = document.createElement("i");
+            icon.className = "bi bi-bell-fill";
+            icon.setAttribute("aria-hidden", "true");
+            const badge = document.createElement("span");
+            badge.className = "activity-bell__badge";
+            badge.hidden = true;
+            button.append(icon, badge);
+            row.append(search, button);
+            button.addEventListener("click", event => { event.stopPropagation(); toggle(button); });
+            buttons.push(button);
+            badges.push(badge);
+        });
+        // زر القائمة في الموبايل يحمل العدد نفسه
+        const menu = document.querySelector(".topbar__menu");
+        if (menu) {
+            const badge = document.createElement("span");
+            badge.className = "activity-bell__badge activity-bell__badge--menu";
+            badge.hidden = true;
+            menu.classList.add("activity-bell");
+            menu.append(badge);
+            badges.push(badge);
+        }
         panel = document.createElement("div");
         panel.className = "activity-panel";
         panel.hidden = true;
-        if (compact) inner.insertBefore(button, inner.querySelector(".topbar__menu")); else bar.append(button);
         document.body.append(panel);
-        button.addEventListener("click", event => { event.stopPropagation(); toggle(); });
         panel.addEventListener("click", event => event.stopPropagation());
         document.addEventListener("click", close);
         document.addEventListener("keydown", event => { if (event.key === "Escape") close(); });
@@ -463,7 +495,7 @@ document.addEventListener("change", event => {
         .then(items => {
             if (!items) return;
             list = items;
-            if (!button) build();
+            if (!panel) build();
             refreshBadge();
         })
         .catch(() => { /* الجرس إضافي: البرنامج يعمل بدونه */ });
