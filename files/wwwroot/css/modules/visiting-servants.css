@@ -1,0 +1,36 @@
+/* الخدام الزائرون: خدام من خارج الكنيسة وسجل خدماتهم */
+.visiting__filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+    padding: .75rem;
+    margin-bottom: 1rem;
+}
+.visiting__filter input[type="search"] { flex: 1 1 16rem; min-width: 0; }
+.visiting__filter select { flex: 0 1 12rem; min-width: 0; }
+
+.visiting__phone { display: inline-flex; align-items: center; gap: .4rem; white-space: nowrap; }
+.visiting__wa { color: #1fa855; font-size: 1.05rem; }
+
+.visiting__fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+
+.visiting__services { margin-top: 1.25rem; }
+.visiting__add {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: .6rem;
+    align-items: end;
+    padding: .75rem 1rem;
+    border-bottom: 1px solid var(--ui-border, #e5e7eb);
+}
+.visiting__add label { display: flex; flex-direction: column; gap: .25rem; margin: 0; min-width: 0; }
+.visiting__add label span { font-size: .85rem; font-weight: 600; }
+.visiting__add-wide { grid-column: span 2; }
+.visiting__del { padding: .25rem .5rem; color: #c0392b; }
+.visiting__remove { margin-top: 1rem; display: flex; justify-content: flex-start; }
+
+@media (max-width: 640px) {
+    .visiting__add-wide { grid-column: auto; }
+    .visiting__filter select, .visiting__filter .ui-btn { flex: 1 1 100%; }
+}
