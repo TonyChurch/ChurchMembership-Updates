@@ -1683,3 +1683,60 @@
 .veh-row--review.veh-row--driver > td:first-child {
     box-shadow: inset -4px 0 0 #f59e0b;
 }
+
+/* مسودة السولار والبنزين في صورة جدول (تدخل في التصدير) */
+.veh-fuel__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .82rem;
+    background: #fff;
+    border-radius: .6rem;
+    overflow: hidden;
+}
+
+.veh-fuel__table caption {
+    caption-side: top;
+    padding: 0 0 .35rem;
+    color: #1d4ed8;
+    font-weight: 700;
+    text-align: start;
+}
+
+.veh-fuel__table th,
+.veh-fuel__table td {
+    padding: .25rem .4rem;
+    border-bottom: 1px solid #e0ecff;
+}
+
+.veh-fuel__table th {
+    color: #64748b;
+    font-weight: 600;
+    background: #f8fbff;
+}
+
+.veh-fuel__table a {
+    color: inherit;
+}
+
+.veh-fuel__table tfoot td {
+    font-weight: 700;
+}
+
+.veh-fuel__cat small {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.veh-fuel__sum td {
+    border-top: 1px dashed #93c5fd;
+}
+
+.veh-fuel__table .veh-fuel__driver td:last-child {
+    color: #b45309;
+    font-weight: 800;
+}
+
+.veh-fuel__table .veh-fuel__church td:last-child {
+    color: #15803d;
+    font-weight: 800;
+}
