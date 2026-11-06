@@ -778,6 +778,13 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
     color: var(--ui-text-muted);
 }
 
+.med-family__list .med-family__outsider {
+    border-top: 1px dashed var(--ui-border);
+    border-radius: 0 0 8px 8px;
+    color: #0f766e;
+    font-weight: 600;
+}
+
 .med-family__empty {
     padding: .5rem .6rem;
     color: var(--ui-text-muted);

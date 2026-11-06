@@ -983,7 +983,8 @@ document.addEventListener("change", event => {
         save.type = "submit";
         const status = make("small", "med-family__status");
         const patientField = field("اسم المريض", patient);
-        form.append(field("الأسرة", familyBox), field("لمن الروشتة؟", member), patientField, field("التاريخ", date), field("الصيدلية", pharmacy),
+        const memberField = field("لمن الروشتة؟", member);
+        form.append(field("الأسرة أو الاسم", familyBox), memberField, patientField, field("التاريخ", date), field("الصيدلية", pharmacy),
             field("رقم الفاتورة", invoice), field("الأدوية", items), field("المبلغ", amount), save, status, pharmacies);
 
         const tableWrap = make("div", "table-responsive");
@@ -992,7 +993,18 @@ document.addEventListener("change", event => {
 
         const resetMembers = () => {
             member.replaceChildren(new Option("الأسرة كلها", ""));
+            memberField.hidden = false;
             patientField.hidden = false;
+        };
+        // اسم غير مسجل في البرنامج: الروشتة باسمه فقط، بلا أسرة ولا أفراد
+        const chooseOutsider = name => {
+            chosen = { outsider: true, name };
+            search.value = name;
+            list.hidden = true;
+            status.textContent = "";
+            resetMembers();
+            memberField.hidden = patientField.hidden = true;
+            pharmacy.focus();
         };
         resetMembers();
         member.addEventListener("change", () => { patientField.hidden = member.value !== ""; });
@@ -1023,6 +1035,15 @@ document.addEventListener("change", event => {
                 return row;
             }));
             if (!found.length) list.append(make("li", "med-family__empty", "لا توجد أسرة بهذا الاسم."));
+            if (text) {
+                const row = make("li");
+                const button = make("button", "med-family__outsider");
+                button.type = "button";
+                button.append(make("span", "", `＋ «${text}»`), make("small", "", "اسم غير مسجل بالبرنامج"));
+                button.addEventListener("click", () => chooseOutsider(text));
+                row.append(button);
+                list.append(row);
+            }
             list.hidden = false;
         };
         search.addEventListener("input", draw);
@@ -1080,11 +1101,12 @@ document.addEventListener("change", event => {
         form.addEventListener("submit", async event => {
             event.preventDefault();
             status.textContent = "";
-            if (!chosen) { status.textContent = "اختر الأسرة من نتائج البحث."; search.focus(); return; }
+            if (!chosen) { status.textContent = "اختر الأسرة من نتائج البحث، أو «اسم غير مسجل بالبرنامج»."; search.focus(); return; }
             if (!(Number(amount.value) > 0)) { status.textContent = "اكتب مبلغ الروشتة."; amount.focus(); return; }
             save.disabled = true;
             const result = await send("", "POST", {
-                familyId: chosen.familyId, memberId: member.value ? Number(member.value) : null, patientName: patient.value,
+                familyId: chosen.outsider ? 0 : chosen.familyId, memberId: !chosen.outsider && member.value ? Number(member.value) : null,
+                patientName: chosen.outsider ? chosen.name : patient.value,
                 date: date.value, pharmacy: pharmacy.value, invoiceNumber: invoice.value, items: items.value, amount: Number(amount.value)
             }).catch(() => null);
             save.disabled = false;
@@ -1099,7 +1121,7 @@ document.addEventListener("change", event => {
 
         fetch("/api/activity/pharmacy-families").then(answer => answer.ok ? answer.json() : []).then(all => {
             families = all.filter(item => item.familyId);
-            search.placeholder = `ابحث في ${families.length} أسرة بالاسم أو الكود`;
+            search.placeholder = `ابحث في ${families.length} أسرة بالاسم أو الكود، أو اكتب اسمًا غير مسجل`;
             // الدخول من زر «صيدلية» في ملف الأسرة: الأسرة مختارة
             const wanted = Number(new URLSearchParams(location.search).get("familyId"));
             const preset = families.find(item => item.familyId === wanted);
