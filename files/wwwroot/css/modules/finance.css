@@ -1535,3 +1535,151 @@
     font-size: .85rem;
     font-weight: 600;
 }
+
+/* ---------- صفحة السيارة: المسودة الجانبية للسولار والبنزين ---------- */
+.veh-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: 1rem;
+    align-items: start;
+}
+
+.veh-layout__main {
+    min-width: 0;
+}
+
+.veh-fuel {
+    position: sticky;
+    top: 12.5rem;
+    display: grid;
+    gap: .55rem;
+    padding: .85rem;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 1rem;
+}
+
+.veh-fuel h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #1d4ed8;
+}
+
+.veh-fuel__hint,
+.veh-fuel__empty {
+    margin: 0;
+    color: #64748b;
+    font-size: .8rem;
+}
+
+.veh-fuel__cats,
+.veh-fuel__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: .25rem;
+}
+
+.veh-fuel__cats li,
+.veh-fuel__list a,
+.veh-fuel__totals div {
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+}
+
+.veh-fuel__cats li {
+    font-weight: 700;
+}
+
+.veh-fuel__cats small {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.veh-fuel__list {
+    max-height: 12rem;
+    overflow-y: auto;
+    padding: .35rem;
+    background: #fff;
+    border-radius: .6rem;
+    font-size: .82rem;
+}
+
+.veh-fuel__list a {
+    color: inherit;
+    text-decoration: none;
+    padding: .1rem .25rem;
+    border-radius: .35rem;
+}
+
+.veh-fuel__list a:hover {
+    background: #dbeafe;
+}
+
+.veh-fuel__totals {
+    margin: 0;
+    display: grid;
+    gap: .3rem;
+    padding-top: .45rem;
+    border-top: 1px dashed #93c5fd;
+}
+
+.veh-fuel__totals dt {
+    font-weight: 600;
+}
+
+.veh-fuel__totals dd {
+    margin: 0;
+    font-weight: 800;
+}
+
+.veh-fuel__driver dd {
+    color: #b45309;
+}
+
+.veh-fuel__church dd {
+    color: #15803d;
+}
+
+/* بنود المصروف التي يشارك فيها السائق: لون مميز */
+.veh-row--driver > td {
+    background: #eff6ff;
+}
+
+.veh-row--driver > td:first-child {
+    box-shadow: inset -4px 0 0 #3b82f6;
+}
+
+.veh-legend {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    color: #1d4ed8;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.veh-legend i {
+    width: .8rem;
+    height: .8rem;
+    border-radius: .2rem;
+    background: #dbeafe;
+    border-inline-start: 3px solid #3b82f6;
+}
+
+@media (max-width: 1199.98px) {
+    .veh-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .veh-fuel {
+        position: static;
+    }
+}
+
+.veh-row--review.veh-row--driver > td:first-child {
+    box-shadow: inset -4px 0 0 #f59e0b;
+}
