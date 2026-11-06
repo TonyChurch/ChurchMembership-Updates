@@ -1330,3 +1330,35 @@
     color: #64748b;
     font-weight: 700;
 }
+
+/* علامة «للمراجعة» على بند */
+.veh-row--review > td {
+    background: #fffbeb !important;
+}
+
+.veh-row--review > td:first-child {
+    box-shadow: inset -4px 0 0 #f59e0b;
+}
+
+.veh-review-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    margin-inline-start: .4rem;
+    padding: .1rem .5rem;
+    border-radius: 999px;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.veh-review-btn.is-on {
+    color: #b45309;
+    background: #fef3c7;
+}
+
+.fin-row-actions .veh-review-form {
+    display: inline-block;
+    margin: 0;
+}
