@@ -898,6 +898,44 @@
     border-radius: 12px;
 }
 
+/* «يخدم في الكنيسة في» داخل صف الفرد في نافذة الارتباط الكنسي */
+.fp-serve {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto repeat(3, minmax(0, 1fr));
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+    padding-top: .35rem;
+    border-top: 1px dashed var(--ui-border);
+    font-size: .86rem;
+}
+
+.fp-serve--on {
+    display: block;
+    color: #b45309;
+    font-weight: 600;
+}
+
+.fp-serve__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.fp-serve select[hidden] {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    .fp-serve {
+        grid-template-columns: 1fr;
+    }
+}
+
 .fp-member-edit__row small {
     color: var(--ui-text-muted);
     font-weight: 500;
