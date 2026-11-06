@@ -1313,3 +1313,9 @@
         grid-template-columns: 1fr;
     }
 }
+
+.veh-day {
+    color: #64748b;
+    font-weight: 600;
+    font-size: .85em;
+}
