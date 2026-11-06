@@ -1101,7 +1101,12 @@ document.addEventListener("change", event => {
         form.addEventListener("submit", async event => {
             event.preventDefault();
             status.textContent = "";
-            if (!chosen) { status.textContent = "اختر الأسرة من نتائج البحث، أو «اسم غير مسجل بالبرنامج»."; search.focus(); return; }
+            // لم تُختر أسرة: الاسم المكتوب في البحث أو في «اسم المريض» يُسجَّل اسمًا غير مسجل بالبرنامج
+            if (!chosen) {
+                const typed = search.value.trim() || patient.value.trim();
+                if (!typed) { status.textContent = "اختر الأسرة من نتائج البحث، أو اكتب اسم المريض إن لم يكن مسجلًا بالبرنامج."; search.focus(); return; }
+                chosen = { outsider: true, name: typed };
+            }
             if (!(Number(amount.value) > 0)) { status.textContent = "اكتب مبلغ الروشتة."; amount.focus(); return; }
             save.disabled = true;
             const result = await send("", "POST", {
@@ -1113,6 +1118,8 @@ document.addEventListener("change", event => {
             if (!result?.ok) { status.textContent = "تعذر حفظ الروشتة، راجع البيانات."; return; }
             toast("✓ تم حفظ الروشتة");
             amount.value = invoice.value = items.value = patient.value = "";
+            // الاسم غير المسجل لا يبقى للروشتة التالية
+            if (chosen?.outsider) { chosen = null; search.value = ""; resetMembers(); }
             const saved = new Date(date.value);
             year = saved.getFullYear();
             month = saved.getMonth() + 1;
