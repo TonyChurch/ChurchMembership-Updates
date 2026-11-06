@@ -1186,3 +1186,130 @@
 .fin-table tr.aid-focus {
     background: rgba(245, 165, 36, .14);
 }
+
+/* ---------- السيارات: جانب للإيراد وجانب للمصروف، وحساب فوري ---------- */
+.veh-entry {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .8rem;
+    margin-bottom: .8rem;
+}
+
+.veh-entry__form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-content: start;
+    gap: .5rem .6rem;
+    margin: 0;
+    padding: .7rem .8rem .8rem;
+    border-radius: 14px;
+    border-top: 4px solid;
+}
+
+.veh-entry__form--in {
+    background: #f0fbf4;
+    border-color: #16a34a;
+}
+
+.veh-entry__form--out {
+    background: #fff4f2;
+    border-color: #dc2626;
+}
+
+.veh-entry__form h3 {
+    grid-column: 1 / -1;
+    margin: 0 0 .1rem;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.veh-entry__form--in h3 { color: #15803d; }
+.veh-entry__form--out h3 { color: #b91c1c; }
+
+.veh-entry__form .form-label {
+    margin-bottom: .15rem;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.veh-entry__wide,
+.veh-entry__form > .ui-btn {
+    grid-column: 1 / -1;
+}
+
+.veh-entry__form .fin-edit-cancel {
+    grid-column: 1 / -1;
+}
+
+.veh-live {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .5rem;
+    margin-bottom: 1rem;
+    padding: .7rem .8rem;
+    background: var(--ui-bg);
+    border: 1px solid var(--ui-border);
+    border-radius: 14px;
+    transition: box-shadow .2s, border-color .2s;
+}
+
+.veh-live.is-preview {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, .18);
+}
+
+.veh-live__title {
+    grid-column: 1 / -1;
+    font-size: .95rem;
+}
+
+.veh-live__title small {
+    color: var(--ui-text-muted);
+    font-weight: 500;
+}
+
+.veh-live__cell {
+    display: grid;
+    gap: .1rem;
+    padding: .45rem .6rem;
+    background: var(--ui-surface, #fff);
+    border-radius: 10px;
+}
+
+.veh-live__cell span,
+.veh-live__cell small {
+    color: var(--ui-text-muted);
+    font-size: .76rem;
+}
+
+.veh-live__cell b {
+    font-size: 1.15rem;
+}
+
+.veh-live__cell--in b { color: #15803d; }
+.veh-live__cell--out b { color: #b91c1c; }
+.veh-live__cell--driver b { color: #b45309; }
+.veh-live__cell--church b { color: #1d4ed8; }
+
+.veh-attach {
+    color: #1d4ed8;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+@media (max-width: 991.98px) {
+    .veh-entry,
+    .veh-live {
+        grid-template-columns: 1fr;
+    }
+
+    .veh-entry__form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 575.98px) {
+    .veh-entry__form {
+        grid-template-columns: 1fr;
+    }
+}
