@@ -1323,3 +1323,10 @@
 .veh-live {
     scroll-margin-top: .75rem;
 }
+
+.veh-serial {
+    width: 2.5rem;
+    text-align: center;
+    color: #64748b;
+    font-weight: 700;
+}
