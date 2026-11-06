@@ -1156,3 +1156,86 @@ document.addEventListener("change", event => {
     document.body.append(notice);
     setTimeout(() => notice.remove(), 5000);
 })();
+
+// تصدير أي صفحة: زر في رأس الصفحة فيه «Excel» (كل جداول الصفحة الظاهرة في ملف واحد) و«طباعة / PDF».
+// يُضاف تلقائيًا لكل صفحة داخل البرنامج؛ ولا يُكرَّر Excel في صفحة لها زر تصدير خاص بها.
+(() => {
+    if (document.body.classList.contains("portal-body") || document.body.classList.contains("no-export") || location.pathname.toLowerCase().startsWith("/account")) return;
+    const page = document.querySelector("main .ui-page, main .container-fluid, main");
+    const header = page?.querySelector(".ui-page-header") || page?.querySelector("h1")?.parentElement;
+    if (!page || !header || header.querySelector(".page-export")) return;
+
+    const visibleTables = () => [...page.querySelectorAll("table")].filter(table => table.offsetParent !== null && !table.closest(".no-print, .modal, [hidden]") && table.rows.length > 0);
+    const hasOwnExcel = [...page.querySelectorAll("a, button")].some(item => /excel/i.test(item.textContent) && !item.closest(".page-export"));
+    const title = (document.querySelector("h1")?.textContent || document.title || "صفحة").trim().replace(/\s+/g, " ");
+
+    const box = document.createElement("div");
+    box.className = "page-export no-print";
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "ui-btn ui-btn--ghost page-export__toggle";
+    toggle.innerHTML = '<i class="bi bi-box-arrow-up" aria-hidden="true"></i> تصدير';
+    toggle.setAttribute("aria-haspopup", "true");
+    toggle.setAttribute("aria-expanded", "false");
+    const menu = document.createElement("div");
+    menu.className = "page-export__menu";
+    menu.hidden = true;
+    const item = (icon, label, action) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.innerHTML = `<i class="bi ${icon}" aria-hidden="true"></i> ${label}`;
+        button.addEventListener("click", () => { menu.hidden = true; toggle.setAttribute("aria-expanded", "false"); action(); });
+        menu.append(button);
+        return button;
+    };
+
+    // Excel: ملف CSV بترميز UTF-8 يفتحه Excel بالعربي؛ كل جدول بعنوانه، وتُحذف أعمدة الأزرار (no-print)
+    const cellText = cell => {
+        const copy = cell.cloneNode(true);
+        copy.querySelectorAll(".no-print, button, .visually-hidden, script").forEach(node => node.remove());
+        copy.querySelectorAll("input, select, textarea").forEach(control => {
+            const value = control.type === "checkbox" ? (control.checked ? "✓" : "") : control.tagName === "SELECT" ? (control.selectedOptions[0]?.textContent || "") : control.value;
+            control.replaceWith(document.createTextNode(value));
+        });
+        return copy.textContent.replace(/\s+/g, " ").trim();
+    };
+    const csv = value => /[",\n\r]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
+    const exportExcel = () => {
+        const tables = visibleTables();
+        if (!tables.length) return;
+        const lines = [csv(title), csv("تاريخ التصدير: " + new Date().toLocaleDateString("ar-EG")), ""];
+        tables.forEach((table, index) => {
+            const section = table.closest("section, .ui-card, .ui-section");
+            const heading = table.caption?.textContent || section?.querySelector("h2, h3")?.textContent;
+            if (tables.length > 1 && heading) lines.push(csv(heading.replace(/\s+/g, " ").trim()));
+            [...table.rows].forEach(row => {
+                if (row.offsetParent === null || row.classList.contains("no-print")) return;
+                const cells = [...row.cells].filter(cell => !cell.classList.contains("no-print"));
+                const values = [];
+                cells.forEach(cell => { values.push(csv(cellText(cell))); for (let span = 1; span < (cell.colSpan || 1); span++) values.push(""); });
+                if (values.some(Boolean)) lines.push(values.join(","));
+            });
+            if (index < tables.length - 1) lines.push("");
+        });
+        const blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `${title.replace(/[\\/:*?"<>|]/g, "-").slice(0, 80)} ${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.append(link);
+        link.click();
+        setTimeout(() => { URL.revokeObjectURL(link.href); link.remove(); }, 1000);
+    };
+
+    const excel = hasOwnExcel ? null : item("bi-file-earmark-excel", "Excel (جداول الصفحة)", exportExcel);
+    item("bi-printer", "طباعة / حفظ PDF", () => window.print());
+    const sync = () => { if (excel) excel.hidden = visibleTables().length === 0; };
+
+    toggle.addEventListener("click", () => {
+        sync();
+        menu.hidden = !menu.hidden;
+        toggle.setAttribute("aria-expanded", String(!menu.hidden));
+    });
+    document.addEventListener("click", event => { if (!box.contains(event.target)) { menu.hidden = true; toggle.setAttribute("aria-expanded", "false"); } });
+    box.append(toggle, menu);
+    (header.querySelector(".ui-page-header__actions, .fin-actions") || header).append(box);
+})();

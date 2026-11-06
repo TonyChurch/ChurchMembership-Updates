@@ -34,3 +34,19 @@
     .visiting__add-wide { grid-column: auto; }
     .visiting__filter select, .visiting__filter .ui-btn { flex: 1 1 100%; }
 }
+
+/* ما يُستخرج من الرقم القومي */
+.visiting__nid {
+    display: block;
+    margin-top: .25rem;
+    color: #0f766e;
+    font-weight: 600;
+}
+
+.visiting__nid:empty {
+    display: none;
+}
+
+.visiting__nid.is-bad {
+    color: #b91c1c;
+}

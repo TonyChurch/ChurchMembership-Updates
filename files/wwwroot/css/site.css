@@ -154,3 +154,49 @@ body.no-export .members-export { display: none !important; }
 /* رسالة «ما الجديد» بعد التحديث */
 .whats-new .modal-title { color: var(--ui-primary, #3b5bfd); font-weight: 800; }
 .whats-new ul { display: grid; gap: .45rem; margin: 0; padding-inline-start: 1.2rem; }
+
+/* زر «تصدير» العام في رأس كل صفحة (site.js) */
+.page-export {
+    position: relative;
+    display: inline-flex;
+    align-self: start;
+}
+
+.page-export__menu {
+    position: absolute;
+    inset-inline-end: 0;
+    top: calc(100% + .3rem);
+    z-index: 1050;
+    display: grid;
+    min-width: 13rem;
+    padding: .3rem;
+    background: var(--ui-surface, #fff);
+    border: 1px solid var(--ui-border, #e5e7eb);
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .16);
+}
+
+.page-export__menu[hidden],
+.page-export__menu button[hidden] {
+    display: none;
+}
+
+.page-export__menu button {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem .7rem;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ui-text, #1f2937);
+    font-weight: 600;
+    text-align: start;
+}
+
+.page-export__menu button:hover {
+    background: rgba(59, 91, 253, .08);
+}
+
+.page-export__menu .bi-file-earmark-excel { color: #15803d; }
+.page-export__menu .bi-printer { color: #1d4ed8; }
