@@ -179,8 +179,9 @@ function Start-Independent([string]$file, [string]$arguments, [string]$folder) {
             CommandLine = "`"$file`" $arguments"; CurrentDirectory = $folder; ProcessStartupInformation = $startup
         }
         if ($result.ReturnValue -eq 0) { return [int]$result.ProcessId }
+        if ($Silent) { Write-Log "تعذر التشغيل المستقل عبر WMI (الرمز $($result.ReturnValue)): تشغيل عادي." }
     }
-    catch { }
+    catch { if ($Silent) { Write-Log "تعذر التشغيل المستقل عبر WMI ($($_.Exception.Message)): تشغيل عادي." } }
     return (Start-Process -FilePath $file -ArgumentList $arguments -WorkingDirectory $folder -WindowStyle Hidden -PassThru).Id
 }
 
