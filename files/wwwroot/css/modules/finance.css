@@ -1779,3 +1779,71 @@
 .veh-group__title > * + * {
     margin-inline-start: .4rem;
 }
+
+/* ---------- بيانات السيارة والسائق في صفحة السيارة ---------- */
+.veh-info {
+    padding: .7rem .9rem;
+}
+
+.veh-info summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    cursor: pointer;
+    font-weight: 800;
+    color: var(--ui-primary-strong);
+}
+
+.veh-info__edit {
+    margin-inline-start: auto;
+    font-size: .85rem;
+}
+
+.veh-info__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: .7rem;
+}
+
+.veh-info h3 {
+    margin: 0 0 .4rem;
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.veh-info dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .35rem .9rem;
+    margin: 0;
+}
+
+.veh-info dl div {
+    display: grid;
+    gap: .05rem;
+}
+
+.veh-info dt {
+    color: #64748b;
+    font-size: .76rem;
+    font-weight: 600;
+}
+
+.veh-info dd {
+    margin: 0;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.veh-info .is-warn dd {
+    color: #dc2626;
+}
+
+@media (max-width: 767.98px) {
+    .veh-info__grid,
+    .veh-info dl {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
