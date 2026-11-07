@@ -1858,3 +1858,130 @@
 .ledger-pick + .form-control:not([hidden]) {
     margin-top: .35rem;
 }
+
+/* ---------- ملخص الحسابات ---------- */
+.fin-total--blue { --fin-color: #1d4ed8; --fin-soft: #eaf1ff; }
+
+.fin-overview__counters strong {
+    font-variant-numeric: tabular-nums;
+}
+
+.fin-overview__note {
+    margin: -.25rem 0 0;
+    font-size: .8rem;
+}
+
+.fin-overview__group h2 {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin: .4rem 0 .6rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.fin-overview__group h2 small {
+    padding: .05rem .5rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: .75rem;
+}
+
+.fin-overview__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: .75rem;
+}
+
+.fin-account {
+    --acc: #4f46e5;
+    --acc-soft: #eef2ff;
+    display: grid;
+    gap: .55rem;
+    padding: .8rem .9rem;
+    color: inherit;
+    text-decoration: none;
+    background: var(--ui-surface, #fff);
+    border: 1px solid var(--ui-border, #e2e8f0);
+    border-top: 4px solid var(--acc);
+    border-radius: 14px;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.fin-account:hover,
+.fin-account:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .1);
+    color: inherit;
+}
+
+.fin-account--gold { --acc: #d97706; --acc-soft: #fff5e1; }
+.fin-account--violet { --acc: #7c3aed; --acc-soft: #f3edff; }
+.fin-account--blue { --acc: #2563eb; --acc-soft: #eaf1ff; }
+.fin-account--green { --acc: #059669; --acc-soft: #e6f8f1; }
+
+.fin-account.is-inactive {
+    opacity: .65;
+}
+
+.fin-account__head {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+}
+
+.fin-account__head > .bi:first-child {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: .6rem;
+    color: var(--acc);
+    background: var(--acc-soft);
+}
+
+.fin-account__head strong {
+    font-size: 1rem;
+}
+
+.fin-account__go {
+    margin-inline-start: auto;
+    color: #94a3b8;
+}
+
+.fin-account__nums {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .35rem;
+}
+
+.fin-account__nums > span {
+    display: grid;
+    gap: .05rem;
+    padding: .35rem .45rem;
+    border-radius: .55rem;
+    background: #f8fafc;
+}
+
+.fin-account__nums small {
+    color: #64748b;
+    font-size: .72rem;
+    font-weight: 600;
+}
+
+.fin-account__nums b {
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.fin-account__nums .is-in { color: #0a7a55; }
+.fin-account__nums .is-out { color: #b3203d; }
+.fin-account__nums .is-bal { color: #1d4ed8; }
+.fin-account__nums .is-negative { color: #dc2626; }
+
+.fin-account__note {
+    color: #64748b;
+    font-size: .76rem;
+}
