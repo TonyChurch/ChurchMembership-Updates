@@ -169,25 +169,38 @@ if (-not $renamed) {
 Rename-Item $next 'app'
 Write-Host 'Done. The program is updated and all data is kept.' -ForegroundColor Green
 
-# الإصدارات الأقدم المنحّاة: تُحذف بعد أن صار البرنامج الجديد في مكانه، في عملية منفصلة لا يُنتظر انتهاؤها،
+# تشغيل عملية مستقلة تمامًا عن هذا السكربت (عن طريق WMI)، وتُرجع رقمها.
+# على جهاز الكنيسة يعمل التحديث داخل مهمة مجدولة، وكل ما يشغّله السكربت بطريقة عادية يُغلق معه لحظة انتهائه:
+# فكان البرنامج الجديد يتوقف بعد «تم التحديث» حتى يعيده Keep-Alive. الاحتياطي Start-Process إن تعذر WMI.
+function Start-Independent([string]$file, [string]$arguments, [string]$folder) {
+    try {
+        $startup = New-CimInstance -ClassName Win32_ProcessStartup -ClientOnly -Property @{ ShowWindow = [uint16]0 }
+        $result = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -ErrorAction Stop -Arguments @{
+            CommandLine = "`"$file`" $arguments"; CurrentDirectory = $folder; ProcessStartupInformation = $startup
+        }
+        if ($result.ReturnValue -eq 0) { return [int]$result.ProcessId }
+    }
+    catch { }
+    return (Start-Process -FilePath $file -ArgumentList $arguments -WorkingDirectory $folder -WindowStyle Hidden -PassThru).Id
+}
+
+# الإصدارات الأقدم المنحّاة: تُحذف بعد أن صار البرنامج الجديد في مكانه، في عملية مستقلة لا يُنتظر انتهاؤها،
 # فلو تعثر الحذف أو أُوقف لا يتأثر التحديث، ويُعاد في التحديث التالي
 function Remove-Trash {
     if (-not (Get-ChildItem $root -Directory -Filter 'app-trash-*')) { return }
     $command = "Get-ChildItem -LiteralPath '$($root.Replace("'", "''"))' -Directory -Filter 'app-trash-*' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue"
-    # نص واحد بين علامتي تنصيص: Start-Process لا يضع علامات التنصيص حول المعاملات بنفسه
-    Start-Process powershell.exe -ArgumentList "-NoProfile -Command `"$command`"" -WindowStyle Hidden -ErrorAction SilentlyContinue | Out-Null
+    try { Start-Independent (Join-Path $PSHOME 'powershell.exe') "-NoProfile -Command `"$command`"" $root | Out-Null } catch { }
 }
 
 # 5) التحديث التلقائي: إعادة التشغيل بنفس الطريقة، والرجوع للقديم إن لم يعمل الجديد
 if ($Silent) {
     if ($null -eq $runArguments) { Write-Log 'تم التحديث. البرنامج لم يكن يعمل، فلم يُشغَّل.'; Remove-Trash; exit 0 }
-    $exe = Join-Path $app 'ChurchMembership.exe'
-    function Start-Program { Start-Process -FilePath (Join-Path $app 'ChurchMembership.exe') -ArgumentList $runArguments -WorkingDirectory $app -WindowStyle Minimized -PassThru }
-    $process = Start-Program
+    function Start-Program { Start-Independent (Join-Path $app 'ChurchMembership.exe') $runArguments $app }
+    $programId = Start-Program
     Write-Step 'تشغيل الإصدار الجديد والتأكد أنه يعمل (دقيقة)'
     Start-Sleep -Seconds 60
-    if ($process.HasExited) {
-        Write-Log "الإصدار الجديد لم يعمل (رمز الخروج $($process.ExitCode)): الرجوع للإصدار السابق."
+    if (-not (Get-Process -Id $programId -ErrorAction SilentlyContinue)) {
+        Write-Log 'الإصدار الجديد لم يعمل: الرجوع للإصدار السابق.'
         Rename-Item $app 'app-failed' -ErrorAction SilentlyContinue
         Rename-Item (Join-Path $root 'app-old') 'app'
         Get-ChildItem $app -Filter 'church.db*' | Remove-Item -Force -ErrorAction SilentlyContinue
