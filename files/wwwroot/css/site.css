@@ -200,3 +200,18 @@ body.no-export .members-export { display: none !important; }
 
 .page-export__menu .bi-file-earmark-excel { color: #15803d; }
 .page-export__menu .bi-printer { color: #1d4ed8; }
+
+/* اسم اليوم بجوار خانات التاريخ */
+.date-day {
+    color: #64748b;
+    font-weight: 600;
+    font-size: .85em;
+}
+
+.date-day-line {
+    display: block;
+    margin-top: .15rem;
+    color: #64748b;
+    font-size: .78rem;
+    font-weight: 600;
+}

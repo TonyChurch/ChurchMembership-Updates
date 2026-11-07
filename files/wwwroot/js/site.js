@@ -1246,3 +1246,67 @@ document.addEventListener("change", event => {
     box.append(toggle, menu);
     (header.querySelector(".ui-page-header__actions, .fin-actions") || header).append(box);
 })();
+
+// اسم اليوم بجوار كل خانة تاريخ في البرنامج: يُكتب في عنوان الخانة، ويتغير مع التاريخ.
+(() => {
+    const dayName = value => {
+        const parts = String(value || "").split("-");
+        if (parts.length !== 3 || !parts[0] || !parts[1] || !parts[2]) return "";
+        const date = new Date(+parts[0], parts[1] - 1, +parts[2]);
+        return isNaN(date) ? "" : date.toLocaleDateString("ar-EG", { weekday: "long" });
+    };
+
+    // مكان اسم اليوم: عنوان الخانة (label[for]) أو العنوان المحيط بها، وإلا سطر صغير تحتها
+    function holderFor(input) {
+        if (input.id) {
+            const label = document.querySelector(`label[for="${CSS.escape(input.id)}"]`);
+            if (label) return label;
+        }
+        const wrapping = input.closest("label");
+        if (wrapping) return wrapping.querySelector("span, b, strong") || wrapping;
+        const previous = input.previousElementSibling;
+        if (previous && previous.matches("label, .form-label, span, small")) return previous;
+        const parent = input.parentElement;
+        if (!parent || parent.matches(".input-group") || getComputedStyle(parent).display.includes("flex")) return null;
+        const line = document.createElement("small");
+        line.className = "date-day-line";
+        input.after(line);
+        return line;
+    }
+
+    function attach(input) {
+        if (input.dataset.dayReady) return;
+        input.dataset.dayReady = "1";
+        // صفحة السيارة لها اسم يومها الخاص
+        if (input.id && document.querySelector(`[data-day-of="${CSS.escape(input.id)}"]`)) return;
+        const holder = holderFor(input);
+        let tag = null;
+        if (holder) {
+            tag = holder.classList.contains("date-day-line") ? holder : document.createElement("span");
+            if (tag !== holder) {
+                tag.className = "date-day";
+                holder.append(" ", tag);
+            }
+        }
+        const render = () => {
+            const name = dayName(input.value);
+            if (tag) tag.textContent = name ? (tag.classList.contains("date-day-line") ? name : `(${name})`) : "";
+            input.title = name;
+        };
+        input.addEventListener("input", render);
+        input.addEventListener("change", render);
+        input.form?.addEventListener("reset", () => setTimeout(render));
+        input._renderDay = render;
+        render();
+    }
+
+    const scan = root => root.querySelectorAll?.('input[type="date"]').forEach(attach);
+    scan(document);
+    // خانات تظهر لاحقًا (نوافذ منبثقة) أو تتغير قيمتها من سكربت (زر تعديل)
+    new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+        if (node.nodeType !== 1) return;
+        if (node.matches?.('input[type="date"]')) attach(node);
+        else scan(node);
+    }))).observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("click", () => setTimeout(() => document.querySelectorAll('input[type="date"]').forEach(input => input._renderDay?.())));
+})();
