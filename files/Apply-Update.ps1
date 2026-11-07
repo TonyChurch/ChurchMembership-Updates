@@ -24,8 +24,13 @@ $ErrorActionPreference = 'Stop'
 $update = Split-Path -Parent $MyInvocation.MyCommand.Path
 $new = if ($NewFolder) { $NewFolder } else { Join-Path $update 'app-new' }
 $logFile = if ($ProgramRoot) { Join-Path $ProgramRoot 'update-log.txt' } else { Join-Path $update 'update-log.txt' }
+# السجل قد يكون مقفولًا لحظات (برنامج الحماية يفحصه بعد كل كتابة، أو Keep-Alive يقرؤه): تُعاد المحاولة،
+# ولا يوقف السجلُّ التحديثَ أبدًا (توقُّفه في منتصف التحديث كان يترك البرنامج القديم)
 function Write-Log([string]$text) {
-    Add-Content -Path $logFile -Value ("{0}  {1}" -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $text) -Encoding UTF8
+    $line = "{0}  {1}" -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $text
+    for ($i = 0; $i -lt 20; $i++) {
+        try { Add-Content -Path $logFile -Value $line -Encoding UTF8 -ErrorAction Stop; return } catch { Start-Sleep -Milliseconds 500 }
+    }
 }
 # خطوات التحديث التلقائي في السجل، فيُعرف أين توقف إن توقف.
 # تبدأ بـ «بدء التحديث» لأن Keep-Alive على جهاز الكنيسة لا يعيد تشغيل البرنامج ما دام آخر سطر كذلك وعمره أقل من 10 دقائق
