@@ -644,3 +644,30 @@
 /* تقرير الخدمة: سبع بطاقات في صفين */
 .servant-attendance.sa-report.servant-followup .sa-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 991.98px) { .servant-attendance.sa-report.servant-followup .sa-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* كشف مستويات الحضور: 100% ثم 90% وهكذا */
+.sl-print-head { display: none; }
+.sl-jump { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .8rem; }
+.sl-jump__item { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .75rem; font-size: .85rem; font-weight: 700; color: var(--sl-ink); text-decoration: none; background: var(--sl-soft); border: 1px solid var(--sl-line); border-radius: 999px; }
+.sl-jump__item b { min-width: 1.5rem; padding: 0 .35rem; color: #fff; text-align: center; background: var(--sl-ink); border-radius: 999px; }
+.sl-tone--full { --sl-ink: #9a6a00; --sl-soft: #fff6dc; --sl-line: #ecd08a; }
+.sl-tone--good { --sl-ink: #0a7a55; --sl-soft: #e6f7ef; --sl-line: #b5e5cf; }
+.sl-tone--mid { --sl-ink: #a4610a; --sl-soft: #fff3e3; --sl-line: #f3d2a4; }
+.sl-tone--low { --sl-ink: #b3203d; --sl-soft: #fdecef; --sl-line: #f3bcc7; }
+.sl-tone--none { --sl-ink: #6b7690; --sl-soft: #f1f3f7; --sl-line: #d9deea; }
+.sl-band { border-top: 4px solid var(--sl-ink); scroll-margin-top: 1rem; }
+.sl-band__head h2 { color: var(--sl-ink); }
+.sl-table td.sl-role { color: var(--ui-text-muted); font-size: .85rem; }
+.sl-table th:first-child, .sl-table td:first-child { width: 3rem; }
+
+@media print {
+    .sl-print-head { display: block; margin: 0 0 .6rem; text-align: center; }
+    .sl-print-head h1 { margin: 0; font-size: 1.3rem; }
+    .sl-print-head p { margin: .2rem 0 0; font-size: .85rem; }
+    .servant-levels .sl-band { margin-bottom: .6rem; box-shadow: none; border-inline: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+    .servant-levels .sl-band__head { break-after: avoid; page-break-after: avoid; }
+    .servant-levels .sl-table th, .servant-levels .sl-table td { padding: .2rem .4rem; font-size: .8rem; border-bottom: 1px solid #ddd; }
+    .servant-levels .sl-table tr { break-inside: avoid; page-break-inside: avoid; }
+    .servant-levels .sl-table a { color: inherit; text-decoration: none; }
+    .servant-levels .sa-note { font-size: .75rem; }
+}
