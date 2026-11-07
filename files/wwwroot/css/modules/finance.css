@@ -1985,3 +1985,28 @@
     color: #64748b;
     font-size: .76rem;
 }
+
+/* ملخص الحسابات: جدول بسيط */
+.fin-overview__group-row th {
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    font-weight: 800;
+    text-align: start;
+}
+
+.fin-overview__row {
+    cursor: pointer;
+}
+
+.fin-overview__row:hover > td {
+    background: #f5f7ff;
+}
+
+.fin-overview__row.is-inactive {
+    opacity: .6;
+}
+
+.fin-overview__table .is-in { color: #0a7a55; }
+.fin-overview__table .is-out { color: #b3203d; }
+.fin-overview__table .is-bal { color: #1d4ed8; }
+.fin-overview__table .is-negative { color: #dc2626; }
