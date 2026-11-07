@@ -27,6 +27,11 @@ $logFile = if ($ProgramRoot) { Join-Path $ProgramRoot 'update-log.txt' } else { 
 function Write-Log([string]$text) {
     Add-Content -Path $logFile -Value ("{0}  {1}" -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $text) -Encoding UTF8
 }
+# خطوات التحديث التلقائي في السجل، فيُعرف أين توقف إن توقف.
+# تبدأ بـ «بدء التحديث» لأن Keep-Alive على جهاز الكنيسة لا يعيد تشغيل البرنامج ما دام آخر سطر كذلك وعمره أقل من 10 دقائق
+function Write-Step([string]$text) { if ($Silent) { Write-Log "بدء التحديث - $text" } }
+# أي خطأ غير متوقع يُكتب في السجل بدل أن يتوقف السكربت بصمت
+trap { if ($Silent) { Write-Log "توقف التحديث بخطأ: $($_.Exception.Message)" }; break }
 
 Add-Type -AssemblyName System.Windows.Forms
 $dialogTitle = 'تحديث برنامج عضوية الكنيسة'
@@ -97,6 +102,7 @@ Start-Sleep -Seconds 1
 
 # 2) نسخة من قاعدة البيانات قبل أي شيء
 Write-Host '2/4 Backing up the database...'
+Write-Step '2/4: نسخة من قاعدة البيانات'
 $database = Join-Path $app 'church.db'
 $safe = $null
 if (Test-Path $database) {
@@ -112,6 +118,7 @@ else {
 
 # 3) البرنامج الجديد في مجلد جانبي، وتُنقل إليه البيانات
 Write-Host '3/4 Copying the new program and moving the data into it... (about a minute)'
+Write-Step '3/4: نسخ البرنامج الجديد ونقل البيانات إليه'
 $next = Join-Path $root 'app-next'
 if (Test-Path $next) { Remove-Item $next -Recurse -Force }
 Copy-Item $new $next -Recurse -Force
@@ -137,7 +144,15 @@ if ((Test-Path $database) -and -not (Test-Path (Join-Path $next 'church.db'))) {
 
 # 4) التبديل بإعادة التسمية: لو كان ملف مقفولًا تفشل التسمية والبرنامج القديم لا يُمس
 Write-Host '4/4 Switching to the new program...'
-Get-ChildItem $root -Directory -Filter 'app-old*' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+Write-Step '4/4: التبديل إلى البرنامج الجديد'
+# الإصدار الأقدم (app-old) يُنحّى بإعادة التسمية فقط، وهي لحظية؛ حذفه هنا (نحو 250 ميجا) كان يوقف السكربت بصمت على جهاز الكنيسة
+# فيبقى البرنامج متوقفًا بلا تحديث. يُحذف بعد نجاح التحديث.
+$trashIndex = 0
+Get-ChildItem $root -Directory -Filter 'app-old*' | ForEach-Object {
+    $trashIndex++
+    try { Rename-Item $_.FullName ("app-trash-$stamp-$trashIndex") -ErrorAction Stop }
+    catch { Remove-Item $_.FullName -Recurse -Force -ErrorAction SilentlyContinue }
+}
 $renamed = $false
 for ($i = 0; $i -lt 30 -and -not $renamed; $i++) {
     try { Rename-Item $app 'app-old' -ErrorAction Stop; $renamed = $true } catch { Start-Sleep -Seconds 1 }
@@ -149,12 +164,22 @@ if (-not $renamed) {
 Rename-Item $next 'app'
 Write-Host 'Done. The program is updated and all data is kept.' -ForegroundColor Green
 
+# الإصدارات الأقدم المنحّاة: تُحذف بعد أن صار البرنامج الجديد في مكانه، في عملية منفصلة لا يُنتظر انتهاؤها،
+# فلو تعثر الحذف أو أُوقف لا يتأثر التحديث، ويُعاد في التحديث التالي
+function Remove-Trash {
+    if (-not (Get-ChildItem $root -Directory -Filter 'app-trash-*')) { return }
+    $command = "Get-ChildItem -LiteralPath '$($root.Replace("'", "''"))' -Directory -Filter 'app-trash-*' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue"
+    # نص واحد بين علامتي تنصيص: Start-Process لا يضع علامات التنصيص حول المعاملات بنفسه
+    Start-Process powershell.exe -ArgumentList "-NoProfile -Command `"$command`"" -WindowStyle Hidden -ErrorAction SilentlyContinue | Out-Null
+}
+
 # 5) التحديث التلقائي: إعادة التشغيل بنفس الطريقة، والرجوع للقديم إن لم يعمل الجديد
 if ($Silent) {
-    if ($null -eq $runArguments) { Write-Log 'تم التحديث. البرنامج لم يكن يعمل، فلم يُشغَّل.'; exit 0 }
+    if ($null -eq $runArguments) { Write-Log 'تم التحديث. البرنامج لم يكن يعمل، فلم يُشغَّل.'; Remove-Trash; exit 0 }
     $exe = Join-Path $app 'ChurchMembership.exe'
     function Start-Program { Start-Process -FilePath (Join-Path $app 'ChurchMembership.exe') -ArgumentList $runArguments -WorkingDirectory $app -WindowStyle Minimized -PassThru }
     $process = Start-Program
+    Write-Step 'تشغيل الإصدار الجديد والتأكد أنه يعمل (دقيقة)'
     Start-Sleep -Seconds 60
     if ($process.HasExited) {
         Write-Log "الإصدار الجديد لم يعمل (رمز الخروج $($process.ExitCode)): الرجوع للإصدار السابق."
@@ -168,6 +193,7 @@ if ($Silent) {
     Write-Log 'تم التحديث التلقائي والبرنامج يعمل.'
     # مجلد التنزيل لم يعد لازمًا (الإصدار السابق محفوظ في app-old)
     if ($NewFolder -and (Test-Path $NewFolder)) { Remove-Item $NewFolder -Recurse -Force -ErrorAction SilentlyContinue }
+    Remove-Trash
     exit 0
 }
 
@@ -175,6 +201,7 @@ if ($Silent) {
 $launcher = Join-Path $root 'تشغيل البرنامج.cmd'
 $launched = Test-Path $launcher
 if ($launched) { Start-Process -FilePath $launcher -WorkingDirectory $root }
+Remove-Trash
 
 $summary = "تم تحديث البرنامج، وكل البيانات كما هي.`n`nمجلد البرنامج: $root`n"
 if ($safe) { $summary += "نسخة البيانات قبل التحديث: نسخ-قبل-التحديث`n" }
