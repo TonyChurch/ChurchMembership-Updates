@@ -1506,3 +1506,11 @@ a.dup-badge:hover { color: #fff; background: #c4481a; }
 .dup-alert > span:not(.dup-alert__actions) { flex: 1 1 18rem; }
 .dup-alert__actions { display: flex; flex-wrap: wrap; gap: .4rem; margin-inline-start: auto; }
 .dup-alert .ui-btn { min-height: 2rem; padding: .15rem .8rem; font-size: .85rem; }
+/* زر «مكرر» بعداد في شريط قائمة الفصل (Views/ServiceClasses/Roster.cshtml) */
+.roster-dup-btn { color: #c4481a; border-color: #f6c7b0; background: #fff1ea; }
+.roster-dup-btn:hover { color: #fff; background: #e2622d; border-color: #e2622d; }
+.roster-dup-btn__count { display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.6rem; padding: 0 .4rem; color: #fff; background: #e2622d; border-radius: 999px; font-size: .85rem; font-weight: 800; }
+.roster-dup-btn:hover .roster-dup-btn__count { color: #e2622d; background: #fff; }
+.roster-dup-btn--none { color: #1f7a4d; background: #ecf8f1; border-color: #bfe6cf; cursor: default; }
+.roster-dup-btn--none:hover { color: #1f7a4d; background: #ecf8f1; border-color: #bfe6cf; }
+.roster-dup-btn--none .roster-dup-btn__count, .roster-dup-btn--none:hover .roster-dup-btn__count { color: #fff; background: #2e9a63; }
