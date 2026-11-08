@@ -1496,3 +1496,13 @@ input.form-control.is-ok-mark:not([type=date]):not([type=time]) {
 
 /* طفل الحضانة في تقرير أعياد الميلاد */
 .birthdays-nursery { display: inline-flex; align-items: center; gap: .25rem; margin-inline-start: .35rem; padding: .05rem .5rem; border-radius: 999px; background: #fff3dc; color: #8a5200; font-size: .75rem; font-weight: 700; }
+
+/* علامة «مكرر» بجوار اسم في أي قائمة، وتنبيه أعلى القائمة بعدد المكررين (Views/Shared/_DuplicateBadge و_DuplicateAlert) */
+.dup-badge { display: inline-flex; align-self: flex-start; width: fit-content; align-items: center; gap: .2rem; margin-inline-start: .35rem; padding: 0 .5rem; color: #fff; background: #e2622d; border-radius: 999px; font-size: .72rem; font-weight: 800; line-height: 1.5; text-decoration: none; vertical-align: middle; white-space: nowrap; cursor: help; }
+a.dup-badge { cursor: pointer; }
+a.dup-badge:hover { color: #fff; background: #c4481a; }
+.dup-alert { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin: 0 0 .8rem; padding: .6rem .9rem; color: #8a2a12; background: #fff1ea; border: 1px solid #f6c7b0; border-inline-start: 5px solid #e2622d; border-radius: 12px; font-weight: 700; }
+.dup-alert > i { font-size: 1.2rem; }
+.dup-alert > span:not(.dup-alert__actions) { flex: 1 1 18rem; }
+.dup-alert__actions { display: flex; flex-wrap: wrap; gap: .4rem; margin-inline-start: auto; }
+.dup-alert .ui-btn { min-height: 2rem; padding: .15rem .8rem; font-size: .85rem; }
