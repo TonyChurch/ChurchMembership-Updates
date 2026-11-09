@@ -99,6 +99,8 @@ $runArguments = $null
 if ($running) {
     $commandLine = @($running)[0].CommandLine
     $runArguments = if ($commandLine -match '^\s*"[^"]*"\s*(.*)$') { $Matches[1] } elseif ($commandLine -match '^\s*\S+\s*(.*)$') { $Matches[1] } else { '' }
+    # واي فاي الكنيسة (الملف lan-access بجوار البرنامج، كما في Keep-Alive): يعمل الإصدار الجديد مفتوحًا للشبكة الداخلية
+    if (Test-Path (Join-Path $root 'lan-access')) { $runArguments = $runArguments -replace 'http://127\.0\.0\.1:', 'http://0.0.0.0:' }
 }
 if ($Silent) { Write-Log "بدء التحديث التلقائي في $root" }
 $running | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
