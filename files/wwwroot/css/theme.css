@@ -1548,3 +1548,40 @@ body.label-edit-mode :is(a, button, h1, h2, h3, h4, h5, th, label, strong, b, sp
 }
 
 .showcase-banner i { color: #d98a00; font-size: 1.1rem; }
+/* شريط صفحات المرحلة: المخدومون والخدام · الحضور والغياب · الغياب المتكرر · الاعتراف */
+.stage-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem;
+    margin-bottom: .75rem;
+    padding: .45rem .55rem;
+}
+
+.stage-tabs__name {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-inline-end: .5rem;
+    color: var(--ui-primary-strong);
+    font-weight: 800;
+}
+
+.stage-tabs__item {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .8rem;
+    color: var(--ui-text);
+    font-size: .88rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: var(--ui-bg);
+    border-radius: 999px;
+    transition: background var(--ui-transition);
+}
+
+.stage-tabs__item:hover { color: var(--ui-text); background: var(--ui-primary-soft); }
+.stage-tabs__item i { color: var(--ui-primary); }
+.stage-tabs__item.is-active { color: #fff; background: var(--ui-gradient-primary); }
+.stage-tabs__item.is-active i { color: #fff; }
