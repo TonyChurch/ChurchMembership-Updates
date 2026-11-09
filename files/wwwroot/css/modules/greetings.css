@@ -1,0 +1,41 @@
+/* تهنئة المناسبات عبر واتساب (Views/Greetings/Index.cshtml) */
+.greetings__icon { background: linear-gradient(135deg, #1faa59, #128c7e); }
+
+.greetings__ranges { display: inline-flex; flex-wrap: wrap; gap: .2rem; margin-bottom: 1rem; padding: .2rem; background: var(--ui-slate-soft, #f1f4f9); border-radius: 999px; }
+.greetings__ranges a { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem 1rem; color: var(--ui-text, #172036); font-weight: 700; text-decoration: none; border-radius: 999px; }
+.greetings__ranges a b { min-width: 1.5rem; padding: 0 .4rem; text-align: center; color: #128c7e; background: #e3f6ec; border-radius: 999px; font-size: .8rem; }
+.greetings__ranges a.is-active { color: #fff; background: #1faa59; }
+.greetings__ranges a.is-active b { color: #1faa59; background: #fff; }
+
+.greetings__templates { margin-bottom: 1rem; padding: .8rem 1rem; }
+.greetings__templates summary { font-weight: 800; cursor: pointer; }
+.greetings__vars { margin: .6rem 0; color: var(--ui-text-muted, #6b7690); font-size: .85rem; }
+.greetings__vars code { padding: 0 .3rem; color: #128c7e; background: #e3f6ec; border-radius: 6px; }
+.greetings__template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: .8rem; }
+.greetings__template { display: grid; gap: .4rem; }
+.greetings__template label { display: grid; gap: .3rem; font-weight: 700; }
+.greetings__template .ui-btn { justify-self: start; }
+
+.greetings__empty { padding: 1.2rem; color: var(--ui-text-muted, #6b7690); font-weight: 600; }
+.greetings__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: .9rem; }
+.greetings__item { display: grid; gap: .6rem; padding: .9rem 1rem; border-top: 4px solid var(--tone, #1faa59); transition: opacity .2s; }
+.greetings__item--birthday { --tone: #e2622d; }
+.greetings__item--wedding { --tone: #d63384; }
+.greetings__item--ordination { --tone: #6d4bd8; }
+.greetings__item--sacrament { --tone: #3b5bfd; }
+.greetings__item--other { --tone: #b7791f; }
+.greetings__item > header { display: flex; align-items: center; gap: .6rem; }
+.greetings__item > header > div { flex: 1; min-width: 0; }
+.greetings__item h2 { margin: 0; font-size: 1rem; font-weight: 800; overflow-wrap: anywhere; }
+.greetings__item h2 a { color: var(--ui-text, #172036); text-decoration: none; }
+.greetings__item small { color: var(--ui-text-muted, #6b7690); }
+.greetings__item small b { color: var(--tone); }
+.greetings__kind { display: grid; place-items: center; flex: 0 0 2.4rem; height: 2.4rem; color: #fff; background: var(--tone); border-radius: 12px; font-size: 1.15rem; }
+.greetings__sent { padding: .1rem .55rem; color: #12663b; background: #e3f6ec; border-radius: 999px; font-size: .78rem; font-weight: 800; white-space: nowrap; }
+.greetings__text { font-size: .9rem; line-height: 1.6; resize: vertical; }
+.greetings__item > footer { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; }
+.greetings__phone { margin-inline-end: auto; color: var(--ui-text-muted, #6b7690); font-size: .85rem; }
+.greetings__nophone { margin-inline-end: auto; color: #b45309; font-size: .85rem; font-weight: 700; }
+.greetings__send { color: #fff; background: #1faa59; border-color: #1faa59; }
+.greetings__send:hover { color: #fff; background: #128c7e; border-color: #128c7e; }
+.greetings__item.is-sent { opacity: .7; }
