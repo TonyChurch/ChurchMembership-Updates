@@ -1532,3 +1532,19 @@ body.label-edit-mode :is(a, button, h1, h2, h3, h4, h5, th, label, strong, b, sp
 .labels-page__add-form { display: flex; flex-wrap: wrap; align-items: end; gap: .6rem; margin-bottom: .4rem; }
 .labels-page__add-form label { display: grid; gap: .25rem; flex: 1 1 14rem; font-weight: 700; font-size: .9rem; }
 .labels-page__add small { color: var(--ui-text-muted, #6b7690); }
+
+/* نسخة العرض: شريط ثابت أعلى المحتوى */
+.showcase-banner {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    margin-bottom: .75rem;
+    padding: .55rem .9rem;
+    color: #6b4500;
+    font-size: .88rem;
+    background: linear-gradient(135deg, #fff5e1, #ffe7b3);
+    border: 1px solid #f5c66b;
+    border-radius: 12px;
+}
+
+.showcase-banner i { color: #d98a00; font-size: 1.1rem; }
