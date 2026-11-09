@@ -147,11 +147,11 @@
     body .families-table > * > tr > :nth-child(4),
     body .families-table > * > tr > :nth-child(6) { display: none; }
 
-    /* الأعضاء: الافتقاد / الاعتراف / التناول / أب الاعتراف */
-    body .members-table:not(.families-table) > * > tr > :nth-child(4),
-    body .members-table:not(.families-table) > * > tr > :nth-child(5),
-    body .members-table:not(.families-table) > * > tr > :nth-child(6),
-    body .members-table:not(.families-table) > * > tr > :nth-child(8) { display: none; }
+    /* الأعضاء (صفحة الأعضاء فقط): الافتقاد / الاعتراف / التناول / أب الاعتراف */
+    body .members-index-table > * > tr > :nth-child(4),
+    body .members-index-table > * > tr > :nth-child(5),
+    body .members-index-table > * > tr > :nth-child(6),
+    body .members-index-table > * > tr > :nth-child(8) { display: none; }
 
     body .fp-card { padding: .8rem .85rem; }
     body .fp-grid { gap: .7rem; }

@@ -1,0 +1,56 @@
+/* الفئات الخاصة: تبويبات ملونة لكل فئة، وجدول أفرادها */
+.special-categories__icon { background: linear-gradient(135deg, #8b5cf6, #d63384); }
+
+.special-tab {
+    --tint: #3b82f6;
+    --tint-soft: #e8f0ff;
+}
+
+.special-tab i { color: var(--tint); }
+
+.special-tab.is-active {
+    color: #fff;
+    background: var(--tint);
+}
+
+.special-tab.is-active i,
+.special-tab.is-active b { color: #fff; }
+
+.special-tab--violet { --tint: #8b5cf6; --tint-soft: #f2edff; }
+.special-tab--gold { --tint: #d9920b; --tint-soft: #fff5e1; }
+.special-tab--pink { --tint: #d63384; --tint-soft: #fdebf4; }
+.special-tab--green { --tint: #0a7a55; --tint-soft: #e6f8f1; }
+
+.special-categories__title {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    margin: 0 0 .75rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.special-categories__title small {
+    color: var(--ui-text-muted);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.special-phone { white-space: nowrap; }
+.special-phone small { color: var(--ui-text-muted); }
+.special-whatsapp { color: #1da851; }
+
+.special-detail {
+    --tint: #3b82f6;
+    display: inline-block;
+    padding: .1rem .55rem;
+    color: color-mix(in srgb, var(--tint) 80%, #000);
+    font-size: .8rem;
+    background: color-mix(in srgb, var(--tint) 12%, var(--ui-surface));
+    border-radius: 999px;
+}
+
+.special-detail--violet { --tint: #8b5cf6; }
+.special-detail--gold { --tint: #c98a00; }
+.special-detail--pink { --tint: #d63384; }
+.special-detail--green { --tint: #0a7a55; }
