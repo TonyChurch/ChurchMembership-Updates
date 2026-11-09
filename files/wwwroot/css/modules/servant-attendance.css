@@ -671,3 +671,25 @@
     .servant-levels .sl-table a { color: inherit; text-decoration: none; }
     .servant-levels .sa-note { font-size: .75rem; }
 }
+
+/* حضور الفصول: فاصل ملون باسم كل مرحلة قبل فصولها */
+.ca-stage td {
+    --tint: var(--ui-primary);
+    padding: .45rem .8rem !important;
+    color: color-mix(in srgb, var(--tint) 80%, #000);
+    font-size: .9rem;
+    background: color-mix(in srgb, var(--tint) 12%, var(--ui-surface)) !important;
+    border-inline-start: 4px solid var(--tint);
+}
+
+.ca-stage td > * { vertical-align: middle; }
+.ca-stage strong { margin-inline: .35rem .6rem; }
+.ca-stage span { color: var(--ui-text-muted); font-size: .8rem; }
+.ca-stage a { float: inline-end; color: var(--tint); font-size: .8rem; font-weight: 700; text-decoration: none; }
+
+.ca-stage--blue td { --tint: #3b82f6; }
+.ca-stage--violet td { --tint: #8b5cf6; }
+.ca-stage--green td { --tint: #0a9a6a; }
+.ca-stage--gold td { --tint: #c98a00; }
+.ca-stage--pink td { --tint: #d63384; }
+.ca-stage--teal td { --tint: #0d9488; }
