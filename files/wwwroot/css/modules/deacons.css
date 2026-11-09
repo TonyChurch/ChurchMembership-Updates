@@ -211,3 +211,58 @@
 .pascha__ref-input:focus { border-color: #7a3db8; background: #fff; color: #263040; outline: 0; }
 .pascha__ref-input::placeholder { color: #b9c0cc; }
 @media print { .pascha__ref-print { display: block !important; color: #555; font-size: .75rem; font-weight: 600; } }
+
+/* ---------- حضور الشمامسة ---------- */
+.deacons__label { display: grid; gap: .2rem; font-size: .8rem; font-weight: 700; color: var(--ui-text-muted); }
+.deacons-take__head { display: flex; flex-wrap: wrap; gap: .7rem 1rem; padding: .9rem 1rem; margin-bottom: 1rem; }
+.deacons-take__head label { display: grid; flex: 1 1 10rem; gap: .2rem; font-size: .8rem; font-weight: 700; color: var(--ui-text-muted); }
+.deacons-take__head .deacons-take__notes { flex-basis: 100%; }
+.deacons-take__bar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding: .8rem 1rem; border-bottom: 1px solid var(--ui-border); }
+.deacons-take__count b { color: #0a7a55; }
+.deacons-take__list { margin: 0; padding: 0; list-style: none; }
+.deacons-take__list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem 1rem; padding: .55rem 1rem; border-bottom: 1px solid var(--ui-border); }
+.deacons-take__name { display: grid; }
+.deacons-take__name small { color: var(--ui-text-muted); font-size: .75rem; }
+.deacons-take__choices { display: inline-flex; gap: .3rem; }
+.deacons-take__choice { --tint: #0a7a55; padding: .3rem .8rem; font-size: .85rem; font-weight: 700; color: var(--tint); background: color-mix(in srgb, var(--tint) 9%, var(--ui-surface)); border: 1px solid color-mix(in srgb, var(--tint) 30%, transparent); border-radius: 999px; cursor: pointer; }
+.deacons-take__choice--primary { --tint: #3b82f6; }
+.deacons-take__choice--warning { --tint: #d9920b; }
+.btn-check:checked + .deacons-take__choice { color: #fff; background: var(--tint); }
+.deacons-take__save { display: flex; justify-content: flex-end; margin-top: 1rem; }
+.dr-table th, .dr-table td { text-align: center; }
+.dr-table .dr-name { text-align: start; white-space: nowrap; }
+.dr-name small { display: block; color: var(--ui-text-muted); font-size: .72rem; }
+.dr-date { font-size: .75rem; white-space: nowrap; }
+.dr-cell { font-weight: 800; }
+.dr-cell--present { color: #0a7a55; background: #e6f8f1; }
+.dr-cell--late { color: #2563eb; background: #e8f0ff; }
+.dr-cell--excused { color: #b7791f; background: #fff5e1; }
+.dr-cell--absent { color: #c81e4a; background: #fdebf0; }
+
+/* ---------- تسجيل سريع / استيراد / المكرر ---------- */
+.deacons__dup-btn { color: #c2410c; background: #fff1e6; border-color: #fdba74; }
+.deacons__dup-btn b { margin-inline-start: .2rem; }
+.deacons-panel, .deacons-dup { margin-bottom: 1rem; padding: 1rem 1.1rem; }
+.deacons-panel h2, .deacons-dup h2 { display: flex; align-items: center; gap: .45rem; margin: 0 0 .5rem; font-size: 1.02rem; font-weight: 800; }
+.deacons-panel p { color: var(--ui-text-muted); font-size: .88rem; }
+.deacons-panel__row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .6rem; margin-top: .7rem; }
+.deacons-panel__row .form-control { flex: 1 1 16rem; }
+.deacons-dup h2 small { color: var(--ui-text-muted); font-size: .8rem; font-weight: 600; }
+.deacons-dup ul { margin: 0 0 .8rem; padding: 0; list-style: none; }
+.deacons-dup li { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .8rem; padding: .5rem 0; border-bottom: 1px dashed var(--ui-border); }
+.deacons-dup li label { display: inline-flex; align-items: center; gap: .3rem; font-size: .8rem; color: var(--ui-text-muted); }
+.deacons-dup li small { color: var(--ui-text-muted); }
+
+/* ---------- التوزيع السنوي ---------- */
+.deacons-annual__days { display: flex; flex-wrap: wrap; gap: .3rem .8rem; padding-top: .35rem; color: var(--ui-text); font-weight: 600; }
+.deacons-annual__day { display: inline-flex; align-items: center; gap: .3rem; }
+.deacons-annual__hint { margin: .6rem 0 0; font-size: .8rem; }
+.deacons-annual__clear { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .6rem; margin-top: .9rem; padding-top: .9rem; border-top: 1px dashed var(--ui-border); }
+.deacons-annual__table td { font-size: .82rem; white-space: nowrap; }
+.deacons-annual__past td { opacity: .6; }
+.deacons-annual__print-title { display: none; }
+@media print {
+    .deacons-annual__print-title { display: block; margin: 0 0 .5rem; font-size: 1rem; text-align: center; }
+    .deacons-annual__table td, .deacons-annual__table th { padding: .15rem .25rem; font-size: 7.5pt; }
+    .deacons-annual__past td { opacity: 1; }
+}
