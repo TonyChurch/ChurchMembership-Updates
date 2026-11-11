@@ -2150,3 +2150,9 @@
 .bsv-table .ui-icon-btn { width: 1.8rem; height: 1.8rem; }
 .bsv-case { flex-wrap: wrap; }
 .bsv-case__member { flex-basis: 100%; margin-top: .3rem; padding: .2rem 1.8rem .2rem .5rem; font-size: .8rem; }
+
+/* بطاقة «تتحمله الكنيسة» داخل عنوان «تسجيل خدمة»، والعودة على المربع بعد الحفظ */
+.bsv-form h2 { flex-wrap: wrap; }
+.bsv-form h2 .bsv-church-total { margin-inline-start: auto; font-size: .85rem; }
+.bsv-form h2 .bsv-church-total ~ .ui-btn { margin-inline-start: 0; }
+#serviceForm { scroll-margin-top: 12rem; }
