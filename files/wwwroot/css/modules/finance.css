@@ -2099,3 +2099,6 @@
 @media print {
     .bsv-title { padding: 0 0 .4rem; }
 }
+
+/* ما تتحمله الكنيسة (محسوب تلقائيًا في نموذج الخدمة) */
+.bsv-church { background: #fdf2f8; color: #9d174d; font-weight: 800; }

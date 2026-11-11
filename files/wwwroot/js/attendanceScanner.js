@@ -1,4 +1,5 @@
-// مسح كروت الحضور بالكاميرا في صفحة تسجيل حضور الفصل: كل كارت (CM-M:<رقم العضو>) يعلّم صاحبه «حاضر».
+// مسح كروت الحضور بالكاميرا في أي كشف حضور (الفصول، اجتماعات الخدام، الشمامسة): كل كارت (CM-M:<رقم العضو>) يعلّم صاحبه «حاضر».
+// الصف: [data-attendance-row][data-member-id]، والاختيار: .sa-status-input أو [data-scan-input]، والاسم: .ui-person__text strong أو [data-scan-name].
 // يستخدم BarcodeDetector إن وُجد في المتصفح، وإلا jsQR (wwwroot/lib/jsqr). الكاميرا تحتاج https أو localhost.
 (() => {
     const form = document.querySelector("[data-attendance-form]");
@@ -39,15 +40,15 @@
         recent.set(id, now);
 
         const row = form.querySelector(`[data-attendance-row][data-member-id="${id}"]`);
-        if (!row) { say("صاحب هذا الكارت ليس في هذا الفصل"); return; }
-        const radio = [...row.querySelectorAll(".sa-status-input")].find((input) => input.value === present);
+        if (!row) { say("صاحب هذا الكارت ليس في هذا الكشف"); return; }
+        const radio = [...row.querySelectorAll(".sa-status-input, [data-scan-input]")].find((input) => input.value === present);
         const already = radio?.checked;
         if (radio) radio.checked = true;
         form.dispatchEvent(new Event("change"));
         row.classList.remove("sa-roster__row--scanned");
         void row.offsetWidth;
         row.classList.add("sa-roster__row--scanned");
-        const name = row.querySelector(".ui-person__text strong")?.textContent ?? "";
+        const name = row.querySelector(".ui-person__text strong, [data-scan-name]")?.textContent ?? "";
         say(already ? `${name}: مسجل حاضر من قبل` : `✓ ${name}`);
         if (!already) {
             beep();

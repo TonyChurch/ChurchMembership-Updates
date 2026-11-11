@@ -1399,7 +1399,7 @@ a.ui-stat:hover {
 
 header.page-head--grid {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: fit-content(55%) minmax(0, 1fr);
     align-items: center;
     gap: .6rem 1rem;
 }
