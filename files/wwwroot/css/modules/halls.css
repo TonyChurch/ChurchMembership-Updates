@@ -1,0 +1,63 @@
+/* حجز القاعات */
+.halls { --hl: #7c3aed; }
+.halls > * { min-width: 0; }
+.halls--blue { --hc: #2563eb; --hs: #dbeafe; }
+.halls--green { --hc: #059669; --hs: #d1fae5; }
+.halls--orange { --hc: #ea580c; --hs: #ffedd5; }
+.halls--pink { --hc: #db2777; --hs: #fce7f3; }
+.halls--violet { --hc: #7c3aed; --hs: #ede9fe; }
+.halls--teal { --hc: #0d9488; --hs: #ccfbf1; }
+.halls--red { --hc: #dc2626; --hs: #fee2e2; }
+.halls--gold { --hc: #b45309; --hs: #fef3c7; }
+
+.halls-week { display: inline-flex; align-items: center; gap: .3rem; margin: 0; padding: .1rem .45rem; border-radius: .7rem; background: #ede9fe; border: 1px solid #ddd6fe; }
+.halls-week i { color: var(--hl); }
+.halls-week .form-control { width: auto; border: 0; background: transparent; font-weight: 700; }
+.halls-period { font-weight: 800; color: #4c1d95; margin: 0 0 .6rem; }
+
+.halls-grid-card { padding: 0; overflow: hidden; margin-bottom: 1rem; }
+.halls-grid { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 900px; }
+.halls-grid th, .halls-grid td { border: 1px solid #e2e8f0; vertical-align: top; padding: .35rem; }
+.halls-grid thead th { background: #f8fafc; font-size: .85rem; text-align: center; }
+.halls-grid thead th small { display: block; color: #64748b; font-weight: 600; }
+.halls-grid thead th.is-holy { background: #fef3c7; }
+.halls-grid .is-today { background: #f5f3ff; }
+.halls-grid thead th.is-today { background: var(--hl); color: #fff; }
+.halls-grid thead th.is-today small { color: #ede9fe; }
+.halls-grid__hall { width: 9.5rem; text-align: start !important; background: var(--hs, #f8fafc); border-inline-start: 4px solid var(--hc, #94a3b8) !important; }
+.halls-grid tbody .halls-grid__hall strong { display: block; font-size: .9rem; color: #0f172a; }
+.halls-grid tbody .halls-grid__hall small { color: #475569; font-size: .72rem; font-weight: 600; }
+.halls-grid td { height: 4.5rem; }
+.halls-booking {
+    position: relative; display: flex; flex-direction: column; gap: .05rem; margin-bottom: .25rem; padding: .25rem .4rem;
+    border-radius: .45rem; background: var(--hs); border-inline-start: 3px solid var(--hc); color: #0f172a; text-decoration: none; font-size: .75rem;
+}
+.halls-booking b { font-size: .7rem; color: var(--hc); white-space: nowrap; }
+.halls-booking span { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.halls-booking small { color: #475569; font-size: .68rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.halls-booking i { position: absolute; inset-inline-end: .3rem; top: .2rem; color: var(--hc); font-size: .7rem; }
+.halls-add { display: flex; align-items: center; justify-content: center; height: 1.4rem; border-radius: .4rem; color: #94a3b8; text-decoration: none; opacity: 0; transition: opacity .1s; }
+.halls-grid td:hover .halls-add, .halls-grid td:focus-within .halls-add { opacity: 1; background: #f1f5f9; }
+
+.halls-manage { padding: .7rem 1rem; }
+.halls-manage summary { cursor: pointer; font-weight: 800; color: #334155; }
+.halls-manage__list { display: flex; flex-direction: column; gap: .4rem; margin-top: .7rem; }
+.halls-manage__row { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; padding: .4rem; border-radius: .6rem; background: var(--hs, #f8fafc); border-inline-start: 4px solid var(--hc, #cbd5e1); }
+.halls-manage__row .form-control, .halls-manage__row .form-select { flex: 1 1 120px; width: auto; }
+.halls-manage__row input[name=name] { flex: 2 1 180px; }
+.halls-manage__row.is-off { opacity: .6; }
+.halls-manage__new { background: #fff; border: 1px dashed #cbd5e1; }
+.halls-check { display: inline-flex !important; flex-direction: row !important; align-items: center; gap: .35rem; font-size: .85rem; font-weight: 700; color: #475569; }
+.halls-check .form-check-input { margin: 0; }
+
+.halls-form { padding: 1rem; }
+.halls-form__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); gap: .6rem .9rem; }
+.halls-form__grid > label { display: flex; flex-direction: column; gap: .25rem; font-size: .85rem; font-weight: 700; color: #475569; }
+.halls-form__wide { grid-column: 1 / -1; }
+.halls-form__save { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; margin-top: 1rem; }
+
+@media print {
+    .halls-grid { min-width: 0; font-size: 8pt; }
+    .halls-grid td { height: auto; }
+    .halls-grid__hall, .halls-booking, .halls-grid thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

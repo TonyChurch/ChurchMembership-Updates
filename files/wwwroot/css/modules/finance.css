@@ -2156,3 +2156,9 @@
 .bsv-form h2 .bsv-church-total { margin-inline-start: auto; font-size: .85rem; }
 .bsv-form h2 .bsv-church-total ~ .ui-btn { margin-inline-start: 0; }
 #serviceForm { scroll-margin-top: 12rem; }
+
+/* شريط «معروض جزء من الخدمات فقط» عند البحث أو التصفية */
+.bsv-filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin: 0 0 .8rem; padding: .6rem .9rem; border-radius: .8rem; background: #fef3c7; border: 1px solid #fcd34d; color: #78350f; font-size: .88rem; font-weight: 600; }
+.bsv-filterbar > i { color: #d97706; font-size: 1.1rem; }
+.bsv-filterbar span { flex: 1 1 320px; }
+.bsv-filterbar b { margin-inline: .15rem; padding: 0 .4rem; border-radius: 999px; background: #fde68a; }
