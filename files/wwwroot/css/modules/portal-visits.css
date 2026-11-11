@@ -1,0 +1,58 @@
+/* سجل زيارات بوابة الشعب */
+.pvis { --pv: #0f766e; --pv-soft: #ccfbf1; --pv-holy: #d97706; }
+/* أبناء الصفحة لا يفرضون عرضًا أكبر من الشاشة */
+.pvis > * { min-width: 0; }
+.pvis__filters { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem; padding: .6rem .8rem; margin-bottom: .6rem; }
+.pvis__custom { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.pvis__custom label { display: flex; align-items: center; gap: .3rem; font-size: .85rem; font-weight: 700; color: #475569; }
+.pvis__custom .form-control { width: auto; }
+.pvis__period { color: #475569; font-size: .88rem; margin: 0 0 .8rem; }
+.pvis__period small { color: #94a3b8; }
+
+.pvis__card { padding: .8rem 1rem; margin-bottom: .9rem; }
+.pvis__card h2 { display: flex; align-items: center; gap: .45rem; font-size: .98rem; font-weight: 800; color: var(--pv); margin-bottom: .7rem; }
+.pvis__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: .9rem; }
+.pvis__grid .pvis__card { margin-bottom: 0; }
+.pvis__grid + .pvis__grid { margin-top: .9rem; }
+.pvis__hint { font-size: .8rem; color: #64748b; margin: .5rem 0 0; }
+
+/* الأعمدة اليومية */
+.pvis__daily { display: flex; align-items: flex-end; gap: 3px; height: 170px; padding-top: 1.1rem; direction: ltr; }
+.pvis__day { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; min-width: 0; }
+.pvis__day b {
+    position: relative; display: block; width: 100%; min-height: 2px; border-radius: 4px 4px 0 0;
+    background: var(--pv); color: #fff; font-size: .62rem; font-weight: 700; text-align: center;
+}
+.pvis__day b:not(:empty) { padding-top: 1px; }
+.pvis__day.is-holy b { background: var(--pv-holy); }
+.pvis__day small { height: 1rem; font-size: .62rem; color: #64748b; white-space: nowrap; }
+.pvis__daily.is-dense { gap: 1px; }
+
+/* الأشرطة الأفقية */
+.pvis__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .4rem; }
+.pvis__bars li { display: grid; grid-template-columns: minmax(90px, 9.5rem) 1fr auto; align-items: center; gap: .5rem; font-size: .85rem; }
+.pvis__bar-label { font-weight: 700; color: #334155; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pvis__bar { height: .7rem; border-radius: 999px; background: #f1f5f9; overflow: hidden; }
+.pvis__bar b { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--pv), #14b8a6); }
+.pvis__bar-value { font-weight: 800; color: #0f172a; white-space: nowrap; }
+.pvis__bar-value small { font-weight: 600; color: #64748b; }
+
+/* الساعات */
+.pvis__hours { display: flex; align-items: flex-end; gap: 2px; height: 130px; direction: ltr; }
+.pvis__hours span { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.pvis__hours b { display: block; min-height: 2px; border-radius: 3px 3px 0 0; background: #6366f1; }
+.pvis__hours small { height: 1rem; font-size: .6rem; color: #64748b; text-align: center; white-space: nowrap; }
+
+/* ما أُرسل */
+.pvis__sent { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .35rem; }
+.pvis__sent li { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .35rem .6rem; border-radius: .6rem; background: #f8fafc; font-size: .88rem; }
+.pvis__sent a { color: #334155; font-weight: 700; text-decoration: none; display: inline-flex; gap: .35rem; align-items: center; }
+.pvis__sent a i { color: var(--pv); }
+.pvis__sent b { background: var(--pv); color: #fff; border-radius: 999px; padding: 0 .55rem; font-size: .8rem; }
+.pvis__muted { color: #94a3b8; background: none !important; }
+
+@media print {
+    .pvis__day b, .pvis__hours b, .pvis__bar b { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+/* التسميات العربية داخل الرسوم (اتجاهها من اليسار لليمين) */
+.pvis__day small, .pvis__hours small { direction: rtl; unicode-bidi: plaintext; }
