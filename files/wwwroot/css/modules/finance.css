@@ -2010,3 +2010,23 @@
 .fin-overview__table .is-out { color: #b3203d; }
 .fin-overview__table .is-bal { color: #1d4ed8; }
 .fin-overview__table .is-negative { color: #dc2626; }
+
+/* الطباعة: المسودة جدول عادي بعد جدول الحركات (لا لوحة ثابتة تغطي ما قبلها) */
+@media print {
+    .veh-layout { display: block; }
+    .veh-fuel {
+        position: static;
+        display: block;
+        margin-top: 1rem;
+        padding: 0;
+        background: none;
+        border: 0;
+        break-before: auto;
+    }
+    .veh-fuel h3 { margin-bottom: .3rem; }
+    .veh-fuel__table { border-radius: 0; overflow: visible; font-size: 9pt; }
+    .veh-fuel__table thead { display: table-header-group; }
+    .veh-fuel__table tr { break-inside: avoid; }
+    .veh-fuel__table a { text-decoration: none; }
+    .veh-fuel__table th, .veh-fuel__table td { border-bottom: 1px solid #cbd5e1; }
+}

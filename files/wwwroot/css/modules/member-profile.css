@@ -613,3 +613,21 @@
 .profile-unified__item--danger > i { background: var(--ui-danger, #d93636); }
 .profile-unified__item--gold > i { background: #b7791f; }
 .profile-unified__item--violet > i { background: var(--ui-violet, #6d4bd8); }
+
+/* ---------- نقل عضو إلى أسرة / أسرة جديدة ---------- */
+.member-move__search { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .7rem; margin-bottom: 1rem; padding: .8rem 1rem; }
+.member-move__search label { font-weight: 800; }
+.member-move__search .form-control { flex: 1 1 18rem; }
+.member-move__targets, .member-move__people { margin-bottom: 1rem; padding: 1rem 1.1rem; }
+.member-move__targets h2, .member-move__people h2 { display: flex; align-items: center; gap: .45rem; margin: 0 0 .7rem; font-size: 1.02rem; font-weight: 800; }
+.member-move__target { display: flex; align-items: center; gap: .7rem; margin-bottom: .45rem; padding: .6rem .8rem; border: 1px solid var(--ui-border); border-radius: 12px; cursor: pointer; }
+.member-move__target:has(input:checked) { border-color: #7c3aed; background: color-mix(in srgb, #7c3aed 7%, var(--ui-surface)); }
+.member-move__target > span { display: grid; flex: 1; }
+.member-move__target small { color: var(--ui-text-muted); }
+.member-move__target--new strong { color: #0a7a55; }
+.member-move__none, .member-move__hint { color: var(--ui-text-muted); font-size: .88rem; }
+.member-move__person { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem 1rem; padding: .5rem 0; border-bottom: 1px dashed var(--ui-border); }
+.member-move__person label { display: inline-flex; align-items: center; gap: .45rem; }
+.member-move__person .form-select { width: auto; min-width: 11rem; }
+.member-move__person.is-main strong { color: #7c3aed; }
+.member-move__save { display: flex; justify-content: flex-end; gap: .6rem; }
