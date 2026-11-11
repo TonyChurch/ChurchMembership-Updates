@@ -2134,3 +2134,19 @@
 .bsv-church-total b { font-size: 1.1rem; font-weight: 800; }
 .bsv-church-total em { font-style: normal; font-weight: 800; padding: .05rem .45rem; border-radius: 999px; background: rgba(255, 255, 255, .22); }
 @media print { .bsv-church-total { color: #9d174d; background: none; box-shadow: none; border: 1px solid #db2777; } }
+
+/* جدول الخدمات المقدمة: يتسع لعرض الشاشة بلا تمرير أفقي */
+.bsv-table { width: 100%; font-size: .82rem; }
+.bsv-table th, .bsv-table td { padding: .4rem .45rem; vertical-align: middle; }
+.bsv-table th { white-space: normal; line-height: 1.3; }
+.bsv-table .bsv-date { white-space: nowrap; font-size: .78rem; }
+.bsv-table .bsv-date .veh-day { display: block; }
+.bsv-table .bsv-service strong { display: block; line-height: 1.35; }
+.bsv-service__tags { display: flex; flex-wrap: wrap; gap: .2rem; margin-top: .15rem; }
+.bsv-service__tags .ui-status, .bsv-service__tags .veh-review-tag { margin: 0; font-size: .7rem; padding: .05rem .4rem; }
+.bsv-table .bsv-notes { min-width: 9rem; max-width: 18rem; white-space: normal; overflow-wrap: anywhere; line-height: 1.45; }
+.bsv-table .fin-num { white-space: nowrap; }
+.bsv-table .bsv-actions { flex-wrap: nowrap; }
+.bsv-table .ui-icon-btn { width: 1.8rem; height: 1.8rem; }
+.bsv-case { flex-wrap: wrap; }
+.bsv-case__member { flex-basis: 100%; margin-top: .3rem; padding: .2rem 1.8rem .2rem .5rem; font-size: .8rem; }
