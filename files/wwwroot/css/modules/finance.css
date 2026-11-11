@@ -2163,3 +2163,9 @@
 .bsv-filterbar span { flex: 1 1 320px; }
 .bsv-filterbar b { margin-inline: .15rem; padding: 0 .4rem; border-radius: 999px; background: #fde68a; }
 .bsv-case__note { display: block; color: #9a3412; font-size: .75rem; font-weight: 600; line-height: 1.4; }
+
+/* تظليل خانة «تكلفة الخدمة» بلون مختلف عن «ما تتحمله الكنيسة» */
+.bsv-form [data-cost] { background: #eff6ff; border-color: #93c5fd; color: #1e3a8a; font-weight: 800; }
+.bsv-form [data-cost]:focus { background: #fff; border-color: #2563eb; box-shadow: 0 0 0 .2rem rgba(37, 99, 235, .15); }
+
+/* رسالة «استُعيدت بيانات لم تُحفظ» (مسودات النماذج) */

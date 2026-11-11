@@ -246,3 +246,8 @@ body.no-export .members-export { display: none !important; }
     .month-picker { display: none !important; }
     .month-picker__print { display: inline; }
 }
+
+/* رسالة «استُعيدت بيانات لم تُحفظ» في أي نموذج تسجيل (wwwroot/js/form-drafts.js) */
+.form-draft-notice { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .8rem; background: #fef3c7; border-color: #fcd34d; color: #78350f; }
+.form-draft-notice span { flex: 1 1 260px; }
+.form-draft-notice .ui-btn { padding: .2rem .7rem; font-size: .82rem; }

@@ -982,10 +982,13 @@ document.addEventListener("change", event => {
         const save = make("button", "ui-btn", "حفظ الروشتة");
         save.type = "submit";
         const status = make("small", "med-family__status");
+        const cancelEdit = make("button", "ui-btn ui-btn--ghost", "إلغاء التعديل");
+        cancelEdit.type = "button";
+        cancelEdit.hidden = true;
         const patientField = field("اسم المريض", patient);
         const memberField = field("لمن الروشتة؟", member);
         form.append(field("الأسرة أو الاسم", familyBox), memberField, patientField, field("التاريخ", date), field("الصيدلية", pharmacy),
-            field("رقم الفاتورة", invoice), field("الأدوية", items), field("المبلغ", amount), save, status, pharmacies);
+            field("رقم الفاتورة", invoice), field("الأدوية", items), field("المبلغ", amount), save, cancelEdit, status, pharmacies);
 
         const tableWrap = make("div", "table-responsive");
         section.append(head, strip, form, tableWrap);
@@ -1021,6 +1024,40 @@ document.addEventListener("change", event => {
             } catch { /* يُكتب اسم المريض يدويًا */ }
             pharmacy.focus();
         };
+        // تعديل روشتة: يملأ النموذج بها، والحفظ يعدّلها بدل إضافة جديدة
+        let editingId = null;
+        const endEdit = () => {
+            editingId = null;
+            save.textContent = "حفظ الروشتة";
+            cancelEdit.hidden = true;
+        };
+        const startEdit = async entry => {
+            editingId = entry.id;
+            if (entry.familyId) {
+                await choose({ familyId: entry.familyId, name: entry.family, code: entry.code });
+                member.value = entry.memberId ? String(entry.memberId) : "";
+                patientField.hidden = member.value !== "";
+                patient.value = entry.memberId ? "" : (entry.patientName || "");
+            } else {
+                chooseOutsider(entry.patient);
+            }
+            date.value = entry.date;
+            pharmacy.value = entry.pharmacy || "";
+            invoice.value = entry.invoice || "";
+            items.value = entry.items || "";
+            amount.value = entry.amount;
+            save.textContent = "حفظ التعديل";
+            cancelEdit.hidden = false;
+            form.scrollIntoView({ block: "center", behavior: "smooth" });
+            amount.focus();
+        };
+        cancelEdit.addEventListener("click", () => {
+            endEdit();
+            amount.value = invoice.value = items.value = patient.value = "";
+            chosen = null;
+            search.value = "";
+            resetMembers();
+        });
         const draw = () => {
             const text = search.value.trim();
             chosen = chosen && chosen.name === text ? chosen : null;
@@ -1078,6 +1115,17 @@ document.addEventListener("change", event => {
                     const result = await send("/pay", "POST", { id: entry.id, paid: paidBox.checked });
                     if (result.ok) load(); else paidBox.checked = !paidBox.checked;
                 });
+                // تعديل، وعلامة «تحتاج مراجعة» (مثل حساب السيارات)
+                const editButton = make("button", "pha__action", "تعديل");
+                editButton.type = "button";
+                editButton.addEventListener("click", () => startEdit(entry));
+                const reviewButton = make("button", `pha__action pha__review${entry.review ? " is-on" : ""}`, entry.review ? "⚑ رفع المراجعة" : "⚐ تحتاج مراجعة");
+                reviewButton.type = "button";
+                reviewButton.title = entry.review ? "تمت المراجعة: رفع العلامة" : "وضع علامة «تحتاج مراجعة»";
+                reviewButton.addEventListener("click", async () => {
+                    if ((await send("/review", "POST", { id: entry.id, paid: !entry.review })).ok) load();
+                });
+                if (entry.review) row.classList.add("pha__row--review");
                 const remove = make("button", "pha__remove", "حذف");
                 remove.type = "button";
                 remove.addEventListener("click", async () => {
@@ -1086,9 +1134,10 @@ document.addEventListener("change", event => {
                 });
                 const cells = [entry.date, `${entry.family}${entry.code ? ` · ${entry.code}` : ""}`, entry.patient, entry.pharmacy || "—", entry.invoice || "—", entry.items || "—", money(entry.amount)];
                 cells.forEach(text => row.append(make("td", "", text)));
+                if (entry.review) row.children[2].append(make("span", "pha__review-tag", " ⚑ للمراجعة"));
                 const paidCell = make("td"), removeCell = make("td", "no-print");
                 paidCell.append(paidBox);
-                removeCell.append(remove);
+                removeCell.append(editButton, reviewButton, remove);
                 row.append(paidCell, removeCell);
                 tbody.append(row);
             });
@@ -1112,11 +1161,13 @@ document.addEventListener("change", event => {
             const result = await send("", "POST", {
                 familyId: chosen.outsider ? 0 : chosen.familyId, memberId: !chosen.outsider && member.value ? Number(member.value) : null,
                 patientName: chosen.outsider ? chosen.name : patient.value,
-                date: date.value, pharmacy: pharmacy.value, invoiceNumber: invoice.value, items: items.value, amount: Number(amount.value)
+                date: date.value, pharmacy: pharmacy.value, invoiceNumber: invoice.value, items: items.value, amount: Number(amount.value),
+                id: editingId
             }).catch(() => null);
             save.disabled = false;
             if (!result?.ok) { status.textContent = "تعذر حفظ الروشتة، راجع البيانات."; return; }
-            toast("✓ تم حفظ الروشتة");
+            toast(editingId ? "✓ تم حفظ التعديل" : "✓ تم حفظ الروشتة");
+            endEdit();
             amount.value = invoice.value = items.value = patient.value = "";
             // الاسم غير المسجل لا يبقى للروشتة التالية
             if (chosen?.outsider) { chosen = null; search.value = ""; resetMembers(); }

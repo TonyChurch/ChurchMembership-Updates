@@ -963,3 +963,10 @@ body.sidebar-collapsed .right-sidebar--desktop .activity-search-row > .right-sid
 .activity-search-row > .right-sidebar__search kbd {
     display: none;
 }
+
+/* حسابات الصيدلية: تعديل الروشتة وعلامة «تحتاج مراجعة» */
+.pha__action { margin-inline-end: .35rem; padding: .15rem .55rem; border: 1px solid #c7d2fe; border-radius: 999px; background: #eef2ff; color: #3730a3; font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; }
+.pha__review { border-color: #fcd34d; background: #fffbeb; color: #92400e; }
+.pha__review.is-on { background: #f59e0b; border-color: #d97706; color: #fff; }
+.pha__row--review td { background: #fffbeb; }
+.pha__review-tag { margin-inline-start: .3rem; padding: 0 .4rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-size: .72rem; font-weight: 800; white-space: nowrap; }
