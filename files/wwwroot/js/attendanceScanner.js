@@ -93,6 +93,7 @@
             alert("المتصفح لا يسمح بالكاميرا هنا. افتح البرنامج من رابط https (رابط الإنترنت) أو من جهاز الكنيسة نفسه.");
             return;
         }
+        video.hidden = false;
         panel.hidden = false;
         say("جارٍ تشغيل الكاميرا...");
         try {
@@ -114,4 +115,33 @@
 
     panel.querySelector("[data-scan-close]").addEventListener("click", stop);
     form.addEventListener("submit", stop);
+
+    // ماسح باركود موصَّل بالجهاز (USB/بلوتوث): يكتب الرمز كلوحة مفاتيح بسرعة ثم Enter.
+    // نلتقط الحروف السريعة (أقل من 60 مللي ثانية بينها) حتى لو لم تكن في خانة، ونأخذ رقم العضو من آخر الرمز
+    // (فيعمل حتى لو كانت لوحة المفاتيح على العربي فتغيّرت حروف «CM-M:»).
+    let wedge = "", wedgeLast = 0, wedgeFast = 0;
+    const digit = key => {
+        const arabic = "٠١٢٣٤٥٦٧٨٩".indexOf(key);
+        return arabic >= 0 ? String(arabic) : key;
+    };
+    document.addEventListener("keydown", event => {
+        const now = Date.now();
+        if (now - wedgeLast > 60) { wedge = ""; wedgeFast = 0; }
+        else wedgeFast++;
+        wedgeLast = now;
+        if (event.key === "Enter") {
+            const match = /(\d{1,8})$/.exec(wedge);
+            // رمز قصير كُتب بسرعة الماسح (عدة حروف متتالية سريعة)، لا كتابة إنسان
+            if (match && wedge.length >= 5 && wedgeFast >= 4) {
+                event.preventDefault();
+                const field = document.activeElement;
+                if (field && (field.tagName === "INPUT" || field.tagName === "TEXTAREA") && field.value.endsWith(wedge)) field.value = field.value.slice(0, -wedge.length);
+                if (panel.hidden) { panel.hidden = false; video.hidden = !stream; }
+                mark(`CM-M:${match[1]}`);
+            }
+            wedge = "";
+            return;
+        }
+        if (event.key.length === 1) wedge = (wedge + digit(event.key)).slice(-40);
+    }, true);
 })();
