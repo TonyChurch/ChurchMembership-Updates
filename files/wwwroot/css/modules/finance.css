@@ -2128,3 +2128,9 @@
 .bsv-review-chip { display: inline-flex; align-items: center; gap: .3rem; margin-inline-start: auto; padding: .15rem .65rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-size: .8rem; font-weight: 800; text-decoration: none; }
 .bsv-review-chip.is-on { background: #92400e; color: #fff; }
 .bsv-actions .veh-review-btn.is-on { color: #b45309; }
+
+/* عدّاد إجمالي ما تتحمله الكنيسة أعلى الصفحة */
+.bsv-church-total { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .8rem; border-radius: .7rem; background: linear-gradient(90deg, #be185d, #db2777); color: #fff; font-size: .9rem; font-weight: 700; white-space: nowrap; box-shadow: 0 4px 10px rgba(190, 24, 93, .25); }
+.bsv-church-total b { font-size: 1.1rem; font-weight: 800; }
+.bsv-church-total em { font-style: normal; font-weight: 800; padding: .05rem .45rem; border-radius: 999px; background: rgba(255, 255, 255, .22); }
+@media print { .bsv-church-total { color: #9d174d; background: none; box-shadow: none; border: 1px solid #db2777; } }
