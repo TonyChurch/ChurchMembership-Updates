@@ -2030,3 +2030,13 @@
     .veh-fuel__table a { text-decoration: none; }
     .veh-fuel__table th, .veh-fuel__table td { border-bottom: 1px solid #cbd5e1; }
 }
+
+/* ملاحظة الحركة تحت البيان */
+.veh-note {
+    display: block;
+    margin-top: .15rem;
+    color: #64748b;
+    font-size: .8rem;
+    line-height: 1.4;
+}
+.veh-note i { color: #d97706; margin-inline-end: .2rem; }
