@@ -2040,3 +2040,21 @@
     line-height: 1.4;
 }
 .veh-note i { color: #d97706; margin-inline-end: .2rem; }
+
+/* خانة «وضع علامة للمراجعة» في نموذجي الإيراد والمصروف */
+.veh-review-check {
+    grid-column: 1 / -1;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    justify-self: start;
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: .85rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+.veh-review-check .form-check-input { margin: 0; }
+.veh-review-check:has(input:checked) { background: #fde68a; box-shadow: inset 0 0 0 1px #d97706; }
