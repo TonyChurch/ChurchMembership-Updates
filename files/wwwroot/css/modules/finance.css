@@ -2110,3 +2110,10 @@
 .bsv-found .bsv-case small.fin-muted { flex-basis: 100%; order: 3; font-size: .72rem; }
 .bsv-found .bsv-case { flex-wrap: wrap; }
 .bsv-form > .bsv-cases { margin-top: 0; margin-bottom: .9rem; }
+
+/* مستفيد جديد غير مسجل على البرنامج */
+.bsv-new { margin-top: .6rem; }
+.bsv-new__none { margin: 0 0 .4rem; padding: .45rem .7rem; border-radius: .6rem; background: #fff7ed; color: #9a3412; font-size: .85rem; font-weight: 700; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.bsv-new__box summary { cursor: pointer; font-size: .85rem; font-weight: 800; color: #9d174d; }
+.bsv-new__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: .4rem; margin: .5rem 0 .3rem; }
+.bsv-new__box small { color: #64748b; font-size: .75rem; }
