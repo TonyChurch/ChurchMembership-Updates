@@ -1,0 +1,27 @@
+/* خريطة الأسر حسب المناطق */
+.fmap > * { min-width: 0; }
+.fmap-areas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); gap: .5rem; margin-bottom: .9rem; }
+.fmap-area {
+    display: flex; flex-direction: column; gap: .2rem; padding: .6rem .75rem; border-radius: .8rem;
+    background: #fff; border: 1px solid #e2e8f0; border-inline-start: 5px solid var(--ac); color: #0f172a; text-decoration: none;
+}
+.fmap-area strong { font-size: .95rem; color: var(--ac); }
+.fmap-area span { font-size: .8rem; color: #475569; }
+.fmap-area small { font-size: .74rem; color: #64748b; }
+.fmap-area.is-active { background: color-mix(in srgb, var(--ac) 10%, #fff); box-shadow: 0 0 0 2px var(--ac); }
+.fmap-area__visit { display: block; height: .35rem; border-radius: 999px; background: #f1f5f9; overflow: hidden; }
+.fmap-area__visit b { display: block; height: 100%; background: var(--ac); }
+.fmap-map-card { padding: .5rem; margin-bottom: .9rem; }
+.fmap-map { height: 420px; border-radius: .7rem; z-index: 0; }
+.fmap-map__note { margin: .4rem .3rem 0; font-size: .8rem; color: #64748b; }
+.fmap-popup { display: flex; flex-direction: column; gap: .1rem; direction: rtl; text-align: right; font-family: inherit; }
+.fmap-popup a { font-weight: 800; }
+.fmap-popup small { color: #475569; }
+.fmap-list-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding: .8rem 1rem 0; }
+.fmap-list-head h2 { display: flex; align-items: center; gap: .5rem; font-size: 1rem; font-weight: 800; margin: 0; }
+.fmap-list-head h2 small { color: #64748b; font-weight: 600; }
+.fmap-table td { vertical-align: middle; }
+.fmap-name { font-weight: 800; text-decoration: none; }
+.fmap-sub { display: block; color: #64748b; font-size: .75rem; }
+.fmap-address { max-width: 22rem; white-space: normal; }
+.fmap-actions { display: inline-flex; gap: .2rem; }
