@@ -2102,3 +2102,11 @@
 
 /* ما تتحمله الكنيسة (محسوب تلقائيًا في نموذج الخدمة) */
 .bsv-church { background: #fdf2f8; color: #9d174d; font-weight: 800; }
+
+/* البحث في الأسر المسجلة على البرنامج داخل «المستفيد» */
+.bsv-cases__hint { margin: 0 0 .4rem; font-size: .78rem; color: #64748b; }
+.bsv-found { margin-top: .6rem; padding-top: .5rem; border-top: 1px dashed #f9a8d4; }
+.bsv-found h4 { font-size: .85rem; font-weight: 800; color: #9d174d; margin: 0 0 .4rem; }
+.bsv-found .bsv-case small.fin-muted { flex-basis: 100%; order: 3; font-size: .72rem; }
+.bsv-found .bsv-case { flex-wrap: wrap; }
+.bsv-form > .bsv-cases { margin-top: 0; margin-bottom: .9rem; }
