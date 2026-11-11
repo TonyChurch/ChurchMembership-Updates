@@ -1,0 +1,50 @@
+/* نماذج واستبيانات البوابة (صفحات الإدارة) */
+.pforms { --pf: #7c3aed; --pf-soft: #f5f3ff; }
+.pforms > * { min-width: 0; }
+.pforms-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+.pforms-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem 1rem; padding: .75rem .9rem; border-radius: .85rem; background: #fff; border: 1px solid #e2e8f0; border-inline-start: 5px solid var(--pf); }
+.pforms-item.is-closed { border-inline-start-color: #94a3b8; }
+.pforms-item__text { display: flex; flex-direction: column; gap: .3rem; flex: 1 1 420px; min-width: 0; }
+.pforms-item__text > strong { font-size: 1rem; color: #0f172a; }
+.pforms-item__meta { display: flex; flex-wrap: wrap; gap: .25rem .8rem; align-items: center; font-size: .8rem; color: #475569; }
+.pforms-item__link { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+.pforms-item__link code { padding: .1rem .5rem; border-radius: .4rem; background: var(--pf-soft); color: #4c1d95; font-size: .78rem; }
+.pforms-item__actions { display: flex; align-items: center; gap: .35rem; }
+.pforms-item__actions form { margin: 0; }
+.pforms-count { display: flex; flex-direction: column; align-items: center; min-width: 3.6rem; padding: .25rem .5rem; border-radius: .6rem; background: var(--pf-soft); color: var(--pf); text-decoration: none; }
+.pforms-count b { font-size: 1.2rem; line-height: 1; }
+.pforms-count small { font-size: .7rem; }
+
+.pforms-form { padding: 1rem; }
+.pforms-form__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: .6rem .9rem; }
+.pforms-form__grid > label { display: flex; flex-direction: column; gap: .25rem; font-size: .85rem; font-weight: 700; color: #475569; }
+.pforms-form__wide { grid-column: 1 / -1; }
+.pforms-check { display: inline-flex !important; flex-direction: row !important; align-items: center; gap: .4rem; font-size: .85rem; font-weight: 700; color: #475569; }
+.pforms-check .form-check-input { margin: 0; }
+.pforms-form__title { display: flex; align-items: center; gap: .5rem; font-size: 1rem; font-weight: 800; color: var(--pf); margin: 1.1rem 0 .6rem; }
+.pforms-form__title small { color: #64748b; font-weight: 700; }
+.pforms-table-title { padding: .8rem 1rem 0; margin-top: 0; }
+.pforms-questions { margin: 0 0 .7rem; padding-inline-start: 1.4rem; display: flex; flex-direction: column; gap: .5rem; }
+.pforms-q { padding: .55rem .65rem; border-radius: .7rem; background: var(--pf-soft); border: 1px solid #ddd6fe; }
+.pforms-q__row { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.pforms-q__row > input[type=text] { flex: 3 1 260px; }
+.pforms-q__row > select { flex: 1 1 140px; width: auto; }
+.pforms-q__tools { display: inline-flex; gap: .15rem; margin-inline-start: auto; }
+.pforms-q__options { margin-top: .4rem; }
+.pforms-form__save { display: flex; justify-content: flex-end; margin-top: 1rem; }
+
+.pforms-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: .8rem; margin-bottom: .9rem; }
+.pforms-summary__card { padding: .8rem 1rem; }
+.pforms-summary__card h2 { font-size: .95rem; font-weight: 800; color: #0f172a; margin: 0 0 .6rem; }
+.pforms-summary__card h2 small { color: #64748b; font-weight: 600; }
+.pforms-bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .4rem; }
+.pforms-bars li { display: grid; grid-template-columns: minmax(80px, 9rem) 1fr auto; align-items: center; gap: .5rem; font-size: .85rem; }
+.pforms-bars__label { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pforms-bars__bar { height: .7rem; border-radius: 999px; background: #f1f5f9; overflow: hidden; }
+.pforms-bars__bar b { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--pf), #a78bfa); }
+.pforms-bars__value { font-weight: 800; white-space: nowrap; }
+.pforms-bars__value small { color: #64748b; font-weight: 600; }
+.pforms-table { font-size: .84rem; }
+.pforms-table td { white-space: normal; overflow-wrap: anywhere; vertical-align: top; }
+.pforms-table__date { white-space: nowrap !important; }
+@media print { .pforms-bars__bar b { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }

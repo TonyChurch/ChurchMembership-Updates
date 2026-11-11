@@ -534,3 +534,12 @@ body.bible-night { background: #0c1512; }
 .rt-blue { color: #1f5fa8; }
 .rt-green { color: #1f7a44; }
 .rt-gold { color: #a87900; }
+
+/* نماذج واستبيانات البوابة */
+.portal-choice--list { grid-template-columns: 1fr; }
+.portal-form-intro { margin: 0 0 .8rem; color: var(--p-muted); line-height: 1.7; }
+.portal-form-q { font-weight: 800; }
+.portal-form-required { color: #dc2626; margin-inline-start: .2rem; }
+.portal-form-thanks { text-align: center; }
+.portal-form-thanks__icon { font-size: 2.6rem; color: #16a34a; margin: 0; }
+.portal-action--new { border-color: #a78bfa; }
