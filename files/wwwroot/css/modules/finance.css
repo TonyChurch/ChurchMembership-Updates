@@ -2117,3 +2117,4 @@
 .bsv-new__box summary { cursor: pointer; font-size: .85rem; font-weight: 800; color: #9d174d; }
 .bsv-new__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: .4rem; margin: .5rem 0 .3rem; }
 .bsv-new__box small { color: #64748b; font-size: .75rem; }
+.bsv-cases__bar .is-on { background: #fce7f3; border-color: #db2777; color: #9d174d; }
