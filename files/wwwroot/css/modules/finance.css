@@ -2140,7 +2140,7 @@
 .bro-kinds .bsv-chip.is-off { text-decoration: none; }
 
 /* إطار صفحات إخوة الرب الموحّد: رجوع بطاقة ملوّنة يمين الشهر والسنة، وشريط البحث، وزر الخدام في الأعلى */
-.ui-page:has(.bro-church) header .ui-backbar { display: none; }
+.ui-page:has(.bro-church .ui-back) header .ui-backbar { display: none; }
 .bro-church .ui-back { background: #fff; color: #9d174d; padding: .7rem 1.25rem; font-size: 1rem; font-weight: 900; border-radius: .9rem; box-shadow: 0 4px 12px rgba(0, 0, 0, .2); }
 .bro-church .ui-back:hover { background: #fdf2f8; color: #831843; filter: none; }
 .bro-search { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 1rem; padding: .6rem .8rem; background: #fff; border: 1px solid #fbcfe8; border-radius: 1rem; }

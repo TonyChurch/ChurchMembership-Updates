@@ -964,7 +964,7 @@ a.ui-stat:hover {
 /* في صفحات اختيار الشهر والسنة: «رجوع» بجوار الاختيار، ويختفي المكرر في رأس الصفحة */
 .ui-back--period { margin-inline-end: .2rem; }
 .ui-page:has(.ui-back--period) header .ui-backbar { display: none; }
-.ui-page:has(.bro-church) .ui-back--period { display: none; }
+.ui-page:has(.bro-church .ui-back) .ui-back--period { display: none; }
 
 .ui-form {
     display: grid;
