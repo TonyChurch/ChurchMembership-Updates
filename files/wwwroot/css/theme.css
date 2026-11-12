@@ -961,6 +961,11 @@ a.ui-stat:hover {
     filter: brightness(1.1);
 }
 
+/* في صفحات اختيار الشهر والسنة: «رجوع» بجوار الاختيار، ويختفي المكرر في رأس الصفحة */
+.ui-back--period { margin-inline-end: .2rem; }
+.ui-page:has(.ui-back--period) header .ui-backbar { display: none; }
+.ui-page:has(.bro-church) .ui-back--period { display: none; }
+
 .ui-form {
     display: grid;
     gap: var(--ui-gap);
@@ -1408,8 +1413,6 @@ header.page-head--grid {
 
 header.page-head--grid .ui-page-header__title p { margin: 0; }
 header.page-head--grid .ui-page-header__title .ui-backbar { margin: .35rem 0 0; }
-header.page-head--grid .ui-page-header__title .ui-backbar .ui-btn,
-header.page-head--grid .ui-page-header__title .ui-backbar a { min-height: 1.9rem; padding: .15rem .7rem; font-size: .82rem; }
 header.page-head--grid > :not(.ui-page-header__title):not(ul.page-stats) { grid-column: 1 / -1; }
 
 ul.page-stats {
@@ -1447,7 +1450,6 @@ ul.page-stats .ui-birthdays { height: 100%; min-height: 2.6rem; flex-wrap: nowra
 .app-main table tbody tr.is-kb-row > td { background: #fff4d6 !important; box-shadow: inset 0 2px 0 #e0a526, inset 0 -2px 0 #e0a526; }
 /* زر «رجوع» المضاف تلقائيًا تحت عنوان الصفحة */
 .ui-backbar--title { margin: .35rem 0 0; }
-.ui-backbar--title .ui-back { min-height: 1.9rem; padding: .15rem .7rem; font-size: .82rem; }
 /* قائمة الاختصارات */
 .kb-dialog { width: min(36rem, 92vw); padding: 1.2rem 1.4rem; border: 0; border-radius: 16px; box-shadow: 0 20px 60px rgba(15, 23, 42, .3); direction: rtl; }
 .kb-dialog::backdrop { background: rgba(15, 23, 42, .45); }
