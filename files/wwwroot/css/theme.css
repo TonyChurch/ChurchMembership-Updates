@@ -940,23 +940,25 @@ a.ui-stat:hover {
     font-size: .88rem;
 }
 
+/* زر «رجوع»: بطاقة ملوّنة واضحة في كل صفحات البرنامج */
 .ui-back {
     display: inline-flex;
     align-items: center;
-    gap: .35rem;
-    padding: .4rem .85rem;
-    color: var(--ui-text-muted);
+    gap: .4rem;
+    padding: .5rem 1.1rem;
+    color: #fff;
     text-decoration: none;
-    background: var(--ui-surface);
-    border: 1px solid var(--ui-border);
-    border-radius: 999px;
-    font-size: .85rem;
-    font-weight: 700;
+    background: linear-gradient(135deg, var(--ui-primary), var(--ui-primary-strong));
+    border: 0;
+    border-radius: .8rem;
+    font-size: .95rem;
+    font-weight: 800;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .16);
 }
 
 .ui-back:hover {
-    color: var(--ui-primary-strong);
-    border-color: var(--ui-primary);
+    color: #fff;
+    filter: brightness(1.1);
 }
 
 .ui-form {
