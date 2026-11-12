@@ -2124,6 +2124,9 @@
 .bsv-cost-counter b { color: #be185d; }
 .bsv-summary__chip em { font-style: normal; font-size: .72rem; font-weight: 800; color: #be185d; }
 
+/* إجراءات ملف الأسرة في قائمة «ملفات الأسر»: خدمة، تعديل، يحتاج مراجعة، حذف */
+.bro-actions { align-items: center; flex-wrap: nowrap; white-space: nowrap; }
+
 /* محتويات وتسعير الخدمات: جدول الأصناف والتكلفة التقديرية */
 .bsv-estimate { background: #ecfdf5; color: #065f46; }
 .bsv-estimate b { color: #047857; }
