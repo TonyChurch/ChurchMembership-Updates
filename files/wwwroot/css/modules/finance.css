@@ -2123,6 +2123,23 @@
 .bsv-cost-counter { display: block; margin-top: .25rem; padding: .25rem .5rem; border-radius: .5rem; background: #fdf2f8; color: #831843; font-size: .75rem; font-weight: 600; line-height: 1.5; }
 .bsv-cost-counter b { color: #be185d; }
 .bsv-summary__chip em { font-style: normal; font-size: .72rem; font-weight: 800; color: #be185d; }
+
+/* محتويات وتسعير الخدمات: جدول الأصناف والتكلفة التقديرية */
+.bsv-estimate { background: #ecfdf5; color: #065f46; }
+.bsv-estimate b { color: #047857; }
+.bsv-estimate a { color: #047857; font-weight: 800; }
+.bsv-pricing__pick { max-width: 420px; margin-bottom: .6rem; }
+.bsv-pricing__pick label { display: block; font-size: .85rem; font-weight: 700; color: #334155; }
+.bsv-items__wrap { overflow-x: auto; }
+.bsv-items { width: 100%; min-width: 520px; border-collapse: separate; border-spacing: .3rem .25rem; }
+.bsv-items th { font-size: .8rem; font-weight: 800; color: #64748b; text-align: start; padding: 0 .2rem; }
+.bsv-items td:nth-child(2), .bsv-items td:nth-child(3) { width: 6.5rem; }
+.bsv-items td:nth-child(4) { width: 7.5rem; }
+.bsv-items td:last-child, .bsv-items th:last-child { width: 2.6rem; }
+.bsv-items__line { width: 6rem; font-weight: 800; color: #9d174d; white-space: nowrap; }
+.bsv-items tfoot th { font-size: .9rem; color: #334155; padding-top: .4rem; border-top: 1px dashed #f9a8d4; }
+.bsv-items tfoot .bsv-items__line { font-size: 1.05rem; color: #be185d; }
+.bsv-pricing__actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; margin-top: .6rem; }
 .bsv-form__save { align-items: center; gap: .6rem; flex-wrap: wrap; }
 .bsv-form__save .veh-review-check { grid-column: auto; }
 .bsv-review-chip { display: inline-flex; align-items: center; gap: .3rem; margin-inline-start: auto; padding: .15rem .65rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-size: .8rem; font-weight: 800; text-decoration: none; }
