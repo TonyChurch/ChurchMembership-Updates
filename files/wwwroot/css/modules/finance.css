@@ -2139,6 +2139,9 @@
 .bro-kinds .bsv-chip { cursor: pointer; }
 .bro-kinds .bsv-chip.is-off { text-decoration: none; }
 
+/* تقرير الشهور: الشهر الحالي ظاهر */
+.fin-table tbody tr.is-current > td { background: #fff4d6; }
+
 /* بطاقات الأرقام في رأس الصفحة بجوار «تصدير»: شرائح مبسّطة بدل البطاقات الكبيرة أسفل شريط البحث */
 .fin-chips { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: 0; padding: 0; list-style: none; }
 .fin-chips .fin-total { display: inline-flex; align-items: baseline; gap: .4rem; padding: .28rem .75rem; border: 1px solid var(--fin-color); border-radius: 999px; background: var(--fin-soft); }
