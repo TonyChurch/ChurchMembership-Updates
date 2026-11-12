@@ -1,0 +1,30 @@
+/* البابا شنوده للتعليم: دارسون ومدرسون وفصول وحضور */
+.edu-bar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 1rem; }
+.edu-bar form { display: flex; flex-wrap: wrap; gap: .5rem; flex: 1 1 20rem; margin: 0; }
+.edu-bar .form-control, .edu-bar .form-select { flex: 1 1 10rem; min-width: 0; }
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr)); gap: 1rem; align-items: start; }
+.edu-card { padding: 1rem 1.1rem; }
+.edu-card h2 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 .6rem; font-size: 1.05rem; font-weight: 800; }
+.edu-card h2 > .bi { color: var(--ui-primary); }
+.edu-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .8rem 1rem; padding: 1rem 1.1rem; }
+.edu-form label { display: flex; flex-direction: column; gap: .25rem; margin: 0; min-width: 0; font-weight: 700; font-size: .88rem; }
+.edu-form .edu-wide { grid-column: 1 / -1; }
+.edu-form .edu-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .5rem; }
+.edu-link { border: 1px dashed #99f6e4; background: #f0fdfa; border-radius: 1rem; padding: .8rem 1rem; }
+.edu-link__q { display: flex; gap: .5rem; flex-wrap: wrap; }
+.edu-link__q input { flex: 1 1 14rem; min-width: 0; }
+.edu-results { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .3rem; }
+.edu-results li button { width: 100%; text-align: start; border: 1px solid #e2e8f0; background: #fff; border-radius: .7rem; padding: .45rem .7rem; cursor: pointer; }
+.edu-results li button:hover { border-color: var(--ui-primary); }
+.edu-linked { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-weight: 800; color: #0f766e; }
+.edu-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .6rem 1rem; margin: 0; }
+.edu-facts div { padding: .5rem .7rem; border-radius: .8rem; background: #f8fafc; border: 1px solid #e2e8f0; }
+.edu-facts dt { font-size: .78rem; color: #64748b; font-weight: 700; margin: 0; }
+.edu-facts dd { margin: 0; font-weight: 800; }
+.edu-check { display: flex; align-items: center; gap: .6rem; padding: .5rem .7rem; border: 1px solid #e2e8f0; border-radius: .8rem; background: #fff; margin: 0 0 .35rem; cursor: pointer; }
+.edu-check input { width: 1.3rem; height: 1.3rem; }
+.edu-check:has(input:checked) { background: #ecfdf5; border-color: #34d399; }
+.edu-pct { font-weight: 800; }
+.edu-pct.is-low { color: #dc2626; }
+.edu-pct.is-ok { color: #059669; }
+@media print { .edu-bar, .hub-nav, .edu-link { display: none; } }
