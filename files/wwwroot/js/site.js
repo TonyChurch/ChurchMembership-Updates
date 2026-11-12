@@ -910,7 +910,8 @@ document.addEventListener("change", event => {
 (() => {
     if (location.pathname.toLowerCase().replace(/\/$/, "") !== "/pharmacy") return;
     const page = document.querySelector(".ui-page");
-    const anchor = document.querySelector(".fin-nav") || page?.querySelector("header");
+    // تحت إطار إخوة الرب (الشريط والبحث) إن وُجد، وإلا تحت التبويبات
+    const anchor = document.querySelector(".bro-search") || document.querySelector(".fin-nav") || page?.querySelector("header");
     if (!page || !anchor) return;
     const api = "/api/activity/pharmacy-accounts";
     const make = (tag, className, text) => {

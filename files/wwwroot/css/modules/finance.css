@@ -2139,6 +2139,14 @@
 .bro-kinds .bsv-chip { cursor: pointer; }
 .bro-kinds .bsv-chip.is-off { text-decoration: none; }
 
+/* بطاقات الأرقام في رأس الصفحة بجوار «تصدير»: شرائح مبسّطة بدل البطاقات الكبيرة أسفل شريط البحث */
+.fin-chips { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.fin-chips .fin-total { display: inline-flex; align-items: baseline; gap: .4rem; padding: .28rem .75rem; border: 1px solid var(--fin-color); border-radius: 999px; background: var(--fin-soft); }
+.fin-chips .fin-total span { font-size: .78rem; }
+.fin-chips .fin-total strong { font-size: .95rem; }
+.fin-chips .fin-total strong small { font-size: .7rem; }
+@media print { .fin-actions.no-print { display: flex !important; } .fin-actions.no-print > :not(.fin-chips) { display: none !important; } }
+
 /* إطار صفحات إخوة الرب الموحّد: رجوع بطاقة ملوّنة يمين الشهر والسنة، وشريط البحث، وزر الخدام في الأعلى */
 .ui-page:has(.bro-church .ui-back) header .ui-backbar { display: none; }
 .bro-church .ui-back { background: #fff; color: #9d174d; padding: .7rem 1.25rem; font-size: 1rem; font-weight: 900; border-radius: .9rem; box-shadow: 0 4px 12px rgba(0, 0, 0, .2); }

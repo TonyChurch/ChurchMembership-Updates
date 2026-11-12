@@ -141,3 +141,9 @@
         grid-template-columns: minmax(0, 1fr);
     }
 }
+
+/* المكتبة: علامة «في البوابة» والمتكلم وخانة النشر في البوابة */
+.library__public-tag { font-size: .72rem; }
+.library__speaker { display: block; color: #64748b; font-size: .8rem; }
+.library__public { grid-column: 1 / -1; padding: .45rem .6rem; border-radius: .6rem; background: #ecfdf5; font-weight: 700; color: #065f46; }
+.library__public .form-check-input { margin-inline-end: .35rem; }

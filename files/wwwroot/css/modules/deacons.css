@@ -266,3 +266,8 @@
     .deacons-annual__table td, .deacons-annual__table th { padding: .15rem .25rem; font-size: 7.5pt; }
     .deacons-annual__past td { opacity: 1; }
 }
+
+/* حذف قداس من التوزيع السنوي */
+.deacons-annual__row-actions { white-space: nowrap; }
+.deacons-annual__row-actions form { display: inline; margin: 0; }
+.deacons-annual__all { flex-direction: row !important; align-items: center; gap: .35rem; }
