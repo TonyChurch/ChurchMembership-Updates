@@ -1,0 +1,40 @@
+/* تبويبات الخدمات (خدمات الأنبا إبرام للتنمية، الخدمات التعليمية...) */
+
+.hub-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.hub-site { background: linear-gradient(135deg, #0f766e, #0d9488); color: #fff; border: 0; font-weight: 800; box-shadow: 0 3px 10px rgba(13, 148, 136, .3); }
+.hub-site:hover { color: #fff; filter: brightness(1.08); }
+
+.hub-nav { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1rem; }
+.hub-nav__item { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .9rem; border: 1px solid var(--ui-border); border-radius: 999px; background: var(--ui-surface); color: var(--ui-text-muted); font-size: .88rem; font-weight: 700; text-decoration: none; }
+.hub-nav__item:hover { border-color: var(--ui-primary); color: var(--ui-primary-strong); }
+.hub-nav__item.is-active { background: var(--ui-primary); border-color: var(--ui-primary); color: #fff; }
+.hub-nav__item.is-off { opacity: .55; border-style: dashed; }
+
+.hub-site-bar { display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; margin: 0 0 1rem; padding: .7rem 1rem; border: 1px dashed #99f6e4; border-radius: 1rem; background: #f0fdfa; }
+.hub-site-bar.is-missing { border-color: #f59e0b; background: #fffbeb; }
+.hub-site-bar__form { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; flex: 1 1 22rem; margin: 0; }
+.hub-site-bar__form label { flex: 1 1 100%; margin: 0; font-size: .82rem; font-weight: 700; color: #334155; }
+.hub-site-bar__form .form-control { flex: 1 1 12rem; min-width: 0; }
+
+.hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(24rem, 100%), 1fr)); gap: 1rem; align-items: start; }
+.hub-group { padding: 1rem 1.1rem; }
+.hub-group.is-off { opacity: .6; border-style: dashed; }
+.hub-group h2 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 .6rem; font-size: 1.05rem; font-weight: 800; }
+.hub-group h2 > .bi { color: var(--ui-primary); }
+.hub-group__tools { display: inline-flex; gap: .3rem; margin-inline-start: auto; }
+.hub-group__tools form { margin: 0; }
+
+.hub-items { list-style: none; margin: 0 0 .6rem; padding: 0; display: grid; gap: .35rem; }
+.hub-item { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem .7rem; border-radius: .8rem; background: #f8fafc; border: 1px solid #e2e8f0; }
+.hub-item.is-off { opacity: .55; border-style: dashed; }
+.hub-item__icon { margin-top: .15rem; color: #0d9488; }
+.hub-item__body { flex: 1 1 auto; min-width: 0; font-size: .92rem; }
+.hub-item form { margin: 0; }
+
+.hub-edit { margin: .25rem 0 .5rem; font-size: .8rem; }
+.hub-edit summary { cursor: pointer; color: #64748b; font-weight: 700; }
+.hub-edit__form, .hub-add { display: flex; flex-wrap: wrap; gap: .4rem; margin: .4rem 0 0; }
+.hub-edit__form .form-control, .hub-add .form-control { flex: 1 1 11rem; min-width: 0; }
+.hub-add { padding-top: .6rem; border-top: 1px dashed #e2e8f0; }
+
+@media print { .hub-actions, .hub-site-bar { display: none; } }
