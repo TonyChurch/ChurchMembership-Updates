@@ -13,11 +13,7 @@
         return (Math.round(value * 100) / 100).toLocaleString('en-US');
     }
 
-    document.querySelectorAll('form[data-confirm]').forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-            if (!confirm(form.dataset.confirm)) event.preventDefault();
-        });
-    });
+    // رسالة التأكيد (data-confirm) صارت عامة لكل الصفحات في site.js
 
     var form = document.getElementById('finReceiptsForm');
     if (form) {

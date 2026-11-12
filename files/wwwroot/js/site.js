@@ -1361,3 +1361,12 @@ document.addEventListener("change", event => {
     }))).observe(document.body, { childList: true, subtree: true });
     document.addEventListener("click", () => setTimeout(() => document.querySelectorAll('input[type="date"]').forEach(input => input._renderDay?.())));
 })();
+
+// رسالة تأكيد قبل إرسال أي نموذج عليه data-confirm (حذف ملف، حذف خدمة...) في كل الصفحات
+document.addEventListener("submit", event => {
+    const form = event.target instanceof HTMLFormElement ? event.target : null;
+    if (form?.dataset.confirm && !confirm(form.dataset.confirm)) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    }
+}, true);

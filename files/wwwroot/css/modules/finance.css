@@ -2127,6 +2127,16 @@
 /* إجراءات ملف الأسرة في قائمة «ملفات الأسر»: خدمة، تعديل، يحتاج مراجعة، حذف */
 .bro-actions { align-items: center; flex-wrap: nowrap; white-space: nowrap; }
 
+/* كشف الصرف الشهري: بنود كل صف (تعديل، مراجعة، حذف)، وقائمة الخدمات في «مساعدة عينية شهريًا» */
+.bro-items > td { background: #fdf2f8; padding: .5rem .8rem; }
+.bro-items__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; }
+.bro-items__list li { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .8rem; padding: .3rem .6rem; border-radius: .6rem; background: #fff; border: 1px solid #fbcfe8; }
+.bro-items__date { font-weight: 800; color: #9d174d; font-size: .85rem; }
+.bro-items__label { flex: 1 1 12rem; min-width: 0; font-size: .88rem; }
+.bro-kinds { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .4rem; }
+.bro-kinds .bsv-chip { cursor: pointer; }
+.bro-kinds .bsv-chip.is-off { text-decoration: none; }
+
 /* ملفات الأسر: ما تتحمله الكنيسة في الشهر/السنة المختارة، بارزًا أول الصفحة */
 .bro-church { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem 1.2rem; margin: 0 0 1rem; padding: .9rem 1.2rem; border-radius: 1rem; background: linear-gradient(135deg, #be185d, #db2777); color: #fff; box-shadow: 0 6px 18px rgba(190, 24, 93, .25); }
 .bro-church__total { display: flex; align-items: center; gap: .9rem; min-width: 0; }
