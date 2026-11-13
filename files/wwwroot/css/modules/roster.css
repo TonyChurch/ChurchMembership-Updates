@@ -730,6 +730,28 @@ a.roster-del__btn {
 .servant-picker__item.is-removing { background: #fdecec; border-color: #f2a5a5; }
 .servant-picker__waiting { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0; padding: .5rem .7rem; color: #8a5300; background: #fff8e6; border-bottom: 1px solid #f3e2b3; }
 .servant-picker__waiting[hidden] { display: none; }
+/* منطقتان: خدام هذه الخدمة أعلى، وباقة الخدام الموجودين تحتهم (الترتيب بـ order من السكربت) */
+.servant-picker__zone { grid-column: 1 / -1; order: 2; display: flex; align-items: center; gap: .4rem; margin: .5rem 0 0; padding-top: .6rem; font-size: .9rem; font-weight: 700; color: var(--ui-text-muted, #6b7690); border-top: 1px dashed var(--ui-border, #e6eaf2); }
+.servant-picker__zone--here { order: 0; margin-top: 0; padding-top: 0; color: #0c7a4d; border-top: 0; }
+.servant-picker__zone[hidden], .servant-picker__empty[hidden] { display: none; }
+.servant-picker__empty { grid-column: 1 / -1; order: 1; margin: 0; padding: .6rem; font-size: .85rem; text-align: center; color: var(--ui-text-muted, #6b7690); background: var(--ui-slate-soft, #f6f8fb); border-radius: 10px; }
+.servant-picker__item { order: 3; }
+.servant-picker__list { max-height: 65vh; align-content: start; }
+
+/* «خدمة جديدة للخادم»: قائمة تحت كل اسم، ومعها «نقل من …» وزر الحفظ بعد الاختيار */
+.servant-picker__go { display: flex; flex-wrap: wrap; gap: .3rem; }
+.servant-picker__go .form-select { flex: 1 1 8rem; min-height: 1.9rem; padding-block: .1rem; font-size: .8rem; color: var(--ui-text-muted, #6b7690); }
+.servant-picker__go .ui-btn { min-height: 1.9rem; padding: .1rem .7rem; font-size: .8rem; }
+.servant-picker__item.is-saved { box-shadow: 0 0 0 3px rgba(18, 185, 129, .35); transition: box-shadow .3s; }
+
+/* المرحلة والفصل أزرار تُضغط مباشرة */
+.pick-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.pick-chip { display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .9rem; font: inherit; font-weight: 600; color: var(--ui-text, #172036); background: #fff; border: 1px solid var(--ui-border, #e6eaf2); border-radius: 999px; cursor: pointer; }
+.pick-chip:hover { color: var(--ui-primary-strong, #2f49d1); border-color: var(--ui-primary, #3b5bfd); }
+.pick-chip:focus-visible { outline: 0; box-shadow: 0 0 0 4px rgba(59, 91, 253, .2); }
+.pick-chip[aria-pressed="true"] { color: #fff; background: var(--ui-gradient-primary, #3b5bfd); border-color: transparent; }
+.pick-chip b { min-width: 1.4rem; padding: 0 .35rem; font-size: .75rem; line-height: 1.4rem; text-align: center; color: var(--ui-primary-strong, #2f49d1); background: var(--ui-primary-soft, #eef1ff); border-radius: 999px; }
+.pick-chip[aria-pressed="true"] b { color: #fff; background: rgba(255, 255, 255, .25); }
 
 /* قائمة المرحلة: بطاقات الفصول المختصرة */
 .roster-cards {

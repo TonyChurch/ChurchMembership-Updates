@@ -1,6 +1,19 @@
 ﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
+// البحث بلا فرق بين طرق كتابة الحروف: أ إ آ ← ا، ى ئ ← ي، ة ← ه، ؤ ← و، بلا تشكيل ولا تطويل
+// (سقط التعريف في دمج 2026-11-05 فتعطل البحث داخل صفحات الخدام والحضور؛ لا تحذفه)
+window.arabicKey = (text) => String(text ?? "")
+    .replace(/[ً-ٰٟـ]/g, "")
+    .replace(/[أإآٱ]/g, "ا").replace(/[ىئی]/g, "ي")
+    .replace(/ة/g, "ه").replace(/ؤ/g, "و").replace(/ک/g, "ك")
+    .toLowerCase().replace(/\s+/g, " ").trim();
+// كل كلمات البحث موجودة في النص
+window.arabicMatch = (text, search) => {
+    const haystack = window.arabicKey(text);
+    return window.arabicKey(search).split(" ").filter(Boolean).every((word) => haystack.includes(word));
+};
+
 // توحيد عرض كل حقول التاريخ في التطبيق بصيغة يوم/شهر/سنة،
 // مع إبقاء حقل التاريخ الأصلي مسؤولًا عن التقويم والحفظ.
 document.addEventListener("DOMContentLoaded", () => {
