@@ -1384,3 +1384,37 @@ document.addEventListener("submit", event => {
         event.stopImmediatePropagation();
     }
 }, true);
+
+// سطر بحث تلقائي فوق كل جدول طويل (6 صفوف فأكثر) في أي صفحة ليس فيها خانة بحث خاصة بها.
+// يتجاهل فروق كتابة الحروف (arabicMatch). لإيقافه في صفحة أو جدول: data-no-auto-search على أي عنصر يحيط به.
+(() => {
+    const setup = () => {
+        const main = document.querySelector(".app-main");
+        if (!main || main.querySelector("input[type=search], input[name=search], input[name=q], input[data-servant-search]")) return;
+        main.querySelectorAll("table").forEach((table) => {
+            if (table.closest("[data-no-auto-search]") || table.parentElement.closest("td, th")) return;
+            const rows = [...table.tBodies].flatMap((body) => [...body.rows]);
+            if (rows.length < 6) return;
+            const bar = document.createElement("div");
+            bar.className = "ui-auto-search no-print";
+            bar.innerHTML = '<i class="bi bi-search" aria-hidden="true"></i>'
+                + '<input type="search" class="form-control" placeholder="ابحث في هذه القائمة" aria-label="بحث في هذه القائمة" autocomplete="off">'
+                + '<span class="ui-auto-search__count" aria-live="polite"></span>';
+            const input = bar.querySelector("input");
+            const count = bar.querySelector("span");
+            (table.closest(".table-responsive") || table).before(bar);
+            input.addEventListener("input", () => {
+                let shown = 0;
+                rows.forEach((row) => {
+                    const match = window.arabicMatch(row.textContent, input.value);
+                    row.classList.toggle("is-search-hidden", !match);
+                    if (match) shown++;
+                });
+                count.textContent = input.value.trim() ? `${shown} من ${rows.length}` : "";
+            });
+            // Enter داخل نموذج لا يرسله
+            input.addEventListener("keydown", (event) => { if (event.key === "Enter") event.preventDefault(); });
+        });
+    };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setup); else setup();
+})();

@@ -736,6 +736,8 @@ a.roster-del__btn {
 .servant-picker__zone[hidden], .servant-picker__empty[hidden] { display: none; }
 .servant-picker__empty { grid-column: 1 / -1; order: 1; margin: 0; padding: .6rem; font-size: .85rem; text-align: center; color: var(--ui-text-muted, #6b7690); background: var(--ui-slate-soft, #f6f8fb); border-radius: 10px; }
 .servant-picker__item { order: 3; }
+.servant-picker__toggle { min-height: 1.8rem; margin-inline-start: auto; padding: .1rem .7rem; font-size: .8rem; }
+.servant-picker__toggle[hidden] { display: none; }
 .servant-picker__list { max-height: 65vh; align-content: start; }
 
 /* «خدمة جديدة للخادم»: قائمة تحت كل اسم، ومعها «نقل من …» وزر الحفظ بعد الاختيار */

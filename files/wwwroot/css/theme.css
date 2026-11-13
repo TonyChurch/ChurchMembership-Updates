@@ -1589,3 +1589,47 @@ body.label-edit-mode :is(a, button, h1, h2, h3, h4, h5, th, label, strong, b, sp
 .stage-tabs__item i { color: var(--ui-primary); }
 .stage-tabs__item.is-active { color: #fff; background: var(--ui-gradient-primary); }
 .stage-tabs__item.is-active i { color: #fff; }
+/* ---------- سطر البحث التلقائي فوق الجداول (site.js) ---------- */
+
+.ui-auto-search {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    max-width: 28rem;
+    margin: .5rem 0;
+    padding: .25rem .7rem;
+    color: var(--ui-text-muted);
+    background: #fff;
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+}
+
+.ui-auto-search:focus-within {
+    border-color: var(--ui-primary);
+    box-shadow: 0 0 0 4px rgba(59, 91, 253, .12);
+}
+
+.ui-auto-search .form-control {
+    flex: 1;
+    min-width: 0;
+    min-height: 2rem;
+    padding: .1rem .2rem;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.ui-auto-search__count {
+    font-size: .8rem;
+    white-space: nowrap;
+}
+
+tr.is-search-hidden {
+    display: none !important;
+}
+
+@media print {
+    .ui-auto-search {
+        display: none !important;
+    }
+}
