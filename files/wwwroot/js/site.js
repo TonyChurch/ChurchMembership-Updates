@@ -1436,6 +1436,8 @@ document.addEventListener("submit", event => {
         // الصفحة تحدد ما يفعله اختيار فرد: data-family-pick-url="…?memberId={id}" و data-family-pick-label؛ وإلا يُفتح ملف الفرد
         const pickHost = input.closest("[data-family-pick-url]");
         const pickUrl = pickHost?.dataset.familyPickUrl || "", pickLabel = pickHost?.dataset.familyPickLabel || "فتح ملفه";
+        // data-family-pick-method="post": الاختيار ينفَّذ مباشرة (حفظ) بدل فتح صفحة، فيُرسل برمز الحماية الموجود في الصفحة
+        const pickPost = !!pickUrl && (pickHost.dataset.familyPickMethod || "").toLowerCase() === "post";
         let timer = null, last = "";
         input.addEventListener("input", () => {
             clearTimeout(timer);
@@ -1487,6 +1489,18 @@ document.addEventListener("submit", event => {
                                     const link = document.createElement("a");
                                     link.href = pickUrl ? pickUrl.replace("{id}", person.id) : "/Members/Details/" + person.id;
                                     if (newTab) { link.target = "_blank"; link.rel = "noopener"; }
+                                    if (pickPost) link.addEventListener("click", (event) => {
+                                        event.preventDefault();
+                                        const token = document.querySelector("input[name=__RequestVerificationToken]");
+                                        if (!token) return;
+                                        const form = document.createElement("form");
+                                        form.method = "post";
+                                        form.action = link.href;
+                                        form.hidden = true;
+                                        form.append(token.cloneNode());
+                                        document.body.append(form);
+                                        form.submit();
+                                    });
                                     const label = document.createElement("small");
                                     label.textContent = pickLabel;
                                     link.append(person.name, label);
