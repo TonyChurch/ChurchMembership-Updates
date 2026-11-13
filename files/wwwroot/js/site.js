@@ -1418,3 +1418,59 @@ document.addEventListener("submit", event => {
     };
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setup); else setup();
 })();
+
+// «أسر مسجلة على البرنامج» تحت أي خانة بحث: اكتب حرفين فأكثر فتظهر الأسر المطابقة من ملف الأسر (/Families/Find)
+// وكل بطاقة تفتح ملف الأسرة. لا يُضاف في سجل الأسر ولا في «الخدمات المقدمة» (لهما بحثهما)، ولإيقافه: data-no-family-search.
+(() => {
+    const path = location.pathname.toLowerCase();
+    if (/^\/families\/?(index)?$/.test(path) || path.startsWith("/brothers/services")) return;
+    const attach = (input) => {
+        if (input.dataset.familySearch || input.closest("[data-no-family-search]")) return;
+        input.dataset.familySearch = "1";
+        const panel = document.createElement("div");
+        panel.className = "ui-family-hits no-print";
+        panel.hidden = true;
+        const host = input.closest(".ui-auto-search, .servant-picker__bar, .input-group") || input.closest("form:not([method=post])") || input;
+        host.after(panel);
+        const newTab = !!input.closest("form[method=post]");
+        let timer = null, last = "";
+        input.addEventListener("input", () => {
+            clearTimeout(timer);
+            const text = input.value.trim();
+            if (text.length < 2) { last = ""; panel.hidden = true; return; }
+            timer = setTimeout(async () => {
+                if (text === last) return;
+                last = text;
+                try {
+                    const response = await fetch("/Families/Find?q=" + encodeURIComponent(text), { headers: { Accept: "application/json" } });
+                    if (!response.ok || !(response.headers.get("content-type") || "").includes("json")) return;
+                    const families = await response.json();
+                    if (input.value.trim() !== text) return;
+                    const title = document.createElement("div");
+                    title.className = "ui-family-hits__title";
+                    title.innerHTML = '<i class="bi bi-house-heart" aria-hidden="true"></i> ';
+                    title.append(`أسر مسجلة على البرنامج (${families.length})`);
+                    const list = document.createElement("div");
+                    list.className = "ui-family-hits__list";
+                    families.forEach((family) => {
+                        const card = document.createElement("a");
+                        card.className = "ui-family-hits__item";
+                        card.href = "/Families/Profile/" + family.id;
+                        if (newTab) { card.target = "_blank"; card.rel = "noopener"; }
+                        const name = document.createElement("span");
+                        name.textContent = family.name;
+                        const info = document.createElement("small");
+                        info.textContent = [family.code, family.match, family.phone].filter(Boolean).join(" · ");
+                        card.append(name, info);
+                        list.append(card);
+                    });
+                    panel.replaceChildren(title, list);
+                    panel.hidden = families.length === 0;
+                } catch { /* البحث في الأسر إضافي */ }
+            }, 300);
+        });
+    };
+    const setup = () => document.querySelectorAll(".app-main input[type=search], .app-main input[name=search], .app-main input[name=q]").forEach(attach);
+    // بعد سطر البحث التلقائي فوق الجداول (يُنشأ عند DOMContentLoaded)
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(setup)); else setTimeout(setup);
+})();

@@ -1633,3 +1633,66 @@ tr.is-search-hidden {
         display: none !important;
     }
 }
+
+/* ---------- «أسر مسجلة على البرنامج» تحت خانات البحث (site.js) ---------- */
+
+.ui-family-hits {
+    flex-basis: 100%;
+    grid-column: 1 / -1;
+    width: 100%;
+    margin: .4rem 0 .6rem;
+    padding: .6rem .7rem;
+    background: #fff;
+    border: 1px dashed var(--ui-border);
+    border-radius: 14px;
+}
+
+.ui-family-hits[hidden] {
+    display: none;
+}
+
+.ui-family-hits__title {
+    margin-bottom: .45rem;
+    font-size: .88rem;
+    font-weight: 700;
+    color: #b3203d;
+}
+
+.ui-family-hits__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: .4rem;
+    max-height: 15rem;
+    overflow-y: auto;
+}
+
+.ui-family-hits__item {
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+    padding: .45rem .6rem;
+    font-weight: 600;
+    color: var(--ui-text);
+    text-decoration: none;
+    background: var(--ui-bg);
+    border: 1px solid var(--ui-border);
+    border-radius: 10px;
+}
+
+.ui-family-hits__item:hover,
+.ui-family-hits__item:focus-visible {
+    color: var(--ui-primary-strong);
+    border-color: var(--ui-primary);
+}
+
+.ui-family-hits__item small {
+    font-size: .72rem;
+    font-weight: 400;
+    color: var(--ui-text-muted);
+}
+
+@media print {
+    .ui-family-hits {
+        display: none !important;
+    }
+}
