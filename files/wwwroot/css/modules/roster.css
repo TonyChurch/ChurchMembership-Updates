@@ -730,3 +730,113 @@ a.roster-del__btn {
 .servant-picker__item.is-removing { background: #fdecec; border-color: #f2a5a5; }
 .servant-picker__waiting { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0; padding: .5rem .7rem; color: #8a5300; background: #fff8e6; border-bottom: 1px solid #f3e2b3; }
 .servant-picker__waiting[hidden] { display: none; }
+
+/* قائمة المرحلة: بطاقات الفصول المختصرة */
+.roster-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr));
+    gap: .85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.roster-card {
+    display: grid;
+    gap: .6rem;
+    height: 100%;
+    padding: .95rem 1rem;
+    border: 1px solid var(--ui-border);
+    border-inline-start: 5px solid #f2b705;
+    border-radius: 16px;
+    background: var(--ui-surface);
+    color: var(--ui-text);
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgb(15 23 42 / .05);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.roster-card:hover,
+.roster-card:focus-visible {
+    transform: translateY(-2px);
+    border-color: #6d4ae0;
+    box-shadow: 0 8px 20px rgb(109 74 224 / .16);
+    color: var(--ui-text);
+}
+
+.roster-card--loose {
+    border-inline-start-color: #e2547a;
+    border-style: dashed;
+}
+
+.roster-card__head {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.08rem;
+}
+
+.roster-card__head > .bi:first-child {
+    color: #6d4ae0;
+}
+
+.roster-card__head strong {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.roster-card__go {
+    color: var(--ui-text-muted);
+    transition: transform .15s ease;
+}
+
+.roster-card:hover .roster-card__go {
+    transform: translateX(-4px);
+    color: #6d4ae0;
+}
+
+.roster-card__nums {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+
+.roster-card__num {
+    padding: .2rem .65rem;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.roster-card__num b {
+    font-size: 1rem;
+}
+
+.roster-card__num--servants {
+    background: #fff4d6;
+    color: #8a5a00;
+}
+
+.roster-card__num--served {
+    background: #dcf5e7;
+    color: #17703f;
+}
+
+.roster-card__servants {
+    color: var(--ui-text-muted);
+    font-size: .84rem;
+    line-height: 1.6;
+}
+
+.roster-card__flag {
+    justify-self: start;
+    font-size: .76rem;
+}
+
+@media print {
+    .roster-card {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+}
