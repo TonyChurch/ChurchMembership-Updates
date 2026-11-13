@@ -1,6 +1,6 @@
 // حماية نماذج التسجيل من فقد البيانات (لكل البرنامج):
-// ١) تنبيه قبل مغادرة صفحة فيها بيانات مكتوبة لم تُحفظ.
-// ٢) مسودة تلقائية على هذا الجهاز: لو خرجت قبل الحفظ ورجعت، تُستعاد البيانات لتكمل وتحفظ.
+// مسودة تلقائية على هذا الجهاز: لو خرجت قبل الحفظ ورجعت، تُستعاد البيانات لتكمل وتحفظ.
+// (تنبيه المتصفح «Leave site?» قبل المغادرة أُزيل بطلب المستخدم 2026-11-14، فلا تُعِده.)
 // يشمل نماذج الحفظ (POST) التي فيها خانتان أو أكثر للكتابة أو الاختيار، ولا يشمل البحث والتصفية،
 // ولا أي نموذج فيه كلمة مرور، ولا ما عليه data-no-draft. المسودة تُمسح عند الحفظ أو بعد 7 أيام.
 (() => {
@@ -15,6 +15,7 @@
     const SKIP_TYPES = new Set(['hidden', 'submit', 'button', 'reset', 'image', 'file', 'password']);
     const dirtyForms = new Set();
     let submitting = false;
+    const submitted = new Set(), flushers = [];
 
     const fieldsOf = form => [...form.elements].filter(el => el.name && !el.disabled && !SKIP_TYPES.has(el.type) && el.name !== '__RequestVerificationToken');
     const isEntryForm = form => {
@@ -115,22 +116,25 @@
         };
         form.addEventListener('input', remember);
         form.addEventListener('change', remember);
+        // حفظ فوري عند مغادرة الصفحة، إلا النموذج الذي يُرسَل الآن (يُحفظ على الخادم)
+        flushers.push(() => {
+            if (!storage || submitted.has(form) || !dirtyForms.has(form)) return;
+            try { storage.setItem(key, JSON.stringify({ t: Date.now(), d: read(form) })); } catch { }
+        });
         form.addEventListener('submit', event => {
             // إن ألغى المستخدم رسالة التأكيد (data-confirm) لا يُعَد النموذج محفوظًا
             submitting = true;
+            submitted.add(form);
             clearTimeout(timer);
             setTimeout(() => {
-                if (event.defaultPrevented) { submitting = false; return; }
+                if (event.defaultPrevented) { submitting = false; submitted.delete(form); return; }
                 try { storage?.removeItem(key); } catch { }
                 dirtyForms.delete(form);
             }, 0);
         });
     });
 
-    // تنبيه قبل مغادرة صفحة فيها بيانات لم تُحفظ
-    window.addEventListener('beforeunload', event => {
-        if (!dirtyForms.size || submitting) return;
-        event.preventDefault();
-        event.returnValue = '';
-    });
+    // لا تنبيه «Leave site?» عند المغادرة (أُزيل بطلب المستخدم 2026-11-14): المسودة التلقائية تكفي لحماية ما كُتب.
+    // قبل الخروج تُحفظ المسودة فورًا (المؤقت 400 مللي ثانية قد لا يكون انتهى).
+    window.addEventListener('pagehide', () => flushers.forEach(flush => flush()));
 })();

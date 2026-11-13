@@ -544,11 +544,7 @@
         form.querySelector(".fb-save").disabled = true;
     });
 
-    window.addEventListener("beforeunload", event => {
-        if (!dirty) return;
-        event.preventDefault();
-        event.returnValue = "";
-    });
+    // لا تنبيه «Leave site?» عند المغادرة (أُزيل بطلب المستخدم 2026-11-14)
 
     panes().forEach(setupPane);
     renderCards();
