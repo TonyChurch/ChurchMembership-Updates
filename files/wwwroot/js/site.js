@@ -1433,6 +1433,9 @@ document.addEventListener("submit", event => {
         const host = input.closest(".ui-auto-search, .servant-picker__bar, .input-group") || input.closest("form:not([method=post])") || input;
         host.after(panel);
         const newTab = !!input.closest("form[method=post]");
+        // الصفحة تحدد ما يفعله اختيار فرد: data-family-pick-url="…?memberId={id}" و data-family-pick-label؛ وإلا يُفتح ملف الفرد
+        const pickHost = input.closest("[data-family-pick-url]");
+        const pickUrl = pickHost?.dataset.familyPickUrl || "", pickLabel = pickHost?.dataset.familyPickLabel || "فتح ملفه";
         let timer = null, last = "";
         input.addEventListener("input", () => {
             clearTimeout(timer);
@@ -1453,15 +1456,46 @@ document.addEventListener("submit", event => {
                     const list = document.createElement("div");
                     list.className = "ui-family-hits__list";
                     families.forEach((family) => {
-                        const card = document.createElement("a");
+                        const card = document.createElement("div");
                         card.className = "ui-family-hits__item";
-                        card.href = "/Families/Profile/" + family.id;
-                        if (newTab) { card.target = "_blank"; card.rel = "noopener"; }
+                        const open = document.createElement("a");
+                        open.href = "/Families/Profile/" + family.id;
+                        if (newTab) { open.target = "_blank"; open.rel = "noopener"; }
                         const name = document.createElement("span");
                         name.textContent = family.name;
                         const info = document.createElement("small");
                         info.textContent = [family.code, family.match, family.phone].filter(Boolean).join(" · ");
-                        card.append(name, info);
+                        open.append(name, info);
+                        // «عرض الأسرة»: أفرادها تحت البطاقة لاختيار واحد منهم
+                        const show = document.createElement("button");
+                        show.type = "button";
+                        show.className = "ui-family-hits__show";
+                        show.innerHTML = '<i class="bi bi-people" aria-hidden="true"></i> عرض الأسرة';
+                        const members = document.createElement("div");
+                        members.className = "ui-family-hits__members";
+                        members.hidden = true;
+                        show.addEventListener("click", async () => {
+                            if (members.dataset.loaded) { members.hidden = !members.hidden; return; }
+                            show.disabled = true;
+                            try {
+                                const reply = await fetch("/Families/FindMembers?familyId=" + family.id, { headers: { Accept: "application/json" } });
+                                if (!reply.ok || !(reply.headers.get("content-type") || "").includes("json")) return;
+                                const people = await reply.json();
+                                members.dataset.loaded = "1";
+                                if (!people.length) members.textContent = "لا يوجد أفراد مسجلون في هذه الأسرة.";
+                                people.forEach((person) => {
+                                    const link = document.createElement("a");
+                                    link.href = pickUrl ? pickUrl.replace("{id}", person.id) : "/Members/Details/" + person.id;
+                                    if (newTab) { link.target = "_blank"; link.rel = "noopener"; }
+                                    const label = document.createElement("small");
+                                    label.textContent = pickLabel;
+                                    link.append(person.name, label);
+                                    members.append(link);
+                                });
+                                members.hidden = false;
+                            } catch { /* إضافي */ } finally { show.disabled = false; }
+                        });
+                        card.append(open, show, members);
                         list.append(card);
                     });
                     panel.replaceChildren(title, list);
