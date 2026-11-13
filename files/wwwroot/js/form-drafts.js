@@ -4,7 +4,12 @@
 // يشمل نماذج الحفظ (POST) التي فيها خانتان أو أكثر للكتابة أو الاختيار، ولا يشمل البحث والتصفية،
 // ولا أي نموذج فيه كلمة مرور، ولا ما عليه data-no-draft. المسودة تُمسح عند الحفظ أو بعد 7 أيام.
 (() => {
-    const PREFIX = 'cm-draft:';
+    // cm-draft2: مسودات الإصدار السابق (cm-draft:) كانت تُحفظ من الملء التلقائي للصفحة نفسها، فتُمسح
+    const PREFIX = 'cm-draft2:';
+    try { Object.keys(window.localStorage).filter(key => key.startsWith('cm-draft:')).forEach(key => window.localStorage.removeItem(key)); } catch { }
+    // آخر لمسة من المستخدم (ضغطة أو مفتاح): ما تغيّره الصفحة بنفسها بلا لمسة قبله لا يُعَد كتابة
+    let lastTouch = 0;
+    ['pointerdown', 'keydown'].forEach(type => document.addEventListener(type, event => { if (event.isTrusted) lastTouch = Date.now(); }, true));
     const MAX_AGE = 7 * 24 * 60 * 60 * 1000;
     const storage = (() => { try { const s = window.localStorage; s.setItem('cm-draft-test', '1'); s.removeItem('cm-draft-test'); return s; } catch { return null; } })();
     const SKIP_TYPES = new Set(['hidden', 'submit', 'button', 'reset', 'image', 'file', 'password']);
@@ -79,7 +84,7 @@
         if (!isEntryForm(form)) return;
         const key = keyOf(form, index);
         const initialData = read(form);
-        const initial = JSON.stringify(initialData);
+        let initial = JSON.stringify(initialData);
 
         // استعادة مسودة سابقة لهذه الصفحة
         if (storage) {
@@ -94,8 +99,10 @@
         }
 
         let timer = null;
-        const remember = () => {
+        const remember = event => {
             if (submitting) return;
+            // ملء تلقائي من الصفحة (سعر الخدمة، قيمة افتراضية...) قبل أن يكتب المستخدم شيئًا: يصير هو الأصل، فلا تنبيه ولا مسودة
+            if (!event.isTrusted && Date.now() - lastTouch > 1500 && !dirtyForms.has(form)) { initial = JSON.stringify(read(form)); return; }
             if (hasContent(form, initial)) dirtyForms.add(form); else dirtyForms.delete(form);
             clearTimeout(timer);
             timer = setTimeout(() => {
