@@ -27,4 +27,16 @@
 .edu-pct { font-weight: 800; }
 .edu-pct.is-low { color: #dc2626; }
 .edu-pct.is-ok { color: #059669; }
+/* صور توثيق الفصل */
+.edu-photos { margin-top: 1rem; }
+.edu-photos__add { display: flex; flex-wrap: wrap; gap: .6rem; align-items: flex-end; margin: 0 0 .8rem; padding-bottom: .8rem; border-bottom: 1px dashed #e2e8f0; }
+.edu-photos__add label { display: flex; flex-direction: column; gap: .25rem; flex: 1 1 11rem; min-width: 0; margin: 0; font-weight: 700; font-size: .88rem; }
+.edu-photos__add .edu-photos__caption { flex: 2 1 16rem; }
+.edu-photos__day { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: .9rem 0 .5rem; font-size: .95rem; font-weight: 800; }
+.edu-photos__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(10rem, 45%), 1fr)); gap: .6rem; }
+.edu-photo { position: relative; margin: 0; overflow: hidden; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .8rem; break-inside: avoid; }
+.edu-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.edu-photo figcaption { padding: .3rem .5rem; font-size: .8rem; font-weight: 600; overflow-wrap: anywhere; }
+.edu-photo form { position: absolute; top: .3rem; inset-inline-end: .3rem; margin: 0; }
+.edu-photo form .ui-icon-btn { background: rgba(255, 255, 255, .9); }
 @media print { .edu-bar, .hub-nav, .edu-link { display: none; } }
