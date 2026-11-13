@@ -4,9 +4,11 @@
 // يشمل نماذج الحفظ (POST) التي فيها خانتان أو أكثر للكتابة أو الاختيار، ولا يشمل البحث والتصفية،
 // ولا أي نموذج فيه كلمة مرور، ولا ما عليه data-no-draft. المسودة تُمسح عند الحفظ أو بعد 7 أيام.
 (() => {
-    // cm-draft2: مسودات الإصدار السابق (cm-draft:) كانت تُحفظ من الملء التلقائي للصفحة نفسها، فتُمسح
-    const PREFIX = 'cm-draft2:';
-    try { Object.keys(window.localStorage).filter(key => key.startsWith('cm-draft:')).forEach(key => window.localStorage.removeItem(key)); } catch { }
+    // cm-draft3: مسودات الإصدارات السابقة (cm-draft: و cm-draft2:) كانت تحفظ ما تملؤه الصفحة تلقائيًا كأنه كتابة المستخدم، فتُمسح.
+    // الخانة التي تملؤها الصفحة بنفسها تحمل data-draft-auto ما دامت قيمتها تلقائية: تُحفظ فارغة في المسودة،
+    // فتعيد الصفحة ملأها عند الاستعادة ولا تُحسب كتابة يدوية (وإلا توقف الملء التلقائي بعد أول استعادة).
+    const PREFIX = 'cm-draft3:';
+    try { Object.keys(window.localStorage).filter(key => key.startsWith('cm-draft:') || key.startsWith('cm-draft2:')).forEach(key => window.localStorage.removeItem(key)); } catch { }
     // آخر لمسة من المستخدم (ضغطة أو مفتاح): ما تغيّره الصفحة بنفسها بلا لمسة قبله لا يُعَد كتابة
     let lastTouch = 0;
     ['pointerdown', 'keydown'].forEach(type => document.addEventListener(type, event => { if (event.isTrusted) lastTouch = Date.now(); }, true));
@@ -33,7 +35,7 @@
         fieldsOf(form).forEach(el => {
             if (el.type === 'checkbox' || el.type === 'radio') { if (el.checked) (data[el.name] ||= []).push(el.value); }
             else if (el.tagName === 'SELECT' && el.multiple) data[el.name] = [...el.selectedOptions].map(option => option.value);
-            else data[el.name] = el.value;
+            else data[el.name] = el.hasAttribute('data-draft-auto') ? '' : el.value;
         });
         return data;
     };
@@ -44,6 +46,8 @@
         fieldsOf(form).forEach(el => {
             if (!(el.name in data)) { if (el.type === 'checkbox' || el.type === 'radio') el.checked = false; return; }
             const value = data[el.name];
+            // خانة مملوءة تلقائيًا الآن وقيمتها المحفوظة فارغة: تُترك كما ملأتها الصفحة (لا تُفرَّغ عند الاستعادة أو «تجاهلها»)
+            if (el.hasAttribute('data-draft-auto') && value === '') return;
             if (el.type === 'checkbox' || el.type === 'radio') el.checked = Array.isArray(value) && value.includes(el.value);
             else if (el.tagName === 'SELECT' && el.multiple) [...el.options].forEach(option => option.selected = value.includes(option.value));
             else el.value = value;
