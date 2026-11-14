@@ -79,3 +79,12 @@
     .edu-grades td .form-control { border: 0; background: none; padding: 0; min-width: 0; }
     .edu-grades th:last-child, .edu-grades td:last-child { display: none; }
 }
+/* رسالة الخطأ في صفحات التعليم بلون أحمر واضح */
+.hubs .ui-flash.fin-flash--error { color: #991b1b; background: #fef2f2; border-color: #fca5a5; }
+/* «طباعة» أمام الفصل */
+.edu-print { margin-top: .7rem; padding-top: .6rem; border-top: 1px dashed #e2e8f0; }
+.edu-print summary { cursor: pointer; font-weight: 800; color: #0f766e; }
+.edu-print__list { list-style: none; margin: .6rem 0 0; padding: 0; display: grid; gap: .5rem; }
+.edu-print__list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem; }
+.edu-print__links { display: flex; flex-wrap: wrap; gap: .35rem; }
+.edu-print__links .ui-btn { padding: .3rem .7rem; font-size: .85rem; }

@@ -23,3 +23,39 @@
 .cert--edu .cert__verse { color: #0f766e; }
 body:has(.cert--edu) .cert-tools button { background: #0f766e; }
 body:has(.cert--edu) .cert-tools a { color: #0f766e; border-color: #7fcabf; }
+
+/* كشف درجات الفصل: صفحة A4 بالعرض */
+body.sheet-body .cert-tools button { background: #0f766e; }
+body.sheet-body .cert-tools a { color: #0f766e; border-color: #7fcabf; }
+.sheet { max-width: 279mm; margin: 0 auto 1.2rem; padding: 8mm 9mm; background: #fff; border: 2px solid #0f766e; border-radius: 12px; page: landscape; overflow-x: auto; }
+.sheet__head { display: flex; align-items: center; gap: 4mm; margin-bottom: 4mm; padding-bottom: 3mm; border-bottom: 2px solid #c9a227; }
+.sheet__head img { width: 16mm; height: 16mm; object-fit: contain; }
+.sheet__church { margin: 0; font-weight: 800; color: #134e4a; }
+.sheet__unit { margin: 0; color: #0f766e; font-weight: 700; font-size: .9rem; }
+.sheet__title { margin-inline-start: auto; text-align: end; }
+.sheet__title h1 { margin: 0; font-size: 1.35rem; font-weight: 900; color: #0f766e; }
+.sheet__title p { margin: 0; color: #475569; font-size: .92rem; }
+.sheet__table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.sheet__table th, .sheet__table td { padding: 1.4mm 2mm; border: 1px solid #94a3b8; text-align: center; vertical-align: middle; }
+.sheet__table thead th { color: #fff; background: #0f766e; font-weight: 700; }
+.sheet__table thead th small { display: block; font-weight: 400; font-size: .72rem; opacity: .85; }
+.sheet__table tbody tr:nth-child(even) td { background: #f6fcfb; }
+.sheet__table tbody tr { break-inside: avoid; }
+.sheet__table .sheet__n { width: 9mm; }
+.sheet__table .sheet__name { min-width: 42mm; text-align: start; font-weight: 700; }
+.sheet__table thead .sheet__name { text-align: start; }
+.sheet__table td.sheet__fail { color: #9b1c1c; background: #fde0e0 !important; font-weight: 800; }
+.sheet__total { font-weight: 800; }
+.sheet__total small { display: block; font-weight: 400; font-size: .7rem; color: #64748b; }
+.sheet__summary { margin: 4mm 0 1mm; }
+.sheet__hint { margin: 0; color: #64748b; font-size: .78rem; }
+.sheet__signs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10mm; margin-top: 8mm; text-align: center; break-inside: avoid; }
+.sheet__signs span { font-weight: 700; color: #334155; }
+.sheet__signs i { display: block; margin-top: 10mm; border-top: 1px dotted #64748b; }
+@media print {
+    .sheet { max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; overflow: visible; }
+    .sheet__table { font-size: 10.5px; }
+    .sheet__table thead { display: table-header-group; }
+    .sheet__hint { display: none; }
+}
+@media (max-width: 700px) { .sheet { padding: 4mm; } .sheet__head { flex-wrap: wrap; } .sheet__title { margin-inline-start: 0; text-align: start; } }
