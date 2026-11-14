@@ -3,7 +3,7 @@
 .edu-bar form { display: flex; flex-wrap: wrap; gap: .5rem; flex: 1 1 20rem; margin: 0; }
 .edu-bar .form-control, .edu-bar .form-select { flex: 1 1 10rem; min-width: 0; }
 .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr)); gap: 1rem; align-items: start; }
-.edu-card { padding: 1rem 1.1rem; }
+.edu-card { padding: 1rem 1.1rem; min-width: 0; }
 .edu-card h2 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 .6rem; font-size: 1.05rem; font-weight: 800; }
 .edu-card h2 > .bi { color: var(--ui-primary); }
 .edu-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .8rem 1rem; padding: 1rem 1.1rem; }
@@ -40,3 +40,42 @@
 .edu-photo form { position: absolute; top: .3rem; inset-inline-end: .3rem; margin: 0; }
 .edu-photo form .ui-icon-btn { background: rgba(255, 255, 255, .9); }
 @media print { .edu-bar, .hub-nav, .edu-link { display: none; } }
+/* الدرجات والشهادات */
+.edu-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .8rem; }
+.edu-chip { display: inline-flex; flex-direction: column; padding: .35rem .8rem; border: 1px solid #cbd5e1; border-radius: .8rem; background: #fff; color: inherit; font-weight: 800; text-decoration: none; }
+.edu-chip small { color: #64748b; font-weight: 600; font-size: .72rem; }
+.edu-chip:hover { border-color: var(--ui-primary); }
+.edu-chip.is-on { background: #f0fdfa; border-color: #0f766e; color: #0f766e; }
+.edu-inline { display: flex; flex-wrap: wrap; gap: .6rem; align-items: flex-end; margin: 0; }
+.edu-inline label { display: flex; flex-direction: column; gap: .25rem; flex: 1 1 12rem; min-width: 0; margin: 0; font-weight: 700; font-size: .88rem; }
+.edu-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.edu-more { margin-top: 1rem; padding-top: .8rem; border-top: 1px dashed #e2e8f0; }
+.edu-more summary { cursor: pointer; font-weight: 700; color: #475569; margin-bottom: .6rem; }
+.edu-grades { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.edu-grades th, .edu-grades td { padding: .3rem; border-bottom: 1px solid #e2e8f0; vertical-align: middle; text-align: center; }
+.edu-grades thead th { color: #134e4a; background: #f0fdfa; font-weight: 700; min-width: 5.5rem; }
+.edu-grades thead th small { display: block; color: #64748b; font-weight: 400; font-size: .72rem; }
+.edu-grades .edu-grades__name { position: sticky; inset-inline-start: 0; z-index: 1; min-width: 10rem; text-align: start; background: #fff; }
+.edu-grades thead .edu-grades__name { background: #f0fdfa; }
+.edu-grades .edu-grades__name small { display: block; color: #b45309; font-weight: 400; }
+.edu-grades td .form-control { min-width: 4.4rem; padding: .25rem .35rem; text-align: center; }
+.edu-grades td .form-control.is-fail { color: #b91c1c; border-color: #fca5a5; background: #fef2f2; }
+.edu-grades .edu-grades__note { min-width: 14rem; }
+.edu-grades__total { min-width: 6.5rem; white-space: nowrap; }
+.edu-grades__total small { display: block; color: #64748b; font-size: .72rem; }
+.edu-subjects { display: grid; gap: .4rem; }
+.edu-subject { display: grid; grid-template-columns: minmax(9rem, 3fr) repeat(3, minmax(4.2rem, 1fr)) auto auto; gap: .4rem; align-items: center; margin: 0; }
+.edu-subject--head { color: #64748b; font-size: .78rem; font-weight: 700; }
+.edu-subject--new { padding-top: .5rem; border-top: 1px dashed #e2e8f0; }
+.edu-subject.is-inactive .form-control { color: #94a3b8; }
+.edu-subject__active { display: flex; align-items: center; gap: .3rem; margin: 0; font-size: .85rem; white-space: nowrap; }
+.edu-subject__actions { display: flex; gap: .25rem; }
+@media (max-width: 640px) {
+    .edu-subject { grid-template-columns: repeat(3, 1fr); padding-bottom: .5rem; border-bottom: 1px solid #f1f5f9; }
+    .edu-subject > .form-control[name=name] { grid-column: 1 / -1; }
+    .edu-subject--head { display: none; }
+}
+@media print {
+    .edu-grades td .form-control { border: 0; background: none; padding: 0; min-width: 0; }
+    .edu-grades th:last-child, .edu-grades td:last-child { display: none; }
+}

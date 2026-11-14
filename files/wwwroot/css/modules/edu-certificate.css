@@ -1,0 +1,25 @@
+/* شهادة درجات «البابا شنوده للتعليم»: تُحمَّل بعد nursery-certificate.css وتغيّر الألوان والزخرفة فقط */
+.cert--edu {
+    background:
+        radial-gradient(circle at 0 0, #d7f3ee 0 22mm, transparent 22.5mm),
+        radial-gradient(circle at 100% 100%, #e3e9fb 0 26mm, transparent 26.5mm),
+        #fdfefe;
+    border-color: #0f766e;
+    outline-color: #c9a227;
+}
+.cert--edu .cert__church { color: #134e4a; }
+.cert--edu .cert__unit { color: #0f766e; }
+.cert--edu .cert__stars { color: #c9a227; }
+.cert--edu .cert__title { color: #0f766e; }
+.cert--edu .cert__child { background: #f0fdfa; border-color: #b6e6de; }
+.cert--edu .cert__child span { color: #47726d; }
+.cert--edu .cert__grades { border-color: #b6e6de; }
+.cert--edu .cert__grades th { background: #0f766e; }
+.cert--edu .cert__grades td { border-top-color: #dcefeb; }
+.cert--edu .cert__grades tbody tr:nth-child(even) td { background: #f6fcfb; }
+.cert--edu .cert__grades tfoot td { background: #e3f6f2; border-top-color: #0f766e; }
+.cert--edu .cert__note { border-color: #7fcabf; }
+.cert--edu .cert__note > span { color: #47726d; }
+.cert--edu .cert__verse { color: #0f766e; }
+body:has(.cert--edu) .cert-tools button { background: #0f766e; }
+body:has(.cert--edu) .cert-tools a { color: #0f766e; border-color: #7fcabf; }
