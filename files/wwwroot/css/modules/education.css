@@ -133,3 +133,28 @@ body:has(.edu-fabs) .app-main { padding-bottom: 10.5rem; }
 .edu-tone-5 { --tone: #15803d; }
 .edu-tone-6 { --tone: #0369a1; }
 .edu-tone-7 { --tone: #a16207; }
+/* مادة المدرس في كل فصل */
+.edu-teach { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 .4rem; }
+.edu-teach .edu-check { flex: 1 1 12rem; margin: 0; }
+.edu-teach .form-control { flex: 2 1 14rem; min-width: 0; }
+/* الرقم القومي: ما يُستخرج منه */
+.edu-nid-info { display: block; margin-top: .2rem; font-size: .78rem; font-weight: 700; color: #64748b; }
+.edu-nid-info.is-ok { color: #0f766e; }
+.edu-nid-info.is-bad { color: #b91c1c; }
+.is-auto { background: #f0fdfa; border-color: #99f6e4; }
+.edu-import td:nth-child(3) .form-control { min-width: 11rem; }
+/* جدول الحصص */
+.edu-sched-form { align-items: flex-end; }
+.edu-timetable { width: 100%; min-width: 34rem; border-collapse: separate; border-spacing: 0; font-size: .9rem; }
+.edu-timetable th, .edu-timetable td { padding: .5rem; border: 1px solid #e2e8f0; vertical-align: top; text-align: center; }
+.edu-timetable thead th { background: #134e4a; color: #fff; font-weight: 800; }
+.edu-timetable__time { background: #f0fdfa; color: #134e4a; white-space: nowrap; min-width: 6.5rem; }
+.edu-period { --tone: #2563eb; position: relative; display: grid; gap: .1rem; margin: 0 0 .4rem; padding: .4rem .6rem; text-align: start; background: color-mix(in srgb, var(--tone) 10%, #fff); border-inline-start: 4px solid var(--tone); border-radius: .6rem; }
+.edu-period:last-child { margin-bottom: 0; }
+.edu-period strong { color: var(--tone); }
+.edu-period small { color: #475569; font-weight: 600; }
+.edu-period__actions { display: flex; gap: .25rem; margin-top: .2rem; }
+.edu-period__actions form { margin: 0; }
+.edu-danger { color: #b91c1c; }
+.edu-bd-today td { background: #fffbeb; }
+@media print { .edu-timetable th, .edu-timetable td { border-color: #94a3b8; } .edu-timetable thead th { background: #e2e8f0; color: #0f172a; } }
