@@ -119,3 +119,17 @@ body:has(.edu-fabs) .app-main { padding-bottom: 10.5rem; }
 .edu-import input[type=checkbox] { width: 1.2rem; height: 1.2rem; }
 .edu-import tr.is-skip td { background: #f8fafc; }
 .edu-import__link { display: flex; align-items: center; gap: .35rem; margin: .25rem 0 0; font-size: .8rem; font-weight: 600; color: #0f766e; }
+/* شريط الصفوف الملوّن تحت التبويبات: لكل صف لون */
+.edu-strip { margin-top: -.5rem; }
+.edu-strip__item { --tone: #2563eb; background: var(--tone); border-color: var(--tone); color: #fff; box-shadow: 0 4px 10px rgba(15, 23, 42, .12); }
+.edu-strip__item:hover { border-color: var(--tone); color: #fff; filter: brightness(1.1); }
+.edu-strip__item.is-open { outline: 3px solid color-mix(in srgb, var(--tone) 35%, #fff); outline-offset: 1px; }
+.edu-strip__count { min-width: 1.5rem; padding: 0 .4rem; border-radius: 999px; background: rgba(255, 255, 255, .25); font-size: .78rem; text-align: center; }
+.edu-tone-0 { --tone: #2563eb; }
+.edu-tone-1 { --tone: #0f766e; }
+.edu-tone-2 { --tone: #7c3aed; }
+.edu-tone-3 { --tone: #c2410c; }
+.edu-tone-4 { --tone: #be185d; }
+.edu-tone-5 { --tone: #15803d; }
+.edu-tone-6 { --tone: #0369a1; }
+.edu-tone-7 { --tone: #a16207; }
