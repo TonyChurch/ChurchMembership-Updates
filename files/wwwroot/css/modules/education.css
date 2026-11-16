@@ -236,3 +236,85 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
 }
 .edu-cell-form { margin-bottom: .3rem; }
 .edu-cell-form:last-child { margin-bottom: 0; }
+
+/* ===== الحضور والغياب (att-*): بطاقات بزر حاضر/غائب وعدّادات حية وشريط حفظ ثابت ===== */
+.att-picker { display: flex; flex-wrap: wrap; gap: .75rem; align-items: end; padding: .9rem 1.1rem; margin-bottom: 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 1.1rem; box-shadow: 0 1px 3px rgba(15, 23, 42, .05); }
+.att-picker__field { flex: 1 1 14rem; display: grid; gap: .3rem; margin: 0; font-size: .8rem; font-weight: 800; color: #64748b; }
+.att-picker__field:has(.att-picker__date) { flex: 0 1 auto; }
+.att-picker__date { display: flex; align-items: center; gap: .35rem; }
+.att-picker__date .form-control { width: 10.5rem; }
+.att-sheet { background: #fff; border: 1px solid #e2e8f0; border-radius: 1.2rem; overflow: clip; box-shadow: 0 2px 8px rgba(15, 23, 42, .06); margin-bottom: 1.2rem; }
+.att-sheet__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.1rem 1.3rem; background: linear-gradient(135deg, #f5f3ff, #eef2ff); border-bottom: 1px solid #e2e8f0; }
+.att-sheet__title h2 { margin: 0; font-size: 1.2rem; font-weight: 800; color: #1e1b4b; display: flex; align-items: center; gap: .5rem; }
+.att-sheet__title p { margin: .25rem 0 0; font-size: .88rem; font-weight: 700; color: #475569; display: flex; align-items: center; flex-wrap: wrap; gap: .4rem; }
+.att-meter { flex: 1 1 18rem; max-width: 26rem; display: grid; gap: .45rem; }
+.att-meter__figures { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem .9rem; font-size: .82rem; font-weight: 700; color: #475569; }
+.att-fig b { font-size: 1.15rem; font-weight: 800; color: #1e293b; margin-inline-end: .15rem; }
+.att-fig--ok b { color: #059669; }
+.att-fig--no b { color: #dc2626; }
+.att-bar { height: .6rem; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+.att-bar > i { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #34d399, #059669); transition: width .25s ease; }
+.att-bar.is-low > i { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+.att-bar--mini { height: .4rem; }
+.att-body { padding: 1.1rem 1.3rem 1.3rem; }
+.att-topic { display: grid; gap: .3rem; margin: 0 0 .9rem; font-size: .85rem; font-weight: 800; color: #475569; }
+.att-tools { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: 1rem; padding: .6rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .9rem; }
+.att-tools__find { flex: 1 1 12rem; }
+.att-group { margin-bottom: 1.2rem; }
+.att-group:last-child { margin-bottom: 0; }
+.att-group h3 { display: flex; align-items: center; gap: .5rem; margin: 0 0 .6rem; font-size: 1rem; font-weight: 800; color: #1e293b; }
+.att-group h3 > i { color: #4f46e5; }
+.att-group--teachers h3 > i { color: #7c3aed; }
+.att-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+@media (min-width: 992px) { .att-list { grid-template-columns: 1fr 1fr; gap: .5rem .75rem; } }
+.att-row[hidden] { display: none; }
+.att-row label { position: relative; display: flex; align-items: center; gap: .7rem; margin: 0; padding: .55rem .8rem; border: 1px solid #fecaca; border-radius: .95rem; background: #fff7f7; cursor: pointer; transition: background .15s, border-color .15s, box-shadow .15s; }
+.att-row label:hover { box-shadow: 0 2px 8px rgba(15, 23, 42, .08); }
+.att-row:has(.att-input:checked) label { background: #f0fdf4; border-color: #86efac; }
+.att-no { flex: 0 0 1.6rem; text-align: center; font-size: .78rem; font-weight: 800; color: #94a3b8; }
+.att-avatar { flex: 0 0 2.2rem; height: 2.2rem; display: grid; place-items: center; border-radius: 50%; background: #e0e7ff; color: #4338ca; font-weight: 800; }
+.att-group--teachers .att-avatar { background: #ede9fe; color: #6d28d9; }
+.att-name { flex: 1 1 auto; min-width: 0; font-weight: 700; color: #1e293b; overflow-wrap: anywhere; }
+.att-input { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; pointer-events: none; }
+.att-state { flex: 0 0 auto; min-width: 5.2rem; text-align: center; padding: .3rem .8rem; border-radius: 999px; font-size: .85rem; font-weight: 800; background: #fee2e2; color: #b91c1c; }
+.att-state i { margin-inline-end: .2rem; }
+.att-state__on { display: none; }
+.att-input:checked ~ .att-state { background: #d1fae5; color: #047857; }
+.att-input:checked ~ .att-state .att-state__on { display: inline; }
+.att-input:checked ~ .att-state .att-state__off { display: none; }
+.att-input:focus-visible ~ .att-state { outline: 3px solid #818cf8; outline-offset: 2px; }
+.att-save { position: sticky; bottom: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem 1.2rem; padding: .8rem 1.3rem; background: rgba(255, 255, 255, .96); backdrop-filter: blur(6px); border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 14px rgba(15, 23, 42, .06); }
+@media (min-width: 992px) { .att-save { padding-left: 14rem; } }
+.att-save__sum { font-size: .85rem; font-weight: 700; color: #64748b; }
+.att-save__sum b { color: #1e293b; font-size: 1rem; }
+.att-recent { margin-bottom: 1.5rem; }
+.att-recent h2 { display: flex; align-items: center; gap: .5rem; margin: 0 0 .7rem; font-size: 1.05rem; font-weight: 800; color: #1e293b; }
+.att-recent ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+@media (min-width: 992px) { .att-recent ul { grid-template-columns: 1fr 1fr; gap: .5rem .75rem; } }
+.att-recent a { display: flex; align-items: center; gap: .8rem; padding: .6rem .9rem; border: 1px solid #e2e8f0; border-radius: .95rem; background: #fff; color: inherit; text-decoration: none; }
+.att-recent a:hover { border-color: #a5b4fc; box-shadow: 0 2px 8px rgba(15, 23, 42, .08); }
+.att-recent li.is-open a { border-color: #6366f1; background: #eef2ff; }
+.att-recent__date { flex: 0 0 4.6rem; display: grid; line-height: 1.25; }
+.att-recent__date small { color: #64748b; font-weight: 700; }
+.att-recent__body { flex: 1 1 auto; min-width: 0; display: grid; gap: .35rem; font-size: .88rem; font-weight: 700; color: #334155; }
+.att-recent__num { flex: 0 0 auto; font-weight: 800; color: #047857; }
+/* تقرير الحضور: شريط نسبة لكل شخص وملخص لكل فصل */
+.att-rep { background: #fff; border: 1px solid #e2e8f0; border-radius: 1.2rem; overflow: hidden; box-shadow: 0 2px 8px rgba(15, 23, 42, .06); margin-bottom: 1.2rem; }
+.att-rep__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem 1.2rem; padding: 1rem 1.3rem; background: linear-gradient(135deg, #f5f3ff, #eef2ff); border-bottom: 1px solid #e2e8f0; }
+.att-rep__head h2 { margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; font-size: 1.15rem; font-weight: 800; color: #1e1b4b; }
+.att-rep__avg { display: flex; align-items: center; gap: .7rem; min-width: 14rem; font-size: .82rem; font-weight: 700; color: #475569; }
+.att-rep__avg .att-bar { flex: 1 1 auto; }
+.att-rep__avg b { font-size: 1.1rem; color: #1e293b; }
+.att-pct { display: flex; align-items: center; gap: .6rem; min-width: 9rem; }
+.att-pct .att-bar { flex: 1 1 auto; height: .5rem; }
+.att-pct b { flex: 0 0 3rem; text-align: end; font-weight: 800; color: #047857; }
+.att-pct.is-low b { color: #b45309; }
+.att-who { display: inline-block; padding: .1rem .55rem; border-radius: 999px; font-size: .75rem; font-weight: 800; background: #e0e7ff; color: #4338ca; }
+.att-who--teacher { background: #ede9fe; color: #6d28d9; }
+.att-num--ok { color: #047857; font-weight: 800; }
+.att-num--no { color: #b91c1c; font-weight: 800; }
+@media print {
+    .att-sheet, .att-rep, .att-recent a, .att-row label { box-shadow: none; }
+    .att-row label { break-inside: avoid; }
+    .att-input:checked ~ .att-state, .att-state { background: none; border: 1px solid #94a3b8; color: #000; }
+}
