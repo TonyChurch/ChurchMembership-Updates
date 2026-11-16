@@ -1748,3 +1748,6 @@ tr.is-search-hidden {
         display: none !important;
     }
 }
+
+/* اسم يوم الميلاد تحت خانة تاريخ الميلاد (site.js) */
+.birth-day-hint { display: block; margin-top: .2rem; font-size: .78rem; font-weight: 700; color: #0f766e; }

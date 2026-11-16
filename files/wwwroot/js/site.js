@@ -1592,3 +1592,37 @@ document.addEventListener("submit", event => {
     // بعد سطر البحث التلقائي فوق الجداول (يُنشأ عند DOMContentLoaded)
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(setup)); else setTimeout(setup);
 })();
+
+// اليوم مع تاريخ الميلاد: تحت أي خانة تاريخ ميلاد (اسمها ينتهي بـ BirthDate أو تحمل data-birth) يظهر اسم يوم الميلاد،
+// سواء كُتب التاريخ باليد أو استُخلص من الرقم القومي. وwindow.birthDayName متاحة لباقي السكربتات.
+(function () {
+    const days = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+    window.birthDayName = (year, month, day) => {
+        const date = new Date(year, month - 1, day);
+        return year > 1900 && date.getMonth() === month - 1 && date.getDate() === Number(day) ? days[date.getDay()] : "";
+    };
+    const selector = 'input[type="date"][name$="BirthDate" i], input[type="date"][data-birth]';
+    const refresh = () => {
+        document.querySelectorAll(selector).forEach((input) => {
+            if (input.dataset.birthDayValue === input.value) return;
+            input.dataset.birthDayValue = input.value;
+            let hint = input.nextElementSibling;
+            if (!hint || !hint.classList.contains("birth-day-hint")) {
+                hint = document.createElement("small");
+                hint.className = "birth-day-hint";
+                input.insertAdjacentElement("afterend", hint);
+            }
+            const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input.value);
+            const name = parts ? window.birthDayName(+parts[1], +parts[2], +parts[3]) : "";
+            hint.textContent = name ? "يوم الميلاد: " + name : "";
+            hint.hidden = !name;
+        });
+    };
+    document.addEventListener("DOMContentLoaded", () => {
+        refresh();
+        document.addEventListener("input", refresh);
+        document.addEventListener("change", refresh);
+        // القيمة التي تملؤها الصفحة من الرقم القومي لا تُطلق حدثًا دائمًا
+        if (document.querySelector(selector) || document.querySelector("[data-nid], [name$='NationalId']")) setInterval(refresh, 700);
+    });
+})();

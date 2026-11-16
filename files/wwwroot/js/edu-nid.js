@@ -34,7 +34,7 @@
                 if (birth) { birth.value = p.y + '-' + two(p.m) + '-' + two(p.d); birth.classList.add('is-auto'); }
                 if (gender) { gender.value = p.gender; gender.classList.add('is-auto'); }
                 info.className = 'edu-nid-info is-ok';
-                info.textContent = 'الميلاد ' + p.d + '/' + p.m + '/' + p.y + ' · السن ' + age(p) + ' سنة · ' + p.gender + (p.gov ? ' · ' + p.gov : '');
+                info.textContent = 'الميلاد ' + (window.birthDayName ? window.birthDayName(p.y, p.m, p.d) + ' ' : '') + p.d + '/' + p.m + '/' + p.y + ' · السن ' + age(p) + ' سنة · ' + p.gender + (p.gov ? ' · ' + p.gov : '');
             } else {
                 if (birth) birth.classList.remove('is-auto');
                 if (gender) gender.classList.remove('is-auto');

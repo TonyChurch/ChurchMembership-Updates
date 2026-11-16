@@ -131,7 +131,7 @@
         // عنوان اللوحة وسطر البيانات المستخرجة من الرقم القومي
         pane.querySelector("[data-pane-title]").textContent = name || roleOf(pane);
         pane.querySelector("[data-derived-line]").textContent = info
-            ? `${roleOf(pane)} · ${info.female ? "أنثى" : "ذكر"} · ${ageText(info.age)} · مواليد ${info.birth.toLocaleDateString("en-GB")}`
+            ? `${roleOf(pane)} · ${info.female ? "أنثى" : "ذكر"} · ${ageText(info.age)} · مواليد ${window.birthDayName ? window.birthDayName(info.birth.getFullYear(), info.birth.getMonth() + 1, info.birth.getDate()) + " " : ""}${info.birth.toLocaleDateString("en-GB")}`
             : `${roleOf(pane)} — الرقم القومي يملأ النوع والسن تلقائيًا`;
         pane.dataset.tint = tintOf(pane);
     };
