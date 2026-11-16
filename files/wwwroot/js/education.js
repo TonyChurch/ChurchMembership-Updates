@@ -57,3 +57,22 @@
         });
     });
 })();
+
+// قوائم تُحفظ فور الاختيار (الصف والمادة في قائمة المدرسين). «+ مادة جديدة…» تسأل عن الاسم ثم تحفظه.
+(function () {
+    document.querySelectorAll('select[data-edu-auto]').forEach(function (select) {
+        var previous = select.value;
+        select.addEventListener('change', function () {
+            if (select.value === '__new') {
+                var text = (window.prompt('اكتب اسم المادة الجديدة') || '').trim();
+                if (!text) { select.value = previous; return; }
+                var option = document.createElement('option');
+                option.value = text; option.textContent = text;
+                select.insertBefore(option, select.querySelector('option[value="__new"]'));
+                select.value = text;
+            }
+            previous = select.value;
+            select.form.submit();
+        });
+    });
+})();

@@ -234,3 +234,5 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
     .edu-list .edu-move { flex-wrap: nowrap; }
     .edu-list .edu-move .form-select { min-width: 0; width: 100%; padding: .25rem .35rem; font-size: .8rem; }
 }
+.edu-cell-form { margin-bottom: .3rem; }
+.edu-cell-form:last-child { margin-bottom: 0; }
