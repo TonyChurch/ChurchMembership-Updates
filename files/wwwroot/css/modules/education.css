@@ -88,3 +88,34 @@
 .edu-print__list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem; }
 .edu-print__links { display: flex; flex-wrap: wrap; gap: .35rem; }
 .edu-print__links .ui-btn { padding: .3rem .7rem; font-size: .85rem; }
+/* شريط البحث أعلى كل الصفحات */
+.edu-search { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1rem; }
+.edu-search .form-control { flex: 1 1 14rem; min-width: 0; }
+/* بطاقات الإضافة الثابتة (على نسق «أسرة جديدة») */
+.edu-fabs { position: fixed; bottom: 18px; left: 18px; z-index: 1500; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
+.edu-fab { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1rem; border-radius: 999px; background: var(--ui-primary); color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 8px 22px rgba(15, 23, 42, .25); }
+.edu-fab:hover { color: #fff; filter: brightness(1.08); }
+.edu-fab--teacher { background: #7c3aed; }
+.edu-fab--class { background: #0f766e; }
+body:has(.edu-fabs) .app-main { padding-bottom: 10.5rem; }
+@media (max-width: 640px) { .edu-fab { padding: .5rem .8rem; font-size: .85rem; } }
+@media print { .edu-fabs, .edu-search { display: none; } }
+/* الفصول أعلى «نظرة عامة» */
+.edu-classes-top { margin: 0 0 1rem; }
+.edu-classes-top__all { margin-inline-start: auto; font-size: .85rem; font-weight: 700; }
+/* جدول الفصول والإجراءات */
+.edu-view { display: inline-flex; gap: .35rem; margin-inline-start: auto; }
+.edu-row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; }
+.edu-row-actions form { margin: 0; }
+.edu-row-actions .edu-danger { color: #b91c1c; }
+.edu-classes tr.is-off td { color: #94a3b8; }
+.edu-classes .edu-print { margin-top: .4rem; padding-top: .4rem; }
+/* نقل دارس أو مدرس من القائمة */
+.edu-move { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; margin: 0; }
+.edu-move .form-select { flex: 1 1 8rem; min-width: 7rem; max-width: 13rem; padding-block: .3rem; font-size: .88rem; }
+/* الاستيراد من ملف */
+.edu-import td .form-control, .edu-import td .form-select { min-width: 7rem; padding: .3rem .45rem; font-size: .88rem; }
+.edu-import td:nth-child(2) .form-control { min-width: 12rem; }
+.edu-import input[type=checkbox] { width: 1.2rem; height: 1.2rem; }
+.edu-import tr.is-skip td { background: #f8fafc; }
+.edu-import__link { display: flex; align-items: center; gap: .35rem; margin: .25rem 0 0; font-size: .8rem; font-weight: 600; color: #0f766e; }
