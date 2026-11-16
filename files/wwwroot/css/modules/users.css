@@ -232,3 +232,37 @@
     background: var(--ui-danger);
     border-color: var(--ui-danger);
 }
+
+/* ---------- خدمات «أمين خدمة» ---------- */
+
+.users-stages__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: .5rem;
+}
+
+.users-stage {
+    display: flex;
+    align-items: flex-start;
+    gap: .55rem;
+    margin: 0;
+    padding: .6rem .75rem;
+    background: var(--ui-bg);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.users-stage:hover { border-color: var(--ui-primary-soft); }
+.users-stage:has(input:checked) { background: var(--ui-primary-soft); border-color: var(--ui-primary); }
+
+.users-stage input {
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: .2rem;
+    accent-color: var(--ui-primary);
+}
+
+.users-stage span { display: grid; min-width: 0; }
+.users-stage small { color: var(--ui-text-muted); font-size: .76rem; }
