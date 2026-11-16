@@ -1438,6 +1438,137 @@ document.addEventListener("submit", event => {
         const pickUrl = pickHost?.dataset.familyPickUrl || "", pickLabel = pickHost?.dataset.familyPickLabel || "فتح ملفه";
         // data-family-pick-method="post": الاختيار ينفَّذ مباشرة (حفظ) بدل فتح صفحة، فيُرسل برمز الحماية الموجود في الصفحة
         const pickPost = !!pickUrl && (pickHost.dataset.familyPickMethod || "").toLowerCase() === "post";
+        // عرض النتائج بطاقات (الأصل)؛ وحيث تضع الصفحة data-family-views يظهر مفتاح «بطاقات / جدول» ويُحفظ اختيار المستخدم
+        const toggleable = !!input.closest("[data-family-views]");
+        const getView = () => { try { return localStorage.getItem("familyHitsView") === "table" ? "table" : "cards"; } catch { return "cards"; } };
+        const setView = (view) => { try { localStorage.setItem("familyHitsView", view); } catch { /* يبقى لهذه الصفحة */ } };
+        let lastFamilies = [];
+        // «عرض الأسرة»: أفرادها تحت البطاقة (أو تحت الصف في الجدول) لاختيار واحد منهم
+        const wire = (show, members, family, row) => {
+            const sync = () => { if (row) row.hidden = members.hidden; };
+            show.addEventListener("click", async () => {
+                if (members.dataset.loaded) { members.hidden = !members.hidden; sync(); return; }
+                show.disabled = true;
+                try {
+                    const reply = await fetch("/Families/FindMembers?familyId=" + family.id, { headers: { Accept: "application/json" } });
+                    if (!reply.ok || !(reply.headers.get("content-type") || "").includes("json")) return;
+                    const people = await reply.json();
+                    members.dataset.loaded = "1";
+                    if (!people.length) members.textContent = "لا يوجد أفراد مسجلون في هذه الأسرة.";
+                    people.forEach((person) => {
+                        const link = document.createElement("a");
+                        link.href = pickUrl ? pickUrl.replace("{id}", person.id) : "/Members/Details/" + person.id;
+                        if (newTab) { link.target = "_blank"; link.rel = "noopener"; }
+                        if (pickPost) link.addEventListener("click", (event) => {
+                            event.preventDefault();
+                            const token = document.querySelector("input[name=__RequestVerificationToken]");
+                            if (!token) return;
+                            const form = document.createElement("form");
+                            form.method = "post";
+                            form.action = link.href;
+                            form.hidden = true;
+                            form.append(token.cloneNode());
+                            document.body.append(form);
+                            form.submit();
+                        });
+                        const label = document.createElement("small");
+                        label.textContent = pickLabel;
+                        link.append(person.name, label);
+                        members.append(link);
+                    });
+                    members.hidden = false;
+                    sync();
+                } catch { /* إضافي */ } finally { show.disabled = false; }
+            });
+        };
+        const showButton = () => {
+            const show = document.createElement("button");
+            show.type = "button";
+            show.className = "ui-family-hits__show";
+            show.innerHTML = '<i class="bi bi-people" aria-hidden="true"></i> عرض الأسرة';
+            return show;
+        };
+        const render = () => {
+            const families = lastFamilies;
+            const mode = toggleable ? getView() : "cards";
+            const title = document.createElement("div");
+            title.className = "ui-family-hits__title";
+            title.innerHTML = '<i class="bi bi-house-heart" aria-hidden="true"></i> ';
+            title.append(`أسر مسجلة على البرنامج (${families.length})`);
+            if (toggleable) {
+                const views = document.createElement("span");
+                views.className = "ui-family-hits__views";
+                [["cards", "bi-grid-fill", "بطاقات"], ["table", "bi-table", "جدول"]].forEach(([key, icon, label]) => {
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.className = "ui-family-hits__view" + (mode === key ? " is-on" : "");
+                    button.setAttribute("aria-pressed", mode === key ? "true" : "false");
+                    button.innerHTML = `<i class="bi ${icon}" aria-hidden="true"></i> ${label}`;
+                    button.addEventListener("click", () => { setView(key); render(); });
+                    views.append(button);
+                });
+                title.append(views);
+            }
+            let list;
+            if (mode === "table") {
+                list = document.createElement("div");
+                list.className = "ui-family-hits__tablewrap";
+                const table = document.createElement("table");
+                table.className = "ui-family-hits__table";
+                const head = table.createTHead().insertRow();
+                ["الأسرة", "الكود", "المطابقة", "الهاتف", ""].forEach((text) => { const th = document.createElement("th"); th.textContent = text; head.append(th); });
+                const body = table.createTBody();
+                families.forEach((family) => {
+                    const row = body.insertRow();
+                    const open = document.createElement("a");
+                    open.href = "/Families/Profile/" + family.id;
+                    if (newTab) { open.target = "_blank"; open.rel = "noopener"; }
+                    open.textContent = family.name;
+                    row.insertCell().append(open);
+                    row.insertCell().textContent = family.code || "";
+                    row.insertCell().textContent = family.match || "";
+                    const phone = row.insertCell();
+                    phone.textContent = family.phone || "";
+                    phone.dir = "ltr";
+                    const show = showButton();
+                    row.insertCell().append(show);
+                    const detail = body.insertRow();
+                    detail.hidden = true;
+                    const cell = detail.insertCell();
+                    cell.colSpan = 5;
+                    const members = document.createElement("div");
+                    members.className = "ui-family-hits__members";
+                    members.hidden = true;
+                    cell.append(members);
+                    wire(show, members, family, detail);
+                });
+                list.append(table);
+            } else {
+                list = document.createElement("div");
+                list.className = "ui-family-hits__list";
+                families.forEach((family) => {
+                    const card = document.createElement("div");
+                    card.className = "ui-family-hits__item";
+                    const open = document.createElement("a");
+                    open.href = "/Families/Profile/" + family.id;
+                    if (newTab) { open.target = "_blank"; open.rel = "noopener"; }
+                    const name = document.createElement("span");
+                    name.textContent = family.name;
+                    const info = document.createElement("small");
+                    info.textContent = [family.code, family.match, family.phone].filter(Boolean).join(" · ");
+                    open.append(name, info);
+                    const show = showButton();
+                    const members = document.createElement("div");
+                    members.className = "ui-family-hits__members";
+                    members.hidden = true;
+                    wire(show, members, family, null);
+                    card.append(open, show, members);
+                    list.append(card);
+                });
+            }
+            panel.replaceChildren(title, list);
+            panel.hidden = families.length === 0;
+        };
         let timer = null, last = "";
         input.addEventListener("input", () => {
             clearTimeout(timer);
@@ -1451,69 +1582,8 @@ document.addEventListener("submit", event => {
                     if (!response.ok || !(response.headers.get("content-type") || "").includes("json")) return;
                     const families = await response.json();
                     if (input.value.trim() !== text) return;
-                    const title = document.createElement("div");
-                    title.className = "ui-family-hits__title";
-                    title.innerHTML = '<i class="bi bi-house-heart" aria-hidden="true"></i> ';
-                    title.append(`أسر مسجلة على البرنامج (${families.length})`);
-                    const list = document.createElement("div");
-                    list.className = "ui-family-hits__list";
-                    families.forEach((family) => {
-                        const card = document.createElement("div");
-                        card.className = "ui-family-hits__item";
-                        const open = document.createElement("a");
-                        open.href = "/Families/Profile/" + family.id;
-                        if (newTab) { open.target = "_blank"; open.rel = "noopener"; }
-                        const name = document.createElement("span");
-                        name.textContent = family.name;
-                        const info = document.createElement("small");
-                        info.textContent = [family.code, family.match, family.phone].filter(Boolean).join(" · ");
-                        open.append(name, info);
-                        // «عرض الأسرة»: أفرادها تحت البطاقة لاختيار واحد منهم
-                        const show = document.createElement("button");
-                        show.type = "button";
-                        show.className = "ui-family-hits__show";
-                        show.innerHTML = '<i class="bi bi-people" aria-hidden="true"></i> عرض الأسرة';
-                        const members = document.createElement("div");
-                        members.className = "ui-family-hits__members";
-                        members.hidden = true;
-                        show.addEventListener("click", async () => {
-                            if (members.dataset.loaded) { members.hidden = !members.hidden; return; }
-                            show.disabled = true;
-                            try {
-                                const reply = await fetch("/Families/FindMembers?familyId=" + family.id, { headers: { Accept: "application/json" } });
-                                if (!reply.ok || !(reply.headers.get("content-type") || "").includes("json")) return;
-                                const people = await reply.json();
-                                members.dataset.loaded = "1";
-                                if (!people.length) members.textContent = "لا يوجد أفراد مسجلون في هذه الأسرة.";
-                                people.forEach((person) => {
-                                    const link = document.createElement("a");
-                                    link.href = pickUrl ? pickUrl.replace("{id}", person.id) : "/Members/Details/" + person.id;
-                                    if (newTab) { link.target = "_blank"; link.rel = "noopener"; }
-                                    if (pickPost) link.addEventListener("click", (event) => {
-                                        event.preventDefault();
-                                        const token = document.querySelector("input[name=__RequestVerificationToken]");
-                                        if (!token) return;
-                                        const form = document.createElement("form");
-                                        form.method = "post";
-                                        form.action = link.href;
-                                        form.hidden = true;
-                                        form.append(token.cloneNode());
-                                        document.body.append(form);
-                                        form.submit();
-                                    });
-                                    const label = document.createElement("small");
-                                    label.textContent = pickLabel;
-                                    link.append(person.name, label);
-                                    members.append(link);
-                                });
-                                members.hidden = false;
-                            } catch { /* إضافي */ } finally { show.disabled = false; }
-                        });
-                        card.append(open, show, members);
-                        list.append(card);
-                    });
-                    panel.replaceChildren(title, list);
-                    panel.hidden = families.length === 0;
+                    lastFamilies = families;
+                    render();
                 } catch { /* البحث في الأسر إضافي */ }
             }, 300);
         });
