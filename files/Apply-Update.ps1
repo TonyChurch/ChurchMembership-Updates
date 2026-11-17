@@ -142,7 +142,7 @@ Copy-Item (Join-Path $app 'nursery-brand.json') $next -Force -ErrorAction Silent
 Copy-Item (Join-Path $app 'page-texts.json') $next -Force -ErrorAction SilentlyContinue
 Copy-Item (Join-Path $app 'nursery-cert-bg.*') $next -Force -ErrorAction SilentlyContinue
 # شعار «البابا شنوده للتعليم» ومسميات البرنامج التي عدّلها الأمين (خاصة بكل كنيسة، فتبقى بعد كل تحديث)
-Copy-Item (Join-Path $app 'education-logo.*') $next -Force -ErrorAction SilentlyContinue
+Copy-Item (Join-Path $app 'education-logo*') $next -Force -ErrorAction SilentlyContinue
 Copy-Item (Join-Path $app 'ui-labels.json') $next -Force -ErrorAction SilentlyContinue
 if (Test-Path (Join-Path $app 'wwwroot\uploads')) {
     Copy-Item (Join-Path $app 'wwwroot\uploads') (Join-Path $next 'wwwroot') -Recurse -Force
