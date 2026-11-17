@@ -408,3 +408,7 @@ header.edu-head > .edu-head__period { order: 6; flex: 1 1 100%; display: flex; j
 .edu-strip__add { --tone: #0f766e; border-style: dashed; }
 .edu-grades__n { width: 2.2rem; text-align: center; color: #64748b; font-weight: 700; }
 .edu-grades__acts { white-space: nowrap; }
+
+/* شعار «البابا شنوده للتعليم» في رأس كل الصفحات (يُطبع معها) */
+.edu-head__logo { width: 3.4rem; height: 3.4rem; flex: 0 0 auto; object-fit: contain; border-radius: .6rem; }
+@media print { .edu-head__logo { width: 16mm; height: 16mm; } }
