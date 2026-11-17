@@ -231,3 +231,42 @@
         if (e.key === 'Enter') e.preventDefault();
     });
 })();
+
+// تحديد عدة دارسين ونقلهم لفصل واحد: «تحديد الكل» يشمل الصفوف الظاهرة فقط (بعد البحث السريع)
+(function () {
+    var form = document.querySelector('[data-edu-bulk]');
+    if (!form) return;
+    var all = document.querySelector('[data-edu-bulk-all]');
+    var counter = form.querySelector('[data-edu-bulk-count]');
+    function picks() { return Array.prototype.slice.call(document.querySelectorAll('[data-edu-bulk-pick]')); }
+    function visible(box) { var row = box.closest('tr'); return row && !row.hidden; }
+    function refresh() {
+        var checked = picks().filter(function (box) { return box.checked && visible(box); });
+        counter.textContent = checked.length;
+        var bar = document.querySelector("header.topbar");
+        form.style.top = ((bar ? bar.offsetHeight : 0) + 8) + "px";
+        form.hidden = checked.length === 0;
+        if (all) {
+            var shown = picks().filter(visible);
+            all.checked = shown.length > 0 && shown.every(function (box) { return box.checked; });
+        }
+    }
+    document.addEventListener('change', function (event) {
+        if (event.target === all) picks().forEach(function (box) { if (visible(box)) box.checked = all.checked; });
+        else if (!event.target.matches || !event.target.matches('[data-edu-bulk-pick]')) return;
+        refresh();
+    });
+    form.querySelector('[data-edu-bulk-clear]').addEventListener('click', function () {
+        picks().forEach(function (box) { box.checked = false; });
+        refresh();
+    });
+    // البحث السريع يخفي صفوفًا: المخفية لا تُنقل
+    document.addEventListener('input', function () { setTimeout(refresh, 0); });
+    form.addEventListener('submit', function (event) {
+        picks().forEach(function (box) { if (!visible(box)) box.checked = false; });
+        var count = picks().filter(function (box) { return box.checked; }).length;
+        var select = form.querySelector('select[name=classId]');
+        var label = select.options[select.selectedIndex].text;
+        if (!count || !confirm('نقل ' + count + ' دارس إلى: ' + label + '؟')) event.preventDefault();
+    });
+})();

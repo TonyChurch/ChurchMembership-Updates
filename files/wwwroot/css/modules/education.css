@@ -348,3 +348,11 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
 .edu-insearch__tag.is-student { background: #dbeafe; color: #1d4ed8; }
 .edu-insearch__tag.is-teacher { background: #ede9fe; color: #6d28d9; }
 @media (max-width: 575.98px) { .edu-insearch__count { display: none; } }
+
+/* تحديد عدة دارسين ونقلهم لفصل (education.js) */
+.edu-bulk { position: sticky; top: .5rem; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .7rem; margin: 0 0 .7rem; padding: .6rem .8rem; background: #eef4ff; border: 1px solid #bcd0f7; border-radius: 12px; }
+.edu-bulk[hidden] { display: none; }
+.edu-bulk .form-select { flex: 1 1 12rem; max-width: 18rem; }
+.edu-list .c-pick { width: 2.4rem; text-align: center; }
+.edu-list .c-pick .form-check-input { margin: 0; cursor: pointer; }
+.ui-table-card:has(.edu-bulk) { overflow: clip; }
