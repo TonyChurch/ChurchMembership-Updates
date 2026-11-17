@@ -450,3 +450,22 @@ header.edu-head > .edu-head__period { order: 6; flex: 1 1 100%; display: flex; j
 .att-list.att-list--teachers { grid-template-columns: minmax(0, 1fr) !important; }
 .att-row label { flex-wrap: wrap; }
 .att-name { flex: 1 1 9rem; overflow-wrap: break-word; word-break: normal; }
+
+/* الحضور: اختيار الفصل واليوم مصغَّران على يسار شريطي البحث، وموضوع المحاضرة وصفة المدرس (أساسي/بديل) ملازمان لصف المدرس */
+.att-side { display: grid; gap: .45rem; margin: 0; padding: .55rem .65rem; background: #fff; border: 1px solid #e2e8f0; border-radius: .9rem; }
+.att-side .form-select, .att-side .form-control { padding-block: .3rem; font-size: .9rem; }
+.att-side__date { display: flex; align-items: center; gap: .3rem; }
+.att-side__date .form-control { flex: 1 1 8rem; min-width: 0; }
+.att-side .ui-icon-btn { flex: 0 0 auto; }
+.att-lesson { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; padding: .25rem .7rem 0; }
+.att-role { display: inline-flex; overflow: hidden; border: 2px solid #c4b5fd; border-radius: 999px; background: #fff; }
+.att-trow .att-role__opt { position: relative; display: inline-flex; align-items: center; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; }
+.att-trow .att-role__opt input { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; }
+.att-trow .att-role__opt span { padding: .3rem .95rem; font-size: .88rem; font-weight: 800; color: #6d28d9; background: #f5f3ff; }
+.att-trow .att-role__opt input:checked + span { color: #fff; background: #7c3aed; }
+.att-trow .att-role__opt input:focus-visible + span { outline: 3px solid #a78bfa; outline-offset: -3px; }
+.att-trow .att-role__opt input:disabled + span { opacity: .45; }
+.att-topic-inline { flex: 1 1 16rem; display: inline-flex; align-items: center; gap: .5rem; min-width: 0; font-size: .85rem; font-weight: 800; color: #475569; }
+.att-topic-inline > span { flex: 0 0 auto; }
+.att-topic-inline .form-control { flex: 1 1 auto; min-width: 0; padding-block: .3rem; }
+.att-topic-inline .form-control:disabled { opacity: .45; }

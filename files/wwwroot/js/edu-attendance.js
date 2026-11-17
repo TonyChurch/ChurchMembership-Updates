@@ -82,7 +82,7 @@
             var box = row.querySelector('.att-input');
             var arrive = row.querySelector('[data-att-arrive]');
             if (fill && box.checked && !arrive.value) arrive.value = nowClock();
-            row.querySelectorAll('.att-time input, .att-time button').forEach(function (element) { element.disabled = !box.checked; });
+            row.querySelectorAll('.att-time input, .att-time button, .att-lesson input').forEach(function (element) { element.disabled = !box.checked; });
             duration(row);
         }
         function refreshCounters() {
