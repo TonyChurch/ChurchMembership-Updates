@@ -318,3 +318,33 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
     .att-row label { break-inside: avoid; }
     .att-input:checked ~ .att-state, .att-state { background: none; border: 1px solid #94a3b8; color: #000; }
 }
+
+/* الإجراءات السريعة تحت اسم الدارس/المدرس، والبحث الداخلي في الدارسين والمدرسين (2026-11-17) */
+.edu-acts { display: flex; flex-wrap: wrap; gap: .2rem; margin-top: .3rem; align-items: center; }
+.edu-acts form { display: contents; }
+.edu-act { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: .45rem; border: 1px solid #e2e8f0; background: #f8fafc; color: #475569; font-size: .85rem; padding: 0; text-decoration: none; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+.edu-act:hover, .edu-act:focus-visible { background: #eef2ff; border-color: #a5b4fc; color: #4338ca; }
+.edu-act--link { color: #7c3aed; border-style: dashed; border-color: #c4b5fd; }
+.edu-act--linked { color: #15803d; }
+.edu-act--wa { color: #16a34a; }
+.edu-act--del:hover, .edu-act--del:focus-visible { background: #fef2f2; border-color: #fca5a5; color: #b91c1c; }
+.edu-qlink-row > td { background: #faf5ff; }
+.edu-qlink { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.edu-qlink__label { font-weight: 600; color: #6d28d9; margin: 0; }
+.edu-qlink .form-control { flex: 1 1 14rem; min-width: 0; max-width: 28rem; }
+.edu-qlink .edu-results { flex: 1 1 100%; }
+.edu-insearch { margin: -.4rem 0 1rem; position: relative; }
+.edu-insearch__box { display: flex; align-items: center; gap: .5rem; margin: 0; padding: .35rem .7rem; border: 1px dashed #a5b4fc; border-radius: .75rem; background: #f5f7ff; }
+.edu-insearch__box > i { color: #6366f1; }
+.edu-insearch__box .form-control { flex: 1 1 auto; min-width: 0; border: 0; background: transparent; box-shadow: none; }
+.edu-insearch__count { white-space: nowrap; font-size: .85rem; color: #4338ca; }
+.edu-insearch__results { list-style: none; margin: .4rem 0 0; padding: .3rem; border: 1px solid #e2e8f0; border-radius: .75rem; background: #fff; max-height: 22rem; overflow-y: auto; }
+.edu-insearch__results li { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; padding: .35rem .45rem; border-radius: .5rem; }
+.edu-insearch__results li + li { border-top: 1px solid #f1f5f9; }
+.edu-insearch__results li:hover { background: #f8fafc; }
+.edu-insearch__results small { color: #64748b; flex: 1 1 10rem; min-width: 0; overflow-wrap: anywhere; }
+.edu-insearch__name { font-weight: 700; }
+.edu-insearch__tag { font-size: .75rem; padding: .05rem .5rem; border-radius: 999px; }
+.edu-insearch__tag.is-student { background: #dbeafe; color: #1d4ed8; }
+.edu-insearch__tag.is-teacher { background: #ede9fe; color: #6d28d9; }
+@media (max-width: 575.98px) { .edu-insearch__count { display: none; } }
