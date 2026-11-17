@@ -232,41 +232,80 @@
     });
 })();
 
-// تحديد عدة دارسين ونقلهم لفصل واحد: «تحديد الكل» يشمل الصفوف الظاهرة فقط (بعد البحث السريع)
+// تحديد عدة دارسين ونقلهم لفصل واحد. التحديد يتجمّع عبر عمليات البحث: ما حدّدته من بحث يبقى محدّدًا
+// بعد تغيير البحث أو الفصل (يُحفظ في المتصفح ساعتين)، و«نقل المحددين» ينقل كل المجمّع.
 (function () {
     var form = document.querySelector('[data-edu-bulk]');
     if (!form) return;
+    var KEY = 'edu-bulk-students', MAX_AGE = 2 * 60 * 60 * 1000;
     var all = document.querySelector('[data-edu-bulk-all]');
     var counter = form.querySelector('[data-edu-bulk-count]');
+    var note = form.querySelector('[data-edu-bulk-note]');
+    var ids = {};
+    try {
+        var saved = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+        if (saved && Date.now() - saved.t < MAX_AGE) saved.ids.forEach(function (id) { ids[String(id)] = true; });
+    } catch (e) { }
+    function save() {
+        try {
+            var list = Object.keys(ids);
+            if (list.length) sessionStorage.setItem(KEY, JSON.stringify({ t: Date.now(), ids: list }));
+            else sessionStorage.removeItem(KEY);
+        } catch (e) { }
+    }
     function picks() { return Array.prototype.slice.call(document.querySelectorAll('[data-edu-bulk-pick]')); }
     function visible(box) { var row = box.closest('tr'); return row && !row.hidden; }
     function refresh() {
-        var checked = picks().filter(function (box) { return box.checked && visible(box); });
-        counter.textContent = checked.length;
-        var bar = document.querySelector("header.topbar");
-        form.style.top = ((bar ? bar.offsetHeight : 0) + 8) + "px";
-        form.hidden = checked.length === 0;
+        var total = Object.keys(ids).length;
+        var here = picks().filter(function (box) { return ids[box.value]; }).length;
+        counter.textContent = total;
+        if (note) note.textContent = total > here ? '(منهم ' + (total - here) + ' من بحث سابق غير ظاهرين في هذه القائمة)' : '';
+        form.hidden = total === 0;
+        var bar = document.querySelector('header.topbar');
+        form.style.top = ((bar ? bar.offsetHeight : 0) + 8) + 'px';
         if (all) {
             var shown = picks().filter(visible);
             all.checked = shown.length > 0 && shown.every(function (box) { return box.checked; });
         }
     }
+    function set(box, on) { box.checked = on; if (on) ids[box.value] = true; else delete ids[box.value]; }
+    picks().forEach(function (box) { box.checked = !!ids[box.value]; });
+    refresh();
     document.addEventListener('change', function (event) {
-        if (event.target === all) picks().forEach(function (box) { if (visible(box)) box.checked = all.checked; });
-        else if (!event.target.matches || !event.target.matches('[data-edu-bulk-pick]')) return;
+        if (event.target === all) picks().forEach(function (box) { if (visible(box)) set(box, all.checked); });
+        else if (event.target.matches && event.target.matches('[data-edu-bulk-pick]')) set(event.target, event.target.checked);
+        else return;
+        save();
         refresh();
     });
     form.querySelector('[data-edu-bulk-clear]').addEventListener('click', function () {
+        ids = {};
         picks().forEach(function (box) { box.checked = false; });
+        save();
         refresh();
     });
-    // البحث السريع يخفي صفوفًا: المخفية لا تُنقل
+    // البحث السريع يخفي صفوفًا: لا يلغي تحديدها، فيبقى المحدد من قبل
     document.addEventListener('input', function () { setTimeout(refresh, 0); });
     form.addEventListener('submit', function (event) {
-        picks().forEach(function (box) { if (!visible(box)) box.checked = false; });
-        var count = picks().filter(function (box) { return box.checked; }).length;
+        form.querySelectorAll('input[data-edu-bulk-extra]').forEach(function (input) { input.remove(); });
+        var onPage = {};
+        picks().forEach(function (box) { onPage[box.value] = true; });
+        // المحدد من عمليات بحث سابقة وليس في هذه الصفحة يُرسَل معهم
+        Object.keys(ids).forEach(function (id) {
+            if (onPage[id]) return;
+            var input = document.createElement('input');
+            input.type = 'hidden'; input.name = 'ids'; input.value = id; input.setAttribute('data-edu-bulk-extra', '');
+            form.appendChild(input);
+        });
+        var count = Object.keys(ids).length;
         var select = form.querySelector('select[name=classId]');
         var label = select.options[select.selectedIndex].text;
-        if (!count || !confirm('نقل ' + count + ' دارس إلى: ' + label + '؟')) event.preventDefault();
+        if (!count || !confirm('نقل ' + count + ' دارس إلى: ' + label + '؟')) {
+            event.preventDefault();
+            form.querySelectorAll('input[data-edu-bulk-extra]').forEach(function (input) { input.remove(); });
+            return;
+        }
+        ids = {};
+        save();
     });
 })();
