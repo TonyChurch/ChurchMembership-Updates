@@ -26,6 +26,16 @@
             node.nodeValue = lead + labels[original] + tail;
             node.parentElement.dataset.labelOriginal = original;
         });
+        // النص الإرشادي داخل خانات الإدخال (placeholder)
+        const fields = root.matches?.("[placeholder]") ? [root] : [];
+        root.querySelectorAll?.("[placeholder]").forEach((field) => fields.push(field));
+        fields.forEach((field) => {
+            if (field.closest("[data-labels-skip]")) return;
+            const original = field.dataset.placeholderOriginal || clean(field.getAttribute("placeholder"));
+            if (!labels[original]) return;
+            field.dataset.placeholderOriginal = original;
+            field.setAttribute("placeholder", labels[original]);
+        });
         // عنوان نافذة المتصفح: «اسم الصفحة - اسم البرنامج»
         const parts = document.title.split(" - ");
         if (labels[clean(parts[0])]) { parts[0] = labels[clean(parts[0])]; document.title = parts.join(" - "); }
@@ -49,8 +59,25 @@
         document.body.classList.toggle("label-edit-mode", on);
         bar.hidden = !on;
     };
+    // زر صغير بجوار عنوان كل صفحة يبدأ وضع التعديل في الصفحة نفسها
+    const header = document.querySelector(".app-main .ui-page-header");
+    const heading = header?.querySelector("h1, h2");
+    if (heading && !document.querySelector("[data-label-edit-start]")) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "label-edit-start no-print";
+        button.dataset.labelEditStart = "";
+        button.dataset.labelsSkip = "";
+        button.title = "تعديل المسميات: اضغط بعدها أي عنوان أو اسم حقل في الصفحة واكتب اسمه الجديد";
+        button.setAttribute("aria-label", "تعديل المسميات");
+        button.innerHTML = '<i class="bi bi-pencil-square" aria-hidden="true"></i>';
+        heading.appendChild(button);
+    }
     setMode(on);
-    document.querySelectorAll("[data-label-edit-start]").forEach((button) => button.addEventListener("click", () => setMode(true)));
+    document.querySelectorAll("[data-label-edit-start]").forEach((button) => button.addEventListener("click", (event) => {
+        if (button.tagName === "BUTTON") { event.preventDefault(); event.stopPropagation(); setMode(!on); return; }
+        setMode(true);
+    }));
     bar.querySelector("[data-label-edit-stop]").addEventListener("click", () => setMode(false));
 
     // أقرب عنصر نصه المباشر (لا نص عناصره الداخلية) غير فارغ
@@ -64,14 +91,23 @@
     }
 
     document.addEventListener("click", async (event) => {
-        if (!on) return;
-        const element = textHolder(event.target);
-        if (!element) return;
+        if (!on || event.target.closest("[data-labels-skip]")) return;
+        let current, original;
+        const field = event.target.closest("input[placeholder], textarea[placeholder]");
+        if (field) {
+            // خانة إدخال: يُعدَّل النص الإرشادي الظاهر داخلها
+            current = clean(field.getAttribute("placeholder"));
+            original = field.dataset.placeholderOriginal || current;
+            if (!original) return;
+        } else {
+            const element = textHolder(event.target);
+            if (!element) return;
+            const textNodes = [...element.childNodes].filter((node) => node.nodeType === 3 && clean(node.nodeValue));
+            current = clean(textNodes.map((node) => node.nodeValue).join(" "));
+            original = element.dataset.labelOriginal || current;
+        }
         event.preventDefault();
         event.stopPropagation();
-        const textNodes = [...element.childNodes].filter((node) => node.nodeType === 3 && clean(node.nodeValue));
-        const current = clean(textNodes.map((node) => node.nodeValue).join(" "));
-        const original = element.dataset.labelOriginal || current;
         const answer = prompt(`الاسم الجديد لـ «${original}»\n(يتغير في كل مكان يظهر فيه بالبرنامج. اتركه فارغًا ليرجع الاسم الأصلي)`, current);
         if (answer === null) return;
         const body = new URLSearchParams({ original, label: clean(answer), __RequestVerificationToken: bar.dataset.token });
