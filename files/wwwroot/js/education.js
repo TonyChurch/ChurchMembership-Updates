@@ -309,3 +309,11 @@
         save();
     });
 })();
+
+// مواد الفصل: النهاية الصغرى (النجاح) تتبع العظمى فورًا وهي نصفها تمامًا بالكسر (عظمى 15 ← 7.5)، وتُحسب أيضًا عند الحفظ
+document.addEventListener('input', function (event) {
+    var max = event.target.closest && event.target.closest('.edu-subject input[name=maxScore]');
+    if (!max) return;
+    var pass = max.closest('.edu-subject').querySelector('[data-edu-pass]');
+    if (pass) pass.value = (parseInt(max.value, 10) || 0) / 2;
+});

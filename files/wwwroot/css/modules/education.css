@@ -364,3 +364,7 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
 .edu-people-grid { grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr)); gap: .4rem .6rem; }
 .edu-people-grid .hub-item { align-items: center; }
 .edu-people-grid .hub-item__body { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+
+/* منسق الخدمة بالكنيسة في رأس كل صفحة (EduTop) */
+.edu-coordinator { margin: .15rem 0 0; font-size: .85rem; color: #0f766e; }
+.edu-coordinator i { margin-inline-end: .2rem; }

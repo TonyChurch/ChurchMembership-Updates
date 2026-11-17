@@ -59,3 +59,10 @@ body.sheet-body .cert-tools a { color: #0f766e; border-color: #7fcabf; }
     .sheet__hint { display: none; }
 }
 @media (max-width: 700px) { .sheet { padding: 4mm; } .sheet__head { flex-wrap: wrap; } .sheet__title { margin-inline-start: 0; text-align: start; } }
+
+/* منسق الخدمة بالكنيسة: خانة رابعة في توقيعات الكشف والشهادة، واسمه فوق خط التوقيع */
+.sheet__signs:has(> :nth-child(4)), .cert__signs:has(> :nth-child(4)) { grid-template-columns: repeat(4, 1fr); }
+.sheet__signs b, .cert__signs b { display: block; margin-top: 2mm; font-weight: 800; color: #0f766e; }
+/* بوجود الخانة الرابعة: كل الخطوط على مستوى واحد أسفل الخانات، واسم المنسق فوق خطه */
+.sheet__signs:has(> :nth-child(4)) > div, .cert__signs:has(> :nth-child(4)) > div { display: flex; flex-direction: column; min-height: 22mm; }
+.sheet__signs:has(> :nth-child(4)) i, .cert__signs:has(> :nth-child(4)) i { margin-top: auto; }
