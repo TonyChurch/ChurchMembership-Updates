@@ -368,3 +368,10 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
 /* منسق الخدمة بالكنيسة في رأس كل صفحة (EduTop) */
 .edu-coordinator { margin: .15rem 0 0; font-size: .85rem; color: #0f766e; }
 .edu-coordinator i { margin-inline-end: .2rem; }
+
+/* الدرجات: منتقي الشهر والسنة وأرشيف شهور الامتحانات */
+.edu-period { margin: .2rem 0 .8rem; }
+.edu-archive { margin: .4rem 0 .9rem; padding-top: .6rem; border-top: 1px dashed #e2e8f0; }
+.edu-archive__title { display: flex; align-items: center; gap: .4rem; margin: 0 0 .5rem; font-size: .95rem; font-weight: 800; }
+.edu-archive .edu-chips { align-items: center; margin-bottom: 0; }
+.edu-archive__year { padding: .15rem .6rem; font-weight: 800; color: #0f766e; background: #ecfdf5; border-radius: 999px; }
