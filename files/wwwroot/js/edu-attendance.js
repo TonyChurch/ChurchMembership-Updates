@@ -49,3 +49,95 @@
         refresh();
     });
 })();
+
+// حضور المدرسين بالتوقيت (قسم منفصل): «مُدرس اليوم» يُضاف من قائمة المدرسين بصف جديد، ووقت الحضور والانصراف بزر «الآن»،
+// وتُحسب مدة التدريس، وتُعطَّل خانات الوقت للغائب. تُرسَل الحقول: teacherRows (كل الصفوف) وteacherIds (الحاضرون) وarrive_{id} وleave_{id}.
+(function () {
+    function nowClock() {
+        var date = new Date();
+        return ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
+    }
+    function minutes(value) {
+        if (!value) return null;
+        var parts = value.split(':');
+        return (+parts[0]) * 60 + (+parts[1]);
+    }
+    var ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' };
+    function escapeHtml(text) {
+        return String(text).replace(/[&<>"]/g, function (ch) { return ESC[ch]; });
+    }
+    document.querySelectorAll('[data-att-teachers]').forEach(function (section) {
+        var form = section.closest('form');
+        var list = section.querySelector('[data-att-tlist]');
+        var pick = section.querySelector('[data-att-tpick]');
+        var add = section.querySelector('[data-att-tadd]');
+        var template = section.querySelector('[data-att-trow-template]');
+        function duration(row) {
+            var from = minutes(row.querySelector('[data-att-arrive]').value), to = minutes(row.querySelector('[data-att-leave]').value);
+            var out = row.querySelector('[data-att-dur]');
+            if (!out) return;
+            out.textContent = from !== null && to !== null && to >= from ? 'مدة التدريس: ' + Math.floor((to - from) / 60) + ' س ' + ('0' + ((to - from) % 60)).slice(-2) + ' د' : '';
+        }
+        function sync(row, fill) {
+            var box = row.querySelector('.att-input');
+            var arrive = row.querySelector('[data-att-arrive]');
+            if (fill && box.checked && !arrive.value) arrive.value = nowClock();
+            row.querySelectorAll('.att-time input, .att-time button').forEach(function (element) { element.disabled = !box.checked; });
+            duration(row);
+        }
+        function refreshCounters() {
+            var any = form.querySelector('.att-input');
+            if (any) any.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        section.addEventListener('change', function (event) {
+            var row = event.target.closest('.att-trow');
+            if (!row) return;
+            if (event.target.classList.contains('att-input')) sync(row, true); else duration(row);
+        });
+        section.addEventListener('input', function (event) {
+            var row = event.target.closest('.att-trow');
+            if (row) duration(row);
+        });
+        section.addEventListener('click', function (event) {
+            var now = event.target.closest('[data-att-now]');
+            if (now) {
+                var target = now.closest('.att-trow').querySelector(now.getAttribute('data-att-now') === 'arrive' ? '[data-att-arrive]' : '[data-att-leave]');
+                target.value = nowClock();
+                target.dispatchEvent(new Event('input', { bubbles: true }));
+                return;
+            }
+            var remove = event.target.closest('[data-att-tremove]');
+            if (remove) {
+                var row = remove.closest('.att-trow');
+                var option = document.createElement('option');
+                option.value = row.querySelector('[name="teacherRows"]').value;
+                option.textContent = row.getAttribute('data-name');
+                option.setAttribute('data-name', row.getAttribute('data-name'));
+                pick.appendChild(option);
+                row.remove();
+                refreshCounters();
+            }
+        });
+        if (add) add.addEventListener('click', function () {
+            if (!pick.value) return;
+            var option = pick.selectedOptions[0];
+            var name = option.getAttribute('data-name') || option.textContent;
+            var holder = document.createElement('ol');
+            holder.innerHTML = template.innerHTML.replace(/__ID__/g, pick.value).replace(/__NAME__/g, escapeHtml(name)).replace(/__INITIAL__/g, escapeHtml(name.charAt(0) || '؟')).trim();
+            var row = holder.firstElementChild;
+            list.appendChild(row);
+            option.remove();
+            pick.value = '';
+            var empty = section.querySelector('[data-att-tempty]');
+            if (empty) empty.remove();
+            sync(row, true);
+            refreshCounters();
+            row.scrollIntoView({ block: 'nearest' });
+        });
+        // «تحضير الكل / تغييب الكل» تغيّر الخانات برمجيًا: تُحدَّث خانات الوقت بعدها
+        form.querySelectorAll('[data-att-all]').forEach(function (button) {
+            button.addEventListener('click', function () { setTimeout(function () { list.querySelectorAll('.att-trow').forEach(function (row) { sync(row, true); }); }, 0); });
+        });
+        list.querySelectorAll('.att-trow').forEach(function (row) { sync(row, false); });
+    });
+})();
