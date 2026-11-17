@@ -375,3 +375,7 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
 .edu-archive__title { display: flex; align-items: center; gap: .4rem; margin: 0 0 .5rem; font-size: .95rem; font-weight: 800; }
 .edu-archive .edu-chips { align-items: center; margin-bottom: 0; }
 .edu-archive__year { padding: .15rem .6rem; font-weight: 800; color: #0f766e; background: #ecfdf5; border-radius: 999px; }
+
+/* رصد الدرجات: عمود الترتيب */
+.edu-grades__rank { min-width: 3.4rem; white-space: nowrap; text-align: center; }
+.edu-grades__rank small { display: block; color: #64748b; font-size: .72rem; }

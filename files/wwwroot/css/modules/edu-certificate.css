@@ -66,3 +66,8 @@ body.sheet-body .cert-tools a { color: #0f766e; border-color: #7fcabf; }
 /* بوجود الخانة الرابعة: كل الخطوط على مستوى واحد أسفل الخانات، واسم المنسق فوق خطه */
 .sheet__signs:has(> :nth-child(4)) > div, .cert__signs:has(> :nth-child(4)) > div { display: flex; flex-direction: column; min-height: 22mm; }
 .sheet__signs:has(> :nth-child(4)) i, .cert__signs:has(> :nth-child(4)) i { margin-top: auto; }
+
+/* توقيعات الشهادة: منسق الخدمة وآباء الكنيسة (خانتان) بأسمائهم فوق خط التوقيع */
+.cert__signs--two { grid-template-columns: repeat(2, 1fr); gap: 14mm; }
+.cert__signs--two > div { display: flex; flex-direction: column; min-height: 24mm; }
+.cert__signs--two i { margin-top: auto; }
