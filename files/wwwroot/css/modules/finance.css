@@ -2283,3 +2283,40 @@
 .bsv-toolbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .6rem 1rem; margin: 0 0 .8rem; }
 .bsv-toolbar > .fin-expense-form { margin: 0; flex: 0 1 auto; }
 .bsv-toolbar > .bsv-summary { margin: 0; flex: 1 1 320px; }
+/* الموبايل: صفحة «الخدمات المقدمة» تبدأ مباشرة بتسجيل الخدمة (طلب 2026-11-18) */
+@media (max-width: 767.98px) {
+    .bsv:not(.brp) .edu-top { display: none; }
+    .bsv:not(.brp) .fin-nav { margin-bottom: .5rem; }
+    .bsv:not(.brp) .fin-nav .fin-nav__item:not(.is-active) { display: none; }
+    /* شريط الشهر والسنة: بلا زر رجوع ولا عدّاد (العدّاد في عنوان النموذج) */
+    .bsv:not(.brp) .bro-church { padding: .4rem .7rem; margin: 0 0 .6rem; border-radius: .7rem; }
+    .bsv:not(.brp) .bro-church .ui-back, .bsv:not(.brp) .bro-church__total { display: none; }
+    .bsv:not(.brp) .bro-church__pick { display: flex; gap: .5rem; width: 100%; }
+    .bsv:not(.brp) .bro-church__pick label { flex: 1; font-size: .75rem; }
+    .bsv:not(.brp) .bro-church__pick .form-select { padding-block: .2rem; font-size: .9rem; }
+    /* النموذج */
+    .bsv-form { padding: .7rem .7rem 0; }
+    .bsv-form > h2 { font-size: 1rem; flex-wrap: wrap; gap: .3rem; }
+    .bsv-church-total { font-size: .78rem; }
+    .bsv-cases { margin-top: .5rem; padding: .5rem .6rem; }
+    .bsv-cases__hint { display: none; }
+    .bsv-cases__bar { gap: .3rem; margin-bottom: .3rem; }
+    .bsv-cases__bar .form-control { flex: 1 1 100%; padding: .3rem .6rem; font-size: .9rem; min-height: 0; }
+    .bsv-cases__bar .ui-btn { flex: 1; justify-content: center; padding: .2rem .4rem; font-size: .78rem; }
+    /* نتائج البحث قائمة بسطر لكل أسرة لا بطاقات */
+    .bsv-cases__list { display: flex; flex-direction: column; gap: 0; max-height: 14rem; }
+    .bsv-case { border-radius: 0; border-width: 0 0 1px; padding: .5rem .2rem; background: transparent; }
+    .bsv-case:has(input:checked) { background: #fce7f3; }
+    /* خانات الخدمة: عمودان */
+    .bsv-form__grid { grid-template-columns: 1fr 1fr; gap: .5rem; }
+    .bsv-form__grid label:has([data-service-name]), .bsv-form__grid label[data-new-name], .bsv-form__grid .bsv-cost-field, .bsv-form__wide { grid-column: 1 / -1; }
+    .bsv-cost-counter:not(.bsv-estimate) { display: none; }
+    .bsv-cost-counter { font-size: .72rem; }
+    /* زر التسجيل ثابت أسفل الشاشة */
+    .bsv-form__save { position: sticky; bottom: 0; z-index: 5; margin: .6rem -.7rem 0; padding: .5rem .7rem; background: #fff; border-top: 1px solid #f1f5f9; justify-content: space-between; }
+    .bsv-form__save .ui-btn { flex: 1; justify-content: center; }
+}
+@media (max-width: 767.98px) {
+    .bsv-form__grid label:has([data-service-name]) { order: -2; }
+    .bsv-form__grid label[data-new-name] { order: -1; }
+}
