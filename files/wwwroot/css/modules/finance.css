@@ -2320,3 +2320,5 @@
     .bsv-form__grid label:has([data-service-name]) { order: -2; }
     .bsv-form__grid label[data-new-name] { order: -1; }
 }
+.bsv-add-btn { color: #db2777; }
+.bsv-add-btn:hover { background: #fce7f3; color: #9d174d; }
