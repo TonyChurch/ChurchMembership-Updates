@@ -2322,3 +2322,21 @@
 }
 .bsv-add-btn { color: #db2777; }
 .bsv-add-btn:hover { background: #fce7f3; color: #9d174d; }
+/* الموبايل: «تسجيل خدمة» بثلاث خطوات (الصنف bsv-wiz يضعه السكربت في آخر Services.cshtml على الشاشات الصغيرة فقط) */
+.bsv-wiz-bar, .bsv-wiz-nav, .bsv-wiz-recap, .bsv-log-link { display: none; }
+.bsv-wiz .bsv-step-off { display: none !important; }
+.bsv-wiz .bsv-wiz-bar { display: flex; align-items: center; justify-content: space-between; gap: .6rem; margin: .5rem 0 .2rem; font-size: .9rem; color: #9d174d; }
+.bsv-wiz-dots { display: inline-flex; gap: .3rem; }
+.bsv-wiz-dots i { width: 1.4rem; height: .35rem; border-radius: 999px; background: #fbcfe8; }
+.bsv-wiz-dots i.is-on { background: #db2777; }
+.bsv-wiz .bsv-wiz-recap { display: block; margin: .7rem 0 0; padding: .5rem .7rem; border-radius: .6rem; background: #fdf2f8; color: #831843; font-size: .85rem; font-weight: 700; }
+.bsv-wiz .bsv-wiz-nav { display: flex; gap: .5rem; margin-top: .7rem; padding: .5rem 0; position: sticky; bottom: 0; z-index: 5; background: #fff; }
+.bsv-wiz .bsv-wiz-nav .ui-btn { flex: 1; justify-content: center; padding-block: .6rem; }
+.bsv-wiz .bsv-wiz-nav.is-last { position: static; }
+.bsv-wiz .bsv-log-link { display: block; margin: .6rem 0 1rem; text-align: center; font-size: .85rem; font-weight: 700; color: #64748b; }
+/* في وضع الخطوات يُخفى كل ما عدا التسجيل، ويُعاد بزر «عرض سجل الخدمات» */
+.bsv-wiz:not(.bsv-show-log) .bsv-toolbar,
+.bsv-wiz:not(.bsv-show-log) .bsv-filterbar,
+.bsv-wiz:not(.bsv-show-log) > section.ui-table-card,
+.bsv-wiz:not(.bsv-show-log) .bsv-settings-title,
+.bsv-wiz:not(.bsv-show-log) > details.bsv-names { display: none !important; }
