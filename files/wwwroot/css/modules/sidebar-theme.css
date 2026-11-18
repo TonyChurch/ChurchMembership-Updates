@@ -604,3 +604,17 @@ body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
 body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__photo {
     display: none;
 }
+
+/* شعار على خلفية بيضاء: السكربت في _RightSidebar يجعل البياض شفافًا ويضع is-cutout، فيُرفع الإطار ويظهر الشعار كاملًا */
+.right-sidebar__photo.is-cutout {
+    border: 0;
+    background: none;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.right-sidebar__photo.is-cutout img {
+    object-fit: contain;
+    object-position: 50% 50%;
+    filter: drop-shadow(0 8px 16px rgba(4, 24, 18, .45));
+}
