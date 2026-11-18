@@ -2279,3 +2279,7 @@
 .bsv-more > summary small { font-weight: 500; color: #94a3b8; }
 .bsv-more > .bsv-form__grid { margin-top: .6rem; }
 .bsv-settings-title { margin: 1.5rem 0 .6rem; font-size: 1rem; font-weight: 800; color: #475569; }
+/* الفلاتر وملخص الخدمات في صف واحد */
+.bsv-toolbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .6rem 1rem; margin: 0 0 .8rem; }
+.bsv-toolbar > .fin-expense-form { margin: 0; flex: 0 1 auto; }
+.bsv-toolbar > .bsv-summary { margin: 0; flex: 1 1 320px; }
