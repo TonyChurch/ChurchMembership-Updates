@@ -308,10 +308,17 @@
             if (idInput.value) return;
             box.classList.remove("fb-match--attached");
             const name = nameInput.value.trim();
-            if (words(name).length < 2) { box.hidden = true; return; }
+            // المطابقة بالاسم أو الرقم القومي أو الموبايل: الاسم المسجل سريعًا قد يُكتب مختلفًا في الأسرة
+            const nationalId = (field(pane, "NationalId")?.value || "").trim();
+            const phone = (field(pane, "Phone")?.value || "").trim();
+            if (words(name).length < 2 && !nationalId && !phone) { box.hidden = true; return; }
+            const query = { name, nationalId, phone };
+            const same = () => nameInput.value.trim() === query.name
+                && (field(pane, "NationalId")?.value || "").trim() === query.nationalId
+                && (field(pane, "Phone")?.value || "").trim() === query.phone;
             try {
-                const response = await fetch(`/Validation/Unattached?${new URLSearchParams({ name })}`, { headers: { Accept: "application/json" } });
-                if (!response.ok || idInput.value || nameInput.value.trim() !== name) return;
+                const response = await fetch(`/Validation/Unattached?${new URLSearchParams(query)}`, { headers: { Accept: "application/json" } });
+                if (!response.ok || idInput.value || !same()) return;
                 // ملف مضموم لفرد آخر في نفس الصفحة لا يُعرض مرة ثانية
                 const taken = panes().map(other => other.querySelector("[data-existing-id]")?.value).filter(Boolean);
                 const list = (await response.json()).filter(item => !taken.includes(String(item.id)));
@@ -350,6 +357,7 @@
         const schedule = () => { clearTimeout(timer); timer = setTimeout(lookup, 450); };
         nameInput.addEventListener("input", schedule);
         nameInput.addEventListener("change", schedule);
+        ["NationalId", "Phone"].forEach(name => field(pane, name)?.addEventListener("change", schedule));
         // بعد رجوع الحفظ بملاحظات تعود الحقول مملوءة، فيلزم البحث من جديد ليظهر «ضمّه لهذه الأسرة»
         if (idInput.value) { setOwner(idInput.value); showAttached(); } else lookup();
     };

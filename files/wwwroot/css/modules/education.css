@@ -91,15 +91,7 @@
 /* شريط البحث أعلى كل الصفحات */
 .edu-search { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1rem; }
 .edu-search .form-control { flex: 1 1 14rem; min-width: 0; }
-/* بطاقات الإضافة الثابتة (على نسق «أسرة جديدة») */
-.edu-fabs { position: fixed; bottom: 18px; left: 18px; z-index: 1500; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
-.edu-fab { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1rem; border-radius: 999px; background: var(--ui-primary); color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 8px 22px rgba(15, 23, 42, .25); }
-.edu-fab:hover { color: #fff; filter: brightness(1.08); }
-.edu-fab--teacher { background: #7c3aed; }
-.edu-fab--class { background: #0f766e; }
-body:has(.edu-fabs) .app-main { padding-bottom: 10.5rem; }
-@media (max-width: 640px) { .edu-fab { padding: .5rem .8rem; font-size: .85rem; } }
-@media print { .edu-fabs, .edu-search { display: none; } }
+@media print { .edu-search { display: none; } }
 /* الفصول أعلى «نظرة عامة» */
 .edu-classes-top { margin: 0 0 1rem; }
 .edu-classes-top__all { margin-inline-start: auto; font-size: .85rem; font-weight: 700; }
@@ -118,20 +110,6 @@ body:has(.edu-fabs) .app-main { padding-bottom: 10.5rem; }
 .edu-import input[type=checkbox] { width: 1.2rem; height: 1.2rem; }
 .edu-import tr.is-skip td { background: #f8fafc; }
 .edu-import__link { display: flex; align-items: center; gap: .35rem; margin: .25rem 0 0; font-size: .8rem; font-weight: 600; color: #0f766e; }
-/* شريط الصفوف الملوّن تحت التبويبات: لكل صف لون */
-.edu-strip { margin-top: -.5rem; }
-.edu-strip__item { --tone: #2563eb; background: var(--tone); border-color: var(--tone); color: #fff; box-shadow: 0 4px 10px rgba(15, 23, 42, .12); }
-.edu-strip__item:hover { border-color: var(--tone); color: #fff; filter: brightness(1.1); }
-.edu-strip__item.is-open { outline: 3px solid color-mix(in srgb, var(--tone) 35%, #fff); outline-offset: 1px; }
-.edu-strip__count { min-width: 1.5rem; padding: 0 .4rem; border-radius: 999px; background: rgba(255, 255, 255, .25); font-size: .78rem; text-align: center; }
-.edu-tone-0 { --tone: #2563eb; }
-.edu-tone-1 { --tone: #0f766e; }
-.edu-tone-2 { --tone: #7c3aed; }
-.edu-tone-3 { --tone: #c2410c; }
-.edu-tone-4 { --tone: #be185d; }
-.edu-tone-5 { --tone: #15803d; }
-.edu-tone-6 { --tone: #0369a1; }
-.edu-tone-7 { --tone: #a16207; }
 /* مادة المدرس في كل فصل */
 .edu-teach { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 .4rem; }
 .edu-teach .edu-check { flex: 1 1 12rem; margin: 0; }
@@ -405,7 +383,6 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
 .edu-side .edu-inline label { flex: 1 1 9rem; margin: 0; font-weight: 700; font-size: .85rem; }
 .edu-side .edu-inline .form-control { margin-top: .2rem; }
 header.edu-head > .edu-head__period { order: 6; flex: 1 1 100%; display: flex; justify-content: flex-end; margin: 0; }
-.edu-strip__add { --tone: #0f766e; border-style: dashed; }
 .edu-grades__n { width: 2.2rem; text-align: center; color: #64748b; font-weight: 700; }
 .edu-grades__acts { white-space: nowrap; }
 
