@@ -864,3 +864,10 @@ a.roster-del__btn {
         break-inside: avoid;
     }
 }
+
+/* عداد ذكور / إناث للمخدومين (رأس القائمة وبطاقات الفصول) */
+.ui-chip-stat--male { --chip-gradient: linear-gradient(135deg, #2563eb, #60a5fa); --chip-shadow: rgba(37, 99, 235, .28); }
+.ui-chip-stat--female { --chip-gradient: linear-gradient(135deg, #db2777, #f472b6); --chip-shadow: rgba(219, 39, 119, .28); }
+.ui-chip-stat--unknown { --chip-gradient: linear-gradient(135deg, #64748b, #94a3b8); --chip-shadow: rgba(100, 116, 139, .28); }
+.roster-card__num--gender { background: #eef2ff; color: #3730a3; }
+.roster-gender-badge { background: #eef2ff; color: #3730a3; }
