@@ -103,6 +103,18 @@ if ($running) {
     if (Test-Path (Join-Path $root 'lan-access')) { $runArguments = $runArguments -replace 'http://127\.0\.0\.1:', 'http://0.0.0.0:' }
 }
 if ($Silent) { Write-Log "بدء التحديث التلقائي في $root" }
+# (2026-11-19) جهاز الكنيسة: إن اختفى Keep-Alive.ps1 (حذفه برنامج الحماية 360 من 17/11 حتى 19/11 فلم يعد الموقع بعد انقطاع الكهرباء)
+# يعيده كل تحديث من نسخته في حزمة التحديث. يعمل فقط حيث يوجد ترتيب جهاز الكنيسة (Start-Detached.ps1 بجوار مجلد البرنامج).
+try {
+    $machineRoot = Split-Path -Parent $root
+    $keepAlive = Join-Path $machineRoot 'Keep-Alive.ps1'
+    $keepAliveSource = Join-Path $update 'Keep-Alive.ps1'
+    if ((Test-Path (Join-Path $machineRoot 'Start-Detached.ps1')) -and (Test-Path $keepAliveSource) -and -not (Test-Path $keepAlive)) {
+        Copy-Item $keepAliveSource $keepAlive -Force
+        Write-Log 'أُعيد ملف Keep-Alive.ps1 بعد أن وُجد محذوفًا'
+    }
+}
+catch { }
 $running | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
 $running | ForEach-Object { Wait-Process -Id $_.ProcessId -Timeout 30 -ErrorAction SilentlyContinue }
 Start-Sleep -Seconds 1
