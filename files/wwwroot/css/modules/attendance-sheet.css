@@ -65,3 +65,22 @@ td.as-name { text-align: right; font-weight: 600; white-space: nowrap; }
     .as-page { padding: 3mm; overflow-x: auto; }
     .as-head { flex-wrap: wrap; }
 }
+
+/* كشف 4 أسابيع: 3 خانات ضيقة لكل أسبوع، وخط أعرض يفصل الأسابيع */
+.as-tools__hint { color: #5a6f66; font-size: .85rem; }
+.as-table--weeks th:not(.as-name):not(.as-n):not(.as-notes) { width: 8.5mm; font-size: .68rem; padding: .6mm .3mm; }
+.as-table--weeks th[colspan] { width: auto !important; font-size: .74rem !important; }
+.as-table--weeks .as-week { border-right: 2px solid #172036; }
+.as-table--weeks td.as-name { white-space: normal; line-height: 1.25; font-size: .8rem; }
+.as-table--weeks .as-notes { width: 24mm; }
+.as-date { display: block; min-width: 14mm; margin-top: .4mm; padding: 0 .5mm; font-weight: 600; color: #3b5bfd; border-bottom: 1px dotted #9aa3b5; outline: none; }
+.as-date:focus { background: #fff7d6; }
+.as-table--weeks tfoot .as-topic td { height: 9mm; background: #fff; }
+@media print { .as-date { color: #172036; } }
+.as-table--weeks { table-layout: fixed; }
+.as-col-n { width: 7mm; }
+.as-col-mark { width: 8.6mm; }
+.as-col-notes { width: 18mm; }
+.as-table--weeks th, .as-table--weeks td { width: auto !important; }
+.as-table--weeks th:not(.as-name):not(.as-n) { overflow: hidden; }
+.as-head__title h1 { white-space: nowrap; }
