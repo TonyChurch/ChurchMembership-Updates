@@ -1,0 +1,67 @@
+/* كشف الحضور الورقي للفصل: A4 طولي، رأس الجدول يتكرر في كل صفحة */
+@page { size: A4 portrait; margin: 9mm 9mm 10mm; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1rem; color: #172036; font-family: "Cairo", "Segoe UI", Tahoma, sans-serif; background: #eef0f3; }
+
+.as-tools { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; max-width: 192mm; margin: 0 auto 1rem; font-size: .95rem; }
+.as-tools label { display: inline-flex; align-items: center; gap: .4rem; font-weight: 600; }
+.as-tools input[type=date], .as-tools select { padding: .3rem .5rem; font: inherit; border: 1px solid #c5ccd8; border-radius: 8px; background: #fff; }
+.as-tools__check { font-weight: 700; color: #0e4433; }
+.as-tools__print { padding: .45rem 1.2rem; color: #fff; font: inherit; font-weight: 700; background: #0e4433; border: 0; border-radius: 10px; cursor: pointer; }
+.as-tools a { color: #3b5bfd; text-decoration: none; font-weight: 600; }
+
+.as-page { max-width: 192mm; margin: 0 auto; padding: 8mm; background: #fff; box-shadow: 0 2px 10px rgba(0, 0, 0, .08); }
+
+.as-head { display: flex; align-items: center; gap: 4mm; padding-bottom: 3mm; border-bottom: 2px solid #0e4433; }
+.as-head img { width: 17mm; height: 17mm; object-fit: contain; }
+.as-head__church p { margin: 0; }
+.as-head__name { font-size: 1.05rem; font-weight: 800; color: #0e4433; }
+.as-head__unit { font-size: .85rem; color: #b7791f; font-weight: 700; }
+.as-head__title { margin-inline-start: auto; text-align: left; }
+.as-head__title h1 { margin: 0; font-size: 1rem; font-weight: 700; color: #5a6f66; line-height: 1.4; }
+.as-head__title h1 span { display: block; font-size: 1.3rem; font-weight: 800; color: #172036; }
+.as-head__title p { margin: 0; font-size: .8rem; color: #5a6f66; }
+
+.as-fields { display: flex; gap: 4mm; margin: 3mm 0; font-size: .9rem; }
+.as-fields div { display: flex; flex: 1; align-items: flex-end; gap: 2mm; white-space: nowrap; }
+.as-fields__wide { flex: 2 !important; }
+.as-fields span { font-weight: 700; }
+.as-fields b { flex: 1; min-height: 6mm; padding-inline: 1mm; border-bottom: 1px dotted #7a8496; font-weight: 600; white-space: normal; }
+
+.as-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.as-table thead { display: table-header-group; }
+.as-table th, .as-table td { border: 1px solid #7a8496; padding: 0 1mm; text-align: center; vertical-align: middle; }
+.as-table th { background: #e7efe9; font-weight: 700; font-size: .78rem; line-height: 1.3; padding: 1mm; }
+.as-table th small { display: block; font-weight: 600; color: #5a6f66; }
+.as-table tbody tr { height: 7.2mm; break-inside: avoid; }
+.as-table tbody tr:nth-child(even) td { background: #f6f8fa; }
+.as-n { width: 7mm; }
+td.as-name { text-align: right; font-weight: 600; white-space: nowrap; }
+.as-table:not(.as-table--month) th:not(.as-name):not(.as-notes):not(.as-n) { width: 12mm; }
+.as-notes { width: 34mm; text-align: right; font-size: .75rem; }
+.as-table--month th:not(.as-name):not(.as-n):not(.as-notes) { width: 19mm; }
+.as-table tfoot td { height: 7mm; font-weight: 700; background: #e7efe9; }
+
+.box { display: inline-block; width: 4.2mm; height: 4.2mm; border: 1.2px solid #4b5568; border-radius: 1mm; vertical-align: middle; position: relative; }
+.box.is-on::after { content: "✓"; position: absolute; inset: -1.6mm 0 0; font-size: 4.6mm; font-weight: 800; line-height: 1; color: #0e4433; text-align: center; }
+
+.is-compact .as-table tbody tr { height: 6.1mm; }
+.is-compact .as-table { font-size: .8rem; }
+.is-tight .as-table tbody tr { height: 5.2mm; }
+.is-tight .as-table { font-size: .74rem; }
+.is-tight .box { width: 3.6mm; height: 3.6mm; }
+
+.as-legend { margin: 2mm 0 0; font-size: .8rem; color: #5a6f66; }
+.as-empty { text-align: center; padding: 10mm 0; }
+.as-foot { display: flex; justify-content: space-between; gap: 4mm; margin-top: 6mm; font-size: .85rem; break-inside: avoid; }
+
+@media print {
+    body { padding: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .as-tools { display: none; }
+    .as-page { max-width: none; padding: 0; box-shadow: none; }
+}
+@media (max-width: 760px) {
+    body { padding: .5rem; }
+    .as-page { padding: 3mm; overflow-x: auto; }
+    .as-head { flex-wrap: wrap; }
+}
