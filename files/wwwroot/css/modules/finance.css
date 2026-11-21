@@ -2340,3 +2340,11 @@
 .bsv-wiz:not(.bsv-show-log) > section.ui-table-card,
 .bsv-wiz:not(.bsv-show-log) .bsv-settings-title,
 .bsv-wiz:not(.bsv-show-log) > details.bsv-names { display: none !important; }
+
+/* وصول سريع ثابت: «دفتر جديد» أسفل كل صفحات الحسابات (على نسق .edu-fabs؛ الآلة الحاسبة تعلوه إذا فُتحت) */
+.fin-fabs { position: fixed; bottom: 18px; left: 18px; z-index: 1050; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
+.fin-fab { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1rem; border-radius: 999px; background: var(--ui-primary); color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 8px 22px rgba(15, 23, 42, .25); }
+.fin-fab:hover, .fin-fab:focus { color: #fff; filter: brightness(1.08); }
+body:has(.fin-fabs) .app-main { padding-bottom: 5rem; }
+@media (max-width: 640px) { .fin-fab { padding: .5rem .8rem; font-size: .85rem; } }
+@media print { .fin-fabs { display: none; } }

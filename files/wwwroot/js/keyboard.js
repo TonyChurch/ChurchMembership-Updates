@@ -98,7 +98,8 @@
     }
 
     function addNew() {
-        const button = document.querySelector(".app-main [data-shortcut-new], .app-main .members-table-bar__add, .app-main a.ui-btn[href*='/Create'], .app-main a.ui-btn[href*='/Quick']");
+        const button = document.querySelector(".app-main [data-shortcut-new], .app-main .members-table-bar__add, .app-main a.ui-btn[href*='/Create'], .app-main a.ui-btn[href*='/Quick']")
+            || document.querySelector(".app-main [data-shortcut-new-fallback]");
         if (button) { button.click(); return true; }
         return false;
     }
