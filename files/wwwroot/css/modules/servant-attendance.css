@@ -747,3 +747,8 @@
 .absences-page .ui-person__text,
 .confession-page .ui-person__text { min-width: 11rem; }
 .absences-page .ui-table td { vertical-align: middle; }
+
+/* شعار خدمة التربية الكنسية في رؤوس صفحات حضور الفصول */
+.ce-logo { width: 64px; height: 64px; object-fit: contain; flex: 0 0 auto; }
+.sa-report__head .ce-logo { float: inline-start; margin-inline-end: 12px; width: 72px; height: 72px; }
+@media (max-width: 575px) { .ce-logo { width: 48px; height: 48px; } }
