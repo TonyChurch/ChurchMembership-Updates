@@ -84,3 +84,7 @@ td.as-name { text-align: right; font-weight: 600; white-space: nowrap; }
 .as-table--weeks th, .as-table--weeks td { width: auto !important; }
 .as-table--weeks th:not(.as-name):not(.as-n) { overflow: hidden; }
 .as-head__title h1 { white-space: nowrap; }
+.as-week { position: relative; }
+.as-del-day { position: absolute; top: 0; inset-inline-start: 0; width: 14px; height: 14px; line-height: 12px; padding: 0; border: 0; border-radius: 50%; background: #e5484d; color: #fff; font-size: 12px; cursor: pointer; opacity: .55; }
+.as-del-day:hover { opacity: 1; }
+@media print { .as-del-day { display: none !important; } }
