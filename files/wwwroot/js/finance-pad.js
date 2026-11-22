@@ -45,7 +45,8 @@
 
     const blank = () => ({ a: "", op: "*", b: "", sign: "+", note: "" });
 
-    function save() { store.write({ open: !panel.hidden, lines }); }
+    let pos = null, min = false;
+    function save() { store.write({ open: !panel.hidden, lines, pos, min }); }
 
     function say(text, bad) {
         msg.textContent = text;
@@ -183,7 +184,40 @@
     panel.querySelector("[data-pad-close]").addEventListener("click", () => setOpen(false));
     toggles.forEach(t => t.addEventListener("click", () => setOpen(panel.hidden)));
 
+    // سحب النافذة من رأسها (على الشاشات العريضة فقط) وتصغيرها إلى الرأس حتى لا تحجب الصفحة
+    const head = panel.querySelector(".calc__head");
+    const wide = () => window.innerWidth > 900;
+    function applyPos() {
+        if (pos && wide()) {
+            const w = panel.offsetWidth || 320;
+            const x = Math.min(Math.max(0, pos.x), Math.max(0, window.innerWidth - Math.min(w, 120)));
+            const y = Math.min(Math.max(0, pos.y), Math.max(0, window.innerHeight - 48));
+            panel.style.left = x + "px"; panel.style.top = y + "px";
+            panel.style.right = "auto"; panel.style.bottom = "auto";
+        } else {
+            ["left", "top", "right", "bottom", "insetInlineEnd"].forEach(p => { panel.style[p] = ""; });
+        }
+    }
+    function applyMin() {
+        panel.classList.toggle("is-min", min);
+        const button = panel.querySelector("[data-pad-min]");
+        if (button) button.title = min ? "تكبير" : "تصغير";
+    }
+    panel.querySelector("[data-pad-min]").addEventListener("click", () => { min = !min; applyMin(); save(); });
+    head.addEventListener("pointerdown", event => {
+        if (!wide() || event.target.closest("button")) return;
+        const box = panel.getBoundingClientRect();
+        const dx = event.clientX - box.left, dy = event.clientY - box.top;
+        head.setPointerCapture(event.pointerId);
+        const move = e => { pos = { x: e.clientX - dx, y: e.clientY - dy }; applyPos(); };
+        const up = () => { head.removeEventListener("pointermove", move); head.removeEventListener("pointerup", up); head.removeEventListener("pointercancel", up); save(); };
+        head.addEventListener("pointermove", move); head.addEventListener("pointerup", up); head.addEventListener("pointercancel", up);
+        event.preventDefault();
+    });
+    window.addEventListener("resize", applyPos);
+
     const saved = store.read();
+    pos = saved.pos || null; min = !!saved.min; applyPos(); applyMin();
     lines = Array.isArray(saved.lines) && saved.lines.length
         ? saved.lines.map(l => Object.assign(blank(), l))
         : [blank()];
