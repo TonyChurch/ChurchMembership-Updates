@@ -2355,3 +2355,15 @@ body:has(.fin-fabs) .app-main { padding-bottom: 5rem; }
 .fin-name-hits button { display: flex; flex-direction: column; align-items: flex-start; width: 100%; padding: 8px 12px; border: 0; background: transparent; text-align: right; cursor: pointer; }
 .fin-name-hits button:hover, .fin-name-hits button:focus { background: rgba(124,58,237,.1); }
 .fin-name-hits small { color: #6b7280; }
+
+/* بطاقات الإجماليات الثابتة فوق «دفتر جديد» (تتحدث مع الشريط من receipt-book.js) */
+.fin-fab-totals { display: flex; flex-direction: column; gap: .35rem; }
+.fin-fab-total { display: flex; flex-direction: column; min-width: 130px; padding: .4rem .8rem; border-radius: 14px; color: #fff; box-shadow: 0 8px 22px rgba(15, 23, 42, .25); line-height: 1.25; }
+.fin-fab-total span { font-size: .75rem; opacity: .92; }
+.fin-fab-total strong { font-size: 1.05rem; }
+.fin-fab-total--in { background: linear-gradient(135deg, #0a9468, #22b888); }
+.fin-fab-total--out { background: linear-gradient(135deg, #d6304f, #f0677f); }
+.fin-fab-total--net { background: linear-gradient(135deg, #3b5bfd, #6c5cff); }
+.fin-fab-total--net.is-negative { background: linear-gradient(135deg, #8a1c33, #c0392b); }
+body:has(.fin-fab-totals) .app-main { padding-bottom: 12rem; }
+@media (max-width: 640px) { .fin-fab-total { min-width: 100px; padding: .3rem .6rem; } .fin-fab-total strong { font-size: .9rem; } }

@@ -210,6 +210,28 @@
         document.getElementById('finStripNetCell').classList.toggle('is-negative', net < 0);
         var unsaved = Math.abs(collected - savedCollected) > 0.004 || pending > 0;
         document.getElementById('finStripNote').hidden = !unsaved;
+        mirror(collected, spent, net);
+    }
+
+    // بطاقات الإجماليات الثابتة على يسار الصفحة (فوق «دفتر جديد»): نسخة حية من الشريط تتحدث معه
+    var fabs = document.querySelector('.fin-fabs');
+    var cards = null;
+    if (fabs) {
+        var wrap = document.createElement('div');
+        wrap.className = 'fin-fab-totals';
+        wrap.setAttribute('aria-live', 'polite');
+        wrap.innerHTML = '<div class="fin-fab-total fin-fab-total--in"><span>الوارد</span><strong data-k="in"></strong></div>'
+            + '<div class="fin-fab-total fin-fab-total--out"><span>المنصرف</span><strong data-k="out"></strong></div>'
+            + '<div class="fin-fab-total fin-fab-total--net"><span>الرصيد المرحَّل</span><strong data-k="net"></strong></div>';
+        fabs.insertBefore(wrap, fabs.firstChild);
+        cards = wrap;
+    }
+    function mirror(collected, spent, net) {
+        if (!cards) return;
+        cards.querySelector('[data-k=in]').textContent = show(collected);
+        cards.querySelector('[data-k=out]').textContent = show(spent);
+        cards.querySelector('[data-k=net]').textContent = show(net);
+        cards.querySelector('.fin-fab-total--net').classList.toggle('is-negative', net < 0);
     }
 
     if (form) {
