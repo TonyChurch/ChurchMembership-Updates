@@ -303,7 +303,7 @@
     box.className = 'fin-name-hits no-print';
     box.hidden = true;
     document.body.appendChild(box);
-    var current = null, timer = 0, seq = 0;
+    var current = null, timer = 0, seq = 0, picking = false;
 
     function hide() { box.hidden = true; box.innerHTML = ''; }
     function place(input) {
@@ -326,7 +326,17 @@
             b.addEventListener('mousedown', function (e) {
                 e.preventDefault();
                 input.value = f.name;
+                picking = true;
                 input.dispatchEvent(new Event('input', { bubbles: true }));
+                picking = false;
+                // حفظ الربط بملف الأسرة (والفرد إن طابق البحث فردًا)
+                var cell = input.closest('td');
+                var fam = cell && cell.querySelector('input[name$=".FamilyId"]');
+                var mem = cell && cell.querySelector('input[name$=".MemberId"]');
+                if (fam) fam.value = f.id;
+                if (mem) mem.value = f.memberId || '';
+                input.classList.add('fin-linked');
+                input.title = 'مربوط بملف أسرة مسجلة';
                 hide();
             });
             box.appendChild(b);
@@ -338,6 +348,12 @@
     form.addEventListener('input', function (e) {
         var input = e.target;
         if (!input.name || !/\.DonorName$/.test(input.name)) return;
+        if (picking) return;
+        // تعديل الاسم يدويًا يفك الربط بالأسرة
+        var linkCell = input.closest('td');
+        if (linkCell) linkCell.querySelectorAll('input[type=hidden]').forEach(function (h) { h.value = ''; });
+        input.classList.remove('fin-linked');
+        input.removeAttribute('title');
         current = input;
         clearTimeout(timer);
         var q = input.value.trim();
