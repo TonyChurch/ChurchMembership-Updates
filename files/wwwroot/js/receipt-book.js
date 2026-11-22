@@ -271,3 +271,64 @@
         });
     });
 })();
+
+// خانة «الاسم» في الإيصالات: اكتب حرفين فأكثر فتظهر الأسر المسجلة (من /Families/Find) واختر أسرة لتُكتب في الخانة.
+// الكتابة اليدوية تبقى كما هي، واختيار الأسرة اقتراح فقط.
+(function () {
+    var form = document.getElementById('finReceiptsForm');
+    if (!form) return;
+    var box = document.createElement('div');
+    box.className = 'fin-name-hits no-print';
+    box.hidden = true;
+    document.body.appendChild(box);
+    var current = null, timer = 0, seq = 0;
+
+    function hide() { box.hidden = true; box.innerHTML = ''; }
+    function place(input) {
+        var r = input.getBoundingClientRect();
+        box.style.top = (window.scrollY + r.bottom + 2) + 'px';
+        box.style.left = (window.scrollX + r.left) + 'px';
+        box.style.width = Math.max(r.width, 260) + 'px';
+    }
+    function show(input, list) {
+        box.innerHTML = '';
+        if (!list.length) { hide(); return; }
+        list.slice(0, 8).forEach(function (f) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            var name = document.createElement('b');
+            name.textContent = f.name;
+            var more = document.createElement('small');
+            more.textContent = [f.code, f.phone, f.match].filter(Boolean).join(' · ');
+            b.append(name, more);
+            b.addEventListener('mousedown', function (e) {
+                e.preventDefault();
+                input.value = f.name;
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                hide();
+            });
+            box.appendChild(b);
+        });
+        place(input);
+        box.hidden = false;
+    }
+
+    form.addEventListener('input', function (e) {
+        var input = e.target;
+        if (!input.name || !/\.DonorName$/.test(input.name)) return;
+        current = input;
+        clearTimeout(timer);
+        var q = input.value.trim();
+        if (q.length < 2) { hide(); return; }
+        timer = setTimeout(function () {
+            var mine = ++seq;
+            fetch('/Families/Find?q=' + encodeURIComponent(q), { headers: { Accept: 'application/json' } })
+                .then(function (r) { return r.ok && (r.headers.get('content-type') || '').indexOf('json') >= 0 ? r.json() : []; })
+                .then(function (list) { if (mine === seq && current === input && document.activeElement === input) show(input, list); })
+                .catch(function () { /* إضافي */ });
+        }, 250);
+    });
+    form.addEventListener('focusout', function (e) { if (e.target === current) setTimeout(hide, 150); });
+    form.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+    window.addEventListener('scroll', hide, true);
+})();
