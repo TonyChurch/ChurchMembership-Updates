@@ -1,16 +1,21 @@
-// مسودة الحسابات (بجوار الحاسبة): سطور كل منها رقمان وعملية (× افتراضيًا أو ÷ أو + أو −)،
-// وناتج السطر يُضاف إلى الرصيد الجاري (أو يُطرح منه)، والإجمالي يتحدث مع كل رقم. تُحفظ في المتصفح.
+// مسودة الحسابات (بجوار الحاسبة) على نسق جدول: كل سطر رقمان وعملية (× افتراضيًا أو ÷ أو + أو −) وناتج وبيان،
+// وناتج السطر يُضاف إلى الرصيد الجاري (أو يُطرح منه). الرصيد يُنقل إلى آخر حقل كنت فيه بالصفحة أو يُنسخ.
+// يفتحها أي زر فيه data-pad-toggle (شريط الحسابات، ونموذج المنصرف). تُحفظ في المتصفح.
 (() => {
-    const toggle = document.querySelector("[data-pad-toggle]");
+    const toggles = [...document.querySelectorAll("[data-pad-toggle]")];
     const panel = document.querySelector("[data-pad]");
-    if (!toggle || !panel || panel.dataset.ready) return;
+    if (!toggles.length || !panel || panel.dataset.ready) return;
     panel.dataset.ready = "1";
 
     const rowsHost = panel.querySelector("[data-pad-rows]");
     const totalBox = panel.querySelector("[data-pad-total]");
+    const msg = panel.querySelector("[data-pad-msg]");
     const storeKey = "finance-pad";
     const ops = { "*": "×", "/": "÷", "+": "+", "-": "−" };
     let lines = [];
+    let balance = 0;
+    let lastField = null;
+    let msgTimer = 0;
 
     const store = {
         read() { try { return JSON.parse(localStorage.getItem(storeKey) || "{}"); } catch { return {}; } },
@@ -42,9 +47,16 @@
 
     function save() { store.write({ open: !panel.hidden, lines }); }
 
+    function say(text, bad) {
+        msg.textContent = text;
+        msg.classList.toggle("is-bad", !!bad);
+        clearTimeout(msgTimer);
+        msgTimer = setTimeout(() => { msg.textContent = ""; }, 3500);
+    }
+
     // يحدّث الأرقام فقط (بدون إعادة بناء الخانات حتى لا تضيع الكتابة)
     function recalc() {
-        let balance = 0;
+        balance = 0;
         [...rowsHost.children].forEach((row, i) => {
             const line = lines[i];
             const value = round(lineValue(line));
@@ -62,17 +74,15 @@
             const row = document.createElement("div");
             row.className = "pad__row";
             row.innerHTML =
-                '<div class="pad__line">' +
                 '<button type="button" class="pad__sign" data-f="sign" title="يُضاف إلى الرصيد / يُطرح منه"></button>' +
                 '<input class="pad__in" data-f="a" dir="ltr" inputmode="decimal" autocomplete="off" placeholder="0" aria-label="الرقم الأول" />' +
                 '<select class="pad__op" data-f="op" aria-label="العملية">' +
                 Object.keys(ops).map(k => `<option value="${k}">${ops[k]}</option>`).join("") + '</select>' +
                 '<input class="pad__in" data-f="b" dir="ltr" inputmode="decimal" autocomplete="off" placeholder="0" aria-label="الرقم الثاني" />' +
-                '<span class="pad__eq">=</span><strong class="pad__res" data-pad-line dir="ltr"></strong>' +
-                '<button type="button" class="pad__del" data-pad-del title="حذف السطر" aria-label="حذف السطر"><i class="bi bi-x-lg" aria-hidden="true"></i></button>' +
-                '</div>' +
-                '<div class="pad__sub"><input class="pad__note" data-f="note" autocomplete="off" placeholder="بيان (اختياري)" aria-label="بيان" />' +
-                '<span class="pad__balwrap">الرصيد <b data-pad-bal dir="ltr"></b></span></div>';
+                '<strong class="pad__res" data-pad-line dir="ltr"></strong>' +
+                '<input class="pad__note" data-f="note" autocomplete="off" placeholder="بيان" aria-label="بيان" />' +
+                '<b class="pad__bal" data-pad-bal dir="ltr"></b>' +
+                '<button type="button" class="pad__del" data-pad-del title="حذف السطر" aria-label="حذف السطر"><i class="bi bi-x-lg" aria-hidden="true"></i></button>';
             row.querySelector('[data-f="op"]').value = line.op;
             row.querySelector('[data-f="a"]').value = line.a;
             row.querySelector('[data-f="b"]').value = line.b;
@@ -96,7 +106,7 @@
                 el.addEventListener("keydown", event => {
                     event.stopPropagation();
                     if (event.key === "Enter") { event.preventDefault(); addLine(); }
-                    else if (event.key === "Escape") { event.preventDefault(); setOpen(false); toggle.focus(); }
+                    else if (event.key === "Escape") { event.preventDefault(); setOpen(false); toggles[0].focus(); }
                 });
             });
             rowsHost.appendChild(row);
@@ -121,10 +131,48 @@
 
     function setOpen(open) {
         panel.hidden = !open;
-        toggle.setAttribute("aria-expanded", String(open));
-        toggle.classList.toggle("is-active", open);
+        toggles.forEach(t => {
+            t.setAttribute("aria-expanded", String(open));
+            t.classList.toggle("is-active", open);
+        });
         save();
     }
+
+    // آخر حقل كتابة كنت فيه بالصفحة (خارج الحاسبة والمسودة) ليُنقل إليه الرصيد
+    const okTypes = ["", "text", "number", "search", "tel", "url", "email"];
+    const remember = event => {
+        const field = event.target;
+        if (!(field instanceof HTMLElement) || field.closest("[data-pad],[data-calc]")) return;
+        const isText = field instanceof HTMLTextAreaElement ||
+            (field instanceof HTMLInputElement && okTypes.includes(field.type));
+        if (isText && !field.readOnly && !field.disabled) lastField = field;
+    };
+    document.addEventListener("focusin", remember);
+    document.addEventListener("pointerdown", remember);
+
+    panel.querySelector("[data-pad-send]").addEventListener("click", () => {
+        if (!lastField || !document.contains(lastField)) { say("اضغط أولًا داخل الحقل المطلوب في الصفحة ثم عُد واضغط الزر.", true); return; }
+        lastField.value = String(round(balance));
+        lastField.dispatchEvent(new Event("input", { bubbles: true }));
+        lastField.dispatchEvent(new Event("change", { bubbles: true }));
+        lastField.focus();
+        say("نُقل الرصيد " + show(balance) + " إلى الحقل.");
+    });
+
+    panel.querySelector("[data-pad-copy]").addEventListener("click", async () => {
+        const text = String(round(balance));
+        try {
+            await navigator.clipboard.writeText(text);
+        } catch {
+            const temp = document.createElement("textarea");
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            try { document.execCommand("copy"); } catch { /* غير متاح */ }
+            temp.remove();
+        }
+        say("نُسخ الرصيد " + show(balance) + ".");
+    });
 
     panel.querySelector("[data-pad-add]").addEventListener("click", addLine);
     panel.querySelector("[data-pad-clear]").addEventListener("click", () => {
@@ -133,7 +181,7 @@
         build();
     });
     panel.querySelector("[data-pad-close]").addEventListener("click", () => setOpen(false));
-    toggle.addEventListener("click", () => setOpen(panel.hidden));
+    toggles.forEach(t => t.addEventListener("click", () => setOpen(panel.hidden)));
 
     const saved = store.read();
     lines = Array.isArray(saved.lines) && saved.lines.length

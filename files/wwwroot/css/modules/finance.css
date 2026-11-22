@@ -2383,13 +2383,13 @@ body:has(.fin-fabs) .fin-savebar { padding-inline-end: 12.5rem; }
     body:has(.fin-fab-totals) .app-main { padding-bottom: 6rem; }
 }
 
-/* مسودة الحسابات بجوار الحاسبة */
+/* مسودة الحسابات بجوار الحاسبة (جدول: ± رقم عملية رقم | ناتج | بيان | رصيد) */
 .pad {
     position: fixed;
     inset-inline-end: 18.5rem;
     bottom: 1rem;
     z-index: 1060;
-    width: 26rem;
+    width: 40rem;
     max-width: calc(100vw - 2rem);
     max-height: calc(100vh - 2rem);
     display: flex;
@@ -2405,12 +2405,20 @@ body:has(.fin-fabs) .fin-savebar { padding-inline-end: 12.5rem; }
 
 .pad__rows { overflow-y: auto; min-height: 0; }
 
-.pad__row { padding: .4rem 0; border-bottom: 1px dashed var(--ui-border, #e2e8f0); }
+.pad__headrow,
+.pad__row {
+    display: grid;
+    grid-template-columns: 1.7rem minmax(0, 1fr) 2.9rem minmax(0, 1fr) 4.6rem minmax(0, 1.2fr) 5rem 1.5rem;
+    gap: .3rem;
+    align-items: center;
+    direction: ltr;
+}
 
-.pad__line { display: flex; align-items: center; gap: .3rem; direction: ltr; }
+.pad__headrow { padding-bottom: .25rem; font-size: .72rem; font-weight: 700; color: #94a3b8; text-align: center; border-bottom: 1px solid var(--ui-border, #e2e8f0); }
+
+.pad__row { padding: .3rem 0; border-bottom: 1px dashed var(--ui-border, #e2e8f0); }
 
 .pad__in {
-    flex: 1 1 0;
     min-width: 0;
     padding: .35rem .4rem;
     font-weight: 700;
@@ -2430,7 +2438,7 @@ body:has(.fin-fabs) .fin-savebar { padding-inline-end: 12.5rem; }
 }
 
 .pad__sign {
-    flex: 0 0 1.7rem;
+    width: 1.7rem;
     height: 1.7rem;
     border: 0;
     border-radius: 50%;
@@ -2442,33 +2450,33 @@ body:has(.fin-fabs) .fin-savebar { padding-inline-end: 12.5rem; }
 
 .pad__sign.is-minus { background: #dc2626; }
 
-.pad__eq { color: #94a3b8; }
-
-.pad__res { min-width: 3.6rem; text-align: left; color: #16a34a; }
+.pad__res { text-align: left; color: #16a34a; }
 
 .pad__row.is-minus .pad__res { color: #dc2626; }
+
+.pad__bal { text-align: left; color: var(--ui-primary-strong, #4f46e5); }
 
 .pad__del { border: 0; background: transparent; color: #94a3b8; padding: .2rem .3rem; border-radius: .4rem; cursor: pointer; }
 
 .pad__del:hover { background: #fee2e2; color: #dc2626; }
 
-.pad__sub { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .25rem; font-size: .78rem; color: #64748b; }
-
-.pad__note { flex: 1; min-width: 0; border: 0; border-bottom: 1px solid transparent; background: transparent; font-size: .78rem; padding: .1rem 0; }
+.pad__note { direction: rtl; min-width: 0; border: 0; border-bottom: 1px solid var(--ui-border, #e2e8f0); background: transparent; font-size: .85rem; padding: .25rem .1rem; }
 
 .pad__note:focus { outline: none; border-bottom-color: var(--ui-primary, #6366f1); }
 
-.pad__balwrap b { color: var(--ui-primary-strong, #4f46e5); }
+.pad__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
 
-.pad__actions { display: flex; gap: .5rem; margin-top: .6rem; }
+.pad__actions .ui-btn { flex: 1 1 auto; justify-content: center; font-size: .85rem; }
 
-.pad__actions .ui-btn { flex: 1; justify-content: center; font-size: .85rem; }
+.pad__msg { min-height: 1.2rem; margin-top: .3rem; font-size: .8rem; color: #16a34a; }
+
+.pad__msg.is-bad { color: #dc2626; }
 
 .pad__total {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: .6rem;
+    margin-top: .2rem;
     padding: .5rem .7rem;
     border-radius: .7rem;
     background: var(--ui-primary-soft, #eef2ff);
@@ -2477,6 +2485,12 @@ body:has(.fin-fabs) .fin-savebar { padding-inline-end: 12.5rem; }
 
 .pad__total strong { font-size: 1.3rem; color: #16a34a; }
 
+.pad__head-actions { display: inline-flex; gap: .4rem; margin-inline-start: .5rem; }
+
 @media (max-width: 900px) {
     .pad { inset-inline: 1rem; bottom: 1rem; width: auto; max-height: 70vh; z-index: 1061; }
+    .pad__headrow { display: none; }
+    .pad__row { grid-template-columns: 1.7rem minmax(0, 1fr) 2.9rem minmax(0, 1fr) 4.6rem 1.5rem; }
+    .pad__note { grid-column: 1 / 5; }
+    .pad__bal { grid-column: 5 / 7; }
 }

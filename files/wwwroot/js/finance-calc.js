@@ -1,7 +1,8 @@
 // آلة حاسبة بسيطة في صفحات الحسابات: زر في شريط الحسابات يفتح لوحة صغيرة عائمة.
 // تقبل الأرقام العربية، و«استخدم الناتج» يضع الناتج في آخر خانة رقمية كنت تكتب فيها.
 (() => {
-    const toggle = document.querySelector("[data-calc-toggle]");
+    const toggles = [...document.querySelectorAll("[data-calc-toggle]")];
+    const toggle = toggles[0];
     const panel = document.querySelector("[data-calc]");
     if (!toggle || !panel || panel.dataset.ready) return;
     panel.dataset.ready = "1";
@@ -120,8 +121,8 @@
 
     function setOpen(open) {
         panel.hidden = !open;
-        toggle.setAttribute("aria-expanded", String(open));
-        toggle.classList.toggle("is-active", open);
+        toggles.forEach(t => { t.setAttribute("aria-expanded", String(open)); t.classList.toggle("is-active", open); });
+
         if (open) { display.focus(); preview(); }
         store.write({ open, expression: display.value });
     }
@@ -147,6 +148,22 @@
         lastField.focus();
     });
 
+    // نسخ الناتج للحافظة (إضافة بجانب «استخدم الناتج»)
+    const copyButton = panel.querySelector("[data-calc-copy]");
+    if (copyButton) copyButton.addEventListener("click", async () => {
+        if (lastValue === null) return;
+        const text = String(lastValue);
+        try { await navigator.clipboard.writeText(text); }
+        catch {
+            const temp = document.createElement("textarea");
+            temp.value = text; document.body.appendChild(temp); temp.select();
+            try { document.execCommand("copy"); } catch { /* غير متاح */ }
+            temp.remove();
+        }
+        copyButton.textContent = "نُسخ " + money(lastValue);
+        setTimeout(() => { copyButton.innerHTML = '<i class="bi bi-clipboard" aria-hidden="true"></i> نسخ الناتج'; }, 1800);
+    });
+
     panel.querySelectorAll("[data-key]").forEach(button => button.addEventListener("click", () => press(button.dataset.key)));
     display.addEventListener("input", preview);
     display.addEventListener("keydown", event => {
@@ -155,7 +172,7 @@
         else if (event.key === "Escape") { event.preventDefault(); setOpen(false); toggle.focus(); }
     });
     panel.querySelector("[data-calc-close]").addEventListener("click", () => setOpen(false));
-    toggle.addEventListener("click", () => setOpen(panel.hidden));
+    toggles.forEach(t => t.addEventListener("click", () => setOpen(panel.hidden)));
 
     const saved = store.read();
     display.value = saved.expression || "";
