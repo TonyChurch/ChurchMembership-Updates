@@ -2570,3 +2570,67 @@ header.sg-head ul.page-stats .ui-chip-stat { min-height: 1.9rem; padding: .1rem 
 header.sg-head ul.page-stats .ui-chip-stat i { width: 1.5rem; height: 1.5rem; font-size: .8rem; }
 header.sg-head ul.page-stats .ui-chip-stat strong { font-size: 1rem; }
 header.sg-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
+
+/* ---------- رأس صفحات الحسابات المرتب (finance-float.js) ---------- */
+/* العنوان وأزرار الصفحة في سطر واحد في اليمين، والبطاقات الرقمية صغيرة تحت بعضها ثم فاصل ملوّن ثم التبويبات في صفين */
+header.ui-page-header.fin-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: .6rem 1rem; }
+header.ui-page-header.fin-head .fin-head__main { display: flex; flex: 1 1 22rem; min-width: 0; flex-direction: column; align-items: flex-start; gap: .5rem; }
+header.ui-page-header.fin-head .fin-head__main > .ui-page-header__actions,
+header.ui-page-header.fin-head .fin-head__main > .fin-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0; }
+header.ui-page-header.fin-head .fin-head__main .ui-backbar { margin: 0; }
+header.ui-page-header.fin-head .fin-head__main .page-export { margin: 0; }
+header.ui-page-header.fin-head .fin-head__row .ui-backbar { order: 0; }
+header.ui-page-header.fin-head .fin-head__row .page-export { order: 1; }
+header.ui-page-header.fin-head .fin-head__row .fin-head__report { order: 2; }
+header.ui-page-header.fin-head .fin-head__row .fin-head__books { order: 3; }
+
+.fin-corner { display: flex; flex: 0 1 auto; align-items: stretch; gap: .6rem; min-width: 0; margin-inline-start: auto; }
+.fin-corner > ul.page-stats { display: flex; flex-direction: column; gap: .25rem; margin: 0; }
+.fin-corner > ul.page-stats .ui-chip-stat { min-height: 1.7rem; padding: .05rem .5rem .05rem .6rem; column-gap: .4rem; }
+.fin-corner > ul.page-stats .ui-chip-stat i { width: 1.35rem; height: 1.35rem; font-size: .75rem; }
+.fin-corner > ul.page-stats .ui-chip-stat strong { font-size: .95rem; }
+.fin-corner > ul.page-stats .ui-chip-stat span { font-size: .75rem; }
+.fin-corner__sep { align-self: stretch; width: 5px; border-radius: 4px; background: linear-gradient(180deg, #6366f1, #ec4899 55%, #f59e0b); }
+.fin-corner > nav.fin-nav { display: grid; grid-template-columns: repeat(4, auto); align-content: start; gap: .25rem; margin: 0; }
+.fin-corner > nav.fin-nav .fin-nav__item { justify-content: center; padding: .3rem .6rem; font-size: .8rem; white-space: nowrap; }
+.fin-corner > nav.fin-nav a.fin-nav__item + .fin-nav__calc { margin-inline-start: 0; }
+.fin-corner > nav.fin-nav a.fin-nav__item + .fin-nav__calc::before { display: none; }
+
+@media (max-width: 991.98px) {
+    .fin-corner { flex: 1 1 100%; flex-direction: column; }
+    .fin-corner__sep { width: auto; height: 5px; background: linear-gradient(90deg, #6366f1, #ec4899 55%, #f59e0b); }
+    .fin-corner > ul.page-stats { flex-direction: row; flex-wrap: wrap; }
+    .fin-corner > nav.fin-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* الأرصدة العائمة: تظهر عند النزول، وتتحدث تلقائيًا */
+.fin-float { position: fixed; top: .6rem; left: .6rem; z-index: 1030; display: grid; gap: .35rem; width: 8.6rem; padding: .4rem; background: var(--ui-surface, #fff); border: 1px solid var(--ui-border, #e2e8f0); border-radius: 14px; box-shadow: 0 10px 26px rgba(15, 23, 42, .18); }
+.fin-float[hidden] { display: none; }
+.fin-float__list { display: grid; gap: .25rem; margin: 0; padding: 0; list-style: none; }
+.fin-float__item { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0 .35rem; padding: .2rem .4rem; border-radius: 9px; background: var(--ui-bg, #f1f5f9); font-size: .72rem; line-height: 1.25; }
+.fin-float__item i { grid-row: span 2; font-size: .85rem; color: var(--ui-primary, #4f46e5); }
+.fin-float__item b { font-size: .88rem; }
+.fin-float__item span { color: var(--ui-text-muted, #64748b); }
+.fin-float__extra .ui-btn { width: 100%; justify-content: center; padding: .35rem .5rem; font-size: .8rem; }
+@media (max-width: 991.98px) {
+    .fin-float { inset-inline: .4rem; top: .4rem; width: auto; grid-template-columns: 1fr auto; align-items: center; }
+    .fin-float__list { grid-auto-flow: column; grid-auto-columns: 1fr; overflow-x: auto; }
+    .fin-float__item { grid-template-columns: 1fr; text-align: center; }
+    .fin-float__item i { display: none; }
+}
+@media print { .fin-float { display: none !important; } }
+
+/* تسوية المجموعة: سطر واحد (الأرقام وبجوارها الزر) ونافذة بيانات التسوية */
+.fin-settle--line { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.1rem; padding-block: .6rem; }
+.fin-settle--line h2 { font-size: .95rem; }
+.fin-settle--line .fin-settle__result { flex: 1 1 auto; }
+.fin-settle--line .fin-settle__done { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+.fin-dialog { width: min(34rem, calc(100vw - 1.5rem)); padding: 0; border: 1px solid var(--ui-border, #e2e8f0); border-radius: 16px; background: var(--ui-surface, #fff); color: inherit; box-shadow: 0 24px 60px rgba(15, 23, 42, .3); }
+.fin-dialog::backdrop { background: rgba(15, 23, 42, .45); }
+.fin-dialog__body { display: grid; gap: .7rem; padding: 1rem 1.1rem; }
+.fin-dialog__body h2 { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin: 0; font-size: 1.02rem; font-weight: 800; }
+.fin-dialog .fin-settle__form > div { flex: 1 1 9rem; }
+.fin-dialog .fin-settle__form .fin-settle__notes { flex-basis: 100%; }
+.fin-books-list { display: grid; gap: .3rem; max-height: 40vh; overflow: auto; }
+.fin-books-list > div { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .3rem .5rem; background: var(--ui-bg, #f1f5f9); border-radius: 10px; }
+.fin-books-list form { margin: 0; }
