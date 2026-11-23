@@ -65,3 +65,12 @@
     .pack-table { border-collapse: collapse; }
     .pack-section { max-width: none; }
 }
+/* صفحتا الغلاف وملف المطرانية: عمود الصفحة لا يتسع أكثر من عرضها (كان يتسع لأعرض محتوى فيُقصّ يسار الورقة عند الطباعة/الحفظ PDF) */
+.ui-page.cover-page { grid-template-columns: minmax(0, 1fr); }
+.cover-page > * { min-width: 0; }
+@media print {
+    .cover-sheet, .pack-section { width: 100%; max-width: 100%; box-sizing: border-box; }
+    .pack-table { table-layout: fixed; }
+    .pack-table th, .pack-table td { overflow-wrap: anywhere; word-break: break-word; }
+    .cover-top__logo { width: 32mm; }
+}
