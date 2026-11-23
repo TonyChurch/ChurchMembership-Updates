@@ -393,3 +393,26 @@
 @media (min-width: 768px) {
     .topbar .topbar-global-panel .topbar-daily-retreat { align-self: stretch; }
 }
+
+/* أزرار الاستماع وسطور القراءات متطابقة في خلوتي الصباح والمساء
+   (كانت قاعدة أزرار شريط المساء تكبّر أزراره فتتباعد سطوره عن الصباح) */
+@media (min-width: 768px) {
+    .topbar .topbar-daily-retreat__audio {
+        flex: 0 0 28px;
+        width: 28px;
+        height: 28px;
+        min-height: 28px;
+        padding: 0;
+        border-radius: 50%;
+    }
+
+    .topbar .topbar-daily-retreat__readings { gap: .2rem; }
+
+    .topbar .topbar-daily-retreat__audio:hover:not(:disabled),
+    .topbar .topbar-daily-retreat__audio:focus-visible,
+    .topbar .topbar-daily-retreat__audio.is-playing {
+        color: #fff;
+        background: var(--ui-gradient-primary);
+        border-color: transparent;
+    }
+}
