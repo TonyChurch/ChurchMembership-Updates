@@ -1,0 +1,360 @@
+/* =========================================================
+   رأس الصفحة العام (بطاقة الكنيسة + لوحة الشريط + خلوة الصباح والمساء)
+   ترتيب بصري فقط: لا عناصر محذوفة ولا روابط متغيرة.
+   يُحمَّل بعد mobile.css، ولا يعمل إلا من 768px فما فوق (الموبايل له شريطه الخاص).
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+    /* ---------- الخلفية والتوزيع العام ---------- */
+    .topbar {
+        background: linear-gradient(180deg, #f3f0ff 0%, #fff8f0 100%);
+        border-bottom: 1px solid #e9e2ff;
+    }
+
+    .topbar .topbar__inner {
+        align-items: stretch;
+        gap: .9rem;
+        padding-block: .6rem;
+    }
+
+    .topbar .topbar__menu { align-self: center; }
+
+    /* ---------- بطاقة الهوية (الشعار + كل نفس لها قيمة + الساعة) ---------- */
+    .topbar .topbar__brand {
+        position: relative;
+        flex: 0 0 270px;
+        padding: .65rem .85rem;
+        overflow: hidden;
+        background: linear-gradient(160deg, #ffffff 0%, #fff6e3 100%);
+        border: 1px solid #f0d9a3;
+        border-radius: 18px;
+        box-shadow: 0 8px 22px rgba(200, 155, 60, .18);
+    }
+
+    .topbar .topbar__brand::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 4px;
+        background: linear-gradient(90deg, #f59e0b, #ff8a4c, #e11d48);
+    }
+
+    .topbar .topbar__logo {
+        flex-basis: 54px;
+        width: 54px;
+        height: 54px;
+        border-width: 3px;
+        box-shadow: 0 4px 12px rgba(200, 155, 60, .35);
+    }
+
+    .topbar .topbar__brand-copy { justify-items: stretch; }
+
+    .topbar .topbar__brand-copy .topbar__value-message {
+        color: #c2410c;
+        font-size: 1.12rem;
+    }
+
+    .topbar .topbar__value-message i { color: #f59e0b; }
+
+    .topbar .topbar-church-clock {
+        margin-top: .4rem;
+        padding-top: .4rem;
+        border-top: 1px dashed rgba(200, 155, 60, .5);
+    }
+
+    .topbar .topbar-church-clock b { color: #b45309; }
+    .topbar .topbar-church-clock time { color: #3b2a14; }
+
+    /* ---------- لوحة الشريط ---------- */
+    .topbar .topbar-global-panel {
+        position: relative;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+            "identity identity"
+            "commands commands"
+            "shortcuts shortcuts"
+            "morning evening";
+        gap: .4rem .7rem;
+        padding: .7rem .9rem .6rem;
+        background: linear-gradient(135deg, #e6ecff 0%, #f1e6ff 52%, #ffeedd 100%);
+        border: 1px solid #d8d0ff;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(91, 70, 220, .16);
+    }
+
+    .topbar .topbar-global-panel::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 4px;
+        background: linear-gradient(90deg, #3b5bfd, #9b6bff, #ff8a4c, #f59e0b);
+    }
+
+    /* الصفّان الداخليان يذوبان ليصير كل عنصر خلية في شبكة اللوحة */
+    .topbar .topbar-global-panel .topbar-family-primary-row,
+    .topbar .topbar-global-panel .topbar-family-actions {
+        display: contents;
+    }
+
+    /* الاسم والوصف */
+    .topbar .topbar-global-identity {
+        grid-area: identity;
+        min-height: 0;
+        padding: .15rem .5rem 0;
+        background: transparent;
+        text-align: center;
+    }
+
+    .topbar .topbar-global-identity strong {
+        overflow: visible;
+        color: #1f2a6b;
+        font-size: 1.08rem;
+        line-height: 1.4;
+        text-overflow: clip;
+        white-space: normal;
+    }
+
+    .topbar .topbar-global-identity span {
+        display: inline-block;
+        justify-self: center;
+        margin-top: .15rem;
+        padding: .08rem .9rem;
+        color: #5b46dc;
+        background: rgba(255, 255, 255, .7);
+        border-radius: 999px;
+        font-size: .78rem;
+    }
+
+    .topbar .topbar-global-identity span::before,
+    .topbar .topbar-global-identity span::after {
+        content: "\2726";
+        margin-inline: .4rem;
+        color: #f59e0b;
+        font-size: .7rem;
+    }
+
+    /* أزرار التنقل */
+    .topbar .topbar-family-commands {
+        grid-area: commands;
+        flex-wrap: wrap;
+        gap: .3rem;
+        background: transparent;
+    }
+
+    .topbar .topbar-family-commands > * {
+        --chip: #3b5bfd;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 32px;
+        gap: .3rem;
+        padding: .2rem .55rem;
+        color: #26304f;
+        background: #fff;
+        border: 1px solid color-mix(in srgb, var(--chip) 28%, #fff);
+        border-radius: 999px;
+        box-shadow: 0 3px 8px rgba(59, 91, 253, .1);
+        font-size: .78rem;
+        font-weight: 800;
+        text-decoration: none;
+        transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+    }
+
+    .topbar .topbar-family-commands > :nth-child(2) { --chip: #0f9d77; }
+    .topbar .topbar-family-commands > :nth-child(3) { --chip: #0891b2; }
+    .topbar .topbar-family-commands > :nth-child(4) { --chip: #7c3aed; }
+    .topbar .topbar-family-commands > :nth-child(5) { --chip: #f97316; }
+    .topbar .topbar-family-commands > :nth-child(6) { --chip: #e11d48; }
+    .topbar .topbar-family-commands > :nth-child(7) { --chip: #64748b; }
+
+    /* الكلمة تظهر دائمًا هنا (كانت تُخفى في الشاشات المتوسطة لضيق المكان) */
+    .topbar .topbar-family-commands > * span { display: inline; }
+    .topbar .topbar-family-commands > * i { color: var(--chip); font-size: 1rem; }
+
+    .topbar .topbar-family-commands > a:hover,
+    .topbar .topbar-family-commands > a:focus-visible,
+    .topbar .topbar-family-commands > a.is-current,
+    .topbar .topbar-family-commands > button:hover:not(:disabled),
+    .topbar .topbar-family-commands > button:focus-visible {
+        color: #fff;
+        background: var(--chip);
+        border-color: transparent;
+        box-shadow: 0 6px 14px color-mix(in srgb, var(--chip) 40%, transparent);
+        transform: translateY(-1px);
+    }
+
+    .topbar .topbar-family-commands > a:hover i,
+    .topbar .topbar-family-commands > a:focus-visible i,
+    .topbar .topbar-family-commands > a.is-current i,
+    .topbar .topbar-family-commands > button:hover i,
+    .topbar .topbar-family-commands > button:focus-visible i {
+        color: #fff;
+    }
+
+    .topbar .topbar-family-commands > .topbar-global-command--disabled {
+        opacity: .55;
+        cursor: default;
+    }
+
+    /* السنكسار والكتاب المقدس */
+    .topbar .topbar-spiritual-shortcuts {
+        grid-area: shortcuts;
+        flex-wrap: wrap;
+        width: auto;
+        margin: 0;
+        gap: .5rem;
+    }
+
+    .topbar .topbar-spiritual-shortcut {
+        flex: 0 1 auto;
+        min-height: 32px;
+        padding: .2rem .9rem;
+        border: 0;
+        border-radius: 999px;
+        font-size: .8rem;
+    }
+
+    .topbar .topbar-spiritual-shortcut--synaxar { background: linear-gradient(135deg, #d946a8, #8b3fd9); }
+    .topbar .topbar-spiritual-shortcut--bible { background: linear-gradient(135deg, #0ea5a0, #16a34a); }
+
+    /* ---------- بطاقتا خلوة الصباح والمساء ---------- */
+    .topbar .topbar-global-panel .topbar-daily-retreat {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: .4rem;
+        min-width: 0;
+        padding: .45rem .7rem;
+        background: rgba(255, 255, 255, .82);
+        border: 1px solid #fff;
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(59, 91, 253, .1);
+    }
+
+    .topbar .topbar-global-panel .topbar-family-primary-row > .topbar-daily-retreat { grid-area: morning; }
+    .topbar .topbar-global-panel .topbar-family-actions > .topbar-daily-retreat { grid-area: evening; }
+
+    .topbar .topbar-daily-retreat__title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .45rem;
+        font-size: .95rem;
+    }
+
+    .topbar .topbar-daily-retreat__title i {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 1.9rem;
+        height: 1.9rem;
+        color: #fff;
+        border-radius: 50%;
+        font-size: .95rem;
+    }
+
+    .topbar [data-retreat-period="صباح"] .topbar-daily-retreat__title i { background: linear-gradient(135deg, #fbbf24, #f97316); }
+    .topbar [data-retreat-period="مساء"] .topbar-daily-retreat__title i { background: linear-gradient(135deg, #7c6bff, #4c2fb8); }
+
+    .topbar .topbar-daily-retreat__title small {
+        grid-column: auto;
+        margin-inline-start: auto;
+        padding: .05rem .55rem;
+        background: #f3f0ff;
+        border-radius: 999px;
+    }
+
+    .topbar .topbar-daily-retreat__readings { gap: .12rem; }
+
+    .topbar .topbar-daily-retreat__reading-link {
+        font-size: .8rem;
+    }
+
+    .topbar .topbar-daily-retreat__reading-link i { color: #f59e0b; }
+}
+
+/* ---------- شاشة عريضة: الصباح يمينًا والمساء يسارًا والاسم والأزرار في الوسط ---------- */
+@media (min-width: 1500px) {
+    .topbar .topbar__brand { flex-basis: 290px; }
+
+    .topbar .topbar-church-clock {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .3rem .4rem;
+    }
+
+    .topbar .topbar-church-clock > span {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        padding: .2rem .5rem;
+        background: #fff;
+        border: 1px solid #f3e2b8;
+        border-radius: 10px;
+    }
+
+    .topbar .topbar-church-clock > span:nth-child(2) { background: #f1f5ff; border-color: #d6e0ff; }
+    .topbar .topbar-church-clock > span:nth-child(3) { background: #f3eeff; border-color: #e0d5ff; }
+    .topbar .topbar-church-clock > span:nth-child(4) { background: #ecfbf4; border-color: #c8efdc; }
+
+    .topbar .topbar-church-clock b { font-size: .66rem; }
+
+    .topbar .topbar-global-panel {
+        grid-template-columns: minmax(215px, .9fr) minmax(0, 1.7fr) minmax(215px, .9fr);
+        grid-template-areas:
+            "morning identity evening"
+            "morning commands evening"
+            "morning shortcuts evening";
+        align-items: center;
+    }
+}
+
+/* ---------- تابلت وشاشات ضيقة (768–1099): بطاقة الهوية صفًا مستقلًا فوق اللوحة ---------- */
+@media (min-width: 768px) and (max-width: 1099.98px) {
+    .topbar .topbar__inner {
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .55rem;
+    }
+
+    .topbar .topbar__brand {
+        order: 1;
+        flex: 1 1 calc(100% - 64px);
+        padding: .45rem .8rem;
+    }
+
+    .topbar .topbar__menu { order: 2; }
+
+    .topbar .topbar-global-panel {
+        order: 3;
+        flex: 1 1 100%;
+    }
+
+    .topbar .topbar__brand-copy {
+        flex: 1 1 auto;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        column-gap: 1rem;
+    }
+
+    .topbar .topbar-church-clock {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin: 0;
+        padding: 0;
+        border: 0;
+        gap: .3rem;
+    }
+
+    .topbar .topbar-church-clock > span {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        padding: .15rem .4rem;
+        background: #fff;
+        border: 1px solid #f3e2b8;
+        border-radius: 10px;
+    }
+
+    .topbar .topbar-church-clock b { font-size: .62rem; }
+    .topbar .topbar-church-clock time { font-size: .72rem; }
+}
