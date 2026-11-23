@@ -2555,3 +2555,18 @@ a.fin-nav__item + .fin-nav__calc::before {
 }
 
 .pad__form-actions { align-self: center; margin-inline-start: .3rem; }
+
+/* صفحة «مصروفات مشتركة»: العنوان ثم رجوع وتصدير في سطر واحد، والبطاقات الرقمية مصغّرة في الجهة اليسرى */
+header.page-head--grid.sg-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .6rem; }
+header.sg-head .ui-page-header__title { flex: 1 1 22rem; min-width: 0; }
+header.sg-head > .ui-backbar { order: 1; }
+header.sg-head > .page-export { order: 2; }
+header.sg-head > ul.page-stats { order: 3; }
+header.sg-head .ui-page-header__title p { margin: 0; }
+header.sg-head > .ui-backbar { margin: 0; }
+header.sg-head > .page-export { margin: 0; }
+header.sg-head > ul.page-stats { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0; margin-inline-start: auto; }
+header.sg-head ul.page-stats .ui-chip-stat { min-height: 1.9rem; padding: .1rem .55rem .1rem .65rem; column-gap: .4rem; }
+header.sg-head ul.page-stats .ui-chip-stat i { width: 1.5rem; height: 1.5rem; font-size: .8rem; }
+header.sg-head ul.page-stats .ui-chip-stat strong { font-size: 1rem; }
+header.sg-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
