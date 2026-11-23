@@ -90,6 +90,7 @@
     renderFloat();
 
     function updateVisibility() {
+        if (page.hasAttribute('data-float-always')) { float.hidden = false; return; } // صفحة مجموعة التسوية: الأرصدة ظاهرة دائمًا
         var rect = anchor.getBoundingClientRect();
         float.hidden = !(rect.bottom <= 0 || rect.top >= window.innerHeight);
     }
