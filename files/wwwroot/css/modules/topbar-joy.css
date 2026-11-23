@@ -388,3 +388,8 @@
     .topbar .topbar-church-clock time { font-size: .8rem; }
     .topbar .topbar-church-clock > span:nth-child(3) time { font-size: .74rem; }
 }
+
+/* بطاقتا خلوة الصباح والمساء بارتفاع واحد */
+@media (min-width: 768px) {
+    .topbar .topbar-global-panel .topbar-daily-retreat { align-self: stretch; }
+}
