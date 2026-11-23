@@ -1,0 +1,737 @@
+/* =========================================================
+   هوية الألوان «Corporate Navy» — طبقة ألوان فقط (2026-11-23)
+   ---------------------------------------------------------
+   - تُحمَّل آخر شيء في _Layout و _LoginLayout، فتعلو على الألوان القديمة دون تعديل أي ملف قديم.
+   - التصميم السابق محفوظ كما هو في كل ملفات CSS الأخرى (لم يُغيَّر فيها حرف).
+   - للرجوع للتصميم السابق: احذف سطر navy-theme.css من Views/Shared/_Layout.cshtml
+     ومن Views/Account/_LoginLayout.cshtml (أو احذف هذا الملف)، ثم انشر.
+   - ألوان فقط: لا أحجام ولا مسافات ولا أماكن ولا خطوط.
+   - كل قاعدة مسبوقة بـ html لتعلو على ملفات الوحدات التي تُحمَّل داخل الصفحات بعد هذا الملف.
+   ========================================================= */
+
+:root {
+    /* اللوحة */
+    --navy-primary: #17243A;
+    --navy-secondary: #26364F;
+    --navy-accent: #2563A6;
+    --navy-accent-strong: #1E4F86;
+    --navy-accent-soft: #E8F0FA;
+    --navy-side: #F1F5F9;
+    --navy-side-active-bg: #DBEAFE;
+    --navy-side-active-text: #1D4ED8;
+    --navy-line: #E2E8F0;
+    --navy-gold: #B99755;
+    --navy-emerald: #0F766E;
+
+    /* متغيرات التصميم العام (theme.css) */
+    --ui-primary: #2563A6;
+    --ui-primary-strong: #1E4F86;
+    --ui-primary-soft: #E8F0FA;
+    --ui-accent: #B99755;
+    --ui-accent-soft: #F7F1E3;
+    --ui-success: #15803D;
+    --ui-success-soft: #DCFCE7;
+    --ui-warning: #D97706;
+    --ui-warning-soft: #FEF3C7;
+    --ui-danger: #DC2626;
+    --ui-danger-soft: #FEE2E2;
+    --ui-violet: #26364F;
+    --ui-violet-soft: #E2E8F0;
+    --ui-slate: #64748B;
+    --ui-slate-soft: #F1F5F9;
+    --ui-bg: #F8FAFC;
+    --ui-surface: #FFFFFF;
+    --ui-border: #E2E8F0;
+    --ui-text: #172033;
+    --ui-text-muted: #64748B;
+    --ui-gradient-primary: #2563A6;
+    --ui-gradient-accent: #2563A6;
+    --ui-shadow: 0 6px 20px rgba(23, 36, 58, .07);
+    --ui-shadow-lg: 0 14px 32px rgba(23, 36, 58, .12);
+
+    /* القائمة الجانبية (rightSidebar.css و sidebar-theme.css) */
+    --sidebar-navy: #17243A;
+    --sidebar-navy-soft: #26364F;
+    --sidebar-gold: #B99755;
+    --side-ink: #F1F5F9;
+    --side-deep: #17243A;
+    --side-emerald: #F1F5F9;
+    --side-gold: #B99755;
+    --side-text: #17243A;
+    --side-muted: #64748B;
+    --side-line: #E2E8F0;
+    --side-glass: #FFFFFF;
+
+    /* Bootstrap */
+    --bs-primary: #2563A6;
+    --bs-primary-rgb: 37, 99, 166;
+    --bs-success: #15803D;
+    --bs-success-rgb: 21, 128, 61;
+    --bs-warning: #D97706;
+    --bs-warning-rgb: 217, 119, 6;
+    --bs-danger: #DC2626;
+    --bs-danger-rgb: 220, 38, 38;
+    --bs-link-color: #2563A6;
+    --bs-link-color-rgb: 37, 99, 166;
+    --bs-link-hover-color: #1E4F86;
+    --bs-link-hover-color-rgb: 30, 79, 134;
+    --bs-body-color: #172033;
+    --bs-border-color: #E2E8F0;
+}
+
+html body { background-color: #F8FAFC; }
+html .app-shell { background: #F8FAFC; }
+
+html .btn-primary {
+    --bs-btn-bg: #2563A6; --bs-btn-border-color: #2563A6;
+    --bs-btn-hover-bg: #1E4F86; --bs-btn-hover-border-color: #1E4F86;
+    --bs-btn-active-bg: #1E4F86; --bs-btn-active-border-color: #1E4F86;
+    --bs-btn-disabled-bg: #2563A6; --bs-btn-disabled-border-color: #2563A6;
+}
+
+/* =========================================================
+   1) التدرجات اللونية في كل الصفحات ← ألوان ثابتة (مولَّدة آليًا من ملفات CSS القائمة)
+   ========================================================= */
+
+/* theme.css */
+html .ui-btn--excel { background: #15803D; }
+/* theme.css */
+html .ui-chip-stat { --chip-gradient: #2563A6; }
+/* theme.css */
+html .ui-chip-stat--violet { --chip-gradient: #26364F; }
+/* theme.css */
+html .ui-chip-stat--pink { --chip-gradient: #26364F; }
+/* theme.css */
+html .ui-chip-stat--green { --chip-gradient: #0F766E; }
+/* theme.css */
+html .ui-chip-stat--orange { --chip-gradient: #FEF3C7; }
+/* theme.css */
+html .ui-chip-stat--red { --chip-gradient: #DC2626; }
+/* theme.css */
+html .ui-chip-stat--gold { --chip-gradient: #D97706; }
+/* theme.css */
+html .ui-birthdays { background: #F1F5F9; }
+/* theme.css */
+html .ui-birthdays__item.has-items { background: #DC2626; }
+/* theme.css */
+html .ui-filter { background: #F1F5F9; }
+/* theme.css */
+html .ui-back { background: #2563A6; }
+/* theme.css */
+html .ui-btn--success { background: #15803D; }
+/* theme.css */
+html .ui-btn--danger { background: #DC2626; }
+/* theme.css */
+html .ui-toggle input:checked + span { background: #26364F; }
+/* theme.css */
+html .labels-page__icon { background: #26364F; }
+/* theme.css */
+html .showcase-banner { background: #FEF3C7; }
+/* theme.css */
+html .edu-top__art::before { background: none; }
+/* modules/account.css */
+html .account-page { background: #F1F5F9; }
+/* modules/account.css */
+html .login__art::before { background: none; }
+/* modules/account.css */
+html .login__denied-icon { background: #DC2626; }
+/* modules/archive.css */
+html .archive__icon { background: #26364F; }
+/* modules/areas.css */
+html .area-card { background: var(--ui-surface); }
+/* modules/areas.css */
+html .classes-group { background: var(--ui-surface); }
+/* modules/birthdays-report.css */
+html .birthdays-report__icon { background: #26364F; }
+/* modules/church-schedule.css */
+html .church-schedule__icon { background: #26364F; }
+/* modules/clinic.css */
+html .clinic__icon { background: #26364F; }
+/* modules/dashboard.css */
+html .dash-stat { background: var(--ui-surface); }
+/* modules/dashboard.css */
+html .dashx-hero { background: #26364F; }
+/* modules/deacons.css */
+html .deacons__icon { background: #26364F; }
+/* modules/duties.css */
+html .duties-card__bar b { background: #15803D; }
+/* modules/education.css */
+html .att-sheet__head { background: #F1F5F9; }
+/* modules/education.css */
+html .att-bar > i { background: #15803D; }
+/* modules/education.css */
+html .att-bar.is-low > i { background: #D97706; }
+/* modules/education.css */
+html .att-rep__head { background: #F1F5F9; }
+/* modules/events.css */
+html .events-row.is-today { background: var(--ui-surface); }
+/* modules/families-index.css */
+html .families-events { background: #F1F5F9; }
+/* modules/families-index.css */
+html .families-incomplete { background: #F1F5F9; }
+/* modules/families-index.css */
+html .families-care { background: #F1F5F9; }
+/* modules/families-index.css */
+html .families-care .ui-birthdays__item.has-items { background: #2563A6; }
+/* modules/family-builder.css */
+html .fb-progress__bar span { background: #64748B; }
+/* modules/family-builder.css */
+html .fb-person { background: var(--ui-surface); }
+/* modules/family-file.css */
+html .family-hero { background: var(--ui-surface); }
+/* modules/family-file.css */
+html .family-hero__icon { background: #26364F; }
+/* modules/family-file.css */
+html .family-v2 .families-save-btn,
+html .family-v2 .family-visit-add-btn,
+html .family-v2 .family-visit-save-btn,
+html .family-v2 .families-primary-btn { background: #15803D; }
+/* modules/family-profile.css */
+html .person-tile { background: var(--ui-surface); }
+/* modules/family-profile.css */
+html .fp-head { background: var(--ui-surface); }
+/* modules/family-profile.css */
+html .fp-head__icon { background: #26364F; }
+/* modules/family-profile.css */
+html .person-tile--add .person-tile__avatar { background: #26364F; }
+/* modules/family-profile.css */
+html .fp-alert--today.has-items { background: #DC2626; }
+/* modules/family-profile.css */
+html .fp-alert--soon.has-items { background: #FEF3C7; }
+/* modules/finance.css */
+html .fin-strip__cell--in { background: #15803D; }
+/* modules/finance.css */
+html .fin-strip__cell--out { background: #DC2626; }
+/* modules/finance.css */
+html .fin-strip__cell--net { background: #2563A6; }
+/* modules/finance.css */
+html .fin-strip__cell--net.is-negative { background: #DC2626; }
+/* modules/finance.css */
+html .fin-btn-back { background: #15803D; }
+/* modules/finance.css */
+html .fin-strip__cell--carry { background: #D97706; }
+/* modules/finance.css */
+html .fin-account { background: var(--ui-surface); }
+/* modules/finance.css */
+html .bro-church { background: #26364F; }
+/* modules/finance.css */
+html .bsv-church-total { background: #26364F; }
+/* modules/finance.css */
+html .fin-corner__sep { background: #26364F; }
+/* modules/finance.css */
+html .fin-corner__sep { background: #26364F; }
+/* modules/finance.css */
+html .fin-filter a.fin-filter__pack { background: #15803D; }
+/* modules/greetings.css */
+html .greetings__icon { background: #26364F; }
+/* modules/help.css */
+html .help-guide__icon { background: #26364F; }
+/* modules/hubs.css */
+html .hub-site { background: #0F766E; }
+/* modules/jobs.css */
+html .jobs__icon { background: #26364F; }
+/* modules/jobs.css */
+html .jobs .nursery-card__icon { background: #26364F; }
+/* modules/library.css */
+html .library__icon { background: #26364F; }
+/* modules/member-profile.css */
+html .profile-hero { background: var(--ui-surface); }
+/* modules/member-profile.css */
+html .profile-hero--female .profile-hero__avatar { background: #BE185D; }
+/* modules/member-profile.css */
+html .profile-care__card { background: var(--ui-surface); }
+/* modules/member-profile.css */
+html .member-edit__avatar.is-female { background: #BE185D; }
+/* modules/member-profile.css */
+html .profile-assign { background: #F1F5F9; }
+/* modules/member-profile.css */
+html .profile-assign > i { background: #D97706; }
+/* modules/member-profile.css */
+html .profile-serve { background: #2563A6; }
+/* modules/members-index.css */
+html .members-reminders { background: #F1F5F9; }
+/* modules/members-index.css */
+html .members-reminders__done { background: #15803D; }
+/* modules/members-index.css */
+html .members-top__art::before { background: none; }
+/* modules/members-index.css */
+html .members-care__btn--done:hover { background: #15803D; }
+/* modules/members-index.css */
+html .members-top .ui-filter { background: #FEF3C7; }
+/* modules/members-index.css */
+html .members-bulk { background: #FEF3C7; }
+/* modules/nursery.css */
+html .nursery__icon { background: #26364F; }
+/* modules/nursery.css */
+html .nursery-card__icon { background: #26364F; }
+/* modules/nursery.css */
+html .nursery-brand-art::before { background: none; }
+/* modules/nursery.css */
+html .nursery-birthday.is-today { background: #FEF3C7; }
+/* modules/portal-forms.css */
+html .pforms-bars__bar b { background: #26364F; }
+/* modules/portal-visits.css */
+html .pvis__bar b { background: #15803D; }
+/* modules/read-document.css */
+html .read-doc__icon { background: #26364F; }
+/* modules/reports.css */
+html .reports__icon { background: #26364F; }
+/* modules/roster.css */
+html .roster-table--servants thead tr { background: #D97706; }
+/* modules/roster.css */
+html .distribute-remove input:checked + span { background: #DC2626; }
+/* modules/roster.css */
+html .distribute-bulk { background: #FEF3C7; }
+/* modules/roster.css */
+html .roster-add__btn--servant { background: #D97706; }
+/* modules/roster.css */
+html .roster-add__btn--served { background: #15803D; }
+/* modules/roster.css */
+html .distribute-table .distribute-more { background: #15803D; }
+/* modules/roster.css */
+html .ui-chip-stat--male { --chip-gradient: #2563A6; }
+/* modules/roster.css */
+html .ui-chip-stat--female { --chip-gradient: #BE185D; }
+/* modules/roster.css */
+html .ui-chip-stat--unknown { --chip-gradient: #2563A6; }
+/* modules/sacraments.css */
+html .sacraments__icon { background: #26364F; }
+/* modules/seasons.css */
+html .seasons__icon { background: #26364F; }
+/* modules/servant-attendance.css */
+html .honor-board { background: #FEF3C7; }
+/* modules/servant-attendance.css */
+html .sa-stats__month { background: #F1F5F9; }
+/* modules/servants-index.css */
+html .servants-year__form { background: #F1F5F9; }
+/* modules/servants-index.css */
+html .servant-dups__icon { background: #26364F; }
+/* modules/special-categories.css */
+html .special-categories__icon { background: #26364F; }
+/* modules/trips.css */
+html .trips__progress b { background: #0F766E; }
+/* modules/visits.css */
+html .visits__icon { background: #26364F; }
+/* modules/workshop.css */
+html .workshop__icon { background: #26364F; }
+
+/* تصحيحات بعد التوليد الآلي */
+html .events-row.is-today { background: #EFF6FF; }
+html .fb-progress__bar span { background: #2563A6; }
+html .ui-birthdays__item.has-items { background: #2563A6; }
+html .profile-assign > i { background: #26364F; }
+
+/* =========================================================
+   2) لون واحد هادئ لكل البطاقات (بدل لون مختلف لكل بطاقة)
+   ========================================================= */
+
+html .ui-chip-stat,
+html [class*="ui-chip-stat--"] {
+    --chip-gradient: #26364F;
+    --chip-shadow: rgba(23, 36, 58, .18);
+}
+html .ui-chip-stat--male { --chip-gradient: #2563A6; }
+html .ui-chip-stat--female { --chip-gradient: #BE185D; }
+
+html .dash-stat,
+html [class*="dash-stat--"],
+html .dash-quick__item,
+html [class*="dash-quick__item--"],
+html .dashx-kpi,
+html .dashx-hero__kpis a,
+html .dashx-hero__kpis [class*="--"] {
+    --tint: #2563A6;
+    --tint-soft: #E8F0FA;
+}
+
+html .ui-section--pink { --section-color: #26364F; --section-soft: #E2E8F0; }
+
+/* =========================================================
+   3) القائمة الجانبية: فاتحة #F1F5F9
+   ========================================================= */
+
+html .right-sidebar,
+html .right-sidebar-offcanvas {
+    color: #17243A;
+    background: #F1F5F9;
+}
+
+html .app-shell__sidebar { box-shadow: -1px 0 0 #E2E8F0; }
+html .right-sidebar-offcanvas { border-left-color: #E2E8F0; }
+html .right-sidebar__header { border-bottom-color: #E2E8F0; }
+
+html .right-sidebar__brand,
+html .right-sidebar__brand-text,
+html .right-sidebar__brand strong { color: #17243A; }
+
+html .right-sidebar__brand-mark {
+    color: #FFFFFF;
+    background: #B99755;
+    box-shadow: none;
+}
+
+html .right-sidebar__icon-btn {
+    color: #26364F;
+    background: #FFFFFF;
+    border-color: #E2E8F0;
+}
+html .right-sidebar__icon-btn:hover,
+html .right-sidebar__icon-btn:focus {
+    color: #1D4ED8;
+    background: #DBEAFE;
+    border-color: #BFDBFE;
+}
+
+/* بطاقة المستخدم */
+html .right-sidebar__user-toggle {
+    color: #17243A;
+    background: #FFFFFF;
+    border-color: #E2E8F0;
+    box-shadow: 0 1px 2px rgba(23, 36, 58, .06);
+}
+html .right-sidebar__user-toggle:hover,
+html .right-sidebar__user-toggle:focus-visible,
+html .right-sidebar__user-toggle[aria-expanded="true"] {
+    background: #FFFFFF;
+    border-color: #BFDBFE;
+}
+html .right-sidebar__user-avatar {
+    color: #FFFFFF;
+    background: #17243A;
+    border-color: #FFFFFF;
+    box-shadow: 0 0 0 2px #B99755;
+}
+html .right-sidebar__user-avatar::after { background: #15803D; border-color: #FFFFFF; }
+html .right-sidebar__user-text strong { color: #17243A; }
+html .right-sidebar__user-text small {
+    color: #26364F;
+    background: #E2E8F0;
+}
+html body.sidebar-collapsed .right-sidebar--desktop .right-sidebar__user-toggle {
+    background: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/* البنود */
+html .right-sidebar__nav { scrollbar-color: #CBD5E1 transparent; }
+html .right-sidebar__nav::-webkit-scrollbar-thumb { background: #CBD5E1; }
+
+html .right-sidebar__link,
+html .right-sidebar__group-toggle,
+html .right-sidebar__sublink { color: #17243A; }
+
+html .right-sidebar__link > i:first-child,
+html [class*="right-sidebar__"] > i.bi:first-child {
+    --chip: #E2E8F0;
+}
+html .right-sidebar__link > i:first-child {
+    color: #26364F;
+    background: #E2E8F0;
+    box-shadow: none;
+}
+html .right-sidebar__chevron { color: #64748B; }
+
+html .right-sidebar__link:hover,
+html .right-sidebar__link:focus,
+html .right-sidebar__sublink:hover,
+html .right-sidebar__sublink:focus,
+html .right-sidebar__group-toggle.is-active {
+    color: #17243A;
+    background: #E2E8F0;
+}
+
+html a.right-sidebar__link.is-active,
+html a.right-sidebar__link.is-active:hover,
+html a.right-sidebar__link.is-active:focus {
+    color: #1D4ED8;
+    background: #DBEAFE;
+    box-shadow: none;
+}
+html a.right-sidebar__link.is-active > i:first-child {
+    color: #FFFFFF;
+    background: #1D4ED8;
+}
+
+/* القوائم الفرعية */
+html .right-sidebar__submenu {
+    background: #FFFFFF;
+    border-color: #E2E8F0;
+    box-shadow: 0 1px 2px rgba(23, 36, 58, .06);
+}
+html .right-sidebar__submenu .right-sidebar__sublink { color: #17243A; }
+html .right-sidebar__sublink > i:first-child,
+html .right-sidebar__submenu .right-sidebar__sublink > i:first-child,
+html .right-sidebar__submenu .right-sidebar__subchevron { color: #26364F; }
+html .right-sidebar__submenu .right-sidebar__sublink:hover,
+html .right-sidebar__submenu .right-sidebar__sublink:focus,
+html .right-sidebar__submenu .right-sidebar__subgroup-toggle.is-open,
+html .right-sidebar__submenu .right-sidebar__subgroup-toggle[aria-expanded="true"] {
+    color: #17243A;
+    background: #F1F5F9;
+}
+html .right-sidebar__sublink.is-active,
+html .right-sidebar__submenu .right-sidebar__sublink.is-active {
+    color: #1D4ED8;
+    background: #DBEAFE;
+    box-shadow: none;
+}
+html .right-sidebar__sublink.is-active > i:first-child,
+html .right-sidebar__submenu .right-sidebar__sublink.is-active > i:first-child,
+html .right-sidebar__sublink:hover > i:first-child { color: #1D4ED8; }
+html .right-sidebar__sublink.is-active::before,
+html .right-sidebar__submenu .right-sidebar__sublink.is-active::before { background: #1D4ED8; }
+html .right-sidebar__subsubmenu { border-inline-start-color: #E2E8F0; }
+html .right-sidebar__subgroup-toggle.is-open,
+html .right-sidebar__subgroup-toggle[aria-expanded="true"] { color: #17243A; }
+
+html .right-sidebar__soon { color: #26364F; background: #E2E8F0; }
+
+/* رسالة اليوم داخل القائمة */
+html .right-sidebar-daily-message {
+    background: #FFFFFF;
+    border-color: #E2E8F0;
+}
+html .right-sidebar-daily-message__heading { color: #26364F; border-bottom-color: #E2E8F0; }
+html .right-sidebar-daily-message__heading i { color: #B99755; }
+html .right-sidebar-daily-message__heading time { color: #64748B; }
+html .right-sidebar-daily-message__card,
+html a.right-sidebar-daily-message__card:hover,
+html a.right-sidebar-daily-message__card:focus-visible {
+    color: #172033;
+    background: #F8FAFC;
+    border-inline-start-color: #B99755;
+}
+html a.right-sidebar-daily-message__card:hover,
+html a.right-sidebar-daily-message__card:focus-visible { background: #F1F5F9; }
+html .right-sidebar-daily-message__card--birthdays { border-inline-start-color: #2563A6; }
+html .right-sidebar-daily-message__card--practice { border-inline-start-color: #0F766E; }
+html .right-sidebar-daily-message__card small { color: #26364F; }
+html .right-sidebar-daily-message__card--birthdays small { color: #2563A6; }
+html .right-sidebar-daily-message__card--practice small { color: #0F766E; }
+html .right-sidebar-daily-message__chip {
+    color: #17243A;
+    background: #F8FAFC;
+    border-color: #E2E8F0;
+}
+html .right-sidebar-daily-message__chip > i { color: #B99755; }
+html .right-sidebar-daily-message__chip:hover,
+html .right-sidebar-daily-message__chip:focus-visible { color: #1D4ED8; background: #DBEAFE; }
+
+html .right-sidebar__photo {
+    border-color: #E2E8F0;
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(23, 36, 58, .08);
+}
+html .right-sidebar__photo.is-cutout { border: 0; background: none; box-shadow: none; }
+html .right-sidebar__photo.is-cutout img { filter: drop-shadow(0 4px 8px rgba(23, 36, 58, .18)); }
+
+/* جرس الإشعارات وخانة البحث في القائمة */
+html .activity-bell--side { color: #26364F; background: #FFFFFF; }
+
+/* =========================================================
+   4) الشريط العلوي: كحلي #17243A ونص أبيض
+   ========================================================= */
+
+html .topbar {
+    color: #FFFFFF;
+    background: #17243A;
+    border-bottom-color: #17243A;
+}
+
+html .topbar__menu { color: #FFFFFF; background: #2563A6; }
+html .topbar__mobile-title strong,
+html .topbar__page-title { color: #FFFFFF; }
+html .topbar__mobile-title small { color: #CBD5E1; }
+
+/* بطاقة الهوية: الشعار + كل نفس لها قيمة + الساعة */
+html .topbar .topbar__brand,
+html .topbar .topbar__brand:hover,
+html .topbar .topbar__brand:focus {
+    color: #FFFFFF;
+    background: #26364F;
+    border-color: rgba(255, 255, 255, .08);
+    box-shadow: none;
+}
+html .topbar .topbar__brand::before { background: #B99755; }
+html .topbar .topbar__logo { border-color: #B99755; background: #FFFFFF; box-shadow: none; }
+html .topbar .topbar__brand-copy .topbar__value-message,
+html .topbar .topbar__value-message { color: #FFFFFF; }
+html .topbar .topbar__value-message i { color: #B99755; }
+html .topbar .topbar__brand-copy small { color: #CBD5E1; }
+html .topbar .topbar-church-clock { border-top-color: rgba(255, 255, 255, .14); }
+html .topbar .topbar-church-clock b { color: #CBD5E1; }
+html .topbar .topbar-church-clock time { color: #FFFFFF; }
+html .topbar .topbar-church-clock > span,
+html .topbar .topbar-church-clock > span:nth-child(n) {
+    background: rgba(255, 255, 255, .06);
+    border-color: rgba(255, 255, 255, .12);
+}
+
+/* لوحة الشريط: الاسم والأزرار والخلوات */
+html .topbar .topbar-global-panel,
+html .topbar-family-panel {
+    color: #FFFFFF;
+    background: #26364F;
+    border-color: rgba(255, 255, 255, .08);
+    box-shadow: none;
+}
+html .topbar .topbar-global-panel::before { background: #B99755; }
+html .topbar-family-context,
+html .topbar-family-actions,
+html .topbar-family-commands { background: transparent; }
+html .topbar .topbar-global-identity,
+html .topbar-global-identity { color: #FFFFFF; background: transparent; }
+html .topbar .topbar-global-identity strong,
+html .topbar-global-identity strong { color: #FFFFFF; }
+html .topbar .topbar-global-identity span,
+html .topbar-global-identity span {
+    color: #E2E8F0;
+    background: rgba(255, 255, 255, .08);
+}
+html .topbar .topbar-global-identity span::before,
+html .topbar .topbar-global-identity span::after { color: #B99755; }
+
+/* أزرار التنقل في الشريط: لون واحد */
+html .topbar .topbar-family-commands > *,
+html .topbar .topbar-family-commands > :nth-child(n) {
+    --chip: #2563A6;
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, .08);
+    border-color: rgba(255, 255, 255, .16);
+    box-shadow: none;
+}
+html .topbar .topbar-family-commands > * i { color: #FFFFFF; }
+html .topbar .topbar-family-commands > a:hover,
+html .topbar .topbar-family-commands > a:focus-visible,
+html .topbar .topbar-family-commands > a.is-current,
+html .topbar .topbar-family-commands > button:hover:not(:disabled),
+html .topbar .topbar-family-commands > button:focus-visible,
+html .topbar-global-command.is-current,
+html .topbar-family-actions button.is-active {
+    color: #FFFFFF;
+    background: #2563A6;
+    border-color: #2563A6;
+    box-shadow: none;
+}
+html .topbar-global-command,
+html .topbar-family-actions button { color: #FFFFFF; }
+html .topbar-family-actions__add,
+html .topbar-family-actions__add:hover,
+html .topbar-family-actions__add:focus-visible {
+    color: #FFFFFF;
+    background: #2563A6;
+    border-color: #2563A6;
+}
+html .topbar-family-actions__member { color: #E2E8F0; }
+html .topbar-family-actions__separator { background: rgba(255, 255, 255, .2); }
+html .topbar-family-context span,
+html .topbar-family-context strong i { color: #B99755; }
+html .topbar-family-context strong { color: #FFFFFF; }
+
+/* السنكسار والكتاب المقدس */
+html .topbar-spiritual-shortcut,
+html .topbar .topbar-spiritual-shortcut { color: #FFFFFF; border-color: transparent; }
+html .topbar-spiritual-shortcut--synaxar,
+html .topbar .topbar-spiritual-shortcut--synaxar { background: #2563A6; }
+html .topbar-spiritual-shortcut--bible,
+html .topbar .topbar-spiritual-shortcut--bible { background: #0F766E; }
+
+/* خلوة الصباح والمساء */
+html .topbar-daily-retreat,
+html .topbar .topbar-global-panel .topbar-daily-retreat,
+html .topbar-family-actions .topbar-daily-retreat {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, .06);
+    border-color: rgba(255, 255, 255, .12);
+    box-shadow: none;
+}
+html .topbar-daily-retreat__title,
+html .topbar [data-retreat-period] .topbar-daily-retreat__title { color: #FFFFFF; }
+html .topbar [data-retreat-period] .topbar-daily-retreat__title i { color: #17243A; background: #B99755; }
+html .topbar .topbar-daily-retreat__title small,
+html .topbar-daily-retreat__title small { color: #CBD5E1; background: rgba(255, 255, 255, .08); }
+html .topbar-daily-retreat__reading-link { color: #FFFFFF; }
+html .topbar-daily-retreat__reading-link i,
+html .topbar .topbar-daily-retreat__reading-link i { color: #B99755; }
+html .topbar-daily-retreat__reading-link:hover,
+html .topbar-daily-retreat__reading-link:focus-visible { color: #DBEAFE; }
+html .topbar-daily-retreat__audio,
+html .topbar .topbar-daily-retreat__audio {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, .08);
+    border-color: rgba(255, 255, 255, .22);
+}
+html .topbar-daily-retreat__audio:hover,
+html .topbar-daily-retreat__audio:focus-visible,
+html .topbar-daily-retreat__audio.is-playing,
+html .topbar .topbar-daily-retreat__audio:hover:not(:disabled),
+html .topbar .topbar-daily-retreat__audio:focus-visible,
+html .topbar .topbar-daily-retreat__audio.is-playing {
+    color: #FFFFFF;
+    background: #2563A6;
+    border-color: #2563A6;
+}
+html .topbar-daily-retreat__loading { color: #CBD5E1; }
+
+/* الشريط الروحي اليومي تحت الرأس (آية اليوم وقول الآباء) */
+html .daily-spiritual-strip {
+    --daily-strip-background: #FFFFFF;
+    --daily-strip-text: #172033;
+    --daily-strip-heading: #17243A;
+    border-top-color: #E2E8F0;
+    border-bottom-color: #E2E8F0;
+}
+html .daily-spiritual-strip__message i,
+html .daily-spiritual-strip__message--fathers i { color: #B99755; }
+html .daily-spiritual-strip__message--notice i { color: #D97706; }
+html .daily-spiritual-strip__divider { background: #E2E8F0; }
+
+/* التذييل */
+html .app-footer { color: #E2E8F0; background: #17243A; border-top-color: #B99755; }
+html .app-footer__church { color: #B99755; }
+
+/* =========================================================
+   5) لوحة التحكم
+   ========================================================= */
+
+html .dashx-hero {
+    background: #26364F;
+    box-shadow: 0 8px 24px rgba(23, 36, 58, .14);
+}
+html .dashx-hero__cross,
+html .dashx-hero__greet,
+html .dashx-hero__dates i,
+html .dashx-hero__season.is-feast b { color: #B99755; }
+html .dashx-hero__season.is-fast b { color: #DBEAFE; }
+html .dashx-hero__actions a,
+html .dashx-hero__kpis a,
+html .dashx-hero__kpis a:hover { color: #17243A; }
+html .dashx-hero__actions a:hover { color: #2563A6; }
+html .dashx-hero__actions a i { color: #2563A6; }
+html .dashx-hero__kpis a { box-shadow: none; }
+html .dashx-kpi { border-color: #E2E8F0; }
+html .dashx-kpi small,
+html .dashx-status__item small,
+html .dashx-attention__total { color: #64748B; }
+html .dashx-alert.is-danger { background: #FEE2E2; border-color: #FECACA; }
+html .dashx-alert.is-danger > i, html .dashx-alert.is-danger b { color: #B91C1C; }
+html .dashx-alert.is-warning { background: #FEF3C7; border-color: #FDE68A; }
+html .dashx-alert.is-warning > i, html .dashx-alert.is-warning b { color: #B45309; }
+html .dashx-alert.is-info { background: #E8F0FA; border-color: #BFDBFE; }
+html .dashx-alert.is-info > i, html .dashx-alert.is-info b { color: #1E4F86; }
+html .dashx-alert.is-ok { background: #F0FDF4; border-color: #BBF7D0; }
+html .dashx-alert.is-ok > i, html .dashx-alert.is-ok b { color: #15803D; }
+html .dashx-agenda li { background: #F1F5F9; }
+html .dashx-agenda b { color: #2563A6; }
+html .dash-seasons__now { border-color: #0F766E; background: #F0FDFA; }
+html .dash-seasons__now b { color: #0F766E; }
+html .dash-seasons__now span { color: #26364F; }
+html .dash-seasons__now.is-fast { border-color: #26364F; background: #F1F5F9; }
+html .dash-seasons__now.is-fast b { color: #26364F; }
+html .dash-seasons__now.is-feast { border-color: #B99755; background: #F7F1E3; }
+html .dash-seasons__now.is-feast b { color: #8A6D2F; }
+
+@media print {
+    html .topbar, html .dashx-hero { color: #000; background: none; box-shadow: none; }
+}
