@@ -90,7 +90,8 @@
     renderFloat();
 
     function updateVisibility() {
-        if (page.hasAttribute('data-float-always')) { float.hidden = false; return; } // صفحة مجموعة التسوية: الأرصدة ظاهرة دائمًا
+        // صفحة مجموعة التسوية: الأرصدة ظاهرة دائمًا على الشاشة العريضة؛ وعلى الموبايل تظهر عند النزول فقط حتى لا تغطي أزرار الرأس وتبويباته
+        if (page.hasAttribute('data-float-always') && window.innerWidth >= 992) { float.hidden = false; return; }
         var rect = anchor.getBoundingClientRect();
         float.hidden = !(rect.bottom <= 0 || rect.top >= window.innerHeight);
     }
