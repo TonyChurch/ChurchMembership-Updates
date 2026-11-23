@@ -315,11 +315,287 @@ html .visits__icon { background: #26364F; }
 /* modules/workshop.css */
 html .workshop__icon { background: #26364F; }
 
+/* =========================================================
+   1-ب) الألوان البنفسجية والوردية والزرقاء الزاهية الثابتة ← كحلي/أزرق هادئ (مولَّدة آليًا)
+   مستثنى: ألوان الصفوف والمراحل، ألوان النوع (ذكر/أنثى)، الشهادات والطباعة.
+   ========================================================= */
+
+html .ui-chip-stat { --chip-shadow: rgba(37, 99, 166, .28); }
+html .ui-chip-stat--violet { --chip-shadow: rgba(38, 54, 79, .28); }
+html .ui-filter { border-color: #E2E8F0; }
+html .ui-filter .ui-field .form-control,
+html .ui-filter .ui-field .form-select { border-color: #E2E8F0; }
+html .ui-table thead tr { background: #26364F; }
+html .ui-table tbody tr:hover { background: rgba(37, 99, 166, .05); }
+html .ui-status--violet { color: #26364F; }
+html .ui-toggle:hover span { border-color: #26364F; }
+html .brothers-line { background: #F1F5F9; border: 1px solid #CBD5E1; }
+html .brothers-line__title { color: #26364F; }
+html .brothers-line__link { background: #26364F; }
+html .brothers-line__link:hover { background: #26364F; }
+html .person-brothers { color: #26364F; border: 1px dashed #CBD5E1; }
+html .person-brothers:hover { color: #26364F; background: #F1F5F9; }
+html .person-brothers.is-on { background: #26364F; border: 1px solid #26364F; }
+html .person-brothers.is-on:hover { background: #26364F; }
+html .page-export__menu button:hover { background: rgba(37, 99, 166, .08); }
+html .month-picker { background: #F1F5F9; border: 1px solid #CBD5E1; }
+html .month-picker > i { color: #2563A6; }
+html .area-card--violet { --area-color: #26364F; --area-soft: #F1F5F9; }
+html .classes-group__roster { color: #26364F; }
+html .classes-group { --stage-color: #2563A6; --stage-soft: #F1F5F9; }
+html .classes-group--violet { --stage-color: #26364F; --stage-soft: #F1F5F9; }
+html .dash-stat--violet { --tint: #26364F; --tint-soft: #F1F5F9; }
+html .dash-quick__item--violet { --tint: #26364F; --tint-soft: #F1F5F9; }
+html .dash-events__kind { color: #26364F; background: #F1F5F9; }
+html .dash-seasons__now span { color: #26364F; }
+html .dash-seasons__now.is-fast { border-color: #26364F; background: #F1F5F9; }
+html .dash-seasons__now.is-fast b { color: #26364F; }
+html .dashx-hero__season.is-fast b { color: #F1F5F9; }
+html .dashx-hero__actions a:hover { color: #26364F; }
+html .dashx-hero__actions a i { color: #26364F; }
+html .dashx-agenda li { background: #F1F5F9; }
+html .dashx-agenda b { color: #26364F; }
+html .deacons__sub { color: #26364F; }
+html .deacons__priest:has(input:checked) { background: #2563A6; border-color: #2563A6; }
+html .pascha__period.is-night { background: #F1F5F9; }
+html .pascha__period.is-night > i:first-child { color: #2563A6; }
+html .pascha__period.is-active { border-color: #26364F; }
+html .pascha__hour h3 { color: #26364F; }
+html .pascha__group { color: #26364F; }
+html .pascha__more summary { color: #26364F; }
+html .pascha__col { --tone: #26364F; --soft: #F1F5F9; }
+html .pascha__col--special { --tone: #26364F; --soft: #F1F5F9; }
+html .pascha__ref-input:focus { border-color: #26364F; }
+html .dr-cell--absent { color: #26364F; background: #F1F5F9; }
+html .edu-fab--teacher { background: #26364F; }
+html .edu-quick--teacher { --tone: #26364F; }
+html .att-group h3 > i { color: #2563A6; }
+html .att-group--teachers h3 > i { color: #26364F; }
+html .att-avatar { background: #F1F5F9; color: #2563A6; }
+html .att-group--teachers .att-avatar { background: #F1F5F9; color: #26364F; }
+html .att-input:focus-visible ~ .att-state { outline: 3px solid #2563A6; }
+html .att-recent a:hover { border-color: #CBD5E1; }
+html .att-recent li.is-open a { border-color: #2563A6; background: #F1F5F9; }
+html .att-who { background: #F1F5F9; color: #2563A6; }
+html .att-who--teacher { background: #F1F5F9; color: #26364F; }
+html .edu-act:hover,
+html .edu-act:focus-visible { background: #F1F5F9; border-color: #CBD5E1; color: #2563A6; }
+html .edu-act--link { color: #26364F; border-color: #CBD5E1; }
+html .edu-qlink-row > td { background: #F1F5F9; }
+html .edu-qlink__label { color: #26364F; }
+html .edu-insearch__box { border: 1px dashed #CBD5E1; background: #F1F5F9; }
+html .edu-insearch__box > i { color: #2563A6; }
+html .edu-insearch__count { color: #2563A6; }
+html .edu-insearch__tag.is-student { color: #2563A6; }
+html .edu-insearch__tag.is-teacher { background: #F1F5F9; color: #26364F; }
+html .att-teachers { border: 2px solid #E2E8F0; background: #F1F5F9; }
+html .att-teachers > h3 { color: #26364F; }
+html .att-tpick { border: 1px solid #E2E8F0; }
+html .att-tpick label { color: #26364F; }
+html .att-trow { border: 1px solid #E2E8F0; }
+html .att-dur { color: #26364F; }
+html .att-sub { color: #26364F; }
+html .att-role { border: 2px solid #CBD5E1; }
+html .att-trow .att-role__opt span { color: #26364F; background: #F1F5F9; }
+html .att-trow .att-role__opt input:checked + span { background: #26364F; }
+html .att-trow .att-role__opt input:focus-visible + span { outline: 3px solid #CBD5E1; }
+html .events-row,
+html .events-types__item--blue { --event-color: #2563A6; --event-soft: #F1F5F9; }
+html .events-row--violet,
+html .events-types__item--violet { --event-color: #26364F; --event-soft: #F1F5F9; }
+html .events-month h3 { color: #26364F; }
+html .events-day--0 { --day-strong: #2563A6; }
+html .events-day--3 { --day-bg: #F1F5F9; --day-strong: #26364F; }
+html .families-events { border-color: #E2E8F0; }
+html .families-count { color: #26364F; }
+html .families-table td.families-visit { background: rgba(37, 99, 166, .07); }
+html .families-table .families-th--visit { border-bottom: 3px solid #2563A6; }
+html .families-actions__event:hover { color: #26364F; }
+html .family-audit .bi { color: #26364F; }
+html .fb-person--violet { --tint: #26364F; --tint-soft: #F1F5F9; }
+html .fb-pane[data-tint="pink"] { --tint: #26364F; }
+html .fb-pane[data-tint="violet"] { --tint: #26364F; }
+html .fb-add--father { color: #2563A6; }
+html .fb-add--mother { color: #26364F; background: #F1F5F9; }
+html .family-hero__status.is-intensive { color: #26364F; }
+html .family-hero__chips .is-violet { color: #26364F; }
+html .family-hero__chips .is-pink { color: #26364F; background: #F1F5F9; }
+html .family-v2 .table thead th { background: #26364F; }
+html .family-v2 .table tbody tr:hover { background: rgba(37, 99, 166, .05); }
+html .profile-quick__btn--violet { --tint: #26364F; }
+html .person-tile--violet { --tint: #26364F; --tint-soft: #F1F5F9; }
+html .profile-events i { color: #26364F; }
+html .fp-head__count { color: #26364F; }
+html .fp-alert--week { background: #F1F5F9; border-color: #E2E8F0; }
+html .fp-events { --tint: #26364F; }
+html .fp-events > .fp-card-head h2 { color: #26364F; }
+html .fin-total { --fin-color: #2563A6; --fin-soft: #F1F5F9; }
+html .fin-account { --account-color: #2563A6; --account-soft: #F1F5F9; }
+html .fin-account--violet { --account-color: #26364F; --account-soft: #F1F5F9; }
+html .fin-brothers-card { border-inline-start: 4px solid #26364F; }
+html .fin-brothers-card h2 i { color: #26364F; }
+html .fin-service { --service-color: #2563A6; --service-soft: #F1F5F9; }
+html .fin-member { background: #F1F5F9; border: 1px solid #CBD5E1; }
+html .fin-member.is-active { background: #26364F; border-color: #26364F; }
+html .fin-member a { color: #26364F; }
+html .fin-member button { color: #26364F; }
+html .fin-member-link { color: #26364F; background: #F1F5F9; }
+html .fin-member-link:hover { background: #26364F; }
+html .veh-live__cell--church b { color: #2563A6; }
+html .veh-attach { color: #2563A6; }
+html .veh-fuel h3 { color: #2563A6; }
+html .veh-legend { color: #2563A6; }
+html .veh-fuel__table caption { color: #2563A6; }
+html .veh-share-check { color: #2563A6; }
+html .fin-total--blue { --fin-color: #2563A6; }
+html .fin-overview__group h2 small { background: #F1F5F9; color: #2563A6; }
+html .fin-account { --acc: #2563A6; --acc-soft: #F1F5F9; }
+html .fin-account--violet { --acc: #26364F; --acc-soft: #F1F5F9; }
+html .fin-account__nums .is-bal { color: #2563A6; }
+html .fin-overview__row:hover > td { background: #F1F5F9; }
+html .fin-overview__table .is-bal { color: #2563A6; }
+html .bsv-form { border-top: 4px solid #26364F; }
+html .bsv-form h2 { color: #26364F; }
+html .bsv-cases { border: 1px solid #CBD5E1; background: #F1F5F9; }
+html .bsv-cases legend { color: #26364F; }
+html .bsv-case:has(input:checked) { border-color: #26364F; background: #F1F5F9; }
+html .bsv-chip { border: 1px solid #CBD5E1; background: #F1F5F9; color: #26364F; }
+html .bsv-summary__chip b { background: #26364F; }
+html .bsv-summary__chip.is-active { border-color: #26364F; background: #F1F5F9; }
+html .bsv-church { background: #F1F5F9; color: #26364F; }
+html .bsv-found { border-top: 1px dashed #CBD5E1; }
+html .bsv-found h4 { color: #26364F; }
+html .bsv-new__box summary { color: #26364F; }
+html .bsv-cases__bar .is-on { background: #F1F5F9; border-color: #26364F; color: #26364F; }
+html .bsv-cost-counter { background: #F1F5F9; color: #26364F; }
+html .bsv-cost-counter b { color: #26364F; }
+html .bsv-summary__chip em { color: #26364F; }
+html .bro-items > td { background: #F1F5F9; }
+html .bro-items__list li { border: 1px solid #CBD5E1; }
+html .bro-items__date { color: #26364F; }
+html .bro-church .ui-back { color: #26364F; }
+html .bro-church .ui-back:hover { background: #F1F5F9; color: #26364F; }
+html .bro-search { border: 1px solid #CBD5E1; }
+html .bro-search__box > i { color: #26364F; }
+html .bsv-items__line { color: #26364F; }
+html .bsv-items tfoot th { border-top: 1px dashed #CBD5E1; }
+html .bsv-items tfoot .bsv-items__line { color: #26364F; }
+html .bsv-church-total { color: #26364F; border: 1px solid #26364F; }
+html .bsv-form [data-cost] { color: #2563A6; }
+html .brp-chip { background: #F1F5F9; color: #26364F; }
+html .brp-step { background: #26364F; }
+html .brp-total { color: #26364F; }
+html .bsv-case:has(input:checked) { background: #F1F5F9; }
+html .bsv-add-btn { color: #26364F; }
+html .bsv-add-btn:hover { background: #F1F5F9; color: #26364F; }
+html .bsv-wiz .bsv-wiz-bar { color: #26364F; }
+html .bsv-wiz-dots i { background: #E2E8F0; }
+html .bsv-wiz-dots i.is-on { background: #26364F; }
+html .bsv-wiz .bsv-wiz-recap { background: #F1F5F9; color: #26364F; }
+html .fin-name-hits button:hover,
+html .fin-name-hits button:focus { background: rgba(38, 54, 79, .1); }
+html .fin-fab-total--net { border-inline-start-color: #2563A6; }
+html .fin-fab-total--net strong { color: #2563A6; }
+html .fin-float__item--blue b { color: #2563A6; }
+html .greetings__item--wedding { --tone: #26364F; }
+html .greetings__item--ordination { --tone: #26364F; }
+html .greetings__item--sacrament { --tone: #2563A6; }
+html .halls { --hl: #26364F; }
+html .halls--violet { --hc: #26364F; --hs: #F1F5F9; }
+html .halls-week { background: #F1F5F9; border: 1px solid #E2E8F0; }
+html .halls-period { color: #26364F; }
+html .halls-grid .is-today { background: #F1F5F9; }
+html .halls-grid thead th.is-today small { color: #F1F5F9; }
+html .library__type--violet { --tint: #26364F; }
+html .profile-hero__chips .is-violet { color: #26364F; }
+html .profile-care__card { --care-soft: rgba(37, 99, 166, .07); }
+html .profile-care__card--communion { --care-color: #26364F; --care-soft: rgba(38, 54, 79, .09); }
+html .profile-timeline::before { background: #F1F5F9; }
+html .profile-serve__btn { color: #26364F; }
+html .profile-serve__btn:hover { color: #26364F; }
+html .member-move__target:has(input:checked) { border-color: #26364F; }
+html .member-move__person.is-main strong { color: #26364F; }
+html .members-visit__next { border: 1px solid #E2E8F0; }
+html .members-col--visit { background: rgba(37, 99, 166, .07); }
+html .members-col--communion { background: rgba(38, 54, 79, .08); }
+html .members-table .members-th--visit { border-bottom-color: #2563A6; }
+html .members-table .members-th--communion { border-bottom-color: #CBD5E1; }
+html .members-table-title__all { color: #26364F; }
+html .members-table-title__all:hover { background: #26364F; }
+html .nursery-chip--brothers { background: #F1F5F9 !important; color: #26364F !important; }
+html .nursery-nid-result.is-new { border-color: #CBD5E1; background: #F1F5F9; color: #2563A6; }
+html .nursery-ledger tr.is-opening td { background: #F1F5F9; }
+html .pforms { --pf: #26364F; --pf-soft: #F1F5F9; }
+html .pforms-item__link code { color: #26364F; }
+html .pforms-q { border: 1px solid #E2E8F0; }
+html .pvis__hours b { background: #2563A6; }
+html .rhub--indigo { --rh: #2563A6; --rh-soft: #F1F5F9; }
+html .rhub--violet { --rh: #26364F; --rh-soft: #F1F5F9; }
+html .reports__section--primary { --tone: #2563A6; }
+html .reports__section--violet { --tone: #26364F; }
+html .distribute-multi { color: #26364F; background: #F1F5F9; border: 1px solid #E2E8F0; }
+html .roster-card:hover,
+html .roster-card:focus-visible { border-color: #26364F; }
+html .roster-card--loose { border-inline-start-color: #26364F; }
+html .roster-card__head > .bi:first-child { color: #26364F; }
+html .roster-card:hover .roster-card__go { color: #26364F; }
+html .seasons__state small { color: #26364F; }
+html .seasons__state.is-fast { border-color: #26364F; background: #F1F5F9; }
+html .seasons__state.is-fast b { color: #26364F; }
+html .seasons__next--fast > i { color: #26364F; }
+html .seasons__month th { color: #26364F; border-bottom: 2px solid #E2E8F0; }
+html .seasons__row--fast i { color: #26364F; }
+html .seasons__row--fast .seasons__kind { color: #26364F; background: #F1F5F9; }
+html .sa-chip--violet { --chip: #26364F; }
+html .sa-roster__row:nth-child(even) { background: #F1F5F9; }
+html .sa-status--violet { --st: #26364F; }
+html .sa-status--wine { --st: #26364F; }
+html .sa-mark--excused { color: #26364F; }
+html .sa-stats__month { border: 1px solid #E2E8F0; }
+html .sa-stats__month strong { color: #2563A6; }
+html .sa-stats__month small { color: #2563A6; }
+html .ca-stage--violet td { --tint: #26364F; }
+html .sp-occasion--violet { --tint: #26364F; }
+html .servants-year__form { border: 1px solid #E2E8F0; }
+html .servants-year__form label { color: #26364F; }
+html .servants-year__form .form-select { border-color: #E2E8F0; }
+html .servants-bar-actions__assign { color: #26364F; border-color: #E2E8F0; }
+html .servants-place span { color: #26364F; background: #F1F5F9; }
+html .servants-source.is-directory { color: #26364F; }
+html .servants-year__month { color: #2563A6; }
+html .special-tab--violet { --tint: #26364F; --tint-soft: #F1F5F9; }
+html .special-detail--violet { --tint: #26364F; }
+html .trips-servant { background: #F1F5F9; color: #26364F; }
+html .visiting__chip:has(input:checked) { background: #F1F5F9; border-color: #26364F; color: #26364F; }
+html .visiting__sub { border-top: 1px dashed #E2E8F0; color: #26364F; }
+html .workshop .clinic-card h2 { color: #26364F; }
+html .workshop-course { border: 1px solid #CBD5E1; border-top: 4px solid #26364F; }
+html .workshop-course strong { color: #26364F; }
+html .workshop-chip { background: #F1F5F9; color: #26364F; }
+html .workshop-attend label { background: #F1F5F9; }
+html .workshop-filter .workshop-chip.is-on { background: #26364F; }
+html .clinic-row.is-leave { border-inline-start-color: #2563A6; }
+html .workshop-sheet thead th { background: #F1F5F9; color: #26364F; }
+html .workshop-sheet th.is-friday { background: #F1F5F9; }
+html .workshop-sheet th.is-current { background: #26364F; }
+html .workshop-sheet thead .workshop-sheet__name { background: #F1F5F9; }
+html .workshop-sheet td.is-leave { background: #F1F5F9; color: #2563A6; }
+html .workshop-subnav a { border: 1px solid #CBD5E1; color: #26364F; }
+html .workshop-subnav a:hover { background: #F1F5F9; color: #26364F; }
+html .workshop-subnav a.is-active { background: #26364F; border-color: #26364F; }
+html .workshop-archive-month { border: 1px solid #CBD5E1; background: #F1F5F9; }
+html .workshop-archive-month b { color: #26364F; }
+html .workshop-archive-month.is-on { border-color: #26364F; background: #F1F5F9; }
+html .workshop-archive-title { color: #26364F; }
+html .workshop-archive-days a:hover { background: #F1F5F9; }
+
 /* تصحيحات بعد التوليد الآلي */
 html .events-row.is-today { background: #EFF6FF; }
 html .fb-progress__bar span { background: #2563A6; }
 html .ui-birthdays__item.has-items { background: #2563A6; }
 html .profile-assign > i { background: #26364F; }
+html .members-top .ui-filter { background: #F1F5F9; border-color: #E2E8F0; }
+html .login__art { background: #17243A; }
 
 /* =========================================================
    2) لون واحد هادئ لكل البطاقات (بدل لون مختلف لكل بطاقة)
