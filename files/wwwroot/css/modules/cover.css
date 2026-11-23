@@ -40,3 +40,9 @@
     .cover-table .c-del, .cover-del { display: none !important; }
     .cover-table td input::placeholder, .cover-top__fields input::placeholder { color: transparent; }
 }
+.cover-fill { max-width: 820px; margin: 0 auto .8rem; background: var(--ui-surface, #fff); border: 1px solid var(--ui-border, #ddd); border-radius: 12px; padding: .6rem 1rem; }
+.cover-fill summary { cursor: pointer; font-weight: 700; }
+.cover-fill form { display: flex; flex-direction: column; gap: .6rem; margin-top: .6rem; }
+.cover-map { width: 100%; border-collapse: collapse; }
+.cover-map th, .cover-map td { border: 1px solid var(--ui-border, #ddd); padding: .25rem .5rem; text-align: right; }
+.cover-map select { min-width: 0; width: 100%; }
