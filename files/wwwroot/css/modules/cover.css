@@ -79,10 +79,25 @@
 .pack-table td[dir="ltr"], .pack-table .fin-num, .pack-statement td:nth-child(2) { white-space: nowrap; }
 .pack-subtotal td { font-weight: 800; background: #f7f7f7; }
 @media print {
-    .pack-landscape { page: pack-wide; }
+    body.pack-print-wide, body.pack-print-wide .pack-landscape { page: pack-wide; }
+    body.pack-print-wide .cover-sheet, body.pack-print-wide .pack-autonote { display: none !important; }
+    body.pack-print-wide .pack-section.pack-landscape:first-of-type, body.pack-print-wide .cover-sheet + .pack-break { break-before: auto; page-break-before: auto; }
+    body.pack-print-cover .pack-section:not(.cover-sheet) { display: none !important; }
     .pack-table { table-layout: auto; width: 100%; }
     .pack-table th, .pack-table td { font-size: 9.5pt; padding: .2rem .35rem; }
     .pack-statement .ps-amt { width: 22mm; }
     .pack-statement .ps-date { width: 22mm; }
     .pack-statement .ps-book { width: 20mm; }
+}
+/* ملف المطرانية: الوارد من الدفاتر بجوار جدول الأرصدة، فوق تفصيل المصروفات */
+.pack-heads { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 1rem; align-items: start; margin-bottom: .8rem; }
+.pack-heads caption { caption-side: top; text-align: right; font-weight: 800; padding: 0 0 .3rem; color: inherit; }
+.pack-balances th, html .pack-balances tbody th { text-align: right; font-weight: 700; background: #f3f4f6 !important; color: #111 !important; }
+.pack-balances td { width: 40%; }
+@media (max-width: 640px) { .pack-heads { grid-template-columns: 1fr; } }
+@media print { .pack-heads { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); } .pack-heads table { break-inside: avoid; } }
+/* صفحات العرض في ملف المطرانية تأخذ عرض الورقة العرضية كاملًا (277 مم):
+   المتصفح يرتّب كل الملف بعرض الغلاف الطولي، فيُعطى القسم عرضه صراحةً ويمتد يسارًا داخل الورقة العرضية */
+@media print {
+    body.pack-print-wide .pack-section.pack-landscape { width: 100%; max-width: none; }
 }
