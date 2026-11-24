@@ -2741,3 +2741,54 @@ header.ui-page-header .fin-books-actions > .fin-tools--bulk { margin: 0; }
     nav.fin-steps.fin-steps--tabs .fin-steps__arrow { display: none; }
     nav.fin-steps > .ui-auto-search.fin-steps__search { grid-column: 1 / -1; flex-basis: 100%; }
 }
+/* الأرصدة العائمة داخل ركن الأزرار: الرقم والاسم في سطر واحد */
+@media (min-width: 992px) {
+    .fin-fabs > .fin-float { padding: .3rem; gap: .25rem; }
+    .fin-fabs > .fin-float .fin-float__item { display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between; gap: .4rem; padding: .25rem .5rem; }
+    .fin-fabs > .fin-float .fin-float__item i { display: none; }
+    .fin-fabs > .fin-float .fin-float__item span { font-size: .68rem; line-height: 1.2; }
+}
+
+/* ---------- مستندات التسوية (SettlementDocuments) ---------- */
+.fin-doc-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .75rem; align-items: end; }
+.fin-doc-form__wide { grid-column: span 2; }
+.fin-doc-form__submit { display: flex; justify-content: flex-start; }
+@media (max-width: 640px) { .fin-doc-form__wide { grid-column: auto; } }
+.fin-docs__day { font-size: 1rem; margin: 1rem 0 .5rem; color: var(--ui-text); display: flex; gap: .4rem; align-items: center; }
+.fin-docs__day span { color: var(--ui-text-muted); font-weight: 400; }
+.fin-docs__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .75rem; }
+.fin-doc { margin: 0; border: 1px solid var(--ui-border); border-radius: var(--ui-radius, 10px); background: var(--ui-surface); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.fin-doc__thumb { display: flex; align-items: center; justify-content: center; height: 150px; background: var(--ui-bg); color: var(--ui-danger); font-size: 3rem; text-decoration: none; }
+.fin-doc__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.fin-doc figcaption { padding: .45rem .6rem 0; display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+.fin-doc figcaption strong { font-size: .9rem; overflow-wrap: anywhere; }
+.fin-doc figcaption span { font-size: .75rem; color: var(--ui-text-muted); overflow-wrap: anywhere; }
+.fin-doc__actions { display: flex; gap: .25rem; padding: .4rem .5rem .5rem; margin-top: auto; }
+.fin-doc__actions form { margin: 0; }
+.fin-doc__actions .ui-btn { padding: .25rem .55rem; }
+
+/* (2026-11-25) رأس صفحة الدفاتر نفسه في كل صفحات الحسابات (finance-float.js ← organizeHead): الأرصدة في الركن، وسطر أوامر واحد، والبحث في شريط تحت الرأس */
+.fin-corner > ul.fin-totals .fin-total { white-space: nowrap; }
+.fin-corner > ul.fin-totals .fin-total span i { margin-inline-end: .2rem; }
+.fin-corner > ul.fin-totals .fin-total--count { padding-block: .1rem; font-size: .74rem; }
+.fin-corner > ul.fin-totals .fin-total--count strong { font-size: .85rem; }
+@media screen { .fin-totals--print-only { display: none !important; } }
+@media print { .fin-corner > .fin-totals--clone { display: none !important; } }
+header.ui-page-header .fin-books-actions > .month-picker,
+header.ui-page-header .fin-books-actions > .fin-year,
+header.ui-page-header .fin-books-actions > .fin-period { margin: 0; }
+.fin-steps.fin-searchbar { justify-content: flex-end; margin-bottom: .6rem; }
+.fin-tools__moved form { margin: 0; }
+.fin-tools__moved form .ui-btn { width: 100%; justify-content: flex-start; }
+@media (max-width: 991.98px) {
+    .fin-corner > ul.fin-totals:has(> li:nth-child(5)) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fin-corner > ul.fin-totals .fin-total { white-space: normal; }
+}
+@media (max-width: 600px) {
+    header.ui-page-header .fin-books-actions { position: relative; }
+    header.ui-page-header .fin-books-actions > .fin-tools--bulk { position: static; }
+    header.ui-page-header .fin-books-actions > .fin-tools--bulk .fin-tools__menu { inset-inline: 0; min-width: 0; max-width: 100%; }
+    header.ui-page-header .fin-books-actions > .fin-tools--bulk .fin-tools__menu .ui-btn { white-space: normal; text-align: start; }
+}
+/* عناصر صفحات الحسابات لا تمد عرض الصفحة على الموبايل (نموذج جدول الدفاتر كان يمدها إلى نحو 600px فتخرج الأزرار خارج الشاشة) */
+.ui-page.fin-page > * { min-width: 0; }
