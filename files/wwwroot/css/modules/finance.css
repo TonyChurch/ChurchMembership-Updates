@@ -2681,3 +2681,16 @@ nav.fin-filter .fin-tools__menu a, .fin-tools__menu .ui-btn { width: 100%; justi
 [data-sg-panel][hidden] { display: none !important; }
 @media print { [data-sg-panel][hidden] { display: block !important; } .sg-tabs { display: none !important; } }
 @media (max-width: 600px) { .fin-tools { margin-inline-start: 0; } .fin-tools__menu { inset-inline-end: auto; inset-inline-start: 0; } }
+
+/* جدول الدفاتر: التحديد وقائمة «أدوات» لما يُحدَّد، ومصروفات خارج الدفاتر */
+.fin-bulk { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; flex-wrap: wrap; }
+.fin-tools.fin-tools--bulk { position: relative; margin-inline-start: 0; }
+.fin-tools.fin-tools--bulk[open] > summary { background: var(--ui-primary, #2563a6); color: #fff; }
+.fin-tools--bulk .fin-tools__menu { position: absolute; z-index: 1040; inset-inline-start: 0; inset-inline-end: auto; top: 100%; min-width: 15rem; display: flex; flex-direction: column; gap: .25rem; padding: .4rem; background: var(--ui-surface, #fff); border: 1px solid var(--ui-border, #e2e8f0); border-radius: .6rem; box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+.fin-tools--bulk .fin-tools__menu .ui-btn { justify-content: flex-start; width: 100%; }
+.fin-check { width: 2.2rem; text-align: center; }
+.fin-table tr.is-picked > td { background: rgba(37, 99, 166, .08); }
+.fin-loose__h { font-size: 1rem; margin: 1rem 0 .25rem; }
+.fin-loose__books { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0; }
+.fin-loose__book { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .7rem; border: 1px solid var(--ui-border, #e2e8f0); border-radius: 999px; cursor: pointer; }
+.fin-loose__actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
