@@ -2730,3 +2730,14 @@ body:has(.fin-fab-tools) .app-main { padding-bottom: 8rem; }
     .fin-fab.fin-fab--tool { padding: .5rem .7rem; }
 }
 .fin-fab.fin-fab--tool { white-space: nowrap; font-size: .76rem; padding-inline: .35rem; }
+
+/* (2026-11-24) أسهم تتابع العمل بين صفحات المطرانية، وخانة البحث في آخر الشريط، و«أدوات» في رأس صفحة الدفاتر */
+nav.fin-steps .fin-steps__arrow { color: var(--ui-text-muted, #64748b); font-size: .8rem; }
+nav.fin-steps > .ui-auto-search.fin-steps__search { flex: 0 1 18rem; min-width: 11rem; margin: 0 auto 0 0; margin-inline-start: auto; padding-block: .1rem; }
+nav.fin-steps > .ui-auto-search.fin-steps__search .form-control { min-height: 1.8rem; font-size: .85rem; }
+header.ui-page-header .fin-books-actions > .fin-tools--bulk { margin: 0; }
+.fin-tools__count:empty { display: none; }
+@media (max-width: 600px) {
+    nav.fin-steps.fin-steps--tabs .fin-steps__arrow { display: none; }
+    nav.fin-steps > .ui-auto-search.fin-steps__search { grid-column: 1 / -1; flex-basis: 100%; }
+}
