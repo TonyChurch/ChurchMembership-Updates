@@ -115,6 +115,26 @@
 .app-main header.ch-head ul.ch-stats > li:not(.ui-chip-stat) { grid-column: 1 / -1; }
 .app-main header.ch-head ul.ch-stats .ui-birthdays { min-height: 0; padding: .15rem .4rem; flex-wrap: wrap; }
 
+/* أرصدة بسطور ملونة (fin-chips/fin-totals) في الركن */
+.app-main header.ch-head .ch-corner > ul.ch-totals { display: flex; flex-direction: column; gap: .2rem; margin: 0; padding: 0; list-style: none; }
+.app-main header.ch-head .ch-corner > ul.ch-totals .fin-total { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; margin: 0; padding: .12rem .6rem; border-radius: 999px; font-size: .74rem; white-space: nowrap; }
+.app-main header.ch-head .ch-corner > ul.ch-totals .fin-total strong { font-size: .9rem; }
+
+/* ---------- إخوة الرب: «ما تتحمله الكنيسة» في الركن، والشهر والسنة في سطر الأوامر، والتبويبات بعد الفاصل ---------- */
+.app-main header.ch-head .ch-corner > .ch-bro-total { display: flex; align-items: flex-start; gap: .45rem; min-width: 0; max-width: 17rem; padding: .3rem .7rem; color: var(--ui-text, #172033); background: var(--ui-surface, #fff); border: 1px solid var(--ui-border, #e2e8f0); border-inline-start: 3px solid #be185d; border-radius: .8rem; }
+.app-main header.ch-head .ch-bro-total > i { font-size: 1.1rem; color: #be185d; opacity: 1; }
+.app-main header.ch-head .ch-bro-total span { display: block; font-size: .74rem; font-weight: 700; color: var(--ui-text-muted, #64748b); }
+.app-main header.ch-head .ch-bro-total strong { display: block; font-size: 1.15rem; font-weight: 900; line-height: 1.25; color: #be185d; }
+.app-main header.ch-head .ch-bro-total small { display: block; font-size: .72rem; color: var(--ui-text-muted, #64748b); opacity: 1; }
+.app-main header.ch-head .ch-bro-total a { color: var(--ui-primary, #2563a6); font-weight: 800; }
+.app-main header.ch-head .ch-actions > form.ch-bro-pick { display: inline-flex; margin: 0; padding: 0; color: inherit; background: none; box-shadow: none; border-radius: 0; }
+.app-main header.ch-head form.ch-bro-pick .bro-church__pick { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+.app-main header.ch-head form.ch-bro-pick .bro-church__pick label { display: inline-flex; align-items: center; gap: .3rem; margin: 0; font-size: .78rem; font-weight: 700; }
+.app-main header.ch-head form.ch-bro-pick .form-select { min-width: 0; width: auto; margin: 0; min-height: 2.1rem; padding-block: .2rem; font-size: .88rem; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-nav { display: grid; grid-template-columns: repeat(2, auto); align-content: start; gap: .2rem; margin: 0; padding: .3rem; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-nav .fin-nav__item { justify-content: flex-start; padding: .25rem .6rem; font-size: .78rem; white-space: nowrap; }
+@media print { .app-main header.ch-head .ch-corner > nav.ch-corner-nav { display: none; } }
+
 /* ---------- شريط تبويبات الوحدة: شرائح متجاورة، وبحث القائمة في آخره ---------- */
 .app-main nav.ch-tabs {
     display: flex;
@@ -147,6 +167,9 @@
     .app-main header.ch-head > .ch-head__main { flex-basis: 100%; }
     .app-main header.ch-head > .ch-corner { flex: 1 1 100%; flex-direction: column; margin-inline-start: 0; }
     .ch-corner__sep { width: auto; height: 3px; }
+    .app-main header.ch-head .ch-corner > .ch-bro-total { max-width: none; }
+    .app-main header.ch-head .ch-corner > nav.ch-corner-nav { display: flex; flex-wrap: nowrap; overflow-x: auto; }
+    .app-main header.ch-head .ch-corner > nav.ch-corner-nav .fin-nav__item { flex: none; }
     .app-main header.ch-head ul.ch-stats,
     .app-main header.ch-head ul.ch-stats:not(.ch-stats--many) { display: flex; flex-wrap: wrap; }
     .app-main header.ch-head ul.ch-stats .ui-chip-stat { white-space: normal; }

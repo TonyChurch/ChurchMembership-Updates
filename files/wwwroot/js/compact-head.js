@@ -30,7 +30,7 @@
 
         // ---------- سطر الأوامر ----------
         var boxes = Array.prototype.filter.call(header.children, function (child) {
-            if (child.matches('.ui-page-header__actions, .members-header__action, [data-head-actions]')) return true;
+            if (child.matches('.ui-page-header__actions, .members-header__action, .fin-actions, [data-head-actions]')) return true;
             // حاوية أزرار أخرى (مثل «الموقع الرسمي» في المراكز): كل ما فيها أزرار أو روابط
             return child !== title && child.matches('div') && !child.matches('.ui-backbar, .ui-page-header__title') && child.children.length > 0
                 && Array.prototype.every.call(child.children, function (node) { return node.matches('a.ui-btn, button.ui-btn, .page-export'); });
@@ -57,6 +57,9 @@
             return node.matches('a.ui-btn, button.ui-btn') && !node.matches('.ui-btn--ghost, .ui-btn--excel, .ui-btn--danger, .fin-btn-danger, .page-export__toggle, [data-head-tool]') && !isBack(node);
         };
         items = items.filter(function (node) { return !isBack(node); });
+        // أرصدة بسطور ملونة داخل الأوامر (ul.fin-chips / fin-totals) تذهب للركن مع الأرقام
+        var cornerTotals = items.filter(function (node) { return node.matches('ul.fin-chips, ul.fin-totals'); });
+        items = items.filter(function (node) { return cornerTotals.indexOf(node) < 0; });
         var mainBtn = items.filter(function (node) { return node.matches('[data-head-main]'); })[0]
             || items.filter(function (node) { return !isKeep(node) && isMain(node); })[0];
         var keep = items.filter(function (node) { return node !== mainBtn && isKeep(node); });
@@ -102,18 +105,63 @@
         header.classList.add('ch-head');
         header.insertBefore(headMain, header.firstChild);
         rest2.forEach(function (child) { if (child !== headMain && !child.matches('script, template, style, link')) headMain.appendChild(child); });
-        if (stats) {
-            var corner = document.createElement('div');
-            corner.className = 'ch-corner';
+        var corner = null;
+        function separator() {
             var sep = document.createElement('span');
             sep.className = 'ch-corner__sep no-print';
             sep.setAttribute('aria-hidden', 'true');
-            corner.appendChild(sep);
-            corner.appendChild(stats);
+            return sep;
+        }
+        function ensureCorner() {
+            if (corner) return corner;
+            corner = document.createElement('div');
+            corner.className = 'ch-corner';
+            corner.appendChild(separator());
+            header.appendChild(corner);
+            return corner;
+        }
+        if (stats) {
+            ensureCorner().appendChild(stats);
             stats.classList.add('ch-stats');
             if (stats.children.length > 4) stats.classList.add('ch-stats--many');
             if (stats.children.length > 8) stats.classList.add('ch-stats--lots');
-            header.appendChild(corner);
+        }
+        cornerTotals.forEach(function (list) { list.classList.add('ch-totals'); ensureCorner().appendChild(list); });
+
+        // ---------- صفحات إخوة الرب: نفس ترتيب الحسابات ----------
+        // شريط «ما تتحمله الكنيسة» الوردي (BrothersChurchBar) يتوزع: «رجوع» تحت العنوان، والمبلغ في الركن،
+        // واختيار الشهر والسنة (النموذج نفسه بخاناته المخفية) في سطر الأوامر؛ وتبويبات إخوة الرب في الركن بعد الفاصل.
+        var broBar = main.querySelector('form.bro-church');
+        if (broBar && header.closest('.fin-page')) {
+            var broBack = broBar.querySelector('a.ui-back');
+            if (broBack) {
+                var backBox = document.createElement('div');
+                backBox.className = 'ui-backbar ui-backbar--title no-print';
+                broBack.classList.remove('ui-back--card');
+                backBox.appendChild(broBack);
+                titleBox.querySelectorAll('.ui-backbar').forEach(function (old) { old.remove(); });
+                titleBox.appendChild(backBox);
+            }
+            var broTotal = broBar.querySelector('.bro-church__total');
+            if (broTotal) {
+                broTotal.classList.add('ch-bro-total');
+                var holder = ensureCorner();
+                holder.insertBefore(broTotal, holder.children[1] || null);
+            }
+            broBar.classList.add('ch-bro-pick');
+            if (broBar.querySelector('select')) {
+                if (!row.parentElement) headMain.appendChild(row);
+                var toolsMenu = row.querySelector(':scope > .ch-tools');
+                row.insertBefore(broBar, toolsMenu);
+            } else broBar.hidden = true;
+            var broNav = main.querySelector('nav.fin-nav[aria-label="إخوة الرب"]');
+            if (broNav) {
+                var holder2 = ensureCorner();
+                if (holder2.children.length > 1) holder2.appendChild(separator());
+                holder2.appendChild(broNav);
+                broNav.classList.add('ch-corner-nav');
+            }
+            header.classList.add('ch-head--bro');
         }
 
         // ---------- شريط تبويبات الوحدة تحت الرأس: شرائح، وفي آخره بحث القائمة ----------
