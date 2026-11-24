@@ -12,7 +12,8 @@
     var corner = null;
 
     // ---------- ترتيب الرأس (عند وجود بطاقات في الرأس) ----------
-    if (stats) {
+    // دفاتر المطرانية: لا يُعاد ترتيب الرأس (الأرقام سطر صغير تحت العنوان، والتبويبات في شريط الخطوات)
+    if (stats && !document.querySelector('.fin-steps')) {
         var main = document.createElement('div');
         main.className = 'fin-head__main';
         Array.prototype.slice.call(header.children).forEach(function (child) { if (child !== stats) main.appendChild(child); });

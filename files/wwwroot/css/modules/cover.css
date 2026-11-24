@@ -101,3 +101,5 @@
 @media print {
     body.pack-print-wide .pack-section.pack-landscape { width: 100%; max-width: none; }
 }
+/* ملف المطرانية على الشاشة: الجدول العريض يتمرر داخل قسمه بدل أن يوسّع الصفحة (الطباعة لا تتأثر) */
+@media screen { .pack-page .pack-section { max-width: 100%; overflow-x: auto; } }
