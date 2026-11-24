@@ -2694,3 +2694,14 @@ nav.fin-filter .fin-tools__menu a, .fin-tools__menu .ui-btn { width: 100%; justi
 .fin-loose__books { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0; }
 .fin-loose__book { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .7rem; border: 1px solid var(--ui-border, #e2e8f0); border-radius: 999px; cursor: pointer; }
 .fin-loose__actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
+
+/* (2026-11-24) شريط صفحات دفاتر المطرانية بنفس شكل تبويبات الحسابات، وفلاتر الحالة بجوار «دفتر جديد» */
+nav.fin-steps.fin-steps--tabs { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; width: 100%; padding: .35rem; background: var(--ui-surface, #fff); border: 1px solid var(--ui-border, #e2e8f0); border-radius: 1rem; box-shadow: 0 4px 14px rgba(15, 23, 42, .07); }
+nav.fin-steps.fin-steps--tabs .fin-nav__item { padding: .3rem .7rem; font-size: .8rem; white-space: nowrap; }
+nav.fin-steps.fin-steps--tabs .fin-tools__menu a { width: 100%; justify-content: flex-start; border-radius: .6rem; }
+header.ui-page-header .fin-books-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+header.ui-page-header .fin-books-actions .fin-filter { margin: 0; }
+@media (max-width: 600px) {
+    nav.fin-steps.fin-steps--tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    nav.fin-steps.fin-steps--tabs .fin-nav__item { justify-content: center; }
+}

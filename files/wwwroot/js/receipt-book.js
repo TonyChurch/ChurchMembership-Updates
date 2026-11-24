@@ -257,6 +257,11 @@
                 if (!field) return;
                 var value = values[name] == null ? '' : values[name];
                 if (field.type === 'checkbox') return;
+                // تبويب قديم ليس من بنود الغلاف: يُضاف للقائمة حتى لا يضيع عند التعديل
+                if (field.tagName === 'SELECT' && value && !Array.prototype.some.call(field.options, function (option) { return option.value === value; })) {
+                    var extra = new Option(value, value);
+                    field.insertBefore(extra, field.querySelector('option[value="__new"]'));
+                }
                 field.value = value;
                 field.dispatchEvent(new Event('change', { bubbles: true }));
             });
