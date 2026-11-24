@@ -8,6 +8,7 @@
     var header = page.querySelector(':scope > header.ui-page-header');
     if (!header) return;
     var stats = header.querySelector(':scope > ul.page-stats');
+    var headTotals = header.querySelector(':scope > ul.fin-totals'); // صفحة الدفاتر: الأرصدة مكان البطاقات
     var nav = page.querySelector(':scope > nav.fin-nav');
     var corner = null;
 
@@ -16,10 +17,11 @@
     if (stats || nav) {
         var main = document.createElement('div');
         main.className = 'fin-head__main';
-        Array.prototype.slice.call(header.children).forEach(function (child) { if (child !== stats) main.appendChild(child); });
+        Array.prototype.slice.call(header.children).forEach(function (child) { if (child !== stats && child !== headTotals) main.appendChild(child); });
         corner = document.createElement('div');
         corner.className = 'fin-corner';
         if (stats) corner.appendChild(stats);
+        if (headTotals) corner.appendChild(headTotals);
         if (nav) {
             var sep = document.createElement('span');
             sep.className = 'fin-corner__sep no-print';
@@ -74,7 +76,9 @@
     var extra = document.createElement('div');
     extra.className = 'fin-float__extra';
     float.appendChild(extra);
-    document.body.appendChild(float);
+    // بعيدًا عن رأس الصفحة: أعلى الأزرار العائمة (الآلة الحاسبة والمسودة و«دفتر جديد») أسفل يسار الصفحة
+    var fabs = document.querySelector('.fin-fabs');
+    if (fabs) fabs.insertBefore(float, fabs.firstChild); else document.body.appendChild(float);
     var template = page.querySelector('template[data-float-extra]');
     if (template) extra.appendChild(template.content.cloneNode(true));
 

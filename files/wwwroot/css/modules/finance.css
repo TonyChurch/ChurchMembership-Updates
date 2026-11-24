@@ -2709,3 +2709,24 @@ nav.fin-steps .fin-totals.fin-totals--steps { display: flex; flex-wrap: wrap; al
 nav.fin-steps .fin-totals--steps .fin-total { padding: .2rem .65rem; font-size: .8rem; }
 nav.fin-steps .fin-totals--steps .fin-total strong { font-size: .92rem; }
 nav.fin-steps .fin-totals--steps { grid-column: 1 / -1; }
+
+/* (2026-11-24) صفحة الدفاتر: الأرصدة في ركن الرأس مكان البطاقات الملونة */
+.fin-corner > ul.fin-totals { display: flex; flex-direction: column; gap: .25rem; margin: 0; padding: 0; list-style: none; }
+.fin-corner > ul.fin-totals .fin-total { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; padding: .2rem .7rem; border-radius: 999px; font-size: .8rem; }
+.fin-corner > ul.fin-totals .fin-total strong { font-size: .95rem; }
+header.ui-page-header .fin-books-actions > .fin-nav__item { padding: .4rem .9rem; }
+
+/* الآلة الحاسبة والمسودة زران عائمان فوق «دفتر جديد»، والأرصدة العائمة فوقهما (بعيدًا عن رأس الصفحة) */
+.fin-fab-tools { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+.fin-fab.fin-fab--tool { gap: .3rem; padding: .4rem .5rem; border: 1px solid var(--ui-border, #e2e8f0); background: var(--ui-surface, #fff); color: var(--ui-primary-strong, #4f46e5); font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
+.fin-fab.fin-fab--tool:hover, .fin-fab.fin-fab--tool:focus, .fin-fab.fin-fab--tool[aria-expanded="true"] { color: #fff; background: var(--ui-primary, #4f46e5); }
+body:has(.fin-fab-tools) .app-main { padding-bottom: 8rem; }
+@media (min-width: 992px) {
+    .fin-fabs > .fin-float { position: static; width: auto; }
+}
+@media (max-width: 640px) {
+    .fin-fab-tools { grid-template-columns: auto auto; }
+    .fin-fab.fin-fab--tool span { display: none; }
+    .fin-fab.fin-fab--tool { padding: .5rem .7rem; }
+}
+.fin-fab.fin-fab--tool { white-space: nowrap; font-size: .76rem; padding-inline: .35rem; }
