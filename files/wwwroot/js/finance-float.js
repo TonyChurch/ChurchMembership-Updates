@@ -4,25 +4,25 @@
 (function () {
     'use strict';
     var page = document.querySelector('.fin-page');
-    if (!page || page.classList.contains('cover-page') || page.querySelector('#finStrip')) return; // صفحة الدفتر لها بطاقاتها العائمة الحية
+    if (!page) return;
     var header = page.querySelector(':scope > header.ui-page-header');
     if (!header) return;
     var stats = header.querySelector(':scope > ul.page-stats');
     var nav = page.querySelector(':scope > nav.fin-nav');
     var corner = null;
 
-    // ---------- ترتيب الرأس (عند وجود بطاقات في الرأس) ----------
-    // دفاتر المطرانية: لا يُعاد ترتيب الرأس (الأرقام سطر صغير تحت العنوان، والتبويبات في شريط الخطوات)
-    if (stats && !document.querySelector('.fin-steps')) {
+    // ---------- ترتيب الرأس: نفس الشكل في كل صفحات الحسابات ----------
+    // العنوان وأزرار الصفحة يمينًا، وفي الركن: البطاقات الرقمية (إن وُجدت) ثم فاصل ملوّن ثم تبويبات الحسابات
+    if (stats || nav) {
         var main = document.createElement('div');
         main.className = 'fin-head__main';
         Array.prototype.slice.call(header.children).forEach(function (child) { if (child !== stats) main.appendChild(child); });
         corner = document.createElement('div');
         corner.className = 'fin-corner';
-        corner.appendChild(stats);
+        if (stats) corner.appendChild(stats);
         if (nav) {
             var sep = document.createElement('span');
-            sep.className = 'fin-corner__sep';
+            sep.className = 'fin-corner__sep no-print';
             sep.setAttribute('aria-hidden', 'true');
             corner.appendChild(sep);
             corner.appendChild(nav);
@@ -31,6 +31,9 @@
         header.appendChild(main);
         header.appendChild(corner);
     }
+
+    // الغلاف وملف المطرانية (صفحات طباعة) وصفحة الدفتر (لها بطاقاتها العائمة الحية): بلا لوحة عائمة
+    if (page.classList.contains('cover-page') || page.querySelector('#finStrip')) return;
 
     // ---------- مصدر الأرقام ----------
     // الترتيب: بطاقات الرأس، ثم قائمة data-fin-float، ثم شريط الوارد/المنصرف (fin-strip)، ثم خانات المجاميع (fin-total)
