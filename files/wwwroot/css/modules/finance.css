@@ -2705,3 +2705,7 @@ header.ui-page-header .fin-books-actions .fin-filter { margin: 0; }
     nav.fin-steps.fin-steps--tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
     nav.fin-steps.fin-steps--tabs .fin-nav__item { justify-content: center; }
 }
+nav.fin-steps .fin-totals.fin-totals--steps { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; margin: 0; padding: 0; list-style: none; }
+nav.fin-steps .fin-totals--steps .fin-total { padding: .2rem .65rem; font-size: .8rem; }
+nav.fin-steps .fin-totals--steps .fin-total strong { font-size: .92rem; }
+nav.fin-steps .fin-totals--steps { grid-column: 1 / -1; }
