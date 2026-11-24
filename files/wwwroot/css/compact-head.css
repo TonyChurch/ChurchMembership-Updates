@@ -1,0 +1,164 @@
+/* (2026-11-25) الرأس المضغوط لكل صفحات البرنامج بروح صفحات الحسابات. كل القواعد على أصناف يضيفها js/compact-head.js،
+   والسكربت لا يعمل إلا إذا حمل <body> السمة data-compact-head، فحذف السمة من _Layout يعيد الشكل السابق كما كان. */
+
+/* ---------- الرأس: العنوان وسطر الأوامر يمينًا، والأرقام في الركن ---------- */
+.app-main header.ch-head {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .5rem 1rem;
+    margin-bottom: .6rem;
+    padding-block: .1rem;
+}
+.app-main header.ch-head > .ch-head__main {
+    display: flex;
+    flex: 1 1 22rem;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .45rem;
+}
+.app-main header.ch-head .ui-page-header__title { gap: .6rem; min-width: 0; max-width: 100%; }
+.app-main header.ch-head .ui-page-header__title > div { min-width: 0; }
+.app-main header.ch-head .ui-page-header__icon { width: 2.4rem; height: 2.4rem; border-radius: 11px; font-size: 1.1rem; }
+.app-main header.ch-head h1 { font-size: 1.3rem; line-height: 1.3; }
+.app-main header.ch-head .ui-page-header__title p { font-size: .82rem; line-height: 1.4; }
+.app-main header.ch-head .ui-page-header__title .ui-backbar { margin: .25rem 0 0; }
+
+/* سطر الأوامر: الزر الأساسي ثم الفلاتر ثم «أدوات» */
+.app-main header.ch-head .ch-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+    margin: 0;
+    max-width: 100%;
+}
+.app-main header.ch-head .ch-actions > * { margin: 0; max-width: 100%; }
+.app-main header.ch-head .ch-actions form { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: 0; }
+.app-main header.ch-head .ch-actions .form-select,
+.app-main header.ch-head .ch-actions .form-control { width: auto; max-width: 100%; min-height: 2.1rem; }
+
+/* قائمة «أدوات» */
+.ch-tools { position: relative; }
+.ch-tools > summary { list-style: none; cursor: pointer; }
+.ch-tools > summary::-webkit-details-marker { display: none; }
+.ch-tools[open] > summary { background: var(--ui-primary, #2563a6); color: #fff; }
+.ch-tools__menu {
+    position: absolute;
+    z-index: 1040;
+    inset-inline-start: 0;
+    top: calc(100% + .3rem);
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    min-width: 15rem;
+    max-width: min(22rem, 92vw);
+    padding: .4rem;
+    background: var(--ui-surface, #fff);
+    border: 1px solid var(--ui-border, #e2e8f0);
+    border-radius: .7rem;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, .18);
+}
+.ch-tools__menu > * { margin: 0 !important; width: 100%; }
+.ch-tools__menu .ui-btn { width: 100%; justify-content: flex-start; text-align: start; white-space: normal; }
+.ch-tools__menu form { margin: 0; }
+.ch-tools__menu form .ui-btn { width: 100%; }
+.ch-tools__menu .page-export__toggle { width: 100%; justify-content: flex-start; }
+.ch-tools__menu .page-export__menu { position: static; box-shadow: none; }
+
+/* الركن: فاصل ملوّن ثم الأرقام صغيرة بلا بطاقات */
+.app-main header.ch-head > .ch-corner { display: flex; flex: 0 1 auto; align-items: stretch; gap: .6rem; min-width: 0; max-width: 100%; margin-inline-start: auto; }
+.ch-corner__sep { flex: none; align-self: stretch; width: 4px; border-radius: 4px; background: var(--ui-primary, #2563a6); opacity: .55; }
+.app-main header.ch-head ul.ch-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, auto));
+    grid-auto-flow: row;
+    align-content: start;
+    gap: .2rem .4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.app-main header.ch-head ul.ch-stats:not(.ch-stats--many) { grid-template-columns: minmax(0, auto); }
+.app-main header.ch-head ul.ch-stats.ch-stats--lots { grid-template-columns: repeat(3, minmax(0, auto)); }
+.app-main header.ch-head ul.ch-stats > li { min-width: 0; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .5rem;
+    min-height: 0;
+    padding: .12rem .6rem;
+    color: var(--ui-text, #172033);
+    background: var(--ui-surface, #fff);
+    border: 1px solid var(--ui-border, #e2e8f0);
+    border-inline-start: 3px solid var(--ui-primary, #2563a6);
+    border-radius: 999px;
+    box-shadow: none;
+    white-space: nowrap;
+}
+.app-main header.ch-head ul.ch-stats .ui-chip-stat::before,
+.app-main header.ch-head ul.ch-stats .ui-chip-stat::after { display: none; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat i { display: none; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat strong { font-size: .92rem; font-weight: 800; color: inherit; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat span { font-size: .74rem; font-weight: 600; color: var(--ui-text-muted, #64748b); opacity: 1; overflow: hidden; text-overflow: ellipsis; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat--green { border-inline-start-color: #15803d; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat--pink,
+.app-main header.ch-head ul.ch-stats .ui-chip-stat--red { border-inline-start-color: #dc2626; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat--orange { border-inline-start-color: #d97706; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat--gold { border-inline-start-color: #b99755; }
+.app-main header.ch-head ul.ch-stats .ui-chip-stat--violet { border-inline-start-color: #6d28d9; }
+/* عناصر أخرى داخل الأرقام (أعياد الميلاد، اختيار السنة) تأخذ السطر كله */
+.app-main header.ch-head ul.ch-stats > li:not(.ui-chip-stat) { grid-column: 1 / -1; }
+.app-main header.ch-head ul.ch-stats .ui-birthdays { min-height: 0; padding: .15rem .4rem; flex-wrap: wrap; }
+
+/* ---------- شريط تبويبات الوحدة: شرائح متجاورة، وبحث القائمة في آخره ---------- */
+.app-main nav.ch-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .25rem;
+    margin-bottom: .6rem;
+    padding: .3rem;
+    overflow: visible;
+    background: var(--ui-surface, #fff);
+    border: 1px solid var(--ui-border, #e2e8f0);
+    border-radius: 1rem;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, .06);
+}
+.app-main nav.ch-tabs .ui-tabs__item {
+    padding: .3rem .7rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: .8rem;
+    white-space: nowrap;
+}
+.app-main nav.ch-tabs .ui-tabs__item.is-active { color: #fff; background: var(--ui-primary, #2563a6); border-color: transparent; }
+.app-main nav.ch-tabs .ui-tabs__item.is-active b { color: var(--ui-primary, #2563a6); background: #fff; }
+.app-main nav.ch-tabs .ui-tabs__item:not(.is-active):hover { background: var(--ui-primary-soft, #eef2ff); }
+.app-main nav.ch-tabs > .ui-auto-search.ch-tabs__search { flex: 0 1 18rem; min-width: 11rem; margin: 0; margin-inline-start: auto; padding-block: .1rem; }
+.app-main nav.ch-tabs > .ui-auto-search.ch-tabs__search .form-control { min-height: 1.8rem; font-size: .85rem; }
+
+/* ---------- الموبايل ---------- */
+@media (max-width: 767.98px) {
+    .app-main header.ch-head > .ch-head__main { flex-basis: 100%; }
+    .app-main header.ch-head > .ch-corner { flex: 1 1 100%; flex-direction: column; margin-inline-start: 0; }
+    .ch-corner__sep { width: auto; height: 3px; }
+    .app-main header.ch-head ul.ch-stats,
+    .app-main header.ch-head ul.ch-stats:not(.ch-stats--many) { display: flex; flex-wrap: wrap; }
+    .app-main header.ch-head ul.ch-stats .ui-chip-stat { white-space: normal; }
+    .app-main header.ch-head .ch-actions { position: relative; width: 100%; }
+    .ch-actions > .ch-tools { position: static; }
+    .ch-actions > .ch-tools .ch-tools__menu { inset-inline: 0; min-width: 0; max-width: 100%; }
+    /* التبويبات سطر واحد يُسحب أفقيًا بدل عدة أسطر تدفع الجدول لأسفل */
+    .app-main nav.ch-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+    .app-main nav.ch-tabs .ui-tabs__item { flex: none; }
+    .app-main nav.ch-tabs:has(> .ch-tabs__search) { flex-wrap: wrap; }
+    .app-main nav.ch-tabs > .ui-auto-search.ch-tabs__search { flex-basis: 100%; }
+}
+@media print {
+    .ch-corner__sep, .ch-tools { display: none !important; }
+}
