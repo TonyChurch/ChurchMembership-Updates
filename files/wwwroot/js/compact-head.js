@@ -207,9 +207,10 @@
                 holder.insertBefore(broTotal, holder.children[1] || null);
             }
             broBar.classList.add('ch-bro-pick');
-            // الشهر والسنة في سطر مستقل أسفل سطر الأوامر («تكرار لشهر آخر»...)، طلب المستخدم 2026-11-25
+            // سطر واحد: الشهر والسنة ثم «تكرار لشهر آخر» ثم «أدوات» (طلب المستخدم 2026-11-25 مساءً؛ أُلغي السطر المستقل)
             if (broBar.querySelector('select')) {
-                if (row.parentElement === headMain) headMain.insertBefore(broBar, row.nextSibling); else headMain.appendChild(broBar);
+                if (!row.parentElement) headMain.appendChild(row);
+                row.insertBefore(broBar, row.firstChild);
             } else broBar.hidden = true;
             // شارة «تتحمله الكنيسة» الحية في نموذج «تسجيل خدمة» تأخذ مكان رقم «تتحمله الكنيسة» في الركن،
             // وتبقى العنصر نفسه فيحدّثها سكربت الصفحة أثناء الكتابة
@@ -489,12 +490,19 @@
     function scheduleSticky() { clearTimeout(stickyTimer); stickyTimer = setTimeout(stickyHeads, 200); }
 
     function init() {
-        run();
-        collapseFilters();
+        try {
+            run();
+            collapseFilters();
+        } finally {
+            // الرأس كان مخفيًا حتى يكتمل ترتيبه (لا يظهر الشكل القديم لحظة F5)؛ يظهر الآن حتى لو حدث خطأ
+            document.documentElement.classList.add('ch-ready');
+        }
         stickyHeads();
         window.addEventListener('load', scheduleSticky);
         window.addEventListener('resize', scheduleSticky);
     }
 
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    // يعمل فورًا (السكربت بعد </main> فالرأس كله موجود)، إلا في صفحات الحسابات: finance-float.js (defer) يرتب رأسها أولًا
+    if (document.readyState !== 'loading' || (document.querySelector('.app-main') && !document.querySelector('script[src*="finance-float"]'))) init();
+    else document.addEventListener('DOMContentLoaded', init);
 })();

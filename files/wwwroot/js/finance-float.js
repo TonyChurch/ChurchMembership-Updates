@@ -278,3 +278,6 @@
     setInterval(refresh, 20000);
     document.addEventListener('visibilitychange', function () { if (!document.hidden) refresh(); });
 })();
+
+// (2026-11-25) انتهى ترتيب رأس صفحة الحسابات: يظهر الرأس (css/compact-head.css يخفيه حتى هذه اللحظة، وبحد أقصى 0.6 ثانية)
+document.documentElement.classList.add('fin-ready');
