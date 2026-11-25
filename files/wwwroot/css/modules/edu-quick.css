@@ -23,3 +23,13 @@ body:has(.edu-fabs) .app-main { padding-bottom: 10.5rem; }
 .edu-tone-6 { --tone: #0369a1; }
 .edu-tone-7 { --tone: #a16207; }
 .edu-strip__add { --tone: #0f766e; border-style: dashed; }
+/* (2026-11-25) التربية الكنسية: زر «إضافة» واحد صغير يفتح فصل / خادم / مخدوم فوقه، بدل ثلاثة أزرار ثابتة تغطي المحتوى */
+.stage-fabs { display: block; }
+.stage-fabs > summary { list-style: none; cursor: pointer; box-shadow: 0 6px 16px rgba(15, 23, 42, .22); }
+.stage-fabs > summary::-webkit-details-marker { display: none; }
+.stage-fabs[open] > summary { background: #334155; }
+.stage-fabs[open] > summary i { transform: rotate(45deg); }
+.stage-fabs > summary i { transition: transform .15s; }
+.stage-fabs__menu { position: absolute; bottom: calc(100% + .45rem); left: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .4rem; }
+body:has(.stage-fabs) .app-main { padding-bottom: 4rem; }
+.stage-fabs__menu .edu-fab { white-space: nowrap; }

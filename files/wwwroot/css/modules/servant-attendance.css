@@ -752,3 +752,13 @@
 .ce-logo { width: 64px; height: 64px; object-fit: contain; flex: 0 0 auto; }
 .sa-report__head .ce-logo { float: inline-start; margin-inline-end: 12px; width: 72px; height: 72px; }
 @media (max-width: 575px) { .ce-logo { width: 48px; height: 48px; } }
+/* (2026-11-25) «رجوع» أول شريط تقرير حضور الفصل */
+.sa-report .sp-toolbar > .ui-backbar { margin: 0; }
+/* (2026-11-25) فلاتر الغياب المتكرر والاعتراف داخل سطر أوامر الرأس المضغوط: شرائح صغيرة بدل شريط تبويبات كبير */
+.ch-actions > nav.absences-filters__tabs { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; margin: 0; padding: 0; border: 0; background: none; }
+.ch-actions > nav.absences-filters__tabs .ui-tabs__item { display: inline-flex; align-items: center; gap: .3rem; min-height: 0; margin: 0; padding: .28rem .7rem; border: 1px solid var(--ui-border); border-radius: 999px; background: var(--ui-surface); font-size: .8rem; white-space: nowrap; }
+.ch-actions > nav.absences-filters__tabs .ui-tabs__item::after { display: none; }
+.ch-actions > nav.absences-filters__tabs .ui-tabs__item.is-active { color: #fff; background: var(--ui-primary); border-color: transparent; }
+.ch-actions > nav.absences-filters__tabs .ui-tabs__item.is-active b { color: var(--ui-primary); background: #fff; }
+.ch-actions > form.absences-filters__stage { padding: 0; }
+.ch-actions > form.absences-filters__stage .form-select { min-width: 10rem; min-height: 2.1rem; padding-block: .2rem; font-size: .86rem; }
