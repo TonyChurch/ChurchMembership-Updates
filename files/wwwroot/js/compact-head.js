@@ -66,7 +66,7 @@
         organizeProfile(main);
         var header = Array.prototype.filter.call(
             main.querySelectorAll('header.ui-page-header, header.page-head--grid, header.members-header, header[data-compact-head]'),
-            function (node) { return node.querySelector('h1') && !node.closest('[data-no-compact-head], .modal, dialog, .fin-head, [data-fin-head-done], .edu-head'); })[0];
+            function (node) { return node.querySelector('h1') && !node.closest('[data-no-compact-head], .modal, dialog, .fin-head, [data-fin-head-done]'); })[0];
         if (!header || header.hasAttribute('data-ch-done')) return;
         header.setAttribute('data-ch-done', '');
 

@@ -206,7 +206,7 @@
    (html.ch-ready من compact-head.js، وhtml.fin-ready من finance-float.js في الحسابات)، وبحد أقصى 0.6 ثانية إن تعطل السكربت. */
 @keyframes ch-reveal { from { visibility: hidden; } to { visibility: visible; } }
 html:not(.ch-ready) body[data-compact-head] .app-main header:is(.ui-page-header, .page-head--grid, .members-header),
-html:not(.ch-ready) body[data-compact-head] .app-main header:is(.ui-page-header, .page-head--grid, .members-header) ~ :is(nav.ui-tabs, nav.sa-section-nav),
+html:not(.ch-ready) body[data-compact-head] .app-main header:is(.ui-page-header, .page-head--grid, .members-header) ~ :is(nav.ui-tabs, nav.sa-section-nav, nav[data-compact-tabs]),
 html:not(.ch-ready) body[data-compact-head] .app-main :is(form.bro-church, [data-head-profile]),
 html:not(.fin-ready) body[data-compact-head] .fin-page:has(script[src*="finance-float"]) > header.ui-page-header { animation: ch-reveal 0s linear .6s both; }
 @media print { html body .app-main :is(header, nav, form, div) { animation: none !important; } }

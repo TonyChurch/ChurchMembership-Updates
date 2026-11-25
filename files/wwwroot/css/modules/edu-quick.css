@@ -33,3 +33,28 @@ body:has(.edu-fabs) .app-main { padding-bottom: 10.5rem; }
 .stage-fabs__menu { position: absolute; bottom: calc(100% + .45rem); left: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .4rem; }
 body:has(.stage-fabs) .app-main { padding-bottom: 4rem; }
 .stage-fabs__menu .edu-fab { white-space: nowrap; }
+/* (2026-11-25) نظام التعليم بالرأس المضغوط: الشعار صغير بجوار الرأس (كان دائرة كبيرة تزيد ارتفاعه) */
+.edu-top--compact { gap: .6rem; min-width: 0; max-width: 100%; }
+.edu-top--compact .edu-top__art { width: clamp(64px, 6vw, 96px); margin: 0; align-self: start; }
+.edu-top--compact .edu-top__art::before { inset: -6%; }
+.edu-top--compact .edu-top__art img { box-shadow: 0 4px 10px rgba(59, 91, 253, .18); }
+.edu-top--compact > header.ch-head { margin-bottom: .6rem; }
+.edu-head .edu-coordinator { font-size: .8rem; }
+@media (max-width: 991.98px) {
+    .edu-top--compact:has(.edu-top__art) { grid-template-columns: minmax(0, 1fr) auto; }
+    .edu-top--compact .edu-top__art { order: 0; width: 56px; margin: 0; }
+}
+@media print { .edu-top--compact .edu-top__art { width: 24mm; } }
+/* الصفوف: شرائح صغيرة بارتفاع أقل، وعلى الموبايل سطر واحد يُسحب أفقيًا */
+.edu-strip--compact { gap: .3rem; margin: 0 0 .7rem; }
+.edu-strip--compact .edu-strip__item { gap: .3rem; padding: .2rem .6rem; font-size: .8rem; box-shadow: none; }
+.edu-strip--compact .edu-strip__item i { font-size: .75rem; }
+.edu-strip--compact .edu-strip__count { min-width: 1.25rem; padding: 0 .3rem; font-size: .72rem; }
+@media (max-width: 767.98px) {
+    .edu-strip--compact { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; padding-bottom: .2rem; }
+    .edu-strip--compact .edu-strip__item { flex: none; white-space: nowrap; }
+}
+/* العنوان وسطر الأوامر قصيران: عمود أضيق يُبقي الركن (الأرقام والتبويبات) بجوارهما على شاشة 1366 */
+@media (min-width: 768px) { .edu-top--compact > header.ch-head.ch-head--tabs > .ch-head__main { flex-basis: 13rem; } }
+/* عناصر صفحة النظام لا تمدّ عمود الصفحة على الموبايل: الجدول العريض يُسحب أفقيًا داخل بطاقته بدل أن يدفع الرأس والبحث خارج الشاشة */
+.ui-page:has(> .edu-top--compact) > * { min-width: 0; }

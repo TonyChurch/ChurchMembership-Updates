@@ -135,18 +135,18 @@
 .edu-bd-today td { background: #fffbeb; }
 @media print { .edu-timetable th, .edu-timetable td { border-color: #94a3b8; } .edu-timetable thead th { background: #e2e8f0; color: #0f172a; } }
 /* رأس الصفحة: سطر واحد (رجوع / استيراد / تصدير / الموقع) وبجواره البطاقات مصغّرة */
-header.edu-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .6rem; }
-header.edu-head .ui-page-header__title { flex: 1 1 100%; }
-header.edu-head .ui-page-header__title p { margin: 0; }
-header.edu-head > .ui-backbar { order: 1; margin: 0; }
-header.edu-head > .edu-head__import { order: 2; }
-header.edu-head > .page-export { order: 3; margin: 0; }
-header.edu-head > .hub-actions { order: 4; margin: 0; }
-header.edu-head > ul.page-stats { order: 5; display: flex; flex-wrap: wrap; gap: .35rem; margin: 0; margin-inline-start: auto; }
-header.edu-head ul.page-stats .ui-chip-stat { min-height: 1.9rem; padding: .1rem .55rem .1rem .65rem; column-gap: .4rem; }
-header.edu-head ul.page-stats .ui-chip-stat i { width: 1.5rem; height: 1.5rem; font-size: .8rem; }
-header.edu-head ul.page-stats .ui-chip-stat strong { font-size: 1rem; }
-header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
+header.edu-head:not(.ch-head) { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .6rem; }
+header.edu-head:not(.ch-head) .ui-page-header__title { flex: 1 1 100%; }
+header.edu-head:not(.ch-head) .ui-page-header__title p { margin: 0; }
+header.edu-head:not(.ch-head) > .ui-backbar { order: 1; margin: 0; }
+header.edu-head:not(.ch-head) > .edu-head__import { order: 2; }
+header.edu-head:not(.ch-head) > .page-export { order: 3; margin: 0; }
+header.edu-head:not(.ch-head) > .hub-actions { order: 4; margin: 0; }
+header.edu-head:not(.ch-head) > ul.page-stats { order: 5; display: flex; flex-wrap: wrap; gap: .35rem; margin: 0; margin-inline-start: auto; }
+header.edu-head:not(.ch-head) ul.page-stats .ui-chip-stat { min-height: 1.9rem; padding: .1rem .55rem .1rem .65rem; column-gap: .4rem; }
+header.edu-head:not(.ch-head) ul.page-stats .ui-chip-stat i { width: 1.5rem; height: 1.5rem; font-size: .8rem; }
+header.edu-head:not(.ch-head) ul.page-stats .ui-chip-stat strong { font-size: 1rem; }
+header.edu-head:not(.ch-head) ul.page-stats .ui-chip-stat span { font-size: .76rem; }
 /* بطاقات سريعة فوق البحث */
 .edu-quick { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: .5rem; margin: 0 0 .8rem; }
 .edu-quick__item { --tone: #2563eb; display: flex; align-items: center; justify-content: center; gap: .45rem; padding: .65rem .8rem; border-radius: .9rem; background: var(--tone); color: #fff; font-weight: 800; text-decoration: none; box-shadow: 0 4px 10px rgba(15, 23, 42, .12); }
@@ -383,7 +383,7 @@ header.edu-head ul.page-stats .ui-chip-stat span { font-size: .76rem; }
 .edu-side .edu-inline { display: flex; flex-wrap: wrap; align-items: end; gap: .5rem; padding: .6rem .7rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .9rem; }
 .edu-side .edu-inline label { flex: 1 1 9rem; margin: 0; font-weight: 700; font-size: .85rem; }
 .edu-side .edu-inline .form-control { margin-top: .2rem; }
-header.edu-head > .edu-head__period { order: 6; flex: 1 1 100%; display: flex; justify-content: flex-end; margin: 0; }
+header.edu-head:not(.ch-head) > .edu-head__period { order: 6; flex: 1 1 100%; display: flex; justify-content: flex-end; margin: 0; }
 .edu-grades__n { width: 2.2rem; text-align: center; color: #64748b; font-weight: 700; }
 .edu-grades__acts { white-space: nowrap; }
 
