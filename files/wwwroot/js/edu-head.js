@@ -43,6 +43,9 @@
                 stats.style.gridColumn = free ? 'span ' + free : '1 / -1';
                 tabs.appendChild(stats);
                 tabs.classList.add('edu-tabs4');
+                // شارة «أعياد الميلاد» (اليوم / الأسبوع / خلال شهر) في السطر نفسه بعد الأرقام
+                var bday = header.querySelector('.edu-bday');
+                if (bday) { var item = document.createElement('li'); item.className = 'edu-bday-item'; item.appendChild(bday); stats.appendChild(item); }
             }
 
             // (4) أزرار الصفحة (شريط .edu-bar بعد شريطي البحث) تصعد لسطر البحث نفسه: الأزرار يمينًا والبحثان يسارًا

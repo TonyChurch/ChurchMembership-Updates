@@ -99,3 +99,15 @@ html:not(.edu-ready) .ui-page > .edu-tools ~ .edu-bar { visibility: hidden; anim
 /* زر «إزالة» (نموذج POST بزر واحد) لا يأخذ سطرًا كاملًا في شريط الأزرار، وخانة بحث الأسر تتسع في نصف السطر بلا التفاف */
 .edu-tools__side--bar .edu-bar form[method=post], .edu-tools__side--bar .edu-bar form[method=POST] { flex: none; }
 .edu-tools .edu-search .form-control { flex-basis: 8rem; }
+/* (2026-11-25) شارة «أعياد الميلاد» الصغيرة بدل التبويب: العنوان ثم اليوم / الأسبوع / خلال شهر بأرقامها، وكل جزء رابط */
+.edu-bday { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .1rem .15rem; padding: .1rem .3rem; border: 1px solid #fbcfe8; border-radius: 999px; background: #fdf2f8; font-size: .74rem; line-height: 1.4; }
+.edu-bday a { display: inline-flex; align-items: center; gap: .2rem; padding: .05rem .35rem; border-radius: 999px; color: #9d174d; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.edu-bday a:hover, .edu-bday a.is-on { background: #be185d; color: #fff; }
+.edu-bday a b { font-weight: 800; }
+.edu-bday a.is-on b, .edu-bday a:hover b { color: #fff; }
+.edu-bday .edu-bday__title { color: #be185d; }
+.edu-bday.is-active .edu-bday__title { text-decoration: underline; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > ul.edu-tab-stats > li.edu-bday-item { list-style: none; }
+@media print { .edu-bday { display: none !important; } }
+/* سطر الأرقام والشارة لا يحدد عرض أعمدة التبويبات (يلتف داخل خاناته بدل أن يوسّع البطاقة) */
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > ul.edu-tab-stats { contain: inline-size; min-width: 0; }
