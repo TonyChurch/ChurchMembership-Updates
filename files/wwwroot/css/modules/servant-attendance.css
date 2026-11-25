@@ -775,7 +775,10 @@
 .sa-header .sa-head-period .sa-month strong { min-width: 0; font-size: .86rem; }
 .sa-header .sa-head-period .sp-range .form-control { width: auto; min-height: 1.9rem; font-size: .82rem; }
 .ch-tools__menu .sa-chip { width: 100%; justify-content: flex-start; }
-.ch-corner-tabs.sa-section-nav .sa-chip { white-space: nowrap; }
+@media (min-width: 768px) {
+    .app-main header.sa-header.ch-head .ch-corner > nav.ch-corner-tabs.ch-corner-tabs--3 { grid-template-columns: repeat(2, minmax(0, auto)); }
+    .app-main header.sa-header.ch-head .ch-corner > nav.ch-corner-tabs > a { max-width: 13rem; overflow: hidden; text-overflow: ellipsis; }
+}
 
 .sa-meetings { padding: .55rem .75rem; }
 .sa-meetings h2 { margin-bottom: .4rem; font-size: .92rem; }
@@ -785,8 +788,8 @@
 .sa-meeting-card__day b { font-size: .9rem; }
 .sa-meeting-card__day small { font-size: .68rem; }
 .sa-meeting-card__text { flex-direction: row; align-items: baseline; gap: .4rem; }
-.sa-meeting-card__text strong { max-width: 14rem; font-size: .82rem; }
-.sa-meeting-card__text small { max-width: 16rem; font-size: .7rem; }
+.sa-meeting-card__text strong { max-width: 12rem; font-size: .82rem; }
+.sa-meeting-card__text small { max-width: 11rem; font-size: .7rem; }
 .sa-meeting-card__pct { font-size: .9rem; }
 .sa-meeting-card__tools a, .sa-meeting-card__tools button { width: 1.5rem; height: 1.5rem; border-radius: 999px; font-size: .78rem; }
 @media (max-width: 640px) { .sa-meeting-card__text small { display: none; } .sa-meeting-card__text strong { max-width: 9rem; } }

@@ -263,6 +263,11 @@
                 cornerTabs = true;
             }
         }
+        // (2026-11-25) فلتر طويل عليه data-head-row: سطر كامل في أسفل الرأس (تحت العنوان والركن) بدل أن يضيق بجوار الأرقام
+        Array.prototype.forEach.call(header.querySelectorAll('[data-head-row]'), function (node) {
+            node.classList.add('ch-head-row');
+            header.appendChild(node);
+        });
         if (tabs && !cornerTabs) tabs.classList.add('ch-tabs');
         if (cornerTabs) tabs = null; // بحث القائمة يبقى مكانه فوق الجدول
 
