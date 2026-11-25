@@ -58,3 +58,26 @@ body:has(.stage-fabs) .app-main { padding-bottom: 4rem; }
 @media (min-width: 768px) { .edu-top--compact > header.ch-head.ch-head--tabs > .ch-head__main { flex-basis: 13rem; } }
 /* عناصر صفحة النظام لا تمدّ عمود الصفحة على الموبايل: الجدول العريض يُسحب أفقيًا داخل بطاقته بدل أن يدفع الرأس والبحث خارج الشاشة */
 .ui-page:has(> .edu-top--compact) > * { min-width: 0; }
+/* (2026-11-25 ليلًا، js/edu-head.js) سطر واحد تحت العنوان: رجوع، الزر الرئيسي، أدوات، منسق الخدمة */
+.app-main header.ch-head .ch-title-box > .ch-actions.edu-backline { flex: 1 1 100%; order: 3; margin-top: .3rem; row-gap: .35rem; }
+.app-main header.ch-head .ch-actions.edu-backline > .ui-backbar { display: inline-flex; flex: none; margin: 0; }
+.app-main header.ch-head .ch-actions.edu-backline > .edu-coordinator { display: inline-flex; align-items: center; gap: .2rem; margin: 0; white-space: nowrap; }
+/* شرائح الصفوف في المساحة الفارغة بالرأس بين العنوان والركن */
+.app-main .edu-top--compact header.ch-head.edu-head--strip > .ch-head__main { flex-direction: row; flex-wrap: wrap; align-items: flex-start; column-gap: 1rem; }
+.app-main header.ch-head.edu-head--strip > .ch-head__main > .ui-page-header__title { flex: 0 1 auto; }
+.app-main header.ch-head > .ch-head__main > .edu-strip--head { flex: 1 1 16rem; min-width: 0; margin: 0; align-self: center; }
+.app-main header.ch-head > .ch-head__main > .edu-strip--head .edu-strip__item { padding: .15rem .5rem; font-size: .76rem; }
+@media (max-width: 767.98px) { .app-main header.ch-head > .ch-head__main > .edu-strip--head { flex-basis: 100%; } }
+@media print { .edu-strip--head { display: none !important; } }
+html:not(.edu-ready) .edu-top--compact + .edu-strip--compact { visibility: hidden; animation: ch-reveal 0s linear .6s both; }
+/* شريطا البحث (الأسر وخدمة النظام) متجاوران على الشاشة العريضة حين لا توجد أدوات جانبية */
+@media (min-width: 1100px) { .edu-tools:not(:has(.edu-tools__side)) .edu-tools__search { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
+/* الشرائح داخل الرأس سطران فقط (تُسحب أفقيًا إن زادت)، فلا يطول الرأس عن ارتفاع الركن تقريبًا */
+@media (min-width: 768px) {
+    .app-main header.ch-head > .ch-head__main > .edu-strip--head { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); justify-content: start; gap: .25rem .3rem; overflow-x: auto; overflow-y: hidden; padding-bottom: .25rem; scrollbar-width: thin; }
+    .app-main header.ch-head > .ch-head__main > .edu-strip--head .edu-strip__item { white-space: nowrap; }
+}
+.app-main header.ch-head .ch-actions.edu-backline { column-gap: .35rem; }
+.app-main header.ch-head .ch-actions.edu-backline .ui-back,
+.app-main header.ch-head .ch-actions.edu-backline > .ui-btn,
+.app-main header.ch-head .ch-actions.edu-backline > .ch-tools > summary { min-height: 2rem; padding: .25rem .65rem; font-size: .84rem; }

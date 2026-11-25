@@ -447,3 +447,15 @@ header.edu-head:not(.ch-head) > .edu-head__period { order: 6; flex: 1 1 100%; di
 .att-topic-inline > span { flex: 0 0 auto; }
 .att-topic-inline .form-control { flex: 1 1 auto; min-width: 0; padding-block: .3rem; }
 .att-topic-inline .form-control:disabled { opacity: .45; }
+
+/* (2026-11-25) مدرسو الفصل في «تعديل الفصل»: شبكة مدمجة (المربع بجوار الاسم في سطر)، وبحث وتحديد الكل وعداد فوقها */
+.edu-tpick-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .5rem; margin: 0 0 .5rem; }
+.edu-tpick-bar .form-control { flex: 1 1 14rem; min-width: 0; min-height: 2.1rem; }
+.edu-tpick-bar .ui-btn { min-height: 2.1rem; padding: .25rem .7rem; font-size: .85rem; }
+.edu-tpick-count { margin-inline-start: auto; font-size: .88rem; color: #0f766e; white-space: nowrap; }
+.edu-tpick { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .3rem; max-height: 22rem; overflow-y: auto; padding: .1rem; }
+.edu-tpick .edu-check.edu-tpick__item { gap: .4rem; min-width: 0; margin: 0; padding: .3rem .55rem; border-radius: .6rem; font-size: .88rem; line-height: 1.3; }
+.edu-tpick .edu-tpick__item input { flex: none; width: 1.05rem; height: 1.05rem; margin: 0; }
+.edu-tpick__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+.edu-tpick__subject { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #64748b; font-size: .76rem; }
+.edu-tpick__item[hidden] { display: none !important; }

@@ -204,14 +204,16 @@
             edit.setAttribute('aria-label', 'تعديل ' + item.name);
             edit.innerHTML = '<i class="bi bi-pencil" aria-hidden="true"></i>';
             // مربع تحديد أمام الدارس في النتيجة، مربوط بمربع صفه في الجدول (نقل المحددين)
-            if (student && document.querySelector('[data-edu-bulk]')) {
+            // (وفي صفحة المدرسين: أمام المدرس، لربط المحددين بفصل)
+            var bulkForm = document.querySelector('[data-edu-bulk]');
+            if (bulkForm && item.kind === (bulkForm.getAttribute('data-edu-bulk-kind') || 'student')) {
                 var pick = document.createElement('input');
                 pick.type = 'checkbox';
                 pick.className = 'form-check-input edu-insearch__pick';
                 pick.value = item.id;
                 pick.setAttribute('data-edu-bulk-result', '');
                 pick.setAttribute('aria-label', 'تحديد ' + item.name);
-                pick.title = 'تحديد للنقل';
+                pick.title = student ? 'تحديد للنقل' : 'تحديد للربط بفصل';
                 li.appendChild(pick);
             }
             li.appendChild(tag); li.appendChild(link);
@@ -249,7 +251,8 @@
 (function () {
     var form = document.querySelector('[data-edu-bulk]');
     if (!form) return;
-    var KEY = 'edu-bulk-students', MAX_AGE = 2 * 60 * 60 * 1000;
+    var teacherKind = form.getAttribute('data-edu-bulk-kind') === 'teacher';
+    var KEY = teacherKind ? 'edu-bulk-teachers' : 'edu-bulk-students', MAX_AGE = 2 * 60 * 60 * 1000;
     var all = document.querySelector('[data-edu-bulk-all]');
     var counter = form.querySelector('[data-edu-bulk-count]');
     var note = form.querySelector('[data-edu-bulk-note]');
@@ -320,7 +323,8 @@
         var count = Object.keys(ids).length;
         var select = form.querySelector('select[name=classId]');
         var label = select.options[select.selectedIndex].text;
-        if (!count || !confirm('نقل ' + count + ' دارس إلى: ' + label + '؟')) {
+        var question = teacherKind ? 'ربط ' + count + ' من المحددين بفصل: ' + label + '؟ (تبقى فصولهم الأخرى كما هي)' : 'نقل ' + count + ' دارس إلى: ' + label + '؟';
+        if (!count || !confirm(question)) {
             event.preventDefault();
             form.querySelectorAll('input[data-edu-bulk-extra]').forEach(function (input) { input.remove(); });
             return;
