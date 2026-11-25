@@ -271,3 +271,21 @@
 .deacons-annual__row-actions { white-space: nowrap; }
 .deacons-annual__row-actions form { display: inline; margin: 0; }
 .deacons-annual__all { flex-direction: row !important; align-items: center; gap: .35rem; }
+
+/* (2026-11-25) فترات البصخة شرائح صغيرة في سطر (كانت مربعات في ثلاثة صفوف)؛ التاريخ ظاهر للفترة المختارة وفي تلميح الباقي */
+.pascha__periods { display: flex; flex-wrap: wrap; gap: .3rem; padding: .45rem .55rem; margin-bottom: .7rem; }
+.pascha__periods .pascha__period { gap: .3rem; padding: .18rem .6rem; border-radius: 999px; }
+.pascha__periods .pascha__period span { display: inline-flex; align-items: baseline; gap: .35rem; line-height: 1.3; }
+.pascha__periods .pascha__period span > b { font-size: .8rem; white-space: nowrap; }
+.pascha__periods .pascha__period:not(.is-active) small { display: none; }
+.pascha__periods .pascha__period small { font-size: .7rem; white-space: nowrap; }
+.pascha__periods .pascha__period > i:first-child { font-size: .8rem; }
+.pascha__periods .pascha__saved { font-size: .75rem; }
+/* لوحة «توزيع جديد» في التوزيع السنوي: سطر صغير مطوي ما دام للسنة توزيع */
+details.deacons-annual-panel { padding: .45rem .9rem; margin-bottom: .7rem; }
+details.deacons-annual-panel > summary { cursor: pointer; list-style: none; color: var(--ui-primary-strong, #1d4ed8); font-size: .86rem; font-weight: 800; }
+details.deacons-annual-panel > summary::-webkit-details-marker { display: none; }
+details.deacons-annual-panel > summary::after { content: "\F282"; font-family: bootstrap-icons; margin-inline-start: .4rem; font-size: .7rem; }
+details.deacons-annual-panel[open] { padding: .8rem 1.1rem; }
+details.deacons-annual-panel[open] > summary { margin-bottom: .4rem; }
+@media (max-width: 640px) { .pascha__periods .pascha__period small { display: none; } }

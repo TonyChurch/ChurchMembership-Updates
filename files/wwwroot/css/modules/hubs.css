@@ -39,3 +39,13 @@
 
 @media print { .hub-actions, .hub-site-bar { display: none; } }
 
+
+/* (2026-11-25) أقسام المركز في ركن الرأس (data-compact-tabs)، ورابط الموقع وإضافة قسم مطويان في سطر صغير */
+details.hub-site-bar { display: block; padding: .35rem .8rem; margin: 0 0 .7rem; }
+details.hub-site-bar > summary { cursor: pointer; list-style: none; color: #0f766e; font-size: .84rem; font-weight: 700; }
+details.hub-site-bar > summary::-webkit-details-marker { display: none; }
+details.hub-site-bar > summary::after { content: "\F282"; font-family: bootstrap-icons; margin-inline-start: .4rem; font-size: .7rem; }
+details.hub-site-bar[open] > summary { margin-bottom: .5rem; }
+details.hub-site-bar[open] { display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; padding: .6rem 1rem; }
+details.hub-site-bar[open] > summary { flex: 1 1 100%; }
+details.hub-site-bar.is-missing > summary { color: #b45309; }

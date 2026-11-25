@@ -2792,3 +2792,10 @@ header.ui-page-header .fin-books-actions > .fin-period { margin: 0; }
 }
 /* عناصر صفحات الحسابات لا تمد عرض الصفحة على الموبايل (نموذج جدول الدفاتر كان يمدها إلى نحو 600px فتخرج الأزرار خارج الشاشة) */
 .ui-page.fin-page > * { min-width: 0; }
+
+/* (2026-11-25) ملفات أسر إخوة الرب: فلتر الحالة ودرجة الاحتياج سطر واحد صغير بدل صف بعناوين فوق الخانات */
+form.bro-filter-line { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .7rem; padding: .3rem .6rem; margin-bottom: .6rem; }
+form.bro-filter-line > div { display: inline-flex; align-items: center; gap: .35rem; margin: 0; }
+form.bro-filter-line .form-label { margin: 0; font-size: .8rem; white-space: nowrap; }
+form.bro-filter-line .form-select { width: auto; min-height: 2rem; padding-block: .15rem; font-size: .84rem; }
+form.bro-filter-line .ui-btn { min-height: 2rem; padding: .2rem .7rem; font-size: .84rem; }
