@@ -152,10 +152,9 @@
                 holder.insertBefore(broTotal, holder.children[1] || null);
             }
             broBar.classList.add('ch-bro-pick');
-            // الشهر والسنة أول سطر الأوامر يمينًا (طلب المستخدم 2026-11-25)
+            // الشهر والسنة في سطر مستقل أسفل سطر الأوامر («تكرار لشهر آخر»...)، طلب المستخدم 2026-11-25
             if (broBar.querySelector('select')) {
-                if (!row.parentElement) headMain.appendChild(row);
-                row.insertBefore(broBar, row.firstChild);
+                if (row.parentElement === headMain) headMain.insertBefore(broBar, row.nextSibling); else headMain.appendChild(broBar);
             } else broBar.hidden = true;
             // شارة «تتحمله الكنيسة» الحية في نموذج «تسجيل خدمة» تأخذ مكان رقم «تتحمله الكنيسة» في الركن،
             // وتبقى العنصر نفسه فيحدّثها سكربت الصفحة أثناء الكتابة

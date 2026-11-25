@@ -127,7 +127,7 @@
 .app-main header.ch-head .ch-bro-total strong { display: block; font-size: 1.15rem; font-weight: 900; line-height: 1.25; color: #be185d; }
 .app-main header.ch-head .ch-bro-total small { display: block; font-size: .72rem; color: var(--ui-text-muted, #64748b); opacity: 1; }
 .app-main header.ch-head .ch-bro-total a { color: var(--ui-primary, #2563a6); font-weight: 800; }
-.app-main header.ch-head .ch-actions > form.ch-bro-pick { display: inline-flex; margin: 0; padding: 0; color: inherit; background: none; box-shadow: none; border-radius: 0; }
+.app-main header.ch-head .ch-head__main > form.ch-bro-pick, .app-main header.ch-head .ch-actions > form.ch-bro-pick { display: inline-flex; margin: 0; padding: 0; color: inherit; background: none; box-shadow: none; border-radius: 0; }
 .app-main header.ch-head form.ch-bro-pick .bro-church__pick { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
 .app-main header.ch-head form.ch-bro-pick .bro-church__pick label { display: inline-flex; align-items: center; gap: .3rem; margin: 0; font-size: .78rem; font-weight: 700; }
 .app-main header.ch-head form.ch-bro-pick .form-select { min-width: 0; width: auto; margin: 0; min-height: 2.1rem; padding-block: .2rem; font-size: .88rem; }
