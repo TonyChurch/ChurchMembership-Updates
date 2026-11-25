@@ -762,3 +762,31 @@
 .ch-actions > nav.absences-filters__tabs .ui-tabs__item.is-active b { color: var(--ui-primary); background: #fff; }
 .ch-actions > form.absences-filters__stage { padding: 0; }
 .ch-actions > form.absences-filters__stage .form-select { min-width: 10rem; min-height: 2.1rem; padding-block: .2rem; font-size: .86rem; }
+
+/* ---------- (2026-11-25) رأس مضغوط كالتربية الكنسية: الشهر/الفترة والخدمة في سطر الأوامر، والتصدير في «أدوات»،
+   وتبويبات الحضور في الركن (كانت شريطًا كامل العرض تحت الرأس)، واجتماعات الشهر شرائح في سطر بدل بطاقات كبيرة ---------- */
+.sa-head-actions .sa-stage .form-select { min-width: 0; max-width: 11rem; min-height: 2rem; padding-block: .1rem; font-size: .84rem; }
+.sa-header .sa-head-month { min-height: 2.1rem; padding: .1rem .35rem; border-radius: 10px; }
+.sa-header .sa-head-month strong { font-size: .86rem; }
+.sa-header .sa-head-month small { font-size: .68rem; }
+.sa-header .sa-head-month .sa-month__arrow { width: 1.6rem; height: 1.6rem; }
+.sa-header .sa-head-period { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; margin: 0; padding: 0; background: none; border: 0; box-shadow: none; }
+.sa-header .sa-head-period .sa-chip { padding: .2rem .55rem; font-size: .78rem; }
+.sa-header .sa-head-period .sa-month strong { min-width: 0; font-size: .86rem; }
+.sa-header .sa-head-period .sp-range .form-control { width: auto; min-height: 1.9rem; font-size: .82rem; }
+.ch-tools__menu .sa-chip { width: 100%; justify-content: flex-start; }
+.ch-corner-tabs.sa-section-nav .sa-chip { white-space: nowrap; }
+
+.sa-meetings { padding: .55rem .75rem; }
+.sa-meetings h2 { margin-bottom: .4rem; font-size: .92rem; }
+.sa-meeting-cards { display: flex; flex-wrap: wrap; gap: .35rem; }
+.sa-meeting-card.ui-chip-stat { display: inline-flex; flex: 0 1 auto; gap: .45rem; max-width: 100%; min-height: 0; padding: .2rem .35rem .2rem .55rem; border-radius: 999px; box-shadow: none; }
+.sa-meeting-card__day { display: inline-flex; gap: .25rem; align-items: baseline; min-width: 0; padding: .05rem .45rem; border-radius: 999px; }
+.sa-meeting-card__day b { font-size: .9rem; }
+.sa-meeting-card__day small { font-size: .68rem; }
+.sa-meeting-card__text { flex-direction: row; align-items: baseline; gap: .4rem; }
+.sa-meeting-card__text strong { max-width: 14rem; font-size: .82rem; }
+.sa-meeting-card__text small { max-width: 16rem; font-size: .7rem; }
+.sa-meeting-card__pct { font-size: .9rem; }
+.sa-meeting-card__tools a, .sa-meeting-card__tools button { width: 1.5rem; height: 1.5rem; border-radius: 999px; font-size: .78rem; }
+@media (max-width: 640px) { .sa-meeting-card__text small { display: none; } .sa-meeting-card__text strong { max-width: 9rem; } }

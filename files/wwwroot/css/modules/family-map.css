@@ -25,3 +25,11 @@
 .fmap-sub { display: block; color: #64748b; font-size: .75rem; }
 .fmap-address { max-width: 22rem; white-space: normal; }
 .fmap-actions { display: inline-flex; gap: .2rem; }
+
+/* (2026-11-25) المناطق شرائح صغيرة في سطر بدل بطاقات طويلة (373px قبل الخريطة): الاسم ثم العدد ثم الافتقاد، والنشطة مميزة */
+.fmap-areas { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .6rem; }
+.fmap-areas .fmap-area { display: inline-flex; flex-direction: row; align-items: baseline; gap: .4rem; min-width: 0; padding: .22rem .65rem; border-radius: 999px; }
+.fmap-areas .fmap-area strong { font-size: .82rem; white-space: nowrap; }
+.fmap-areas .fmap-area span, .fmap-areas .fmap-area small { font-size: .72rem; white-space: nowrap; }
+.fmap-areas .fmap-area__visit { display: none; }
+@media (max-width: 640px) { .fmap-areas .fmap-area small { display: none; } }

@@ -203,6 +203,17 @@
             edit.title = 'تعديل';
             edit.setAttribute('aria-label', 'تعديل ' + item.name);
             edit.innerHTML = '<i class="bi bi-pencil" aria-hidden="true"></i>';
+            // مربع تحديد أمام الدارس في النتيجة، مربوط بمربع صفه في الجدول (نقل المحددين)
+            if (student && document.querySelector('[data-edu-bulk]')) {
+                var pick = document.createElement('input');
+                pick.type = 'checkbox';
+                pick.className = 'form-check-input edu-insearch__pick';
+                pick.value = item.id;
+                pick.setAttribute('data-edu-bulk-result', '');
+                pick.setAttribute('aria-label', 'تحديد ' + item.name);
+                pick.title = 'تحديد للنقل';
+                li.appendChild(pick);
+            }
             li.appendChild(tag); li.appendChild(link);
             if (item.linked) {
                 var mark = document.createElement('i');
@@ -213,6 +224,7 @@
             li.appendChild(info); li.appendChild(edit);
             list.appendChild(li);
         });
+        document.dispatchEvent(new Event('edu-bulk-sync'));
     }
     function run() {
         var text = input.value.trim();
@@ -263,6 +275,7 @@
         form.hidden = total === 0;
         var bar = document.querySelector('header.topbar');
         form.style.top = ((bar ? bar.offsetHeight : 0) + 8) + 'px';
+        document.querySelectorAll('[data-edu-bulk-result]').forEach(function (box) { box.checked = !!ids[box.value]; });
         if (all) {
             var shown = picks().filter(visible);
             all.checked = shown.length > 0 && shown.every(function (box) { return box.checked; });
@@ -274,6 +287,12 @@
     document.addEventListener('change', function (event) {
         if (event.target === all) picks().forEach(function (box) { if (visible(box)) set(box, all.checked); });
         else if (event.target.matches && event.target.matches('[data-edu-bulk-pick]')) set(event.target, event.target.checked);
+        else if (event.target.matches && event.target.matches('[data-edu-bulk-result]')) {
+            // من نتيجة البحث: يُحدَّد الدارس (ولو لم يكن صفه في هذه القائمة) ويتبعه مربع صفه
+            var on = event.target.checked, id = event.target.value;
+            if (on) ids[id] = true; else delete ids[id];
+            picks().forEach(function (box) { if (box.value === id) box.checked = on; });
+        }
         else return;
         save();
         refresh();
@@ -286,6 +305,7 @@
     });
     // البحث السريع يخفي صفوفًا: لا يلغي تحديدها، فيبقى المحدد من قبل
     document.addEventListener('input', function () { setTimeout(refresh, 0); });
+    document.addEventListener('edu-bulk-sync', refresh);
     form.addEventListener('submit', function (event) {
         form.querySelectorAll('input[data-edu-bulk-extra]').forEach(function (input) { input.remove(); });
         var onPage = {};
