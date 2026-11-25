@@ -548,7 +548,7 @@
 }
 
 /* التنقل والأدوات في سطر واحد على الشاشات الواسعة */
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
     .sa-navbar { flex-wrap: nowrap; }
     .servant-attendance .sa-navbar > .sa-section-nav { flex-wrap: nowrap; flex: none; }
     .sa-navbar__tools { flex-wrap: nowrap; }

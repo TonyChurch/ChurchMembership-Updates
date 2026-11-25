@@ -134,6 +134,22 @@
 .app-main header.ch-head .ch-corner > nav.ch-corner-nav { display: grid; grid-template-columns: repeat(2, auto); align-content: start; gap: .2rem; margin: 0; padding: .3rem; }
 .app-main header.ch-head .ch-corner > nav.ch-corner-nav .fin-nav__item { justify-content: flex-start; padding: .25rem .6rem; font-size: .78rem; white-space: nowrap; }
 @media print { .app-main header.ch-head .ch-corner > nav.ch-corner-nav { display: none; } }
+/* المبلغ فوق الأرقام في عمود واحد، والركن بجوار العنوان على الشاشة العريضة (لا ينزل تحته) */
+.app-main header.ch-head .ch-corner__stack { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+.app-main header.ch-head .ch-corner__stack > .ch-bro-total { max-width: 16rem; padding: .2rem .6rem; }
+.app-main header.ch-head .ch-corner__stack > .ch-bro-total strong { font-size: 1rem; }
+.app-main header.ch-head .ch-corner__stack > ul.ch-stats .ui-chip-stat { padding-block: .08rem; }
+@media (min-width: 992px) {
+    .app-main header.ch-head.ch-head--bro { flex-wrap: nowrap; }
+    .app-main header.ch-head.ch-head--bro > .ch-head__main { flex: 1 1 18rem; }
+    .app-main header.ch-head.ch-head--bro > .ch-corner { flex: 0 1 auto; }
+}
+/* شارة «تتحمله الكنيسة» الحية (من نموذج تسجيل خدمة) داخل أرقام الركن */
+.app-main header.ch-head ul.ch-stats > li.ch-live-total { grid-column: auto; }
+.app-main header.ch-head li.ch-live-total .bsv-church-total { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .15rem .4rem; margin: 0; padding: .12rem .6rem; color: #9d174d; background: #fdf2f8; border: 1px solid #fbcfe8; border-inline-start: 3px solid #be185d; border-radius: 999px; box-shadow: none; font-size: .74rem; font-weight: 700; white-space: nowrap; }
+.app-main header.ch-head li.ch-live-total .bsv-church-total i { display: none; }
+.app-main header.ch-head li.ch-live-total .bsv-church-total b { font-size: .92rem; font-weight: 800; color: #9d174d; }
+.app-main header.ch-head li.ch-live-total .bsv-church-total em { padding: 0 .4rem; color: #fff; background: #be185d; font-size: .78rem; }
 
 /* ---------- شريط تبويبات الوحدة: شرائح متجاورة، وبحث القائمة في آخره ---------- */
 .app-main nav.ch-tabs {

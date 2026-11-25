@@ -30,6 +30,7 @@
 
         // ---------- سطر الأوامر ----------
         var boxes = Array.prototype.filter.call(header.children, function (child) {
+            if (child.hidden) return false; // حاوية أخفتها الصفحة عمدًا تبقى كما هي
             if (child.matches('.ui-page-header__actions, .members-header__action, .fin-actions, [data-head-actions]')) return true;
             // حاوية أزرار أخرى (مثل «الموقع الرسمي» في المراكز): كل ما فيها أزرار أو روابط
             return child !== title && child.matches('div') && !child.matches('.ui-backbar, .ui-page-header__title') && child.children.length > 0
@@ -44,7 +45,7 @@
             if (child.matches('script, template, style, link, input[type=hidden], form.d-none, [hidden], .ui-backbar')) return;
             if (child.matches('.page-export, form, a.ui-btn, button.ui-btn, details, .month-picker, select, [data-head-keep], [data-head-tool], [data-head-main]')) items.push(child);
         });
-        if (!items.length && !stats) { header.classList.add('ch-head', 'ch-head--plain'); return; }
+        if (!items.length && !stats && !main.querySelector('form.bro-church')) { header.classList.add('ch-head', 'ch-head--plain'); return; }
 
         var isBack = function (node) { return node.matches('.ui-backbar, [data-back], .ui-back'); };
         var isKeep = function (node) {
@@ -132,7 +133,9 @@
         // شريط «ما تتحمله الكنيسة» الوردي (BrothersChurchBar) يتوزع: «رجوع» تحت العنوان، والمبلغ في الركن،
         // واختيار الشهر والسنة (النموذج نفسه بخاناته المخفية) في سطر الأوامر؛ وتبويبات إخوة الرب في الركن بعد الفاصل.
         var broBar = main.querySelector('form.bro-church');
-        if (broBar && header.closest('.fin-page')) {
+        // على الموبايل صفحة «الخدمات المقدمة» تخفي رأسها كله وتبدأ بالنموذج (طلب 2026-11-18)، فيبقى الشريط والشارة مكانهما
+        var bsvMobile = header.closest('.bsv:not(.brp)') && window.matchMedia('(max-width: 767.98px)').matches;
+        if (broBar && header.closest('.fin-page') && !bsvMobile) {
             var broBack = broBar.querySelector('a.ui-back');
             if (broBack) {
                 var backBox = document.createElement('div');
@@ -149,11 +152,29 @@
                 holder.insertBefore(broTotal, holder.children[1] || null);
             }
             broBar.classList.add('ch-bro-pick');
+            // الشهر والسنة أول سطر الأوامر يمينًا (طلب المستخدم 2026-11-25)
             if (broBar.querySelector('select')) {
                 if (!row.parentElement) headMain.appendChild(row);
-                var toolsMenu = row.querySelector(':scope > .ch-tools');
-                row.insertBefore(broBar, toolsMenu);
+                row.insertBefore(broBar, row.firstChild);
             } else broBar.hidden = true;
+            // شارة «تتحمله الكنيسة» الحية في نموذج «تسجيل خدمة» تأخذ مكان رقم «تتحمله الكنيسة» في الركن،
+            // وتبقى العنصر نفسه فيحدّثها سكربت الصفحة أثناء الكتابة
+            var liveTotal = main.querySelector('form .bsv-church-total[data-church-total]');
+            if (liveTotal && stats) {
+                var liveItem = document.createElement('li');
+                liveItem.className = 'ch-live-total';
+                var oldItem = Array.prototype.filter.call(stats.children, function (li) { var label = li.querySelector('span'); return label && label.textContent.trim() === 'تتحمله الكنيسة'; })[0];
+                liveItem.appendChild(liveTotal);
+                if (oldItem) { stats.insertBefore(liveItem, oldItem); oldItem.remove(); } else stats.appendChild(liveItem);
+            }
+            // المبلغ والأرقام عمود واحد، فيبقى الركن بجوار العنوان ولا ينزل سطرًا
+            if (broTotal && stats) {
+                var stack = document.createElement('div');
+                stack.className = 'ch-corner__stack';
+                broTotal.parentElement.insertBefore(stack, broTotal);
+                stack.appendChild(broTotal);
+                stack.appendChild(stats);
+            }
             var broNav = main.querySelector('nav.fin-nav[aria-label="إخوة الرب"]');
             if (broNav) {
                 var holder2 = ensureCorner();
