@@ -498,6 +498,9 @@
         try {
             run();
             collapseFilters();
+            // (2026-11-25) ترتيبات تكميلية لوحدات بعينها (مثل js/edu-head.js) تسجّل نفسها في window.chAfterArrange
+            // فتعمل هنا قبل إظهار الرأس، فيظهر بشكله النهائي مرة واحدة بلا قفزة
+            (window.chAfterArrange || []).forEach(function (fn) { try { fn(); } catch (error) { /* لا يوقف الإظهار */ } });
         } finally {
             // الرأس كان مخفيًا حتى يكتمل ترتيبه (لا يظهر الشكل القديم لحظة F5)؛ يظهر الآن حتى لو حدث خطأ
             document.documentElement.classList.add('ch-ready');

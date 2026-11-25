@@ -33,5 +33,7 @@
             root.classList.add('edu-ready');
         }
     }
+    // يعمل داخل compact-head.js قبل إظهار الرأس (لا قفزة بعد الظهور)، واحتياطًا عند DOMContentLoaded إن لم يُستدعَ
+    (window.chAfterArrange = window.chAfterArrange || []).push(arrange);
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arrange); else arrange();
 })();
