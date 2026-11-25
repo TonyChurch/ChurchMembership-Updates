@@ -201,3 +201,82 @@
 @media print {
     .ch-corner__sep, .ch-tools { display: none !important; }
 }
+
+/* ========== (2026-11-25) المقترحات المعتمدة: 1، 2، 3، 4، 6، 7، 8، 9، 10، 12 ========== */
+
+/* العنوان والوصف و«رجوع»: العنوان وزر ⓘ في سطر، والوصف و«رجوع» تحته */
+.app-main header.ch-head .ch-title-box { display: flex; flex-wrap: wrap; align-items: center; column-gap: .35rem; }
+.app-main header.ch-head .ch-title-box > h1 { flex: 0 1 auto; min-width: 0; margin: 0; }
+.app-main header.ch-head .ch-title-box > p,
+.app-main header.ch-head .ch-title-box > .ui-backbar { flex: 1 1 100%; }
+.app-main header.ch-head .ch-title-box > p { order: 2; margin: 0; }
+.app-main header.ch-head .ch-title-box > .ui-backbar { order: 3; }
+/* (3) الوصف يُخفى ويظهر من زر ⓘ أو بالوقوف على الزر */
+.app-main header.ch-head.ch-head--nodesc:not(.ch-desc-open) .ch-title-box > p.ch-desc { display: none; }
+.ch-desc-toggle { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.6rem; height: 1.6rem; padding: 0; color: var(--ui-text-muted, #64748b); background: transparent; border: 1px solid transparent; border-radius: 999px; font-size: .95rem; cursor: pointer; }
+.ch-desc-toggle:hover, .ch-desc-toggle:focus-visible, .ch-desc-toggle[aria-expanded="true"] { color: var(--ui-primary, #2563a6); background: var(--ui-primary-soft, #eef2ff); border-color: var(--ui-border, #e2e8f0); }
+@media print { .app-main header.ch-head .ch-title-box > p.ch-desc { display: block !important; } }
+
+/* (1) زر «إضافة» العائم أسفل اليسار (على نسق «دفتر جديد» في الحسابات) */
+.ch-fab { position: fixed; bottom: 18px; left: 18px; z-index: 1050; display: inline-flex; align-items: center; gap: .4rem; max-width: calc(100vw - 36px); padding: .55rem 1rem; color: #fff; background: var(--ui-primary, #2563a6); border: 0; border-radius: 999px; box-shadow: 0 8px 22px rgba(15, 23, 42, .25); font: inherit; font-weight: 700; white-space: nowrap; cursor: pointer; }
+.ch-fab[hidden] { display: none; }
+.ch-fab:hover, .ch-fab:focus-visible { filter: brightness(1.08); }
+.ch-fab span { overflow: hidden; text-overflow: ellipsis; }
+body.has-ch-fab .app-main { padding-bottom: 4.5rem; }
+@media (max-width: 640px) { .ch-fab { bottom: 10px; left: 10px; padding: .5rem .8rem; font-size: .85rem; } }
+@media print { .ch-fab { display: none !important; } }
+
+/* (6) رأس الجدول ثابت في القوائم الطويلة */
+.ch-sticky-clip { overflow: clip !important; }
+.app-main table.ch-sticky-head > thead > tr > th { position: sticky; top: var(--ch-sticky-top, 0px); z-index: 3; box-shadow: inset 0 -1px 0 var(--ui-border, #e2e8f0); }
+.app-main table.ch-sticky-head > thead > tr > th.ch-sticky-bg { background-color: var(--ui-surface, #fff); }
+@media print { .app-main table.ch-sticky-head > thead > tr > th { position: static; box-shadow: none; } }
+
+/* (7) رقم في الركن يصفّي القائمة */
+.app-main header.ch-head ul.ch-stats > li.ch-stat-link { cursor: pointer; }
+.app-main header.ch-head ul.ch-stats > li.ch-stat-link .ui-chip-stat,
+.app-main header.ch-head ul.ch-stats > li.ui-chip-stat.ch-stat-link { text-decoration: none; }
+.app-main header.ch-head ul.ch-stats > li.ui-chip-stat.ch-stat-link:hover,
+.app-main header.ch-head ul.ch-stats > li.ui-chip-stat.ch-stat-link:focus-visible { background: var(--ui-primary-soft, #eef2ff); outline: none; }
+.app-main header.ch-head ul.ch-stats > li.ui-chip-stat.ch-stat-link.is-active { background: var(--ui-primary-soft, #eef2ff); border-color: var(--ui-primary, #2563a6); }
+
+/* (4) سجل الأسر وإدارة الأعضاء: سطر بحث واحد، وباقي القوائم خلف «فلاتر أخرى» */
+.app-main form.ch-filter:not(.is-open) > .ch-filter-extra { display: none; }
+.app-main form.ch-filter:not(.is-open) { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .5rem; }
+.app-main form.ch-filter:not(.is-open) > .ui-field { flex: 1 1 16rem; min-width: 0; margin: 0; }
+.app-main form.ch-filter:not(.is-open) > .ui-field > label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.app-main form.ch-filter:not(.is-open) > .ui-filter__actions { flex: 0 0 auto; margin: 0; }
+.ch-filter-toggle { white-space: nowrap; }
+.ch-filter-toggle b { display: inline-grid; place-items: center; min-width: 1.2rem; height: 1.2rem; padding: 0 .3rem; color: #fff; background: var(--ui-primary, #2563a6); border-radius: 999px; font-size: .72rem; }
+.app-main form.ch-filter.is-open .ch-filter-toggle { color: #fff; background: var(--ui-primary, #2563a6); }
+
+/* (12) تبويبات الوحدة في الركن بعد الفاصل */
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs { display: grid; grid-template-columns: repeat(2, auto); align-content: start; gap: .2rem; margin: 0; padding: .3rem; overflow: visible; background: var(--ui-surface, #fff); border: 1px solid var(--ui-border, #e2e8f0); border-radius: .8rem; box-shadow: none; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs.ch-corner-tabs--3 { grid-template-columns: repeat(3, auto); }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs .ui-tabs__item,
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > a { display: flex; align-items: center; justify-content: flex-start; gap: .3rem; min-height: 0; margin: 0; padding: .22rem .6rem; border: 1px solid transparent; border-radius: 999px; font-size: .78rem; white-space: nowrap; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs .is-active,
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs [aria-current="page"] { color: #fff; background: var(--ui-primary, #2563a6); border-color: transparent; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs .is-active b { color: var(--ui-primary, #2563a6); background: #fff; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > a:not(.is-active):hover { background: var(--ui-primary-soft, #eef2ff); }
+/* الركن بجوار العنوان إن اتسعت الشاشة، وإلا ينزل تحته كاملًا (لا يُعصر العنوان وأزراره) */
+.app-main header.ch-head.ch-head--tabs > .ch-head__main { flex: 1 1 24rem; }
+@media print { .app-main header.ch-head .ch-corner > nav.ch-corner-tabs { display: none; } }
+
+/* (10) ملف الأسرة والعضو والخادم: «رجوع» بجوار الاسم، وقائمة «أدوات» لأوامر الملف */
+.profile-hero__name > .ui-backbar.ch-profile-back { margin: 0; margin-inline-start: auto; }
+.ch-tools--profile > summary { display: inline-flex; align-items: center; gap: .35rem; }
+.ch-tools--profile .ch-tools__menu { inset-inline-start: auto; inset-inline-end: 0; }
+.ch-tools--profile .ch-tools__menu .ui-btn { display: flex; align-items: center; gap: .45rem; }
+.ch-tools--profile .ch-tools__menu .ui-btn > i { flex: none; }
+
+@media (max-width: 767.98px) {
+    /* (2) «رجوع» بجوار العنوان على الموبايل، لا في سطر وحده */
+    .app-main header.ch-head .ch-title-box > .ui-backbar { flex: 0 0 auto; order: 1; margin: 0; margin-inline-start: auto; }
+    .app-main header.ch-head .ch-title-box > .ui-backbar .ui-back { padding: .2rem .6rem; font-size: .8rem; }
+    /* (12) التبويبات في الركن سطر واحد يُسحب أفقيًا */
+    .app-main header.ch-head .ch-corner > nav.ch-corner-tabs,
+    .app-main header.ch-head .ch-corner > nav.ch-corner-tabs.ch-corner-tabs--3 { display: flex; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+    .app-main header.ch-head .ch-corner > nav.ch-corner-tabs > a { flex: none; }
+    .ch-tools--profile .ch-tools__menu { inset-inline: 0 auto; }
+}

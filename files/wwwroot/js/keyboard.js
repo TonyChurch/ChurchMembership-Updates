@@ -104,6 +104,16 @@
         return false;
     }
 
+    // «أدوات» في رأس الصفحة (الرأس المضغوط): يفتحها ويضع المؤشر على أول أمر فيها
+    function openTools() {
+        const tools = [...document.querySelectorAll(".app-main details.ch-tools")].find(item => item.offsetParent !== null);
+        if (!tools) return false;
+        tools.open = !tools.open;
+        if (tools.open) tools.querySelector(".ch-tools__menu a, .ch-tools__menu button")?.focus();
+        else tools.querySelector("summary")?.focus();
+        return true;
+    }
+
     const SHORTCUTS = [
         ["Backspace", "رجوع للصفحة السابقة (مثل زر «رجوع»)"],
         ["Alt + ←  /  Alt + →", "رجوع وتقدّم المتصفح"],
@@ -116,6 +126,7 @@
         ["Ctrl + K", "البحث في البرنامج (أي صفحة أو ميزة)"],
         ["/", "البحث داخل الصفحة (خانة البحث في القائمة)"],
         ["N", "إضافة جديد (عضو، أسرة، خادم...) في صفحات القوائم"],
+        ["T", "فتح قائمة «أدوات» في رأس الصفحة (التصدير، الطباعة، الاستيراد...) وإغلاقها"],
         ["Ctrl + P", "طباعة الصفحة"],
         ["Esc", "إغلاق النافذة المفتوحة، أو إلغاء تحديد الصف"],
         ["؟  أو  Shift + /", "عرض هذه القائمة"]
@@ -156,6 +167,7 @@
         if (!handled && event.code === "Slash") { handled = true; if (event.shiftKey) showShortcuts(); else handled = focusSearch(); }
         if (!handled && (event.key === "?" || event.key === "؟")) { handled = true; showShortcuts(); }
         if (!handled && event.code === "KeyN" && !event.shiftKey) handled = addNew();
+        if (!handled && event.code === "KeyT" && !event.shiftKey) handled = openTools();
         if (handled) event.preventDefault();
     });
 
