@@ -1,3 +1,3 @@
 ﻿# ChurchMembership updates
 
-Program files only (no church data). Version 202611252310, 2026-11-25 23:10.
+Program files only (no church data). Version 202611260059, 2026-11-26 00:59.

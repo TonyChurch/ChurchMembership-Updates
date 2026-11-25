@@ -504,6 +504,8 @@
         } finally {
             // الرأس كان مخفيًا حتى يكتمل ترتيبه (لا يظهر الشكل القديم لحظة F5)؛ يظهر الآن حتى لو حدث خطأ
             document.documentElement.classList.add('ch-ready');
+            // للقياس: performance.getEntriesByName('ch-ready')[0].startTime = متى ظهر محتوى الصفحة مرتبًا
+            try { performance.mark('ch-ready'); } catch (error) { /* متصفح قديم */ }
         }
         stickyHeads();
         window.addEventListener('load', scheduleSticky);
