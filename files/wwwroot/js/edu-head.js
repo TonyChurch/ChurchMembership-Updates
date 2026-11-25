@@ -29,6 +29,38 @@
                 headMain.appendChild(strip);
                 header.classList.add('edu-head--strip');
             }
+
+            // (3) الأرقام داخل بطاقة تبويبات النظام: أربعة أعمدة، والأرقام في خانات السطر الأخير الفارغة،
+            // فلا يبقى تبويب وحيد في سطر ولا عمود أرقام منفصل (الشاشة العريضة فقط؛ على الموبايل التبويبات سطر يُسحب)
+            var tabs = header.querySelector('.ch-corner > nav.ch-corner-tabs');
+            var stats = header.querySelector('.ch-corner > ul.ch-stats');
+            if (tabs && stats && window.matchMedia('(min-width: 768px)').matches) {
+                var links = tabs.querySelectorAll(':scope > a').length;
+                var free = (4 - links % 4) % 4;
+                var sep = tabs.previousElementSibling;
+                if (sep && sep.classList.contains('ch-corner__sep')) sep.remove();
+                stats.classList.add('edu-tab-stats');
+                stats.style.gridColumn = free ? 'span ' + free : '1 / -1';
+                tabs.appendChild(stats);
+                tabs.classList.add('edu-tabs4');
+            }
+
+            // (4) أزرار الصفحة (شريط .edu-bar بعد شريطي البحث) تصعد لسطر البحث نفسه: الأزرار يمينًا والبحثان يسارًا
+            var tools = document.querySelector('.app-main .ui-page > .edu-tools');
+            if (tools && !tools.querySelector(':scope > .edu-tools__side')) {
+                var bar = null;
+                for (var node = tools.nextElementSibling; node; node = node.nextElementSibling) {
+                    if (node.matches('.edu-bar')) { bar = node; break; }
+                    if (!node.matches('details.edu-fabs, .ui-flash, script, link, style, input[type=hidden]')) break;
+                }
+                if (bar) {
+                    var side = document.createElement('div');
+                    side.className = 'edu-tools__side edu-tools__side--bar';
+                    side.appendChild(bar);
+                    tools.insertBefore(side, tools.firstChild);
+                    tools.classList.add('edu-tools--bar');
+                }
+            }
         } finally {
             root.classList.add('edu-ready');
         }

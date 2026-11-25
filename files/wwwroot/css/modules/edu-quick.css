@@ -81,3 +81,21 @@ html:not(.edu-ready) .edu-top--compact + .edu-strip--compact { visibility: hidde
 .app-main header.ch-head .ch-actions.edu-backline .ui-back,
 .app-main header.ch-head .ch-actions.edu-backline > .ui-btn,
 .app-main header.ch-head .ch-actions.edu-backline > .ch-tools > summary { min-height: 2rem; padding: .25rem .65rem; font-size: .84rem; }
+/* (2026-11-25، js/edu-head.js) الأرقام داخل بطاقة التبويبات: أربعة أعمدة، والأرقام في خانات السطر الأخير الفارغة */
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs.edu-tabs4 { grid-template-columns: repeat(4, auto); }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > ul.edu-tab-stats { display: flex; flex-wrap: wrap; align-items: center; align-content: center; gap: .15rem .35rem; margin: 0; padding: 0 .3rem; background: none; border: 0; border-radius: 0; box-shadow: none; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > ul.edu-tab-stats > li { margin: 0; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > ul.edu-tab-stats .ui-chip-stat { padding-block: .05rem; }
+/* أزرار الصفحة في سطر البحث: الأزرار يمينًا، والبحثان يسارًا متجاوران إن اتسع المكان */
+.edu-tools.edu-tools--bar { grid-template-columns: auto minmax(0, 1fr); align-items: center; }
+.edu-tools--bar > .edu-tools__side--bar { max-width: 37rem; }
+.edu-tools--bar > .edu-tools__side--bar > .edu-bar { margin: 0; }
+.edu-tools--bar > .edu-tools__search { grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); align-items: start; }
+@media (max-width: 991.98px) { .edu-tools.edu-tools--bar { grid-template-columns: minmax(0, 1fr); } .edu-tools--bar > .edu-tools__side--bar { max-width: none; } }
+html:not(.edu-ready) .ui-page > .edu-tools ~ .edu-bar { visibility: hidden; animation: ch-reveal 0s linear .6s both; }
+/* نتائج «أسر مسجلة على البرنامج» سطر كامل تحت البحثين (كانت تأخذ خانة فتنزل البحث البرتقالي سطرًا) */
+.edu-tools__search > .ui-family-hits { grid-column: 1 / -1; order: 3; }
+.edu-tools__search > .edu-insearch { order: 2; }
+/* زر «إزالة» (نموذج POST بزر واحد) لا يأخذ سطرًا كاملًا في شريط الأزرار، وخانة بحث الأسر تتسع في نصف السطر بلا التفاف */
+.edu-tools__side--bar .edu-bar form[method=post], .edu-tools__side--bar .edu-bar form[method=POST] { flex: none; }
+.edu-tools .edu-search .form-control { flex-basis: 8rem; }
