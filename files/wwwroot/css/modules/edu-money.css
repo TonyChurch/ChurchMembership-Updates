@@ -183,12 +183,13 @@
 .edu-file__table .c-no { width: 2.6rem; text-align: center; }
 .edu-file__table .c-amt { width: 6.5rem; text-align: center; font-variant-numeric: tabular-nums; }
 .edu-file__table .c-sign { width: 9rem; }
-/* جدول المرتبات تسعة أعمدة: أضيق ليتسع لصفحة A4 الطولية */
+/* جدول المرتبات ثمانية أعمدة: أضيق ليتسع لصفحة A4 الطولية */
 .edu-file__salaries { font-size: .78rem; }
 .edu-file__salaries th, .edu-file__salaries td { padding-inline: .25rem; }
 .edu-file__salaries .c-amt { width: 4.4rem; }
 .edu-file__salaries .c-sign { width: 5.5rem; }
-.edu-file__reason { display: block; font-size: .68rem; font-weight: 600; line-height: 1.35; }
+.edu-file__salaries .c-amt.c-cut { width: 11rem; }
+.edu-file__reason { display: block; font-size: .68rem; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
 .edu-file__summary { max-width: 34rem; margin: 0 auto; font-size: .95rem; }
 .edu-file__summary td { width: 9rem; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
 .edu-file__strong th, .edu-file__strong td { background: #ecfdf5; font-weight: 800; }

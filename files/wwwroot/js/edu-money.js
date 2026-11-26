@@ -57,17 +57,16 @@
     }
     function refreshSalaries() {
         var totals = {};
-        ['suggested', 'deduction', 'penalty', 'paid'].forEach(function (name) {
+        ['suggested', 'cut', 'paid'].forEach(function (name) {
             totals[name] = sum(all('input[data-sum-part="' + name + '"]'));
             putTotal(name, totals[name]);
         });
-        putTotal('cuts', totals.deduction + totals.penalty);
-        // المستحق = المقترح − الخصومات − الجزاءات (لا يقل عن صفر)، ويظهر باهتًا في خانة المصروف الفارغة
+        // المستحق = المقترح − الخصومات/الجزاءات (لا يقل عن صفر)، ويظهر باهتًا في خانة المصروف الفارغة
         var due = 0;
         all('[data-salary-due]').forEach(function (node) {
             var id = node.getAttribute('data-salary-due');
             function value(prefix) { var input = salaryForm.querySelector('input[name="' + prefix + '_' + id + '"]'); return input ? parse(input.value) || 0 : 0; }
-            var own = Math.max(0, Math.round((value('suggested') - value('deduction') - value('penalty')) * 100) / 100);
+            var own = Math.max(0, Math.round((value('suggested') - value('cut')) * 100) / 100);
             node.textContent = show(own);
             due += own;
             var paid = salaryForm.querySelector('input[data-salary-paid="' + id + '"]');
