@@ -65,6 +65,26 @@
 .edu-sub-input[readonly], .edu-salary-date[readonly] { background: #f1f5f9; color: #475569; }
 .edu-bar form[data-confirm] { flex: 0 0 auto; }
 
+/* ---------- «مرتب الشهر» في صفحة المدرسين ---------- */
+.edu-sal-head { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .8rem; }
+.edu-sal-head .edu-period, .edu-sal-head .edu-lock { margin: 0 0 .4rem; }
+.edu-list .c-salary .edu-sub-input { width: 100%; max-width: 6.5rem; }
+@media (min-width: 1200px) {
+    /* مجموع الأعمدة مع خانة التحديد 100% فلا ينكسر تاريخ الميلاد */
+    .edu-list.edu-list:has(.c-salary) .c-name { width: 13%; }
+    .edu-list.edu-list:has(.c-salary) .c-salary { width: 8%; }
+    .edu-list.edu-list:has(.c-salary) .c-nid { width: 13%; }
+    .edu-list.edu-list:has(.c-salary) .c-phone { width: 10%; }
+    .edu-list.edu-list:has(.c-salary) .c-birth { width: 9.6%; }
+    .edu-list.edu-list:has(.c-salary) .c-gender { width: 4.4%; }
+    .edu-list.edu-list:has(.c-salary) .c-class { width: 12%; }
+    .edu-list.edu-list:has(.c-salary) .c-subject { width: 8%; }
+    .edu-list.edu-list:has(.c-salary) .c-status { width: 6%; }
+    .edu-list.edu-list:has(.c-salary) .c-move { width: 12%; }
+    .edu-list .edu-sub-totalrow td { overflow: visible; }
+    .edu-list:has(.c-salary) td[data-label="تاريخ الميلاد"] { font-size: .76rem; white-space: nowrap; overflow-wrap: normal; padding-inline: .15rem; }
+}
+
 /* ---------- نموذج المصروف، وملف الدارس ---------- */
 .edu-exp__form { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .6rem; margin: 0; }
 .edu-exp__form label { display: flex; flex-direction: column; gap: .2rem; margin: 0; min-width: 0; font-weight: 700; font-size: .86rem; }
