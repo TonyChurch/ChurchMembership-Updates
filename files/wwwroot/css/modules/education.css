@@ -486,3 +486,19 @@ header.edu-head:not(.ch-head) > .edu-head__period { order: 6; flex: 1 1 100%; di
 .edu-class-table .edu-list__nid { unicode-bidi: plaintext; }
 .edu-class-table form { margin: 0; }
 .edu-class-table__out { min-height: 1.9rem; padding: .2rem .55rem; font-size: .8rem; white-space: nowrap; }
+
+/* (2026-11-26) بطاقة الامتحان بإجراءاتها السريعة، ونافذتا تعديله وتكراره (Views/Education/Grades.cshtml) */
+.edu-exams { display: flex; flex-wrap: wrap; align-items: stretch; gap: .6rem; margin: 0 0 .8rem; }
+.edu-exam { display: flex; flex-direction: column; gap: .35rem; max-width: 100%; padding: .4rem; border: 1px solid #e2e8f0; border-radius: .9rem; background: #fff; }
+.edu-exam.is-on { border-color: #0f766e; }
+.edu-exam .edu-chip { flex: 1; }
+.edu-exam .edu-acts { margin-top: 0; }
+.edu-dialog { width: min(26rem, 94vw); max-height: 85vh; padding: 1rem 1.1rem; color: inherit; border: 1px solid var(--ui-border, #e2e8f0); border-radius: 1rem; box-shadow: 0 18px 48px rgba(15, 23, 42, .28); }
+.edu-dialog::backdrop { background: rgba(15, 23, 42, .45); }
+.edu-dialog h3 { margin: 0 0 .7rem; font-size: 1.05rem; font-weight: 800; }
+.edu-dialog form > label { display: block; margin-bottom: .6rem; font-weight: 700; }
+.edu-dialog form > label.edu-dialog__check { display: flex; }
+.edu-dialog__check { display: flex; align-items: center; gap: .45rem; padding: .2rem 0; cursor: pointer; }
+.edu-dialog__check small { color: #64748b; font-weight: 700; }
+.edu-dialog__list { max-height: 40vh; overflow-y: auto; margin-bottom: .6rem; padding-inline-start: .2rem; border-top: 1px dashed #e2e8f0; }
+.edu-dialog__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }

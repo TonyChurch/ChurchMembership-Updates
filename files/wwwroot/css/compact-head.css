@@ -308,22 +308,25 @@ body.has-ch-fab .app-main { padding-bottom: 4.5rem; }
 .app-main header.ch-head > .ch-head-row { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; }
 .app-main header.ch-head > .ch-head-row form { flex-wrap: wrap; min-width: 0; max-width: 100%; }
 
-/* (2026-11-26) أيقونة «طباعة الفصل» الظاهرة في صفحات الفصول (Partials/_ClassPrintMenu): زر مميّز يفتح لوحة اختيار */
+/* (2026-11-26) أيقونة «قوائم الفصول» الظاهرة في صفحات الفصول (Partials/_ClassPrintMenu): زر مميّز يفتح الفصول وكشوفها */
 .cls-print { position: relative; }
 .cls-print > summary { display: inline-flex; align-items: center; gap: .35rem; list-style: none; cursor: pointer; }
 .cls-print > summary::-webkit-details-marker { display: none; }
 .cls-print > summary.cls-print__btn { font-weight: 800; color: var(--ui-primary, #2563a6); border: 2px solid var(--ui-primary, #2563a6); }
 .cls-print[open] > summary.cls-print__btn { color: #fff; background: var(--ui-primary, #2563a6); }
-.cls-print__menu { width: max-content; max-height: 60vh; overflow-y: auto; text-align: start; }
+.cls-print__menu { width: min(22rem, 92vw); max-height: 65vh; overflow-y: auto; text-align: start; }
 .cls-print__menu > * { flex: none; }
 .cls-print__hint { margin: 0; padding: .15rem .3rem; font-size: .82rem; font-weight: 700; color: var(--ui-muted, #64748b); }
-.cls-print__list { margin: 0; padding: 0; list-style: none; }
-.cls-print__group { padding: .35rem .3rem .15rem; font-size: .78rem; font-weight: 800; color: var(--ui-primary, #2563a6); border-bottom: 1px solid var(--ui-border, #e2e8f0); }
-.cls-print__row { display: flex; align-items: center; gap: .35rem; padding: .2rem .3rem; border-radius: .45rem; }
-.cls-print__row:hover { background: rgba(100, 116, 139, .1); }
-.cls-print__name { flex: 1 1 auto; min-width: 0; font-weight: 700; overflow-wrap: anywhere; }
-.cls-print__row a { flex: none; display: inline-flex; align-items: center; gap: .25rem; padding: .25rem .5rem; font-size: .8rem; font-weight: 700; white-space: nowrap; text-decoration: none; color: var(--ui-primary, #2563a6); border: 1px solid var(--ui-border, #e2e8f0); border-radius: .45rem; }
-.cls-print__row a:hover { color: #fff; background: var(--ui-primary, #2563a6); }
+.cls-print__group { margin: .2rem 0 0; padding: .3rem .3rem .15rem; font-size: .78rem; font-weight: 800; color: var(--ui-primary, #2563a6); border-bottom: 1px solid var(--ui-border, #e2e8f0); }
+.cls-print__class { border: 1px solid var(--ui-border, #e2e8f0); border-radius: .5rem; }
+.cls-print__class > summary { display: flex; align-items: center; gap: .4rem; padding: .35rem .5rem; list-style: none; cursor: pointer; font-weight: 800; }
+.cls-print__class > summary::-webkit-details-marker { display: none; }
+.cls-print__class > summary span { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.cls-print__class[open] > summary { color: var(--ui-primary, #2563a6); }
+.cls-print__class[open] .cls-print__caret { transform: rotate(180deg); }
+.cls-print__links { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: .3rem; padding: 0 .4rem .45rem; }
+.cls-print__links a { display: flex; align-items: center; gap: .35rem; padding: .35rem .5rem; font-size: .82rem; font-weight: 700; text-decoration: none; color: var(--ui-primary, #2563a6); border: 1px solid var(--ui-border, #e2e8f0); border-radius: .45rem; }
+.cls-print__links a:hover { color: #fff; background: var(--ui-primary, #2563a6); }
 @media (max-width: 767.98px) {
     .app-main header.ch-head .ch-actions { position: relative; }
     .ch-actions > .cls-print { position: static; }
