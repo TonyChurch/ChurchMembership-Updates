@@ -1768,3 +1768,7 @@ tr.is-search-hidden {
     .edu-top__art { order: -1; width: 110px; margin: 0 auto; }
 }
 @media print { .edu-top__art { width: 24mm; margin: 0; } .edu-top:has(.edu-top__art) { grid-template-columns: minmax(0, 1fr) auto; } }
+
+/* (2026-11-26) شعار «خدمة التربية الكنسية» في رأس صفحات مراحلها وفصولها (Partials/_ChurchEducationLogo) وصفحات حضور الفصول */
+.ce-logo { width: 64px; height: 64px; object-fit: contain; flex: 0 0 auto; }
+@media (max-width: 575px) { .ce-logo { width: 48px; height: 48px; } }
