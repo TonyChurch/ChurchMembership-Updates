@@ -1,3 +1,15 @@
+// نماذج الصفوف في قائمتي الدارسين والمدرسين (نقل، إزالة) بلا رمز حماية خاص بها (data-edu-token) لتخفيف الصفحة:
+// يُضاف لها رمز الصفحة لحظة الإرسال. وإن غاب الرمز يعيد البرنامج تحميل الصفحة برسالة (AntiforgeryRetryFilter).
+document.addEventListener('submit', function (event) {
+    var form = event.target;
+    if (!(form instanceof HTMLFormElement) || !form.hasAttribute('data-edu-token') || form.querySelector('input[name="__RequestVerificationToken"]')) return;
+    var source = document.querySelector('[data-edu-token-src] input[name="__RequestVerificationToken"]') || document.querySelector('input[name="__RequestVerificationToken"]');
+    if (!source) return;
+    var input = document.createElement('input');
+    input.type = 'hidden'; input.name = source.name; input.value = source.value;
+    form.appendChild(input);
+}, true);
+
 // ربط الدارس/المدرس بملف عضو أو خادم موجود في البرنامج (بحث بالاسم أو الرقم القومي أو التليفون)
 (function () {
     document.querySelectorAll('[data-edu-link]').forEach(function (box) {
