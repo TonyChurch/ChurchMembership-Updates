@@ -77,9 +77,12 @@
     document.addEventListener('input', function (event) {
         var target = event.target;
         if (!target || !target.matches) return;
+        // ما يكتبه المستخدم بيده لم يعد «ملئًا تلقائيًا»
+        if (event.isTrusted) target.removeAttribute('data-draft-auto');
         if (target.matches('input[data-sub-mirror]')) {
             var source = document.querySelector('input[data-sub="' + target.getAttribute('data-sub-mirror') + '"]');
             if (!source) return;
+            if (event.isTrusted) source.removeAttribute('data-draft-auto');
             source.value = target.value;
             source.dispatchEvent(new Event('input', { bubbles: true }));
         } else if (target.matches('input[data-sub]')) {
@@ -107,6 +110,22 @@
             alert(message);
             if (bad) bad.focus();
         });
+        // «تعبئة للكل»: الخانات الفارغة فقط، فلا تُستبدل قيمة مكتوبة أو محفوظة. والمملوء يحمل data-draft-auto حتى يعدّله المستخدم
+        var fill = document.querySelector('[data-sub-fill]');
+        if (fill) fill.addEventListener('click', function () {
+            var count = 0;
+            subInputs().forEach(function (input) {
+                var value = input.getAttribute('data-fill');
+                if (!value || input.readOnly || input.value.trim() !== '') return;
+                input.value = value;
+                input.setAttribute('data-draft-auto', '');
+                count++;
+            });
+            refreshSubs();
+            subForm.dispatchEvent(new Event('input'));
+            var status = document.querySelector('[data-sub-fill-status]');
+            if (status) status.textContent = count ? 'مُلئت ' + count + ' من الخانات الفارغة. راجعها وعدّل ما تريد ثم «حفظ الاشتراكات».' : 'لا توجد خانات فارغة لملئها.';
+        });
         var pay = subForm.querySelector('[data-sub-pay]');
         if (pay) pay.addEventListener('click', function (event) {
             if (!refreshSubs().dirty) return;
@@ -126,6 +145,17 @@
             bad.focus();
         });
     }
+
+    // مبلغ غير مفهوم يُنبَّه إليه قبل الإرسال، فلا تضيع بيانات المصروف المكتوبة
+    all('form[data-amount-check]').forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            var input = form.querySelector('input[name=amount]');
+            if (!input || parse(input.value) > 0) return;
+            event.preventDefault();
+            alert('اكتب المبلغ رقمًا أكبر من صفر، مثل 150 أو 12.5.');
+            input.focus();
+        });
+    });
 
     // منع الضغط مرتين على «تسديد»
     var payForm = document.querySelector('form[data-pay-form]');

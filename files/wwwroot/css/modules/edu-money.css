@@ -52,6 +52,29 @@
 .edu-sub-bar__dirty { color: #b91c1c; }
 @media (max-width: 640px) { .edu-sub-bar { gap: .2rem .6rem; padding: .35rem .5rem; padding-inline-end: 6.2rem; font-size: .76rem; } .edu-sub-bar .ui-btn { min-height: 2rem; padding: .25rem .7rem; font-size: .8rem; } .edu-sub-bar__sum b { font-size: .9rem; } }
 
+/* ---------- قيمة الفصل الثابتة و«تعبئة للكل»، والإعفاء، والقفل ---------- */
+.edu-fee { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; margin: 0 0 .6rem; }
+.edu-fee__form { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0; }
+.edu-fee__form label { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0; font-weight: 700; font-size: .88rem; }
+.edu-fee .ui-btn { min-height: 2rem; padding: .25rem .75rem; font-size: .84rem; }
+.edu-fee__status { color: #065f46; font-size: .82rem; font-weight: 700; }
+.edu-sub-term { display: block; width: fit-content; margin-top: .15rem; color: #64748b; font-size: .7rem; text-decoration: none; }
+.edu-sub-term.is-set { padding: 0 .45rem; border-radius: 999px; background: #fef3c7; color: #92400e; font-weight: 800; }
+.edu-lock { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: 0 0 .6rem; padding: .3rem .8rem; border: 1px solid #fcd34d; border-radius: .6rem; background: #fffbeb; color: #92400e; font-weight: 700; }
+.edu-sub-bar .edu-lock { margin: 0; }
+.edu-sub-input[readonly], .edu-salary-date[readonly] { background: #f1f5f9; color: #475569; }
+.edu-bar form[data-confirm] { flex: 0 0 auto; }
+
+/* ---------- نموذج المصروف، وملف الدارس ---------- */
+.edu-exp__form { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .6rem; margin: 0; }
+.edu-exp__form label { display: flex; flex-direction: column; gap: .2rem; margin: 0; min-width: 0; font-weight: 700; font-size: .86rem; }
+.edu-exp__wide { grid-column: 1 / -1; }
+.edu-terms { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .6rem 1rem; margin: 0; }
+.edu-terms fieldset { display: flex; flex-wrap: wrap; gap: .3rem .9rem; margin: 0; padding: 0; border: 0; }
+.edu-terms label { margin: 0; font-weight: 700; font-size: .88rem; }
+.edu-terms__field { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+.edu-terms__field--note { flex: 1 1 14rem; }
+
 /* ---------- جداول الاشتراكات والمرتبات والإيصالات ---------- */
 .edu-money-card h2.edu-money__ok > .bi, .edu-money-card h2.edu-money__due > .bi { color: inherit; }
 .edu-money-table th, .edu-money-table td { padding: .35rem .5rem; vertical-align: middle; }
@@ -61,6 +84,7 @@
 .edu-money__acts form { margin: 0; }
 .edu-money__acts .ui-btn { min-height: 1.9rem; padding: .2rem .6rem; font-size: .8rem; white-space: nowrap; }
 .edu-money__danger { color: #b91c1c; }
+.edu-late__wa { min-height: 1.9rem; padding: .2rem .6rem; font-size: .8rem; color: #15803d; white-space: nowrap; }
 .edu-money__chip { display: inline-block; margin: .1rem; padding: .1rem .6rem; border: 1px solid #cbd5e1; border-radius: 999px; font-size: .76rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
 .edu-money__partial { display: block; color: #b45309; font-weight: 700; }
 .edu-money__empty { margin: 0; }
@@ -121,8 +145,14 @@
 .edu-file__sign div { display: grid; gap: 1.8rem; flex: 1; max-width: 12rem; text-align: center; }
 .edu-file__sign i { border-bottom: 1px dotted #333; }
 
+/* عنوان الكشف المطبوع (يظهر عند الطباعة فقط) */
+.edu-print-title { display: none; }
+
 /* ---------- الطباعة: الإيصال وملف التسوية وحدهما بلا رأس الصفحة وأدواتها ---------- */
 @media print {
+    .app-main .edu-doc-page .no-print { display: none !important; }
+    .app-main .edu-print-title { display: block; text-align: center; }
+    .edu-print-title h2 { margin: .15rem 0; font-size: 1.2rem; font-weight: 800; }
     .app-main .edu-doc-page > .edu-top, .app-main .edu-doc-page > .edu-tools, .app-main .edu-doc-page > .ui-flash { display: none !important; }
     body:has(.edu-doc) .app-shell__sidebar, body:has(.edu-doc) .topbar, body:has(.edu-doc) .app-footer { display: none !important; }
     body:has(.edu-doc) .app-main { margin: 0; padding: 0; }
@@ -134,4 +164,6 @@
     .edu-file__table thead th, .edu-file__table tfoot td, .edu-file__strong th, .edu-file__strong td, .edu-receipt__stamp { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .edu-file__table a { color: inherit; text-decoration: none; }
     .edu-money-table .form-control, .edu-view-table .edu-sub-input { border: 0; background: none; }
+    .edu-sub-term:not(.is-set) { display: none; }
+    .edu-sub-input::placeholder { color: #000; }
 }
