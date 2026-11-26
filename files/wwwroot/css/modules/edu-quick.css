@@ -125,3 +125,24 @@ html:not(.edu-ready) .ui-page > .edu-tools ~ .edu-bar { visibility: hidden; anim
     .edu-classes__menu > nav.edu-strip--menu .edu-strip__item { white-space: normal; }
 }
 @media print { .edu-classes { display: none !important; } }
+/* (2026-11-26، طلب المستخدم، js/edu-head.js) الشعار أكبر، و«منسق الخدمة» سطر تحت اسم الصفحة مباشرة،
+   والأرقام وشارة أعياد الميلاد سطر تحت «رجوع / أدوات / الفصول» داخل الرأس (خرجت من بطاقة التبويبات) */
+.edu-top--compact .edu-top__art { width: clamp(96px, 8.5vw, 136px); }
+@media (max-width: 991.98px) { .edu-top--compact .edu-top__art { width: 76px; } }
+.app-main header.ch-head .ch-title-box > .edu-coordinator--under { flex: 1 1 100%; order: 2; display: flex; align-items: center; gap: .2rem; margin: .1rem 0 0; white-space: normal; }
+.app-main header.ch-head .ch-title-box > .edu-head-stats { flex: 1 1 100%; order: 4; display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .5rem; min-width: 0; margin-top: .35rem; }
+.app-main header.ch-head .edu-head-stats > ul.ch-stats { display: flex; flex-wrap: wrap; gap: .25rem .4rem; margin: 0; padding: 0; min-width: 0; }
+.app-main header.ch-head .edu-head-stats > ul.ch-stats > li { margin: 0; }
+.app-main header.ch-head .edu-head-stats .edu-bday { max-width: 100%; }
+/* بحث الخدمة البرتقالي وبجواره «كل الفصول» و«كل الحالات» (الدارسون والمدرسون) */
+.edu-insearch-row { display: flex; align-items: flex-start; gap: .5rem; min-width: 0; }
+.edu-insearch-row > .edu-insearch { flex: 1 1 auto; min-width: 0; }
+.edu-insearch-row__filters { display: flex; flex: none; gap: .4rem; align-items: center; }
+.edu-insearch-row__filters .form-select { width: auto; max-width: 15rem; }
+@media (max-width: 767.98px) {
+    .edu-insearch-row { flex-wrap: wrap; }
+    .edu-insearch-row__filters { flex: 1 1 100%; order: -1; }
+    .edu-insearch-row__filters .form-select { flex: 1 1 0; min-width: 0; max-width: none; }
+}
+.edu-insearch-row { margin: -.4rem 0 1rem; }
+.edu-insearch-row > .edu-insearch { margin: 0; }

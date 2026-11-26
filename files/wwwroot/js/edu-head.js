@@ -19,8 +19,9 @@
             line.classList.add('edu-backline');
             var back = titleBox.querySelector(':scope > .ui-backbar');
             if (back) line.insertBefore(back, line.firstChild);
-            var coordinator = titleBox.querySelector(':scope > .edu-coordinator');
-            if (coordinator) line.appendChild(coordinator);
+            // (2026-11-26، طلب المستخدم) «منسق الخدمة» سطر مستقل تحت اسم الصفحة مباشرة (كان في آخر سطر «رجوع»)
+            var coordinator = titleBox.querySelector(':scope > .edu-coordinator') || header.querySelector('.edu-coordinator');
+            if (coordinator) { coordinator.classList.add('edu-coordinator--under'); titleBox.appendChild(coordinator); }
             if (line.children.length) titleBox.appendChild(line); else line.remove();
 
             // (2026-11-26) شرائح الصفوف صارت قائمة منسدلة «الفصول (عددها)» بجوار «أدوات» (كانت سطرين في الرأس تُقطع مع 11 فصلًا)؛
@@ -56,22 +57,22 @@
                 });
             }
 
-            // (3) الأرقام داخل بطاقة تبويبات النظام: أربعة أعمدة، والأرقام في خانات السطر الأخير الفارغة،
-            // فلا يبقى تبويب وحيد في سطر ولا عمود أرقام منفصل (الشاشة العريضة فقط؛ على الموبايل التبويبات سطر يُسحب)
-            var tabs = header.querySelector('.ch-corner > nav.ch-corner-tabs');
+            // (3) (2026-11-26، طلب المستخدم) الأرقام (دارس / نشط / مربوط بملف...) وشارة «أعياد الميلاد» تخرج من بطاقة التبويبات
+            // إلى سطر تحت سطر «رجوع / أدوات / الفصول» داخل الرأس؛ وبطاقة التبويبات تبقى روابط فقط
             var stats = header.querySelector('.ch-corner > ul.ch-stats');
-            if (tabs && stats && window.matchMedia('(min-width: 768px)').matches) {
-                var links = tabs.querySelectorAll(':scope > a').length;
-                var free = (4 - links % 4) % 4;
-                var sep = tabs.previousElementSibling;
-                if (sep && sep.classList.contains('ch-corner__sep')) sep.remove();
-                stats.classList.add('edu-tab-stats');
-                stats.style.gridColumn = free ? 'span ' + free : '1 / -1';
-                tabs.appendChild(stats);
-                tabs.classList.add('edu-tabs4');
-                // شارة «أعياد الميلاد» (اليوم / الأسبوع / خلال شهر) في السطر نفسه بعد الأرقام
-                var bday = header.querySelector('.edu-bday');
-                if (bday) { var item = document.createElement('li'); item.className = 'edu-bday-item'; item.appendChild(bday); stats.appendChild(item); }
+            var bday = header.querySelector('.edu-bday');
+            if (stats || bday) {
+                var statsRow = document.createElement('div');
+                statsRow.className = 'edu-head-stats no-print';
+                if (stats) {
+                    var sep = stats.nextElementSibling;
+                    if (sep && sep.classList.contains('ch-corner__sep')) sep.remove();
+                    sep = stats.previousElementSibling;
+                    if (sep && sep.classList.contains('ch-corner__sep')) sep.remove();
+                    statsRow.appendChild(stats);
+                }
+                if (bday) statsRow.appendChild(bday);
+                titleBox.appendChild(statsRow);
             }
 
             // (4) أزرار الصفحة (شريط .edu-bar بعد شريطي البحث) تصعد لسطر البحث نفسه: الأزرار يمينًا والبحثان يسارًا
