@@ -88,3 +88,15 @@ td.as-name { text-align: right; font-weight: 600; white-space: nowrap; }
 .as-del-day { position: absolute; top: 0; inset-inline-start: 0; width: 14px; height: 14px; line-height: 12px; padding: 0; border: 0; border-radius: 50%; background: #e5484d; color: #fff; font-size: 12px; cursor: pointer; opacity: .55; }
 .as-del-day:hover { opacity: 1; }
 @media print { .as-del-day { display: none !important; } }
+
+/* (2026-11-26) قائمة أسماء الفصل، وأوراق فصول نظام التعليم (Views/Education/ClassSheet.cshtml) */
+.as-names-staff { margin: 3mm 0 0; font-size: .85rem; }
+.as-head + .as-table, .as-names-staff + .as-table { margin-top: 3mm; }
+.as-table.as-table--names th:not(.as-name):not(.as-notes):not(.as-n) { width: 30mm; }
+.as-table.as-table--names .as-notes { width: 40mm; }
+.as-table.as-table--days th:not(.as-name):not(.as-notes):not(.as-n) { width: 19mm; }
+.as-table.as-table--days .as-notes { width: 30mm; }
+.as-table--days .as-week-no { display: block; }
+.as-table--days .as-group th { text-align: right; padding-inline: 2mm; }
+.as-table--staff { margin-top: 4mm; break-inside: avoid; }
+.as-table.as-table--staff th:not(.as-name):not(.as-notes):not(.as-n) { width: 28mm; }
