@@ -61,7 +61,8 @@
             // إلى سطر تحت سطر «رجوع / أدوات / الفصول» داخل الرأس؛ وبطاقة التبويبات تبقى روابط فقط
             var stats = header.querySelector('.ch-corner > ul.ch-stats');
             var bday = header.querySelector('.edu-bday');
-            if (stats || bday) {
+            var money = header.querySelector('.edu-money');
+            if (stats || bday || money) {
                 var statsRow = document.createElement('div');
                 statsRow.className = 'edu-head-stats no-print';
                 if (stats) {
@@ -72,6 +73,8 @@
                     statsRow.appendChild(stats);
                 }
                 if (bday) statsRow.appendChild(bday);
+                // (2026-11-26) بيان الاشتراكات المجمَّعة (للكاهن) تحت الأرقام وأعياد الميلاد
+                if (money) statsRow.appendChild(money);
                 titleBox.appendChild(statsRow);
             }
 

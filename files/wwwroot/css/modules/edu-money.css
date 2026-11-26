@@ -1,0 +1,137 @@
+/* (2026-11-26) أموال نظام التعليم (للكاهن): بيان الاشتراكات في الرأس، خانة «اشتراك الشهر»، الاشتراكات والمرتبات، الإيصال وملف التسوية */
+
+.edu-money__ok { color: #15803d; }
+.edu-money__due { color: #b45309; }
+
+/* ---------- بيان الاشتراكات في رأس الصفحة ---------- */
+.edu-money { max-width: 100%; font-size: .78rem; }
+.edu-money__box { position: relative; }
+.edu-money__box > summary { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem .5rem; padding: .2rem .7rem; border: 1px solid #a7f3d0; border-radius: .9rem; background: #ecfdf5; color: #065f46; font-weight: 700; list-style: none; cursor: pointer; }
+.edu-money__box > summary::-webkit-details-marker { display: none; }
+.edu-money__box > summary b { font-weight: 800; }
+.edu-money__box[open] > summary { border-color: #059669; }
+.edu-money__box[open] > summary .bi-chevron-down { transform: rotate(180deg); }
+.edu-money__panel { position: absolute; top: calc(100% + .3rem); inset-inline-start: 0; z-index: 1200; width: min(26rem, calc(100vw - 2.5rem)); max-height: 60vh; overflow: auto; padding: .6rem .7rem; border: 1px solid var(--ui-border, #e2e8f0); border-radius: .8rem; background: var(--ui-surface, #fff); color: var(--ui-text, #172033); box-shadow: 0 14px 34px rgba(15, 23, 42, .2); }
+.edu-money__panel ul { margin: 0 0 .5rem; padding: 0; list-style: none; }
+.edu-money__panel li { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .5rem; padding: .25rem 0; border-bottom: 1px solid #f1f5f9; }
+.edu-money__panel li > a:first-child { flex: 1 1 8rem; min-width: 0; font-weight: 700; text-decoration: none; }
+.edu-money__head { margin: .1rem 0 .2rem; font-size: .85rem; font-weight: 800; }
+.edu-money__pay { padding: .1rem .7rem; border-radius: 999px; background: var(--ui-primary, #2563a6); color: #fff; font-weight: 700; text-decoration: none; }
+.edu-money__pay:hover { color: #fff; filter: brightness(1.08); }
+.edu-money__receipts { display: inline-flex; flex-wrap: wrap; gap: .25rem; }
+.edu-money__links { display: flex; flex-wrap: wrap; gap: .3rem .9rem; margin: 0; font-weight: 700; }
+.edu-money__links a { text-decoration: none; }
+/* على الموبايل تُفتح اللوحة تحت البيان داخل الصفحة بعرض الرأس فلا تخرج عن الشاشة */
+@media (max-width: 767.98px) { .edu-money, .edu-money__box { width: 100%; } .edu-money__panel { position: static; width: 100%; max-height: none; margin-top: .3rem; } }
+/* اللوحة المفتوحة فوق ما بعد الرأس */
+.edu-top--compact > header.ch-head:has(.edu-money__box[open]) { position: relative; z-index: 30; overflow: visible; }
+
+/* ---------- اختيار الشهر والسنة ---------- */
+.edu-period { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: 0 0 .6rem; }
+.edu-period__label { margin: 0; font-weight: 800; color: #0f766e; white-space: nowrap; }
+.edu-period .form-select { width: auto; min-width: 6.5rem; }
+.edu-bar form.edu-period { flex: 0 1 auto; margin: 0; }
+.edu-bar .edu-period .form-select { flex: 0 1 auto; }
+
+/* ---------- خانة «اشتراك الشهر» والمجموع ---------- */
+.edu-sub-col { white-space: nowrap; }
+.edu-sub-input { width: 6.5rem; min-width: 0; min-height: 2rem; padding: .2rem .5rem; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.edu-sub-input.is-invalid { border-color: #dc2626; background: #fef2f2; }
+.edu-sub-else { color: #b45309; font-weight: 700; white-space: normal; }
+.edu-sub-outside { background: #fffbeb; }
+.edu-sub-totalrow td { border-top: 2px solid #059669; background: #ecfdf5; font-weight: 800; }
+.edu-sub-card { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: .25rem 0 0; font-size: .8rem; font-weight: 700; color: #065f46; }
+.edu-sub-card .edu-sub-input { width: 5.5rem; }
+.edu-sub-cardtotal { margin: .6rem 0 0; padding: .35rem .7rem; border-radius: .6rem; background: #ecfdf5; font-weight: 800; color: #065f46; }
+/* شريط الحفظ ثابت أسفل الشاشة أثناء الكتابة؛ المسافة اليسرى لزر «إضافة» العائم */
+.edu-sub-bar { position: sticky; bottom: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .8rem; margin: .7rem 0 0; padding: .5rem .7rem; padding-inline-end: 7rem; border: 1px solid #a7f3d0; border-radius: .8rem; background: #fff; box-shadow: 0 -6px 18px rgba(15, 23, 42, .1); font-weight: 700; }
+.edu-sub-bar .form-draft-notice { flex: 1 1 100%; margin: 0; }
+.edu-sub-bar__sum b { font-size: 1.05rem; }
+.edu-sub-bar__ok { color: #15803d; }
+.edu-sub-bar__due { color: #b45309; }
+.edu-sub-bar__dirty { color: #b91c1c; }
+@media (max-width: 640px) { .edu-sub-bar { gap: .2rem .6rem; padding: .35rem .5rem; padding-inline-end: 6.2rem; font-size: .76rem; } .edu-sub-bar .ui-btn { min-height: 2rem; padding: .25rem .7rem; font-size: .8rem; } .edu-sub-bar__sum b { font-size: .9rem; } }
+
+/* ---------- جداول الاشتراكات والمرتبات والإيصالات ---------- */
+.edu-money-card h2.edu-money__ok > .bi, .edu-money-card h2.edu-money__due > .bi { color: inherit; }
+.edu-money-table th, .edu-money-table td { padding: .35rem .5rem; vertical-align: middle; }
+.edu-money-table tfoot td { border-top: 2px solid #94a3b8; font-weight: 800; }
+.edu-num { font-variant-numeric: tabular-nums; }
+.edu-money__acts { display: flex; flex-wrap: wrap; gap: .3rem; }
+.edu-money__acts form { margin: 0; }
+.edu-money__acts .ui-btn { min-height: 1.9rem; padding: .2rem .6rem; font-size: .8rem; white-space: nowrap; }
+.edu-money__danger { color: #b91c1c; }
+.edu-money__chip { display: inline-block; margin: .1rem; padding: .1rem .6rem; border: 1px solid #cbd5e1; border-radius: 999px; font-size: .76rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.edu-money__partial { display: block; color: #b45309; font-weight: 700; }
+.edu-money__empty { margin: 0; }
+.edu-money__cancelled td:not(:last-child) { color: #94a3b8; text-decoration: line-through; }
+.edu-money__cancelled td:first-child small { text-decoration: none; }
+.edu-salary-table td { vertical-align: top; }
+.edu-salary-date { width: 10.5rem; min-height: 2rem; padding: .2rem .5rem; }
+.edu-salary-hint { display: block; color: #64748b; font-size: .7rem; }
+
+/* ---------- نموذج التسديد ---------- */
+.edu-pay { max-width: 44rem; }
+.edu-pay__form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin: 0; }
+.edu-pay__form label { display: flex; flex-direction: column; gap: .2rem; margin: 0; font-weight: 700; font-size: .88rem; min-width: 0; }
+.edu-pay__form input[readonly] { background: #f1f5f9; }
+.edu-pay__wide, .edu-pay__actions { grid-column: 1 / -1; }
+.edu-pay__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+@media (max-width: 640px) { .edu-pay__form { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- إيصال الاستلام ---------- */
+.edu-receipt { position: relative; }
+.edu-receipt__logo { display: flex; flex-direction: column; align-items: flex-start; gap: .1rem; }
+.edu-receipt__logo img { max-width: 5.5rem; max-height: 5.5rem; }
+.edu-receipt__logo small { font-weight: 700; }
+.edu-receipt h1 { text-align: center; line-height: 1.5; }
+.edu-receipt__no { font-size: 1rem; }
+.edu-receipt--cancelled { color: #64748b; }
+.edu-receipt__stamp { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%) rotate(-18deg); padding: .2rem 2.5rem; border: .3rem double #dc2626; border-radius: .6rem; color: #dc2626; font-size: 3.2rem; font-weight: 900; opacity: .75; pointer-events: none; }
+@media (max-width: 640px) {
+    .edu-receipt { padding: .8rem; font-size: .92rem; }
+    .edu-receipt .fin-voucher__head { grid-template-columns: minmax(0, 1fr) auto; }
+    .edu-receipt .fin-voucher__date { grid-column: 1 / -1; }
+    .edu-receipt .fin-voucher__body { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+    .edu-receipt .fin-voucher__signatures { gap: .8rem; }
+    .edu-receipt .fin-voucher__signatures div { min-width: 0; flex: 1; }
+}
+
+/* ---------- ملف التسوية ---------- */
+.edu-file { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.edu-file__sheet { min-width: 0; max-width: 58rem; width: 100%; margin: 0 auto; padding: 1rem 1.2rem; border: 1px solid #cbd5e1; border-radius: .6rem; background: #fff; color: #000; overflow-x: auto; }
+.edu-file__head { display: flex; align-items: center; gap: 1rem; padding-bottom: .6rem; margin-bottom: .6rem; border-bottom: 3px double #334155; }
+.edu-file__head img { width: 5.5rem; height: auto; }
+.edu-file__head h2 { margin: .15rem 0; font-size: 1.25rem; font-weight: 800; }
+.edu-file__head p { margin: 0; font-weight: 700; }
+.edu-file__sheet h3 { margin: .4rem 0 .5rem; font-size: 1.1rem; font-weight: 800; }
+.edu-file__sheet h4 { margin: .8rem 0 .3rem; font-size: .98rem; font-weight: 800; }
+.edu-file__sheet h3 small, .edu-file__sheet h4 small { font-weight: 600; font-size: .8rem; }
+.edu-file__table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.edu-file__table th, .edu-file__table td { padding: .22rem .4rem; border: 1px solid #64748b; text-align: start; vertical-align: top; }
+.edu-file__table thead th { background: #e2e8f0; font-weight: 800; }
+.edu-file__table tfoot td { background: #f1f5f9; font-weight: 800; }
+.edu-file__table .c-no { width: 2.6rem; text-align: center; }
+.edu-file__table .c-amt { width: 6.5rem; text-align: center; font-variant-numeric: tabular-nums; }
+.edu-file__table .c-sign { width: 9rem; }
+.edu-file__summary { max-width: 34rem; margin: 0 auto; font-size: .95rem; }
+.edu-file__summary td { width: 9rem; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.edu-file__strong th, .edu-file__strong td { background: #ecfdf5; font-weight: 800; }
+.edu-file__sign { display: flex; justify-content: space-around; gap: 1rem; margin-top: 1.6rem; }
+.edu-file__sign div { display: grid; gap: 1.8rem; flex: 1; max-width: 12rem; text-align: center; }
+.edu-file__sign i { border-bottom: 1px dotted #333; }
+
+/* ---------- الطباعة: الإيصال وملف التسوية وحدهما بلا رأس الصفحة وأدواتها ---------- */
+@media print {
+    .app-main .edu-doc-page > .edu-top, .app-main .edu-doc-page > .edu-tools, .app-main .edu-doc-page > .ui-flash { display: none !important; }
+    body:has(.edu-doc) .app-shell__sidebar, body:has(.edu-doc) .topbar, body:has(.edu-doc) .app-footer { display: none !important; }
+    body:has(.edu-doc) .app-main { margin: 0; padding: 0; }
+    .edu-file { display: block; }
+    .edu-file__sheet { max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; overflow: visible; }
+    .edu-file__break { break-before: page; }
+    .edu-file__table tr, .edu-file__sign { break-inside: avoid; }
+    .edu-file__sheet h3, .edu-file__sheet h4 { break-after: avoid; }
+    .edu-file__table thead th, .edu-file__table tfoot td, .edu-file__strong th, .edu-file__strong td, .edu-receipt__stamp { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .edu-file__table a { color: inherit; text-decoration: none; }
+    .edu-money-table .form-control, .edu-view-table .edu-sub-input { border: 0; background: none; }
+}
