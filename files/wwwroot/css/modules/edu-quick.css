@@ -146,3 +146,12 @@ html:not(.edu-ready) .ui-page > .edu-tools ~ .edu-bar { visibility: hidden; anim
 }
 .edu-insearch-row { margin: -.4rem 0 1rem; }
 .edu-insearch-row > .edu-insearch { margin: 0; }
+/* (2026-11-26 عصرًا، طلب المستخدم بالأسهم) الشعار أكبر، وبطاقة التبويبات تتسع في المساحة الفارغة بين العنوان والشعار،
+   وشارة «أعياد الميلاد» تنزل سطرًا تحت الأرقام يمينًا، فلا يأخذ عمود العنوان وسط الرأس */
+.app-main header.ch-head .ch-title-box > .edu-head-stats { flex-direction: column; align-items: flex-start; }
+@media screen and (min-width: 992px) { .edu-top--compact .edu-top__art { width: clamp(130px, 12vw, 190px); } }
+@media (min-width: 768px) {
+    .app-main .edu-top--compact > header.ch-head.ch-head--tabs > .ch-head__main { flex: 6 1 18rem; max-width: 25.5rem; }
+    .app-main .edu-top--compact > header.ch-head.ch-head--tabs > .ch-corner { flex: 1 1 24rem; min-width: min-content; max-width: 52rem; }
+    .app-main .edu-top--compact > header.ch-head.ch-head--tabs > .ch-corner > nav.ch-corner-tabs { flex: 1 1 auto; grid-template-columns: repeat(3, auto); }
+}
