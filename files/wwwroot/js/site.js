@@ -1438,6 +1438,91 @@ document.addEventListener("submit", event => {
         const pickUrl = pickHost?.dataset.familyPickUrl || "", pickLabel = pickHost?.dataset.familyPickLabel || "فتح ملفه";
         // data-family-pick-method="post": الاختيار ينفَّذ مباشرة (حفظ) بدل فتح صفحة، فيُرسل برمز الحماية الموجود في الصفحة
         const pickPost = !!pickUrl && (pickHost.dataset.familyPickMethod || "").toLowerCase() === "post";
+        const postPick = (url) => {
+            const token = document.querySelector("input[name=__RequestVerificationToken]");
+            if (!token) return;
+            const form = document.createElement("form");
+            form.method = "post";
+            form.action = url;
+            form.hidden = true;
+            form.append(token.cloneNode());
+            document.body.append(form);
+            form.submit();
+        };
+        // «مسجلون في الخدمة» فوق نتائج الأسر: حيث تضع الصفحة data-service-search="رابط البحث" (صفحات نظام التعليم)،
+        // ولو بلا ربط بأسرة. وفي خانة عليها data-service-pick (student/teacher) و data-service-class يضم الاختيار صاحبه للفصل.
+        const service = document.querySelector(".app-main [data-service-search]");
+        const serviceHost = input.closest("[data-service-pick]");
+        let servicePanel = null;
+        if (service) {
+            servicePanel = document.createElement("div");
+            servicePanel.className = "ui-family-hits ui-service-hits no-print";
+            servicePanel.hidden = true;
+            panel.before(servicePanel);
+        }
+        const renderService = (data) => {
+            const items = data.items || [];
+            const title = document.createElement("div");
+            title.className = "ui-family-hits__title";
+            title.innerHTML = '<i class="bi bi-person-check-fill" aria-hidden="true"></i> ';
+            title.append(`${service.dataset.serviceTitle} (${data.total})`);
+            if (data.total > items.length) title.append(` — يظهر أول ${items.length}، اكتب أكثر لتضييق النتائج`);
+            const list = document.createElement("div");
+            list.className = "ui-family-hits__list";
+            items.forEach((person) => {
+                const card = document.createElement("div");
+                card.className = "ui-family-hits__item ui-service-hits__item is-" + person.kind;
+                const open = document.createElement("a");
+                open.href = person.url;
+                if (newTab) { open.target = "_blank"; open.rel = "noopener"; }
+                const name = document.createElement("span");
+                name.textContent = person.name + " ";
+                const tag = document.createElement("b");
+                tag.className = "ui-service-hits__tag";
+                tag.textContent = person.tag;
+                name.append(tag);
+                const info = document.createElement("small");
+                info.textContent = person.info;
+                open.append(name, info);
+                card.append(open);
+                if (person.note) {
+                    const note = document.createElement("small");
+                    note.className = "ui-service-hits__note";
+                    note.textContent = person.note;
+                    card.append(note);
+                }
+                if (person.pick) {
+                    const pick = document.createElement("button");
+                    pick.type = "button";
+                    pick.className = "ui-family-hits__show ui-service-hits__pick";
+                    pick.innerHTML = '<i class="bi bi-plus-circle" aria-hidden="true"></i> ';
+                    pick.append(person.pick.label);
+                    pick.addEventListener("click", () => {
+                        if (person.pick.confirm && !confirm(person.pick.confirm)) return;
+                        pick.disabled = true;
+                        postPick(person.pick.url);
+                    });
+                    card.append(pick);
+                }
+                list.append(card);
+            });
+            servicePanel.replaceChildren(title, list);
+            servicePanel.hidden = items.length === 0;
+        };
+        const searchService = async (text) => {
+            if (!service) return;
+            const query = new URLSearchParams({ q: text });
+            if (serviceHost) {
+                query.set("kind", serviceHost.dataset.servicePick);
+                query.set("classId", serviceHost.dataset.serviceClass);
+            }
+            try {
+                const response = await fetch(service.dataset.serviceSearch + (service.dataset.serviceSearch.includes("?") ? "&" : "?") + query, { headers: { Accept: "application/json" } });
+                if (!response.ok || !(response.headers.get("content-type") || "").includes("json")) return;
+                const data = await response.json();
+                if (input.value.trim() === text) renderService(data);
+            } catch { /* البحث في المسجلين إضافي */ }
+        };
         // عرض النتائج بطاقات (الأصل)؛ وحيث تضع الصفحة data-family-views يظهر مفتاح «بطاقات / جدول» ويُحفظ اختيار المستخدم
         const toggleable = !!input.closest("[data-family-views]");
         const getView = () => { try { return localStorage.getItem("familyHitsView") === "table" ? "table" : "cards"; } catch { return "cards"; } };
@@ -1461,15 +1546,7 @@ document.addEventListener("submit", event => {
                         if (newTab) { link.target = "_blank"; link.rel = "noopener"; }
                         if (pickPost) link.addEventListener("click", (event) => {
                             event.preventDefault();
-                            const token = document.querySelector("input[name=__RequestVerificationToken]");
-                            if (!token) return;
-                            const form = document.createElement("form");
-                            form.method = "post";
-                            form.action = link.href;
-                            form.hidden = true;
-                            form.append(token.cloneNode());
-                            document.body.append(form);
-                            form.submit();
+                            postPick(link.href);
                         });
                         const label = document.createElement("small");
                         label.textContent = pickLabel;
@@ -1573,10 +1650,11 @@ document.addEventListener("submit", event => {
         input.addEventListener("input", () => {
             clearTimeout(timer);
             const text = input.value.trim();
-            if (text.length < 2) { last = ""; panel.hidden = true; return; }
+            if (text.length < 2) { last = ""; panel.hidden = true; if (servicePanel) servicePanel.hidden = true; return; }
             timer = setTimeout(async () => {
                 if (text === last) return;
                 last = text;
+                searchService(text);
                 try {
                     const response = await fetch("/Families/Find?q=" + encodeURIComponent(text), { headers: { Accept: "application/json" } });
                     if (!response.ok || !(response.headers.get("content-type") || "").includes("json")) return;

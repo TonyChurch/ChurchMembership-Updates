@@ -165,6 +165,14 @@ header.edu-head:not(.ch-head) ul.page-stats .ui-chip-stat span { font-size: .76r
 .ui-family-hits__table th, .ui-family-hits__table td { padding: .4rem .6rem; border-bottom: 1px solid #e2e8f0; text-align: start; vertical-align: middle; }
 .ui-family-hits__table thead th { background: #f0fdfa; color: #134e4a; font-weight: 800; white-space: nowrap; }
 .ui-family-hits__table td a { font-weight: 800; }
+/* «مسجلون في الخدمة» فوق نتائج الأسر (site.js): لون مختلف وشارة الصفة وزر الضم للفصل */
+.ui-service-hits { border: 1px solid #99f6e4; background: #f0fdfa; }
+.ui-service-hits .ui-family-hits__title { color: #0f766e; }
+.ui-service-hits__item { background: #fff; min-width: 0; overflow-wrap: anywhere; }
+.ui-service-hits__tag { display: inline-block; padding: .02rem .5rem; border-radius: 999px; background: #dbeafe; color: #1d4ed8; font-size: .72rem; font-weight: 700; vertical-align: middle; }
+.ui-service-hits__item.is-teacher .ui-service-hits__tag { background: #ede9fe; color: #6d28d9; }
+.ui-family-hits__item small.ui-service-hits__note { color: #b45309; font-weight: 700; }
+.ui-service-hits__pick { background: #ccfbf1; color: #0f766e; }
 /* استيراد: أعمدة مضغوطة بعروض محددة فلا يلزم تمرير أفقي */
 .edu-import th, .edu-import td { padding: .3rem .35rem; }
 .edu-import .edu-nid-info { white-space: normal; font-size: .72rem; line-height: 1.3; }
