@@ -32,6 +32,9 @@
     function refreshSubs() {
         var inputs = subInputs();
         var total = sum(inputs);
+        // «الدارسون»: الإجمالي للمعروض فقط (ما يخفيه البحث داخل الجدول لا يُجمع)
+        if (subForm && subForm.hasAttribute('data-sub-visible'))
+            total = sum(inputs.filter(function (input) { var row = input.closest('tr'); return !row || !row.hidden; }));
         all('[data-sub-total]').forEach(function (node) { node.textContent = show(total); });
         var dirty = false;
         inputs.forEach(function (input) {
@@ -49,11 +52,34 @@
 
     // ---------- المرتبات: المجموعان، وتاريخ اليوم تلقائيًا عند كتابة المصروف (يبقى «تلقائيًا» في المسودة حتى يغيّره المستخدم) ----------
     var salaryForm = document.querySelector('form[data-salary-form]');
+    function putTotal(name, value) {
+        all('[data-sum-total="' + name + '"]').forEach(function (node) { node.textContent = show(value); });
+    }
     function refreshSalaries() {
-        ['suggested', 'paid'].forEach(function (name) {
-            var total = sum(all('input[data-sum-part="' + name + '"]'));
-            all('[data-sum-total="' + name + '"]').forEach(function (node) { node.textContent = show(total); });
+        var totals = {};
+        ['suggested', 'deduction', 'penalty', 'paid'].forEach(function (name) {
+            totals[name] = sum(all('input[data-sum-part="' + name + '"]'));
+            putTotal(name, totals[name]);
         });
+        putTotal('cuts', totals.deduction + totals.penalty);
+        // المستحق = المقترح − الخصومات − الجزاءات (لا يقل عن صفر)، ويظهر باهتًا في خانة المصروف الفارغة
+        var due = 0;
+        all('[data-salary-due]').forEach(function (node) {
+            var id = node.getAttribute('data-salary-due');
+            function value(prefix) { var input = salaryForm.querySelector('input[name="' + prefix + '_' + id + '"]'); return input ? parse(input.value) || 0 : 0; }
+            var own = Math.max(0, Math.round((value('suggested') - value('deduction') - value('penalty')) * 100) / 100);
+            node.textContent = show(own);
+            due += own;
+            var paid = salaryForm.querySelector('input[data-salary-paid="' + id + '"]');
+            if (!paid) return;
+            paid.placeholder = own > 0 ? String(own) : '';
+            // ما كتبه زر «كتابة المستحق» يتبع المستحق حتى يعدّله المستخدم بيده
+            if (paid.hasAttribute('data-draft-auto')) {
+                var next = own > 0 ? String(own) : '';
+                if (paid.value !== next) { paid.value = next; autoDate(paid); putTotal('paid', sum(all('input[data-sum-part="paid"]'))); }
+            }
+        });
+        putTotal('due', due);
     }
     function today() {
         var now = new Date();
@@ -126,6 +152,13 @@
             var status = document.querySelector('[data-sub-fill-status]');
             if (status) status.textContent = count ? 'مُلئت ' + count + ' من الخانات الفارغة. راجعها وعدّل ما تريد ثم «حفظ الاشتراكات».' : 'لا توجد خانات فارغة لملئها.';
         });
+        document.addEventListener('edu-rows-filtered', refreshSubs);
+        // قائمة طويلة (الدارسون): تُرسَل الخانات المتغيّرة وحدها، فلا تُكتب قيمة قديمة فوق ما حفظه غيرك
+        if (subForm.hasAttribute('data-sub-changed')) subForm.addEventListener('formdata', function (event) {
+            subInputs().forEach(function (input) {
+                if (parse(input.value) === parse(input.defaultValue)) event.formData.delete(input.name);
+            });
+        });
         var pay = subForm.querySelector('[data-sub-pay]');
         if (pay) pay.addEventListener('click', function (event) {
             if (!refreshSubs().dirty) return;
@@ -137,6 +170,17 @@
         refreshSalaries();
         // مسودة استُعيد فيها مبلغ مصروف بلا تاريخ: يُكتب تاريخ اليوم كما لو كُتب الآن
         all('input[data-salary-paid]').forEach(function (paid) { if (paid.value !== paid.defaultValue) autoDate(paid); });
+        var fillDue = salaryForm.querySelector('[data-salary-fill]');
+        if (fillDue) fillDue.addEventListener('click', function () {
+            all('input[data-salary-paid]').forEach(function (paid) {
+                if (paid.readOnly || paid.value.trim() !== '' || !paid.placeholder) return;
+                paid.value = paid.placeholder;
+                paid.setAttribute('data-draft-auto', '');
+                autoDate(paid);
+            });
+            refreshSalaries();
+            salaryForm.dispatchEvent(new Event('input'));
+        });
         salaryForm.addEventListener('submit', function (event) {
             var bad = all('input[data-sum-part]').filter(function (input) { return parse(input.value) === null; })[0];
             if (!bad) return;

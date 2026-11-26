@@ -185,6 +185,7 @@ document.addEventListener('submit', function (event) {
             if (ok) shown++;
         });
         count.textContent = text && rows.length ? 'في الجدول: ' + shown + ' من ' + rows.length : '';
+        document.dispatchEvent(new Event('edu-rows-filtered'));
     }
     function render(items, text) {
         list.innerHTML = '';

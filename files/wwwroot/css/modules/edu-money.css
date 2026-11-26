@@ -85,6 +85,25 @@
     .edu-list:has(.c-salary) td[data-label="تاريخ الميلاد"] { font-size: .76rem; white-space: nowrap; overflow-wrap: normal; padding-inline: .15rem; }
 }
 
+/* ---------- «اشتراك الشهر» في صفحة «الدارسون» ---------- */
+.edu-list .c-sub .edu-sub-input { width: 100%; max-width: 6.5rem; }
+.edu-sub-hint { display: block; color: #64748b; font-size: .7rem; }
+.edu-sub-hint::after { content: attr(data-hint); }
+@media (min-width: 992px) {
+    /* مجموع الأعمدة مع خانة التحديد في حدود 100% */
+    .edu-list.edu-list:has(.c-sub) .c-name { width: 17%; }
+    .edu-list.edu-list:has(.c-sub) .c-sub { width: 9%; }
+    .edu-list.edu-list:has(.c-sub) .c-nid { width: 14.5%; }
+    .edu-list.edu-list:has(.c-sub) .c-phone { width: 11.5%; }
+    .edu-list.edu-list:has(.c-sub) .c-birth { width: 9.4%; }
+    .edu-list.edu-list:has(.c-sub) .c-gender { width: 4.6%; }
+    .edu-list.edu-list:has(.c-sub) .c-class { width: 12.5%; }
+    .edu-list.edu-list:has(.c-sub) .c-status { width: 6.5%; }
+    .edu-list.edu-list:has(.c-sub) .c-move { width: 12.5%; }
+    .edu-list .edu-sub-totalrow td { overflow: visible; }
+    .edu-list:has(.c-sub) td[data-label="تاريخ الميلاد"] { font-size: .76rem; white-space: nowrap; overflow-wrap: normal; padding-inline: .15rem; }
+}
+
 /* ---------- نموذج المصروف، وملف الدارس ---------- */
 .edu-exp__form { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .6rem; margin: 0; }
 .edu-exp__form label { display: flex; flex-direction: column; gap: .2rem; margin: 0; min-width: 0; font-weight: 700; font-size: .86rem; }
@@ -113,6 +132,12 @@
 .edu-salary-table td { vertical-align: top; }
 .edu-salary-date { width: 10.5rem; min-height: 2rem; padding: .2rem .5rem; }
 .edu-salary-hint { display: block; color: #64748b; font-size: .7rem; }
+.edu-salary-cut { display: block; color: #b45309; font-size: .7rem; font-weight: 700; }
+.edu-salary-table .edu-sub-input::placeholder { color: #94a3b8; font-weight: 600; }
+.edu-salary-cutcell .edu-sub-input { display: block; }
+.edu-salary-reason { width: 100%; min-width: 7rem; min-height: 1.8rem; margin-top: .2rem; padding: .1rem .45rem; font-size: .76rem; }
+.edu-salary-reason[readonly] { background: #f1f5f9; color: #475569; }
+.edu-salary-table .edu-salary-date { width: 9.4rem; }
 
 /* ---------- نموذج التسديد ---------- */
 .edu-pay { max-width: 44rem; }
@@ -158,6 +183,12 @@
 .edu-file__table .c-no { width: 2.6rem; text-align: center; }
 .edu-file__table .c-amt { width: 6.5rem; text-align: center; font-variant-numeric: tabular-nums; }
 .edu-file__table .c-sign { width: 9rem; }
+/* جدول المرتبات تسعة أعمدة: أضيق ليتسع لصفحة A4 الطولية */
+.edu-file__salaries { font-size: .78rem; }
+.edu-file__salaries th, .edu-file__salaries td { padding-inline: .25rem; }
+.edu-file__salaries .c-amt { width: 4.4rem; }
+.edu-file__salaries .c-sign { width: 5.5rem; }
+.edu-file__reason { display: block; font-size: .68rem; font-weight: 600; line-height: 1.35; }
 .edu-file__summary { max-width: 34rem; margin: 0 auto; font-size: .95rem; }
 .edu-file__summary td { width: 9rem; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
 .edu-file__strong th, .edu-file__strong td { background: #ecfdf5; font-weight: 800; }
@@ -184,6 +215,7 @@
     .edu-file__table thead th, .edu-file__table tfoot td, .edu-file__strong th, .edu-file__strong td, .edu-receipt__stamp { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .edu-file__table a { color: inherit; text-decoration: none; }
     .edu-money-table .form-control, .edu-view-table .edu-sub-input { border: 0; background: none; }
+    .edu-salary-table .edu-sub-input::placeholder, .edu-salary-reason::placeholder { color: transparent; }
     .edu-sub-term:not(.is-set) { display: none; }
     .edu-sub-input::placeholder { color: #000; }
 }
