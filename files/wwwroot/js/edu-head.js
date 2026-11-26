@@ -23,11 +23,37 @@
             if (coordinator) line.appendChild(coordinator);
             if (line.children.length) titleBox.appendChild(line); else line.remove();
 
+            // (2026-11-26) شرائح الصفوف صارت قائمة منسدلة «الفصول (عددها)» بجوار «أدوات» (كانت سطرين في الرأس تُقطع مع 11 فصلًا)؛
+            // في صفحة فصل يحمل الزر اسمه، والفصل الحالي مميّز داخل اللوحة. الإغلاق بالضغط خارجها (compact-head.js) وبـ Esc (هنا)
             var strip = document.querySelector('.app-main .edu-top--compact + .edu-strip--compact');
             if (strip) {
-                strip.classList.add('edu-strip--head');
-                headMain.appendChild(strip);
-                header.classList.add('edu-head--strip');
+                var classCount = strip.querySelectorAll(':scope > .edu-strip__item:not(.edu-strip__add)').length;
+                var current = strip.querySelector(':scope > .edu-strip__item.is-open');
+                var currentName = current ? current.cloneNode(true) : null;
+                if (currentName) Array.prototype.forEach.call(currentName.querySelectorAll('i, .edu-strip__count'), function (node) { node.remove(); });
+                var classes = document.createElement('details');
+                classes.className = 'ch-tools edu-classes no-print';
+                var summary = document.createElement('summary');
+                summary.className = 'ui-btn' + (current ? ' edu-classes__current ' + (current.className.match(/edu-tone-\d/) || [''])[0] : '');
+                summary.innerHTML = '<i class="bi bi-easel-fill" aria-hidden="true"></i> ';
+                summary.appendChild(document.createTextNode(currentName ? 'الفصل: ' + currentName.textContent.trim() : 'الفصول (' + classCount + ')'));
+                summary.insertAdjacentHTML('beforeend', ' <i class="bi bi-chevron-down edu-classes__caret" aria-hidden="true"></i>');
+                var panel = document.createElement('div');
+                panel.className = 'ch-tools__menu edu-classes__menu';
+                strip.classList.add('edu-strip--menu');
+                panel.appendChild(strip);
+                classes.appendChild(summary);
+                classes.appendChild(panel);
+                var toolsMenu = line.querySelector(':scope > .ch-tools');
+                if (toolsMenu) toolsMenu.after(classes);
+                else if (coordinator && coordinator.parentNode === line) line.insertBefore(classes, coordinator);
+                else line.appendChild(classes);
+                if (!line.parentNode) titleBox.appendChild(line);
+                document.addEventListener('keydown', function (event) {
+                    if (event.key !== 'Escape' || !classes.open) return;
+                    classes.open = false;
+                    summary.focus();
+                });
             }
 
             // (3) الأرقام داخل بطاقة تبويبات النظام: أربعة أعمدة، والأرقام في خانات السطر الأخير الفارغة،

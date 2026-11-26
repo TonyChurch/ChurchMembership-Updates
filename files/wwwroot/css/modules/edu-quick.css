@@ -111,3 +111,17 @@ html:not(.edu-ready) .ui-page > .edu-tools ~ .edu-bar { visibility: hidden; anim
 @media print { .edu-bday { display: none !important; } }
 /* سطر الأرقام والشارة لا يحدد عرض أعمدة التبويبات (يلتف داخل خاناته بدل أن يوسّع البطاقة) */
 .app-main header.ch-head .ch-corner > nav.ch-corner-tabs > ul.edu-tab-stats { contain: inline-size; min-width: 0; }
+/* (2026-11-26، js/edu-head.js) الصفوف قائمة منسدلة «الفصول (عددها)» بجوار «أدوات»: لوحة فيها الشرائح بألوانها وأعدادها، تلتف أسطرًا ولا تُسحب */
+.app-main header.ch-head .edu-classes > summary { display: inline-flex; align-items: center; gap: .3rem; white-space: nowrap; }
+.app-main header.ch-head .edu-classes > summary.edu-classes__current { border-inline-start: 4px solid var(--tone); }
+.edu-classes__caret { font-size: .7rem; transition: transform .15s; }
+.edu-classes[open] .edu-classes__caret { transform: rotate(180deg); }
+.ch-tools__menu.edu-classes__menu { min-width: min(18rem, 92vw); width: max-content; max-width: min(36rem, 92vw); max-height: min(60vh, 26rem); overflow-y: auto; }
+.edu-classes__menu > nav.edu-strip--menu { display: flex; flex-wrap: wrap; gap: .3rem; margin: 0; padding: 0; overflow: visible; }
+.edu-classes__menu > nav.edu-strip--menu .edu-strip__item { flex: none; white-space: nowrap; width: auto; }
+@media (max-width: 767.98px) {
+    .ch-actions > .ch-tools.edu-classes .ch-tools__menu.edu-classes__menu { width: auto; max-width: 100%; }
+    .edu-classes__menu > nav.edu-strip--menu { flex-wrap: wrap; overflow: visible; }
+    .edu-classes__menu > nav.edu-strip--menu .edu-strip__item { white-space: normal; }
+}
+@media print { .edu-classes { display: none !important; } }
