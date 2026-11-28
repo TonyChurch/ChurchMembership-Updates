@@ -152,7 +152,7 @@
         var fill = document.querySelector('[data-sub-fill]');
         if (fill) fill.addEventListener('click', function () {
             var count = 0;
-            subInputs().forEach(function (input) {
+            moneyInputs().forEach(function (input) {
                 var value = input.getAttribute('data-fill');
                 if (!value || input.readOnly || input.value.trim() !== '') return;
                 input.value = value;

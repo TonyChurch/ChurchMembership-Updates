@@ -174,3 +174,10 @@ html:not(.edu-ready) .ui-page > .edu-tools ~ .edu-bar { visibility: hidden; anim
 .edu-people__head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-bottom: .6rem; }
 .edu-people__head > h2 { margin: 0; }
 .edu-people__head > .edu-view-switch { margin: 0; }
+/* (2026-11-28، طلب المستخدم بالأسهم) خانة الإضافة في سطر العنوان (و«اشتراك شهر» في آخر سطر الدارسين)، ونتائج البحث سطر كامل تحته */
+.edu-people__head > .hub-add { display: contents; }
+.edu-people__head > .hub-add > .form-control { flex: 1 1 16rem; width: auto; min-width: 0; }
+.edu-people__head > .hub-add > .ui-family-hits { order: 3; flex: 1 1 100%; min-width: 0; }
+.edu-people__head > .edu-period { flex: none; max-width: 100%; margin: 0; }
+/* ملف الفصل: شريطا البحث فوق بعضهما (الأسر ثم الخدمة) بجوار أزرار الفصل */
+.ui-page:has(> .edu-class-body) > .edu-tools--bar > .edu-tools__search { grid-template-columns: minmax(0, 1fr); }
