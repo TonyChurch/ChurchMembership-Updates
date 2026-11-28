@@ -1065,6 +1065,20 @@
     font-size: .74rem;
 }
 
+/* أرقام الأسرة داخل بطاقات خدماتها */
+.fin-service .fin-service__stat {
+    display: block;
+    margin-top: .2rem;
+    color: var(--service-color);
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.fin-service__stat strong {
+    font-size: .95rem;
+    font-weight: 800;
+}
+
 .fin-service--green { --service-color: #0a9468; --service-soft: #e6f8f1; }
 .fin-service--gold { --service-color: #d98e00; --service-soft: #fff5e1; }
 .fin-service--slate { --service-color: #475569; --service-soft: #f1f4f9; }

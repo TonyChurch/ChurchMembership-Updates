@@ -1195,9 +1195,17 @@ document.addEventListener("change", event => {
             families = all.filter(item => item.familyId);
             search.placeholder = `ابحث في ${families.length} أسرة بالاسم أو الكود، أو اكتب اسمًا غير مسجل`;
             // الدخول من زر «صيدلية» في ملف الأسرة: الأسرة مختارة
-            const wanted = Number(new URLSearchParams(location.search).get("familyId"));
+            const query = new URLSearchParams(location.search);
+            const wanted = Number(query.get("familyId"));
             const preset = families.find(item => item.familyId === wanted);
-            if (preset) choose(preset);
+            // ومعه الفرد إن فُتحت من خدماته هو
+            if (preset) choose(preset).then(() => {
+                const person = query.get("memberId");
+                if (person && [...member.options].some(option => option.value === person)) {
+                    member.value = person;
+                    patientField.hidden = true;
+                }
+            });
         });
         load();
     }).catch(() => { /* القسم يظهر لمن له صلاحية الصيدلية فقط */ });
