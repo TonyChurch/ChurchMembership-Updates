@@ -87,26 +87,18 @@
                 if (money && tabs) whenWide('(min-width: 768px)', function (wide) { (wide ? tabs : statsRow).appendChild(money); });
             }
 
-            // (2026-11-28، طلب المستخدم بالأسهم) ملف الفصل: «طباعة الشهادات والكشف» تحت بطاقة التبويبات،
-            // ومفتاح «مفصل / بطاقات» تحت الشعار؛ وعلى الشاشة الأضيق يعود كلٌّ إلى مكانه الأصلي
-            var corner = header.querySelector(':scope > .ch-corner');
-            var printCard = document.querySelector('.app-main [data-edu-head-slot="tabs"]');
-            var print = printCard && printCard.querySelector('.edu-print');
-            var views = document.querySelector('.app-main [data-edu-head-slot="art"]');
-            var art = header.parentNode.querySelector(':scope > .edu-top__art');
-            if (corner && (print || views)) {
-                var home = document.createComment('edu-views');
-                if (views) views.parentNode.insertBefore(home, views);
-                whenWide('(min-width: 992px)', function (wide) {
-                    corner.classList.toggle('edu-corner--extra', wide);
-                    if (print) {
-                        (wide ? corner : printCard).appendChild(print);
-                        printCard.hidden = wide;
-                    }
-                    if (views) {
-                        if (wide) (art || corner).appendChild(views);
-                        else home.parentNode.insertBefore(views, home.nextSibling);
-                    }
+            // (2026-11-28، طلب المستخدم) أمر نادر أو خطر في شريط الصفحة (مثل «إزالة» الفصل) ينتقل إلى آخر «أدوات»
+            var menu = line.querySelector(':scope > .ch-tools:not(.edu-classes) > .ch-tools__menu');
+            if (menu) Array.prototype.forEach.call(document.querySelectorAll('.app-main [data-edu-head-tool]'), function (node) { menu.appendChild(node); });
+
+            // قائمة «طباعة الشهادات والكشف» في شريط الأوامر: تُغلق بالضغط خارجها أو بـ Esc
+            var print = document.querySelector('.app-main .edu-bar > .edu-print');
+            if (print) {
+                document.addEventListener('click', function (event) { if (print.open && !print.contains(event.target)) print.open = false; });
+                document.addEventListener('keydown', function (event) {
+                    if (event.key !== 'Escape' || !print.open) return;
+                    print.open = false;
+                    print.querySelector('summary').focus();
                 });
             }
 

@@ -158,13 +158,19 @@ html:not(.edu-ready) .ui-page > .edu-tools ~ .edu-bar { visibility: hidden; anim
 /* (2026-11-28، طلب المستخدم بالأسهم، js/edu-head.js) بيان الاشتراكات سطر في أسفل بطاقة التبويبات */
 .app-main header.ch-head .ch-corner > nav.ch-corner-tabs > .edu-money { grid-column: 1 / -1; justify-self: stretch; min-width: 0; contain: inline-size; margin-top: .1rem; }
 .app-main header.ch-head .ch-corner > nav.ch-corner-tabs > .edu-money .edu-money__box > summary { justify-content: center; }
-/* ملف الفصل: «طباعة الشهادات والكشف» سطر تحت البطاقة، و«مفصل / بطاقات» تحت الشعار */
-.app-main header.ch-head > .ch-corner.edu-corner--extra { flex-wrap: wrap; align-content: flex-start; }
-.app-main header.ch-head > .ch-corner.edu-corner--extra > .edu-print { flex: 1 1 100%; margin: 0; padding: 0; border: 0; text-align: end; }
-.app-main header.ch-head > .ch-corner.edu-corner--extra > .edu-print > summary { display: inline-block; padding: .3rem .9rem; border: 1px solid #99f6e4; border-radius: 999px; background: #f0fdfa; font-size: .84rem; }
-.app-main header.ch-head > .ch-corner.edu-corner--extra > .edu-print > .edu-print__list,
-.app-main header.ch-head > .ch-corner.edu-corner--extra > .edu-print > p { margin-top: .4rem; padding: .5rem .8rem; border: 1px solid var(--ui-border, #e2e8f0); border-radius: .8rem; background: var(--ui-surface, #fff); text-align: start; }
-.edu-top--compact .edu-top__art:has(> .edu-view-switch) { grid-template-columns: minmax(0, 1fr); }
-.edu-top--compact .edu-top__art > .edu-view-switch { position: relative; flex-wrap: wrap; justify-content: center; gap: .2rem; margin: .5rem 0 0; }
-.edu-top--compact .edu-top__art > .edu-view-switch .ui-btn { padding-inline: .5rem; font-size: .78rem; }
-.app-main header.ch-head > .ch-corner > .edu-view-switch { flex: 1 1 100%; margin: 0; }
+/* ملف الفصل: «طباعة الشهادات والكشف» زر بين أوامر الفصل وقائمته منسدلة، و«مفصل / بطاقات» بجوار «المدرسون» */
+.edu-bar > .edu-print { position: relative; margin: 0; padding: 0; border: 0; }
+.edu-bar > .edu-print > summary.ui-btn { color: var(--ui-primary-strong); list-style: none; }
+.edu-bar > .edu-print > summary::-webkit-details-marker { display: none; }
+.edu-bar > .edu-print > summary::after { content: ""; border: .3em solid transparent; border-top-color: currentColor; border-bottom-width: 0; }
+.edu-bar > .edu-print[open] > summary::after { border-top-width: 0; border-bottom: .3em solid currentColor; }
+.edu-bar > .edu-print > .edu-print__list,
+.edu-bar > .edu-print > p { position: absolute; top: calc(100% + .35rem); inset-inline-start: 0; z-index: 1200; width: min(28rem, calc(100vw - 2.5rem)); max-height: 60vh; overflow: auto; margin: 0; padding: .6rem .8rem; border: 1px solid var(--ui-border, #e2e8f0); border-radius: .8rem; background: var(--ui-surface, #fff); box-shadow: 0 14px 34px rgba(15, 23, 42, .2); }
+@media (max-width: 767.98px) {
+    .edu-bar > .edu-print[open] { flex: 1 1 100%; }
+    .edu-bar > .edu-print > .edu-print__list,
+    .edu-bar > .edu-print > p { position: static; width: 100%; max-height: none; margin-top: .35rem; }
+}
+.edu-people__head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-bottom: .6rem; }
+.edu-people__head > h2 { margin: 0; }
+.edu-people__head > .edu-view-switch { margin: 0; }
