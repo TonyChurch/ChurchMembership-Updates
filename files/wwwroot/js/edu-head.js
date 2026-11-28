@@ -4,6 +4,12 @@
 // إن لم يعمل الرأس المضغوط (لا ch-head) يبقى كل شيء كما هو.
 (function () {
     'use strict';
+    // ينفّذ الآن ومع كل تغيّر في عرض الشاشة
+    function whenWide(query, apply) {
+        var list = window.matchMedia(query);
+        apply(list.matches);
+        if (list.addEventListener) list.addEventListener('change', function () { apply(list.matches); });
+    }
     function arrange() {
         var root = document.documentElement;
         try {
@@ -76,6 +82,32 @@
                 // (2026-11-26) بيان الاشتراكات المجمَّعة (للكاهن) تحت الأرقام وأعياد الميلاد
                 if (money) statsRow.appendChild(money);
                 titleBox.appendChild(statsRow);
+                // (2026-11-28، طلب المستخدم بالأسهم) على الشاشة العريضة ينتقل البيان إلى أسفل بطاقة التبويبات
+                var tabs = header.querySelector('.ch-corner > nav.ch-corner-tabs');
+                if (money && tabs) whenWide('(min-width: 768px)', function (wide) { (wide ? tabs : statsRow).appendChild(money); });
+            }
+
+            // (2026-11-28، طلب المستخدم بالأسهم) ملف الفصل: «طباعة الشهادات والكشف» تحت بطاقة التبويبات،
+            // ومفتاح «مفصل / بطاقات» تحت الشعار؛ وعلى الشاشة الأضيق يعود كلٌّ إلى مكانه الأصلي
+            var corner = header.querySelector(':scope > .ch-corner');
+            var printCard = document.querySelector('.app-main [data-edu-head-slot="tabs"]');
+            var print = printCard && printCard.querySelector('.edu-print');
+            var views = document.querySelector('.app-main [data-edu-head-slot="art"]');
+            var art = header.parentNode.querySelector(':scope > .edu-top__art');
+            if (corner && (print || views)) {
+                var home = document.createComment('edu-views');
+                if (views) views.parentNode.insertBefore(home, views);
+                whenWide('(min-width: 992px)', function (wide) {
+                    corner.classList.toggle('edu-corner--extra', wide);
+                    if (print) {
+                        (wide ? corner : printCard).appendChild(print);
+                        printCard.hidden = wide;
+                    }
+                    if (views) {
+                        if (wide) (art || corner).appendChild(views);
+                        else home.parentNode.insertBefore(views, home.nextSibling);
+                    }
+                });
             }
 
             // (4) أزرار الصفحة (شريط .edu-bar بعد شريطي البحث) تصعد لسطر البحث نفسه: الأزرار يمينًا والبحثان يسارًا

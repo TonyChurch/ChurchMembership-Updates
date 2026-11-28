@@ -28,17 +28,28 @@
     // ---------- اشتراك الشهر في صفحة الفصل: خانة الجدول هي المحفوظة، وخانة البطاقة نسخة منها ----------
     var subForm = document.querySelector('form[data-sub-form]');
     function subInputs() { return all('input[data-sub]'); }
-    function mirrorOf(id) { return document.querySelector('input[data-sub-mirror="' + id + '"]'); }
+    // (2026-11-28) خانة «مصروفات أخرى» بجوار الاشتراك: مجموع مستقل، وتُحفظ مع الاشتراك وتُسدَّد معه
+    function otherInputs() { return all('input[data-oth]'); }
+    function moneyInputs() { return subInputs().concat(otherInputs()); }
+    function mirrorOf(input) {
+        var other = input.hasAttribute('data-oth');
+        return document.querySelector('input[' + (other ? 'data-oth-mirror="' + input.getAttribute('data-oth') : 'data-sub-mirror="' + input.getAttribute('data-sub')) + '"]');
+    }
     function refreshSubs() {
-        var inputs = subInputs();
-        var total = sum(inputs);
-        // «الدارسون»: الإجمالي للمعروض فقط (ما يخفيه البحث داخل الجدول لا يُجمع)
-        if (subForm && subForm.hasAttribute('data-sub-visible'))
-            total = sum(inputs.filter(function (input) { var row = input.closest('tr'); return !row || !row.hidden; }));
+        function totalOf(inputs) {
+            var all = sum(inputs);
+            // «الدارسون»: الإجمالي للمعروض فقط (ما يخفيه البحث داخل الجدول لا يُجمع)
+            if (subForm && subForm.hasAttribute('data-sub-visible'))
+                return sum(inputs.filter(function (input) { var row = input.closest('tr'); return !row || !row.hidden; }));
+            return all;
+        }
+        var total = totalOf(subInputs());
+        var others = totalOf(otherInputs());
         all('[data-sub-total]').forEach(function (node) { node.textContent = show(total); });
+        all('[data-oth-total]').forEach(function (node) { node.textContent = show(others); });
         var dirty = false;
-        inputs.forEach(function (input) {
-            var mirror = mirrorOf(input.getAttribute('data-sub'));
+        moneyInputs().forEach(function (input) {
+            var mirror = mirrorOf(input);
             if (mirror) {
                 if (mirror.value !== input.value) mirror.value = input.value;
                 mirror.classList.toggle('is-invalid', input.classList.contains('is-invalid'));
@@ -47,7 +58,7 @@
         });
         var flag = document.querySelector('[data-sub-dirty]');
         if (flag) flag.hidden = !dirty;
-        return { total: total, dirty: dirty };
+        return { total: total, others: others, dirty: dirty };
     }
 
     // ---------- المرتبات: المجموعان، وتاريخ اليوم تلقائيًا عند كتابة المصروف (يبقى «تلقائيًا» في المسودة حتى يغيّره المستخدم) ----------
@@ -104,13 +115,15 @@
         if (!target || !target.matches) return;
         // ما يكتبه المستخدم بيده لم يعد «ملئًا تلقائيًا»
         if (event.isTrusted) target.removeAttribute('data-draft-auto');
-        if (target.matches('input[data-sub-mirror]')) {
-            var source = document.querySelector('input[data-sub="' + target.getAttribute('data-sub-mirror') + '"]');
+        if (target.matches('input[data-sub-mirror], input[data-oth-mirror]')) {
+            var source = document.querySelector(target.hasAttribute('data-oth-mirror')
+                ? 'input[data-oth="' + target.getAttribute('data-oth-mirror') + '"]'
+                : 'input[data-sub="' + target.getAttribute('data-sub-mirror') + '"]');
             if (!source) return;
             if (event.isTrusted) source.removeAttribute('data-draft-auto');
             source.value = target.value;
             source.dispatchEvent(new Event('input', { bubbles: true }));
-        } else if (target.matches('input[data-sub]')) {
+        } else if (target.matches('input[data-sub], input[data-oth]')) {
             refreshSubs();
             // الخانة خارج وسم النموذج (مربوطة به بـ form=)، فيُبلَّغ النموذج لتحفظ المسودة التلقائية ما كُتب
             if (subForm) subForm.dispatchEvent(new Event('input'));
@@ -126,10 +139,10 @@
         refreshSubs();
         subForm.addEventListener('submit', function (event) {
             var state = refreshSubs();
-            var bad = subInputs().filter(function (input) { return parse(input.value) === null; })[0];
+            var bad = moneyInputs().filter(function (input) { return parse(input.value) === null; })[0];
             var handed = Number(subForm.getAttribute('data-handed')) || 0;
             var message = bad ? 'يوجد مبلغ غير صحيح. اكتب أرقامًا مثل 50 أو 12.5.'
-                : state.dirty && state.total + 0.001 < handed ? 'مجموع الاشتراكات (' + show(state.total) + ' ج) أقل مما سُدِّد للخدمة بإيصالات (' + show(handed) + ' ج). ألغِ الإيصال أولًا من صفحة «الاشتراكات».' : '';
+                : state.dirty && state.total + state.others + 0.001 < handed ? 'مجموع الاشتراكات والمصروفات الأخرى (' + show(state.total + state.others) + ' ج) أقل مما سُدِّد للخدمة بإيصالات (' + show(handed) + ' ج). ألغِ الإيصال أولًا من صفحة «الاشتراكات».' : '';
             if (!message) return;
             event.preventDefault();
             alert(message);
@@ -154,7 +167,7 @@
         document.addEventListener('edu-rows-filtered', refreshSubs);
         // قائمة طويلة (الدارسون): تُرسَل الخانات المتغيّرة وحدها، فلا تُكتب قيمة قديمة فوق ما حفظه غيرك
         if (subForm.hasAttribute('data-sub-changed')) subForm.addEventListener('formdata', function (event) {
-            subInputs().forEach(function (input) {
+            moneyInputs().forEach(function (input) {
                 if (parse(input.value) === parse(input.defaultValue)) event.formData.delete(input.name);
             });
         });

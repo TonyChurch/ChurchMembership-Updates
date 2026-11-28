@@ -155,3 +155,16 @@ html:not(.edu-ready) .ui-page > .edu-tools ~ .edu-bar { visibility: hidden; anim
     .app-main .edu-top--compact > header.ch-head.ch-head--tabs > .ch-corner { flex: 1 1 24rem; min-width: min-content; max-width: 52rem; }
     .app-main .edu-top--compact > header.ch-head.ch-head--tabs > .ch-corner > nav.ch-corner-tabs { flex: 1 1 auto; grid-template-columns: repeat(3, auto); }
 }
+/* (2026-11-28، طلب المستخدم بالأسهم، js/edu-head.js) بيان الاشتراكات سطر في أسفل بطاقة التبويبات */
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > .edu-money { grid-column: 1 / -1; justify-self: stretch; min-width: 0; contain: inline-size; margin-top: .1rem; }
+.app-main header.ch-head .ch-corner > nav.ch-corner-tabs > .edu-money .edu-money__box > summary { justify-content: center; }
+/* ملف الفصل: «طباعة الشهادات والكشف» سطر تحت البطاقة، و«مفصل / بطاقات» تحت الشعار */
+.app-main header.ch-head > .ch-corner.edu-corner--extra { flex-wrap: wrap; align-content: flex-start; }
+.app-main header.ch-head > .ch-corner.edu-corner--extra > .edu-print { flex: 1 1 100%; margin: 0; padding: 0; border: 0; text-align: end; }
+.app-main header.ch-head > .ch-corner.edu-corner--extra > .edu-print > summary { display: inline-block; padding: .3rem .9rem; border: 1px solid #99f6e4; border-radius: 999px; background: #f0fdfa; font-size: .84rem; }
+.app-main header.ch-head > .ch-corner.edu-corner--extra > .edu-print > .edu-print__list,
+.app-main header.ch-head > .ch-corner.edu-corner--extra > .edu-print > p { margin-top: .4rem; padding: .5rem .8rem; border: 1px solid var(--ui-border, #e2e8f0); border-radius: .8rem; background: var(--ui-surface, #fff); text-align: start; }
+.edu-top--compact .edu-top__art:has(> .edu-view-switch) { grid-template-columns: minmax(0, 1fr); }
+.edu-top--compact .edu-top__art > .edu-view-switch { position: relative; flex-wrap: wrap; justify-content: center; gap: .2rem; margin: .5rem 0 0; }
+.edu-top--compact .edu-top__art > .edu-view-switch .ui-btn { padding-inline: .5rem; font-size: .78rem; }
+.app-main header.ch-head > .ch-corner > .edu-view-switch { flex: 1 1 100%; margin: 0; }
